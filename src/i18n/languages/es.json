@@ -37,5 +37,14 @@
       "restaurantRequired": "Selecciona un restaurante",
       "consentRequired": "Debes aceptar la política de privacidad"
     }
+  },
+  "watchExperience": {
+    "title": "Mira la\nExperiencia",
+    "subtitle": "Por favor mira el video completo para desbloquear tu\ncalificación.",
+    "durationLabel": "3:00",
+    "timerLabel": "RESTANTE",
+    "helper": "La calificación estará disponible cuando\ntermine el video.",
+    "cta": "CALIFICA A TU MAESTRO CERVECERO",
+    "step": "PASO 2 DE 3"
   }
 }

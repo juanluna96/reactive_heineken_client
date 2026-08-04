@@ -13,9 +13,16 @@ export const LabelRow = styled.div`
   gap: 8px;
 `;
 
-export const Icon = styled.img`
+export const Icon = styled.span`
+  display: flex;
   width: 12px;
   height: 12px;
+  color: ${({ theme }) => theme.colors.mutedText};
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const Label = styled.span`
@@ -52,14 +59,21 @@ export const Select = styled.select<{ $hasValue: boolean; $hasError: boolean }>`
   }
 `;
 
-export const ChevronIcon = styled.img`
+export const ChevronIcon = styled.span`
   position: absolute;
   top: 50%;
   right: 17px;
-  width: 24px;
-  height: 24px;
+  display: flex;
+  width: 16px;
+  height: 16px;
+  color: ${({ theme }) => theme.colors.placeholderText};
   transform: translateY(-50%);
   pointer-events: none;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const ErrorText = styled.span`

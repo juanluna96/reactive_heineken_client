@@ -1,4 +1,3 @@
-import checkCircleIcon from '../../assets/icons/check-circle.svg';
 import * as S from './LanguageOption.styles';
 import { useLanguageOption } from './LanguageOption.hooks';
 import type { LanguageOptionProps } from './LanguageOption.types';
@@ -13,7 +12,7 @@ export const LanguageOption = (props: LanguageOptionProps) => {
         <S.Flag aria-hidden="true">{flag}</S.Flag>
         <S.Label>{label}</S.Label>
       </S.Content>
-      <S.CheckIcon src={checkCircleIcon} $selected={selected} alt="" aria-hidden="true" />
+      <S.CheckIcon $selected={selected} aria-hidden="true" />
     </S.Option>
   );
 };

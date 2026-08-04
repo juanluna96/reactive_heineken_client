@@ -40,7 +40,7 @@ export const useRegistrationScreen = () => {
       setSubmitted(true);
       return;
     }
-    // No next step exists yet.
+    navigate(ROUTES.watchExperience);
   };
 
   return {

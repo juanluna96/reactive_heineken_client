@@ -13,9 +13,16 @@ export const LabelRow = styled.div`
   gap: 8px;
 `;
 
-export const Icon = styled.img`
+export const Icon = styled.span`
+  display: flex;
   width: 12px;
   height: 12px;
+  color: ${({ theme }) => theme.colors.mutedText};
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const Label = styled.span`

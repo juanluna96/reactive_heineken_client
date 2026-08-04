@@ -1,5 +1,7 @@
+import type { IconType } from 'react-icons';
+
 export interface TextFieldProps {
-  icon: string;
+  icon: IconType;
   label: string;
   placeholder: string;
   type?: 'text' | 'email';

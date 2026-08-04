@@ -1,3 +1,4 @@
+import { FaArrowLeft } from 'react-icons/fa6';
 import styled from 'styled-components';
 
 export const Screen = styled.div`
@@ -82,9 +83,10 @@ export const BackButton = styled.button`
   cursor: pointer;
 `;
 
-export const BackIcon = styled.img`
+export const BackIcon = styled(FaArrowLeft)`
   width: 16px;
   height: 16px;
+  color: ${({ theme }) => theme.colors.textPrimary};
 `;
 
 export const Logo = styled.img`

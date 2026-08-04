@@ -37,5 +37,14 @@
       "restaurantRequired": "Select a restaurant",
       "consentRequired": "You must accept the privacy policy"
     }
+  },
+  "watchExperience": {
+    "title": "Watch the\nExperience",
+    "subtitle": "Please watch the full video to unlock your\nrating.",
+    "durationLabel": "3:00",
+    "timerLabel": "REMAINING",
+    "helper": "The rating will be available after the\nvideo finishes.",
+    "cta": "RATE YOUR BEER MASTER",
+    "step": "STEP 2 OF 3"
   }
 }

@@ -3,13 +3,15 @@ import { useTextField } from './TextField.hooks';
 import type { TextFieldProps } from './TextField.types';
 
 export const TextField = (props: TextFieldProps) => {
-  const { icon, label, placeholder, type = 'text', value, error } = props;
+  const { icon: Icon, label, placeholder, type = 'text', value, error } = props;
   const { handleChange } = useTextField(props);
 
   return (
     <S.Field>
       <S.LabelRow>
-        <S.Icon src={icon} alt="" aria-hidden="true" />
+        <S.Icon aria-hidden="true">
+          <Icon />
+        </S.Icon>
         <S.Label>{label}</S.Label>
       </S.LabelRow>
       <S.Input

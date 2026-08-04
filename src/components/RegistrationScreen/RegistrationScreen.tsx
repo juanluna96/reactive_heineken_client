@@ -1,11 +1,7 @@
 import backgroundImage from '../../assets/images/background.jpg';
 import grainTexture from '../../assets/images/grain-texture.png';
-import backArrowIcon from '../../assets/icons/back-arrow.svg';
-import chevronDownIcon from '../../assets/icons/chevron-down.svg';
-import mailIcon from '../../assets/icons/mail-icon.svg';
-import restaurantIcon from '../../assets/icons/restaurant-icon.svg';
-import userIcon from '../../assets/icons/user-icon.svg';
 import heinekenLogo from '../../assets/logos/heineken-logo.png';
+import { FaChevronDown, FaEnvelope, FaUtensils, FaUser } from 'react-icons/fa6';
 import { Checkbox } from '../Checkbox';
 import { PrimaryButton } from '../PrimaryButton';
 import { SelectField } from '../SelectField';
@@ -47,7 +43,7 @@ export const RegistrationScreen = () => {
       <S.Content>
         <S.Header>
           <S.BackButton type="button" onClick={handleBack} aria-label="Back">
-            <S.BackIcon src={backArrowIcon} alt="" aria-hidden="true" />
+            <S.BackIcon aria-hidden="true" />
           </S.BackButton>
           <S.Logo src={heinekenLogo} alt="Heineken" />
         </S.Header>
@@ -60,7 +56,7 @@ export const RegistrationScreen = () => {
 
           <S.FormCard>
             <TextField
-              icon={userIcon}
+              icon={FaUser}
               label={t.registration.name.label}
               placeholder={t.registration.name.placeholder}
               value={name}
@@ -68,7 +64,7 @@ export const RegistrationScreen = () => {
               error={nameError}
             />
             <TextField
-              icon={mailIcon}
+              icon={FaEnvelope}
               label={t.registration.email.label}
               placeholder={t.registration.email.placeholder}
               type="email"
@@ -77,8 +73,8 @@ export const RegistrationScreen = () => {
               error={emailError}
             />
             <SelectField
-              icon={restaurantIcon}
-              chevronIcon={chevronDownIcon}
+              icon={FaUtensils}
+              chevronIcon={FaChevronDown}
               label={t.registration.restaurant.label}
               placeholder={t.registration.restaurant.placeholder}
               options={restaurantOptions}

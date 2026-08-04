@@ -1,3 +1,4 @@
+import { FaCircleCheck } from 'react-icons/fa6';
 import styled, { css } from 'styled-components';
 
 export const Option = styled.button<{ $selected: boolean }>`
@@ -40,9 +41,10 @@ export const Label = styled.span`
   color: ${({ theme }) => theme.colors.white};
 `;
 
-export const CheckIcon = styled.img<{ $selected: boolean }>`
+export const CheckIcon = styled(FaCircleCheck)<{ $selected: boolean }>`
   width: 20px;
   height: 20px;
+  color: ${({ theme }) => theme.colors.brandGreenLight};
   opacity: ${({ $selected }) => ($selected ? 1 : 0)};
   transition: opacity 0.2s ease;
 `;

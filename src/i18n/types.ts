@@ -41,9 +41,20 @@ export interface RegistrationDictionary {
   };
 }
 
+export interface WatchExperienceDictionary {
+  title: string;
+  subtitle: string;
+  durationLabel: string;
+  timerLabel: string;
+  helper: string;
+  cta: string;
+  step: string;
+}
+
 export interface TranslationDictionary {
   welcome: WelcomeDictionary;
   registration: RegistrationDictionary;
+  watchExperience: WatchExperienceDictionary;
 }
 
 export interface LanguageState {

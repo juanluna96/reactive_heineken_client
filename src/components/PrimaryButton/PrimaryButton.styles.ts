@@ -1,3 +1,4 @@
+import { FaArrowRight } from 'react-icons/fa6';
 import styled, { css } from 'styled-components';
 
 export const Button = styled.button<{ $disabled: boolean }>`
@@ -43,7 +44,8 @@ export const Label = styled.span`
   color: ${({ theme }) => theme.colors.ctaText};
 `;
 
-export const Icon = styled.img`
+export const Icon = styled(FaArrowRight)`
   width: 12px;
   height: 12px;
+  color: ${({ theme }) => theme.colors.ctaText};
 `;
