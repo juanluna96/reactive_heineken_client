@@ -4,4 +4,5 @@ export interface CheckboxProps {
   prefix: string;
   linkText: string;
   suffix: string;
+  error?: string;
 }

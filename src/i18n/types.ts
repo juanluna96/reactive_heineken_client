@@ -33,6 +33,12 @@ export interface RegistrationDictionary {
   };
   cta: string;
   step: string;
+  errors: {
+    nameRequired: string;
+    emailInvalid: string;
+    restaurantRequired: string;
+    consentRequired: string;
+  };
 }
 
 export interface TranslationDictionary {

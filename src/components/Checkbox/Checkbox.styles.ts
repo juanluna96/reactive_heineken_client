@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+`;
+
 export const Wrapper = styled.label`
   display: flex;
   align-items: flex-start;
@@ -7,7 +14,7 @@ export const Wrapper = styled.label`
   cursor: pointer;
 `;
 
-export const Input = styled.input`
+export const Input = styled.input<{ $hasError: boolean }>`
   flex-shrink: 0;
   width: 16px;
   height: 16px;
@@ -15,7 +22,7 @@ export const Input = styled.input`
   appearance: none;
   position: relative;
   border-radius: 2px;
-  border: 1px solid ${({ theme }) => theme.colors.placeholderText};
+  border: 1px solid ${({ theme, $hasError }) => ($hasError ? theme.colors.danger : theme.colors.placeholderText)};
   background: ${({ theme }) => theme.colors.white};
   cursor: pointer;
 
@@ -51,4 +58,12 @@ export const Label = styled.span`
 
 export const LinkText = styled.span`
   color: ${({ theme }) => theme.colors.brandGreenLight};
+`;
+
+export const ErrorText = styled.span`
+  margin-left: 32px;
+  font-family: ${({ theme }) => theme.fonts.heading};
+  font-size: 12px;
+  line-height: 16px;
+  color: ${({ theme }) => theme.colors.danger};
 `;

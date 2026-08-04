@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Button = styled.button`
+export const Button = styled.button<{ $disabled: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,6 +18,19 @@ export const Button = styled.button`
   &:focus-visible {
     opacity: 0.85;
   }
+
+  ${({ $disabled }) =>
+    $disabled &&
+    css`
+      opacity: 0.5;
+      box-shadow: none;
+      cursor: not-allowed;
+
+      &:hover,
+      &:focus-visible {
+        opacity: 0.5;
+      }
+    `}
 `;
 
 export const Label = styled.span`

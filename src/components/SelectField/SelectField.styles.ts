@@ -33,12 +33,12 @@ export const SelectWrapper = styled.div`
   width: 100%;
 `;
 
-export const Select = styled.select<{ $hasValue: boolean }>`
+export const Select = styled.select<{ $hasValue: boolean; $hasError: boolean }>`
   width: 100%;
   height: 56px;
   padding: 0 41px 0 17px;
   border-radius: ${({ theme }) => theme.radii.md};
-  border: 1px solid ${({ theme }) => theme.colors.cardBorder};
+  border: 1px solid ${({ theme, $hasError }) => ($hasError ? theme.colors.danger : theme.colors.cardBorder)};
   background: ${({ theme }) => theme.colors.inputBackground};
   font-family: ${({ theme }) => theme.fonts.heading};
   font-size: 16px;
@@ -60,4 +60,11 @@ export const ChevronIcon = styled.img`
   height: 24px;
   transform: translateY(-50%);
   pointer-events: none;
+`;
+
+export const ErrorText = styled.span`
+  font-family: ${({ theme }) => theme.fonts.heading};
+  font-size: 12px;
+  line-height: 16px;
+  color: ${({ theme }) => theme.colors.danger};
 `;

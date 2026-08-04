@@ -14,6 +14,7 @@ export const theme = {
     cardBackground: '#201f1f',
     cardBorder: '#3e4a3f',
     inputBackground: '#0e0e0e',
+    danger: '#ff6b6b',
   },
   fonts: {
     heading: "'Be Vietnam Pro', system-ui, sans-serif",

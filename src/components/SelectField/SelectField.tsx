@@ -3,7 +3,7 @@ import { useSelectField } from './SelectField.hooks';
 import type { SelectFieldProps } from './SelectField.types';
 
 export const SelectField = (props: SelectFieldProps) => {
-  const { icon, chevronIcon, label, placeholder, options, value } = props;
+  const { icon, chevronIcon, label, placeholder, options, value, error } = props;
   const { hasValue, handleChange } = useSelectField(props);
 
   return (
@@ -13,7 +13,7 @@ export const SelectField = (props: SelectFieldProps) => {
         <S.Label>{label}</S.Label>
       </S.LabelRow>
       <S.SelectWrapper>
-        <S.Select value={value} onChange={handleChange} $hasValue={hasValue}>
+        <S.Select value={value} onChange={handleChange} $hasValue={hasValue} $hasError={Boolean(error)}>
           <option value="" disabled>
             {placeholder}
           </option>
@@ -25,6 +25,7 @@ export const SelectField = (props: SelectFieldProps) => {
         </S.Select>
         <S.ChevronIcon src={chevronIcon} alt="" aria-hidden="true" />
       </S.SelectWrapper>
+      {error && <S.ErrorText>{error}</S.ErrorText>}
     </S.Field>
   );
 };

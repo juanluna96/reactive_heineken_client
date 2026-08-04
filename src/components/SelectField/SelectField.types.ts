@@ -11,4 +11,5 @@ export interface SelectFieldProps {
   options: SelectFieldOption[];
   value: string;
   onChange: (value: string) => void;
+  error?: string;
 }

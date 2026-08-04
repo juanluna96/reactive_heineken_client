@@ -22,6 +22,11 @@ export const RegistrationScreen = () => {
     restaurant,
     accepted,
     restaurantOptions,
+    isFormValid,
+    nameError,
+    emailError,
+    restaurantError,
+    consentError,
     setName,
     setEmail,
     setRestaurant,
@@ -60,6 +65,7 @@ export const RegistrationScreen = () => {
               placeholder={t.registration.name.placeholder}
               value={name}
               onChange={setName}
+              error={nameError}
             />
             <TextField
               icon={mailIcon}
@@ -68,6 +74,7 @@ export const RegistrationScreen = () => {
               type="email"
               value={email}
               onChange={setEmail}
+              error={emailError}
             />
             <SelectField
               icon={restaurantIcon}
@@ -77,6 +84,7 @@ export const RegistrationScreen = () => {
               options={restaurantOptions}
               value={restaurant}
               onChange={setRestaurant}
+              error={restaurantError}
             />
             <Checkbox
               checked={accepted}
@@ -84,12 +92,15 @@ export const RegistrationScreen = () => {
               prefix={t.registration.consent.prefix}
               linkText={t.registration.consent.linkText}
               suffix={t.registration.consent.suffix}
+              error={consentError}
             />
           </S.FormCard>
         </S.Hero>
 
         <S.Footer>
-          <PrimaryButton onClick={handleContinue}>{t.registration.cta}</PrimaryButton>
+          <PrimaryButton onClick={handleContinue} disabled={!isFormValid}>
+            {t.registration.cta}
+          </PrimaryButton>
           <StepIndicator current={1} total={3} label={t.registration.step} />
         </S.Footer>
       </S.Content>

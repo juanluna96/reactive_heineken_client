@@ -5,4 +5,5 @@ export interface TextFieldProps {
   type?: 'text' | 'email';
   value: string;
   onChange: (value: string) => void;
+  error?: string;
 }

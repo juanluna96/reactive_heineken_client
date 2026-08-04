@@ -28,12 +28,12 @@ export const Label = styled.span`
   color: ${({ theme }) => theme.colors.mutedText};
 `;
 
-export const Input = styled.input`
+export const Input = styled.input<{ $hasError: boolean }>`
   width: 100%;
   height: 56px;
   padding: 0 17px;
   border-radius: ${({ theme }) => theme.radii.md};
-  border: 1px solid ${({ theme }) => theme.colors.cardBorder};
+  border: 1px solid ${({ theme, $hasError }) => ($hasError ? theme.colors.danger : theme.colors.cardBorder)};
   background: ${({ theme }) => theme.colors.inputBackground};
   font-family: ${({ theme }) => theme.fonts.heading};
   font-size: 16px;
@@ -47,4 +47,11 @@ export const Input = styled.input`
     outline: none;
     border-color: ${({ theme }) => theme.colors.brandGreenLight};
   }
+`;
+
+export const ErrorText = styled.span`
+  font-family: ${({ theme }) => theme.fonts.heading};
+  font-size: 12px;
+  line-height: 16px;
+  color: ${({ theme }) => theme.colors.danger};
 `;

@@ -30,6 +30,12 @@
       "suffix": " and the processing of my personal data."
     },
     "cta": "CONTINUE",
-    "step": "STEP 1 OF 3"
+    "step": "STEP 1 OF 3",
+    "errors": {
+      "nameRequired": "Enter your full name",
+      "emailInvalid": "Enter a valid email address",
+      "restaurantRequired": "Select a restaurant",
+      "consentRequired": "You must accept the privacy policy"
+    }
   }
 }
