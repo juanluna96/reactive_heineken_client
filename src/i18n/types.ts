@@ -1,10 +1,8 @@
 export type Language = 'es' | 'en';
 
-export interface TranslationDictionary {
-  welcome: {
-    title: string;
-    subtitle: string;
-  };
+export interface WelcomeDictionary {
+  title: string;
+  subtitle: string;
   languageOptions: {
     es: string;
     en: string;
@@ -13,7 +11,11 @@ export interface TranslationDictionary {
   footer: string;
 }
 
-export interface LanguageContextValue {
+export interface TranslationDictionary {
+  welcome: WelcomeDictionary;
+}
+
+export interface LanguageState {
   language: Language;
   setLanguage: (language: Language) => void;
   t: TranslationDictionary;

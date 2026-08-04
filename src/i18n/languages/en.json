@@ -1,0 +1,12 @@
+{
+  "welcome": {
+    "title": "WELCOME",
+    "subtitle": "Select your preferred language to\nbegin your experience.",
+    "languageOptions": {
+      "es": "Español",
+      "en": "English"
+    },
+    "cta": "START EXPERIENCE",
+    "footer": "© 2026 HEINEKEN EXPERIENCE. ALL RIGHTS\nRESERVED."
+  }
+}

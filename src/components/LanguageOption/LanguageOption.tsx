@@ -4,8 +4,8 @@ import { useLanguageOption } from './LanguageOption.hooks';
 import type { LanguageOptionProps } from './LanguageOption.types';
 
 export const LanguageOption = (props: LanguageOptionProps) => {
-  const { flag, label, selected } = props;
-  const { handleClick } = useLanguageOption(props);
+  const { flag } = props;
+  const { selected, label, handleClick } = useLanguageOption(props);
 
   return (
     <S.Option type="button" $selected={selected} aria-pressed={selected} onClick={handleClick}>
