@@ -9,6 +9,11 @@ export const theme = {
     white: '#ffffff',
     ctaText: '#f9fff5',
     mutedText: '#bdcabc',
+    textPrimary: '#e5e2e1',
+    placeholderText: '#6b7280',
+    cardBackground: '#201f1f',
+    cardBorder: '#3e4a3f',
+    inputBackground: '#0e0e0e',
   },
   fonts: {
     heading: "'Be Vietnam Pro', system-ui, sans-serif",

@@ -1,13 +1,12 @@
-import backgroundImage from '../../assets/welcome/background.jpg';
-import heinekenLogo from '../../assets/welcome/heineken-logo.png';
+import backgroundImage from '../../assets/images/background.jpg';
+import heinekenLogo from '../../assets/logos/heineken-logo.png';
 import { LanguageOption } from '../LanguageOption';
 import { PrimaryButton } from '../PrimaryButton';
 import * as S from './WelcomeScreen.styles';
 import { useWelcomeScreen } from './WelcomeScreen.hooks';
-import type { WelcomeScreenProps } from './WelcomeScreen.types';
 
-export const WelcomeScreen = (props: WelcomeScreenProps) => {
-  const { t, handleStart } = useWelcomeScreen(props);
+export const WelcomeScreen = () => {
+  const { t, handleStart } = useWelcomeScreen();
 
   return (
     <S.Screen>

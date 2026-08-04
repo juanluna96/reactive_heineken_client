@@ -1,4 +1,4 @@
-import arrowRightIcon from '../../assets/welcome/arrow-right.svg';
+import arrowRightIcon from '../../assets/icons/arrow-right.svg';
 import * as S from './PrimaryButton.styles';
 import { usePrimaryButton } from './PrimaryButton.hooks';
 import type { PrimaryButtonProps } from './PrimaryButton.types';

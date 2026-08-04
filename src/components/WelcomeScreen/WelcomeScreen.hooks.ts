@@ -1,11 +1,13 @@
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from '../../i18n';
-import type { WelcomeScreenProps } from './WelcomeScreen.types';
+import { ROUTES } from '../../routes';
 
-export const useWelcomeScreen = ({ onStart }: WelcomeScreenProps) => {
+export const useWelcomeScreen = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const handleStart = () => {
-    onStart?.();
+    navigate(ROUTES.registration);
   };
 
   return { t, handleStart };

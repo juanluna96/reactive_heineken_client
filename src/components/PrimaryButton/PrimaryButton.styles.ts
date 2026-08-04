@@ -10,13 +10,13 @@ export const Button = styled.button`
   border: none;
   border-radius: ${({ theme }) => theme.radii.pill};
   background: ${({ theme }) => theme.colors.brandGreen};
-  opacity: 0.5;
+  box-shadow: 0 0 10px rgba(1, 135, 66, 0.4);
   cursor: pointer;
   transition: opacity 0.2s ease;
 
   &:hover,
   &:focus-visible {
-    opacity: 0.8;
+    opacity: 0.85;
   }
 `;
 

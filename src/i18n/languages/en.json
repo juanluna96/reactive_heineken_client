@@ -8,5 +8,28 @@
     },
     "cta": "START EXPERIENCE",
     "footer": "© 2026 HEINEKEN EXPERIENCE. ALL RIGHTS\nRESERVED."
+  },
+  "registration": {
+    "title": "Welcome",
+    "subtitle": "Let's get to know you before starting\nyour experience.",
+    "name": {
+      "label": "NAME",
+      "placeholder": "Enter your full name"
+    },
+    "email": {
+      "label": "EMAIL",
+      "placeholder": "example@email.com"
+    },
+    "restaurant": {
+      "label": "RESTAURANT / BAR",
+      "placeholder": "Select your restaurant"
+    },
+    "consent": {
+      "prefix": "I accept the ",
+      "linkText": "Privacy Policy",
+      "suffix": " and the processing of my personal data."
+    },
+    "cta": "CONTINUE",
+    "step": "STEP 1 OF 3"
   }
 }

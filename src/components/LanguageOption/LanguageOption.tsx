@@ -1,4 +1,4 @@
-import checkCircleIcon from '../../assets/welcome/check-circle.svg';
+import checkCircleIcon from '../../assets/icons/check-circle.svg';
 import * as S from './LanguageOption.styles';
 import { useLanguageOption } from './LanguageOption.hooks';
 import type { LanguageOptionProps } from './LanguageOption.types';
