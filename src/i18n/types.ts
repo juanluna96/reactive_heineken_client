@@ -51,10 +51,27 @@ export interface WatchExperienceDictionary {
   step: string;
 }
 
+export interface RateBeerMasterDictionary {
+  beerMasterLabel: string;
+  namePlaceholder: string;
+  title: string;
+  subtitle: string;
+  tierMessages: string[];
+  opinionLabel: string;
+  opinionPlaceholder: string;
+  cta: string;
+  step: string;
+  errors: {
+    nameRequired: string;
+    ratingRequired: string;
+  };
+}
+
 export interface TranslationDictionary {
   welcome: WelcomeDictionary;
   registration: RegistrationDictionary;
   watchExperience: WatchExperienceDictionary;
+  rateBeerMaster: RateBeerMasterDictionary;
 }
 
 export interface LanguageState {

@@ -45,7 +45,7 @@ export const useWatchExperienceScreen = () => {
 
   const handleRate = () => {
     if (!isUnlocked) return;
-    // No next step exists yet.
+    navigate(ROUTES.rateBeerMaster);
   };
 
   return {

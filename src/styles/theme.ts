@@ -17,6 +17,8 @@ export const theme = {
     danger: '#ff6b6b',
     timerTrack: '#353534',
     lockedBackground: '#2a2a2a',
+    accentWarm: '#ffb3ad',
+    heinekenRed: '#e3001b',
   },
   fonts: {
     heading: "'Be Vietnam Pro', system-ui, sans-serif",

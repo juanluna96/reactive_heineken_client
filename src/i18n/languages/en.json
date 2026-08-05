@@ -46,5 +46,26 @@
     "helper": "The rating will be available after the\nvideo finishes.",
     "cta": "RATE YOUR BEER MASTER",
     "step": "STEP 2 OF 3"
+  },
+  "rateBeerMaster": {
+    "beerMasterLabel": "BEER MASTER",
+    "namePlaceholder": "Beer master's name",
+    "title": "How was your experience?",
+    "subtitle": "Your opinion helps us improve",
+    "tierMessages": [
+      "VERY POOR EXPERIENCE",
+      "COULD BE BETTER",
+      "IT WAS OKAY",
+      "GREAT SERVICE",
+      "EXCELLENT! PERFECT SERVICE!"
+    ],
+    "opinionLabel": "OPINION",
+    "opinionPlaceholder": "Optional feedback...",
+    "cta": "SUBMIT RATING",
+    "step": "STEP 3 OF 3",
+    "errors": {
+      "nameRequired": "Enter the beer master's name",
+      "ratingRequired": "Please select a rating"
+    }
   }
 }

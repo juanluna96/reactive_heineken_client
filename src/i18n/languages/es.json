@@ -46,5 +46,26 @@
     "helper": "La calificación estará disponible cuando\ntermine el video.",
     "cta": "CALIFICA A TU MAESTRO CERVECERO",
     "step": "PASO 2 DE 3"
+  },
+  "rateBeerMaster": {
+    "beerMasterLabel": "MAESTRO CERVECERO",
+    "namePlaceholder": "Nombre del maestro cervecero",
+    "title": "¿Cómo fue tu experiencia?",
+    "subtitle": "Tu opinión nos ayuda a mejorar",
+    "tierMessages": [
+      "MUY MALA EXPERIENCIA",
+      "PODRÍA MEJORAR",
+      "ESTUVO BIEN",
+      "MUY BUEN SERVICIO",
+      "¡EXCELENTE! ¡SERVICIO PERFECTO!"
+    ],
+    "opinionLabel": "OPINIÓN",
+    "opinionPlaceholder": "Comentario opcional...",
+    "cta": "ENVIAR CALIFICACIÓN",
+    "step": "PASO 3 DE 3",
+    "errors": {
+      "nameRequired": "Ingresa el nombre del maestro cervecero",
+      "ratingRequired": "Selecciona una calificación"
+    }
   }
 }
