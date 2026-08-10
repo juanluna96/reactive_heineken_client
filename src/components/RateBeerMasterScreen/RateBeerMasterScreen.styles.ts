@@ -286,8 +286,6 @@ export const Footer = styled.footer`
   flex-direction: column;
   flex-shrink: 0;
   gap: clamp(12px, 3dvh, 24px);
-  margin: 0 -20px;
-  padding: clamp(20px, 5dvh, 24px) 20px clamp(16px, 4dvh, 24px);
-  background: rgba(14, 14, 14, 0.8);
-  backdrop-filter: blur(20px);
+  padding-top: clamp(20px, 5dvh, 24px);
+  padding-bottom: clamp(16px, 4dvh, 24px);
 `;

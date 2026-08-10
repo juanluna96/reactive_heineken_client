@@ -29,7 +29,9 @@ export const ThankYouScreen = () => {
         </S.Hero>
 
         <S.Footer>
-          <PrimaryButton onClick={handleRestart}>{t.thankYou.cta}</PrimaryButton>
+          <PrimaryButton onClick={handleRestart} showIcon={false}>
+            {t.thankYou.cta}
+          </PrimaryButton>
           <S.Copyright>{t.thankYou.footer}</S.Copyright>
         </S.Footer>
       </S.Content>
