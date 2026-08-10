@@ -67,5 +67,12 @@
       "nameRequired": "Enter the beer master's name",
       "ratingRequired": "Please select a rating"
     }
+  },
+  "thankYou": {
+    "title": "Thank You!",
+    "confirmation": "Your rating has been submitted successfully.",
+    "supportingText": "Thanks for helping us improve the Heineken experience. Your feedback is very valuable to us.",
+    "cta": "FINISH",
+    "footer": "© 2026 HEINEKEN EXPERIENCE. ALL RIGHTS\nRESERVED."
   }
 }

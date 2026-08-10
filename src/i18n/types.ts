@@ -67,11 +67,20 @@ export interface RateBeerMasterDictionary {
   };
 }
 
+export interface ThankYouDictionary {
+  title: string;
+  confirmation: string;
+  supportingText: string;
+  cta: string;
+  footer: string;
+}
+
 export interface TranslationDictionary {
   welcome: WelcomeDictionary;
   registration: RegistrationDictionary;
   watchExperience: WatchExperienceDictionary;
   rateBeerMaster: RateBeerMasterDictionary;
+  thankYou: ThankYouDictionary;
 }
 
 export interface LanguageState {

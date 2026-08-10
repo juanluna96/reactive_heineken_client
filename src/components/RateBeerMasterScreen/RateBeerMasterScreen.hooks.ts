@@ -56,7 +56,7 @@ export const useRateBeerMasterScreen = () => {
       setSubmitted(true);
       return;
     }
-    // No next step exists yet.
+    navigate(ROUTES.thankYou);
   };
 
   return {

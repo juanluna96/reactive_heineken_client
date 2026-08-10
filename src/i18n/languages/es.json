@@ -67,5 +67,12 @@
       "nameRequired": "Ingresa el nombre del maestro cervecero",
       "ratingRequired": "Selecciona una calificación"
     }
+  },
+  "thankYou": {
+    "title": "¡Muchas Gracias!",
+    "confirmation": "Tu opinión ha sido enviada con éxito.",
+    "supportingText": "Gracias por ayudarnos a mejorar la experiencia Heineken. Tu opinión es muy valiosa para nosotros.",
+    "cta": "FINALIZAR",
+    "footer": "© 2026 HEINEKEN EXPERIENCE. TODOS LOS\nDERECHOS RESERVADOS."
   }
 }

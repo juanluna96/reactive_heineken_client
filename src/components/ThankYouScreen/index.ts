@@ -1,0 +1,1 @@
+export { ThankYouScreen } from './ThankYouScreen';
