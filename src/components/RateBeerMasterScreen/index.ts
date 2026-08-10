@@ -1,0 +1,1 @@
+export { RateBeerMasterScreen } from './RateBeerMasterScreen';
