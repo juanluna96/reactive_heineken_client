@@ -25,6 +25,7 @@ export const BackgroundImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 15% top;
 `;
 
 export const Content = styled.div`
@@ -78,10 +79,10 @@ export const Hero = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(24px, 5dvh, 48px);
+  gap: clamp(20px, 5dvh, 48px);
   flex: 1 1 auto;
   min-height: 0;
-  padding-bottom: clamp(24px, 5dvh, 48px);
+  padding-bottom: clamp(20px, 5dvh, 48px);
 `;
 
 export const ProfileSection = styled.div`

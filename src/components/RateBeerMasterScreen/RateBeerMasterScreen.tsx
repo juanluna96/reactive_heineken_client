@@ -1,4 +1,4 @@
-import backgroundImage from '../../assets/images/video-thumbnail.jpg';
+import backgroundImage from '../../assets/images/background-2.jpg';
 import heinekenLogo from '../../assets/logos/heineken-logo.png';
 import { PrimaryButton } from '../PrimaryButton';
 import { ScreenOverlay } from '../ScreenOverlay';
