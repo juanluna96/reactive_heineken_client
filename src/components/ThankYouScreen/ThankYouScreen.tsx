@@ -5,13 +5,14 @@ import * as S from './ThankYouScreen.styles';
 import { useThankYouScreen } from './ThankYouScreen.hooks';
 
 export const ThankYouScreen = () => {
-  const { t, handleRestart } = useThankYouScreen();
+  const { t, handleRestart, canvasRef } = useThankYouScreen();
 
   return (
     <S.Screen>
       <S.Background>
         <S.BackgroundImage src={backgroundImage} alt="" />
         <ScreenOverlay />
+        <S.BubbleCanvas ref={canvasRef} />
       </S.Background>
 
       <S.Content>
