@@ -1,5 +1,4 @@
 import backgroundImage from '../../assets/images/background.jpg';
-import grainTexture from '../../assets/images/grain-texture.png';
 import heinekenLogo from '../../assets/logos/heineken-logo.png';
 import { FaChevronDown, FaEnvelope, FaUtensils, FaUser } from 'react-icons/fa6';
 import { Checkbox } from '../Checkbox';
@@ -35,9 +34,7 @@ export const RegistrationScreen = () => {
     <S.Screen>
       <S.Background>
         <S.BackgroundImage src={backgroundImage} alt="" />
-        <S.DarkOverlay />
-        <S.GlowOverlay />
-        <S.GrainOverlay $texture={grainTexture} />
+        <S.GradientOverlay />
       </S.Background>
 
       <S.Content>

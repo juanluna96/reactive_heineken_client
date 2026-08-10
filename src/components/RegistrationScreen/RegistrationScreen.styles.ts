@@ -28,26 +28,14 @@ export const BackgroundImage = styled.img`
   object-position: 15% top;
 `;
 
-export const DarkOverlay = styled.div`
+export const GradientOverlay = styled.div`
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
-`;
-
-export const GlowOverlay = styled.div`
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(112, 220, 141, 0.15), rgba(112, 220, 141, 0) 70%);
-`;
-
-export const GrainOverlay = styled.div<{ $texture: string }>`
-  position: absolute;
-  inset: 0;
-  background-image: ${({ $texture }) => `url(${$texture})`};
-  background-size: 24px 22px;
-  background-repeat: repeat;
-  mix-blend-mode: overlay;
-  opacity: 0.2;
+  background: linear-gradient(
+    to bottom,
+    ${({ theme }) => theme.colors.overlayStart},
+    ${({ theme }) => theme.colors.overlayEnd}
+  );
 `;
 
 export const Content = styled.div`
