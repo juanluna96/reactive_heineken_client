@@ -2,6 +2,7 @@ import { staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background.jpg';
 import heinekenLogo from '../../assets/logos/heineken-logo.png';
 import { FaChevronDown, FaEnvelope, FaUtensils, FaUser } from 'react-icons/fa6';
+import { BubbleField } from '../BubbleField';
 import { Checkbox } from '../Checkbox';
 import { PrimaryButton } from '../PrimaryButton';
 import { ScreenOverlay } from '../ScreenOverlay';
@@ -37,6 +38,7 @@ export const RegistrationScreen = () => {
       <S.Background>
         <S.BackgroundImage src={backgroundImage} alt="" />
         <ScreenOverlay />
+        <BubbleField />
       </S.Background>
 
       <S.Content initial="hidden" animate="visible" variants={staggerContainer}>

@@ -29,14 +29,6 @@ export const BackgroundImage = styled.img`
   object-position: 15% top;
 `;
 
-export const BubbleCanvas = styled.canvas`
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-`;
-
 export const Content = styled(motion.div)`
   position: relative;
   z-index: 1;

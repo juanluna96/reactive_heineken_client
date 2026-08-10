@@ -1,19 +1,20 @@
 import { staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background.jpg';
+import { BubbleField } from '../BubbleField';
 import { PrimaryButton } from '../PrimaryButton';
 import { ScreenOverlay } from '../ScreenOverlay';
 import * as S from './ThankYouScreen.styles';
 import { useThankYouScreen } from './ThankYouScreen.hooks';
 
 export const ThankYouScreen = () => {
-  const { t, handleRestart, canvasRef } = useThankYouScreen();
+  const { t, handleRestart } = useThankYouScreen();
 
   return (
     <S.Screen>
       <S.Background>
         <S.BackgroundImage src={backgroundImage} alt="" />
         <ScreenOverlay />
-        <S.BubbleCanvas ref={canvasRef} />
+        <BubbleField />
       </S.Background>
 
       <S.Content initial="hidden" animate="visible" variants={staggerContainer}>

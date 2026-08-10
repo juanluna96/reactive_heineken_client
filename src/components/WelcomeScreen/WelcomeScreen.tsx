@@ -1,6 +1,7 @@
 import { staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background.jpg';
 import heinekenLogo from '../../assets/logos/heineken-logo.png';
+import { BubbleField } from '../BubbleField';
 import { LanguageOption } from '../LanguageOption';
 import { PrimaryButton } from '../PrimaryButton';
 import { ScreenOverlay } from '../ScreenOverlay';
@@ -15,6 +16,7 @@ export const WelcomeScreen = () => {
       <S.Background>
         <S.BackgroundImage src={backgroundImage} alt="" />
         <ScreenOverlay />
+        <BubbleField />
       </S.Background>
 
       <S.Content initial="hidden" animate="visible" variants={staggerContainer}>

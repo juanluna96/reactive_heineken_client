@@ -1,6 +1,7 @@
 import { staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background-2.jpg';
 import heinekenLogo from '../../assets/logos/heineken-logo.png';
+import { BubbleField } from '../BubbleField';
 import { PrimaryButton } from '../PrimaryButton';
 import { ScreenOverlay } from '../ScreenOverlay';
 import { StepIndicator } from '../StepIndicator';
@@ -30,6 +31,7 @@ export const RateBeerMasterScreen = () => {
       <S.Background>
         <S.BackgroundImage src={backgroundImage} alt="" />
         <ScreenOverlay />
+        <BubbleField />
       </S.Background>
 
       <S.Content initial="hidden" animate="visible" variants={staggerContainer}>
