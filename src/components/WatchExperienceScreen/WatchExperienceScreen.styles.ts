@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { FaArrowLeft, FaLock, FaPlay } from 'react-icons/fa6';
 import styled from 'styled-components';
 
@@ -28,7 +29,7 @@ export const BackgroundImage = styled.img`
   object-position: 15% top;
 `;
 
-export const Content = styled.div`
+export const Content = styled(motion.div)`
   position: relative;
   z-index: 1;
   display: flex;
@@ -39,7 +40,7 @@ export const Content = styled.div`
   padding: clamp(24px, 6dvh, 48px) 20px clamp(16px, 4dvh, 24px);
 `;
 
-export const Header = styled.header`
+export const Header = styled(motion.header)`
   position: relative;
   display: flex;
   align-items: center;
@@ -82,7 +83,7 @@ export const Hero = styled.div`
   min-height: 0;
 `;
 
-export const HeadingBlock = styled.div`
+export const HeadingBlock = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -111,7 +112,7 @@ export const Subtitle = styled.p`
   color: ${({ theme }) => theme.colors.mutedText};
 `;
 
-export const VideoCard = styled.div`
+export const VideoCard = styled(motion.div)`
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -177,7 +178,7 @@ export const DurationText = styled.span`
   color: ${({ theme }) => theme.colors.white};
 `;
 
-export const TimerSection = styled.div`
+export const TimerSection = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -255,7 +256,7 @@ export const HelperText = styled.p`
   color: ${({ theme }) => theme.colors.mutedText};
 `;
 
-export const Footer = styled.footer`
+export const Footer = styled(motion.footer)`
   display: flex;
   flex-direction: column;
   flex-shrink: 0;

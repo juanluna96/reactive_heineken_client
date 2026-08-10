@@ -1,3 +1,4 @@
+import { staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background.jpg';
 import { PrimaryButton } from '../PrimaryButton';
 import { ScreenOverlay } from '../ScreenOverlay';
@@ -15,20 +16,20 @@ export const ThankYouScreen = () => {
         <S.BubbleCanvas ref={canvasRef} />
       </S.Background>
 
-      <S.Content>
+      <S.Content initial="hidden" animate="visible" variants={staggerContainer}>
         <S.Hero>
-          <S.IconCircle>
+          <S.IconCircle variants={staggerItem}>
             <S.CheckIcon aria-hidden="true" />
           </S.IconCircle>
 
-          <S.TextGroup>
+          <S.TextGroup variants={staggerItem}>
             <S.Title>{t.thankYou.title}</S.Title>
             <S.Confirmation>{t.thankYou.confirmation}</S.Confirmation>
             <S.SupportingText>{t.thankYou.supportingText}</S.SupportingText>
           </S.TextGroup>
         </S.Hero>
 
-        <S.Footer>
+        <S.Footer variants={staggerItem}>
           <PrimaryButton onClick={handleRestart} showIcon={false}>
             {t.thankYou.cta}
           </PrimaryButton>

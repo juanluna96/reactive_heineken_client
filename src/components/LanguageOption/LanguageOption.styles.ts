@@ -1,7 +1,8 @@
+import { motion } from 'framer-motion';
 import { FaCircleCheck } from 'react-icons/fa6';
 import styled, { css } from 'styled-components';
 
-export const Option = styled.button<{ $selected: boolean }>`
+export const Option = styled(motion.button)<{ $selected: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -14,7 +15,7 @@ export const Wrapper = styled.label`
   cursor: pointer;
 `;
 
-export const Input = styled.input<{ $hasError: boolean }>`
+export const Input = styled(motion.input)<{ $hasError: boolean }>`
   flex-shrink: 0;
   width: 16px;
   height: 16px;

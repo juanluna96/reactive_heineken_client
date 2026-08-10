@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 export const Screen = styled.div`
@@ -27,7 +28,7 @@ export const BackgroundImage = styled.img`
   object-position: 15% top;
 `;
 
-export const Content = styled.div`
+export const Content = styled(motion.div)`
   position: relative;
   z-index: 1;
   display: flex;
@@ -38,7 +39,7 @@ export const Content = styled.div`
   padding: clamp(24px, 6dvh, 48px) 20px clamp(16px, 4dvh, 24px);
 `;
 
-export const Header = styled.header`
+export const Header = styled(motion.header)`
   display: flex;
   justify-content: center;
   flex-shrink: 0;
@@ -51,7 +52,7 @@ export const Logo = styled.img`
   object-fit: contain;
 `;
 
-export const WelcomeText = styled.div`
+export const WelcomeText = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -83,7 +84,7 @@ export const Subtitle = styled.p`
   color: ${({ theme }) => theme.colors.mutedText};
 `;
 
-export const LanguageList = styled.div`
+export const LanguageList = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -92,7 +93,7 @@ export const LanguageList = styled.div`
   gap: 12px;
 `;
 
-export const Footer = styled.footer`
+export const Footer = styled(motion.footer)`
   display: flex;
   flex-direction: column;
   flex-shrink: 0;

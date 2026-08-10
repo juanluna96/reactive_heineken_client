@@ -1,3 +1,4 @@
+import { staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background-2.jpg';
 import heinekenLogo from '../../assets/logos/heineken-logo.png';
 import { PrimaryButton } from '../PrimaryButton';
@@ -31,8 +32,8 @@ export const RateBeerMasterScreen = () => {
         <ScreenOverlay />
       </S.Background>
 
-      <S.Content>
-        <S.Header>
+      <S.Content initial="hidden" animate="visible" variants={staggerContainer}>
+        <S.Header variants={staggerItem}>
           <S.BackButton type="button" onClick={handleBack} aria-label="Back">
             <S.BackIcon aria-hidden="true" />
           </S.BackButton>
@@ -40,7 +41,7 @@ export const RateBeerMasterScreen = () => {
         </S.Header>
 
         <S.Hero>
-          <S.ProfileSection>
+          <S.ProfileSection variants={staggerItem}>
             <S.NameInput
               value={beerMasterName}
               onChange={handleBeerMasterNameChange}
@@ -52,7 +53,7 @@ export const RateBeerMasterScreen = () => {
             {nameError && <S.NameError>{nameError}</S.NameError>}
           </S.ProfileSection>
 
-          <S.RatingSection>
+          <S.RatingSection variants={staggerItem}>
             <S.Title>{t.rateBeerMaster.title}</S.Title>
             <S.Subtitle>{t.rateBeerMaster.subtitle}</S.Subtitle>
 
@@ -65,6 +66,8 @@ export const RateBeerMasterScreen = () => {
                   onMouseEnter={star.onHover}
                   onMouseLeave={handleStarHoverEnd}
                   aria-label={`${star.value}`}
+                  whileHover={{ scale: 1.15 }}
+                  whileTap={{ scale: 0.9 }}
                 >
                   {star.filled ? <S.StarFilled /> : <S.StarEmpty />}
                 </S.StarButton>
@@ -75,7 +78,7 @@ export const RateBeerMasterScreen = () => {
             {ratingError && <S.RatingError>{ratingError}</S.RatingError>}
           </S.RatingSection>
 
-          <S.OpinionSection>
+          <S.OpinionSection variants={staggerItem}>
             <S.OpinionLabel>{t.rateBeerMaster.opinionLabel}</S.OpinionLabel>
             <S.OpinionCard>
               <S.Textarea
@@ -90,7 +93,7 @@ export const RateBeerMasterScreen = () => {
           </S.OpinionSection>
         </S.Hero>
 
-        <S.Footer>
+        <S.Footer variants={staggerItem}>
           <PrimaryButton onClick={handleSubmit} disabled={!isFormValid}>
             {t.rateBeerMaster.cta}
           </PrimaryButton>

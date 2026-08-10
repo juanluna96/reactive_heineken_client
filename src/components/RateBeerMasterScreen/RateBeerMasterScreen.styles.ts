@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { FaArrowLeft, FaRegStar, FaStar } from 'react-icons/fa6';
 import styled from 'styled-components';
 
@@ -28,7 +29,7 @@ export const BackgroundImage = styled.img`
   object-position: 15% top;
 `;
 
-export const Content = styled.div`
+export const Content = styled(motion.div)`
   position: relative;
   z-index: 1;
   display: flex;
@@ -39,7 +40,7 @@ export const Content = styled.div`
   padding: clamp(24px, 6dvh, 48px) 20px 0;
 `;
 
-export const Header = styled.header`
+export const Header = styled(motion.header)`
   position: relative;
   display: flex;
   align-items: center;
@@ -85,7 +86,7 @@ export const Hero = styled.div`
   padding-bottom: clamp(20px, 5dvh, 48px);
 `;
 
-export const ProfileSection = styled.div`
+export const ProfileSection = styled(motion.div)`
   display: inline-grid;
   grid-template-columns: 1fr;
   justify-content: center;
@@ -141,7 +142,7 @@ export const BeerMasterLabel = styled.span`
   opacity: 0.8;
 `;
 
-export const RatingSection = styled.div`
+export const RatingSection = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -174,7 +175,7 @@ export const Stars = styled.div`
   padding: 24px 0 16px;
 `;
 
-export const StarButton = styled.button`
+export const StarButton = styled(motion.button)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -219,7 +220,7 @@ export const RatingError = styled.p`
   color: ${({ theme }) => theme.colors.danger};
 `;
 
-export const OpinionSection = styled.div`
+export const OpinionSection = styled(motion.div)`
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -278,7 +279,7 @@ export const CharCount = styled.span`
   opacity: 0.6;
 `;
 
-export const Footer = styled.footer`
+export const Footer = styled(motion.footer)`
   position: sticky;
   bottom: 0;
   z-index: 1;

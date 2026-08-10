@@ -9,7 +9,13 @@ export const Checkbox = (props: CheckboxProps) => {
   return (
     <S.Container>
       <S.Wrapper>
-        <S.Input type="checkbox" checked={checked} onChange={handleChange} $hasError={Boolean(error)} />
+        <S.Input
+          type="checkbox"
+          checked={checked}
+          onChange={handleChange}
+          $hasError={Boolean(error)}
+          whileTap={{ scale: 0.85 }}
+        />
         <S.Label>
           {prefix}
           <S.LinkText>{linkText}</S.LinkText>

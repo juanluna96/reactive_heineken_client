@@ -1,3 +1,4 @@
+import { staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background-2.jpg';
 import videoThumbnail from '../../assets/images/video-thumbnail.jpg';
 import heinekenLogo from '../../assets/logos/heineken-logo.png';
@@ -18,8 +19,8 @@ export const WatchExperienceScreen = () => {
         <ScreenOverlay />
       </S.Background>
 
-      <S.Content>
-        <S.Header>
+      <S.Content initial="hidden" animate="visible" variants={staggerContainer}>
+        <S.Header variants={staggerItem}>
           <S.BackButton type="button" onClick={handleBack} aria-label="Back">
             <S.BackIcon aria-hidden="true" />
           </S.BackButton>
@@ -27,12 +28,12 @@ export const WatchExperienceScreen = () => {
         </S.Header>
 
         <S.Hero>
-          <S.HeadingBlock>
+          <S.HeadingBlock variants={staggerItem}>
             <S.Title>{t.watchExperience.title}</S.Title>
             <S.Subtitle>{t.watchExperience.subtitle}</S.Subtitle>
           </S.HeadingBlock>
 
-          <S.VideoCard>
+          <S.VideoCard variants={staggerItem}>
             <S.VideoThumbnail src={videoThumbnail} alt="" />
             <S.VideoOverlay>
               {!isPlaying && (
@@ -46,7 +47,7 @@ export const WatchExperienceScreen = () => {
             </S.DurationBadge>
           </S.VideoCard>
 
-          <S.TimerSection>
+          <S.TimerSection variants={staggerItem}>
             <S.TimerRing>
               <S.TimerSvg viewBox="0 0 128 128">
                 <S.TimerTrack cx="64" cy="64" r={radius} />
@@ -61,7 +62,7 @@ export const WatchExperienceScreen = () => {
           </S.TimerSection>
         </S.Hero>
 
-        <S.Footer>
+        <S.Footer variants={staggerItem}>
           {isUnlocked ? (
             <PrimaryButton onClick={handleRate}>{t.watchExperience.cta}</PrimaryButton>
           ) : (

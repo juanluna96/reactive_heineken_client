@@ -1,7 +1,8 @@
+import { motion } from 'framer-motion';
 import { FaArrowRight } from 'react-icons/fa6';
 import styled, { css } from 'styled-components';
 
-export const Button = styled.button<{ $disabled: boolean }>`
+export const Button = styled(motion.button)<{ $disabled: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;

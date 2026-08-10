@@ -1,3 +1,4 @@
+import { staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background.jpg';
 import heinekenLogo from '../../assets/logos/heineken-logo.png';
 import { FaChevronDown, FaEnvelope, FaUtensils, FaUser } from 'react-icons/fa6';
@@ -38,8 +39,8 @@ export const RegistrationScreen = () => {
         <ScreenOverlay />
       </S.Background>
 
-      <S.Content>
-        <S.Header>
+      <S.Content initial="hidden" animate="visible" variants={staggerContainer}>
+        <S.Header variants={staggerItem}>
           <S.BackButton type="button" onClick={handleBack} aria-label="Back">
             <S.BackIcon aria-hidden="true" />
           </S.BackButton>
@@ -47,12 +48,12 @@ export const RegistrationScreen = () => {
         </S.Header>
 
         <S.Hero>
-          <S.HeadingBlock>
+          <S.HeadingBlock variants={staggerItem}>
             <S.Title>{t.registration.title}</S.Title>
             <S.Subtitle>{t.registration.subtitle}</S.Subtitle>
           </S.HeadingBlock>
 
-          <S.FormCard>
+          <S.FormCard variants={staggerItem}>
             <TextField
               icon={FaUser}
               label={t.registration.name.label}
@@ -91,7 +92,7 @@ export const RegistrationScreen = () => {
           </S.FormCard>
         </S.Hero>
 
-        <S.Footer>
+        <S.Footer variants={staggerItem}>
           <PrimaryButton onClick={handleContinue} disabled={!isFormValid}>
             {t.registration.cta}
           </PrimaryButton>

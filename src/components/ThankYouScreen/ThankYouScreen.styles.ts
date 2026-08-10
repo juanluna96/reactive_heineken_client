@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { FaCheck } from 'react-icons/fa6';
 import styled from 'styled-components';
 
@@ -36,7 +37,7 @@ export const BubbleCanvas = styled.canvas`
   pointer-events: none;
 `;
 
-export const Content = styled.div`
+export const Content = styled(motion.div)`
   position: relative;
   z-index: 1;
   display: flex;
@@ -58,7 +59,7 @@ export const Hero = styled.div`
   padding-top: clamp(20px, 5dvh, 48px);
 `;
 
-export const IconCircle = styled.div`
+export const IconCircle = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -76,7 +77,7 @@ export const CheckIcon = styled(FaCheck)`
   color: ${({ theme }) => theme.colors.ctaText};
 `;
 
-export const TextGroup = styled.div`
+export const TextGroup = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -115,7 +116,7 @@ export const SupportingText = styled.p`
   color: ${({ theme }) => theme.colors.mutedText};
 `;
 
-export const Footer = styled.footer`
+export const Footer = styled(motion.footer)`
   display: flex;
   flex-direction: column;
   align-items: center;
