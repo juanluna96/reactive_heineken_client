@@ -6,6 +6,7 @@ import { ROUTES } from '../../routes';
 const DURATION_SECONDS = 180;
 const RADIUS = 56;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
+const AUTOPLAY_DELAY_MS = 1000;
 
 const formatTime = (totalSeconds: number) => {
   const minutes = Math.floor(totalSeconds / 60)
@@ -21,6 +22,11 @@ export const useWatchExperienceScreen = () => {
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [secondsRemaining, setSecondsRemaining] = useState(DURATION_SECONDS);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => setIsPlaying(true), AUTOPLAY_DELAY_MS);
+    return () => clearTimeout(timeoutId);
+  }, []);
 
   useEffect(() => {
     if (!isPlaying) return;
