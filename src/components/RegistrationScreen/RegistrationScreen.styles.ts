@@ -28,16 +28,6 @@ export const BackgroundImage = styled.img`
   object-position: 15% top;
 `;
 
-export const GradientOverlay = styled.div`
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    ${({ theme }) => theme.colors.overlayStart},
-    ${({ theme }) => theme.colors.overlayEnd}
-  );
-`;
-
 export const Content = styled.div`
   position: relative;
   z-index: 1;

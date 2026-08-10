@@ -1,6 +1,7 @@
 import backgroundImage from '../../assets/images/video-thumbnail.jpg';
 import heinekenLogo from '../../assets/logos/heineken-logo.png';
 import { PrimaryButton } from '../PrimaryButton';
+import { ScreenOverlay } from '../ScreenOverlay';
 import { StepIndicator } from '../StepIndicator';
 import * as S from './RateBeerMasterScreen.styles';
 import { useRateBeerMasterScreen } from './RateBeerMasterScreen.hooks';
@@ -27,7 +28,7 @@ export const RateBeerMasterScreen = () => {
     <S.Screen>
       <S.Background>
         <S.BackgroundImage src={backgroundImage} alt="" />
-        <S.GradientOverlay />
+        <ScreenOverlay />
       </S.Background>
 
       <S.Content>

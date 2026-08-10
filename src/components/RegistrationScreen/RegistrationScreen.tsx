@@ -3,6 +3,7 @@ import heinekenLogo from '../../assets/logos/heineken-logo.png';
 import { FaChevronDown, FaEnvelope, FaUtensils, FaUser } from 'react-icons/fa6';
 import { Checkbox } from '../Checkbox';
 import { PrimaryButton } from '../PrimaryButton';
+import { ScreenOverlay } from '../ScreenOverlay';
 import { SelectField } from '../SelectField';
 import { StepIndicator } from '../StepIndicator';
 import { TextField } from '../TextField';
@@ -34,7 +35,7 @@ export const RegistrationScreen = () => {
     <S.Screen>
       <S.Background>
         <S.BackgroundImage src={backgroundImage} alt="" />
-        <S.GradientOverlay />
+        <ScreenOverlay />
       </S.Background>
 
       <S.Content>

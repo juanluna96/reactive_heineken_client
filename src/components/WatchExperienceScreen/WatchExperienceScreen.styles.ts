@@ -28,12 +28,6 @@ export const BackgroundImage = styled.img`
   object-position: 15% top;
 `;
 
-export const DarkOverlay = styled.div`
-  position: absolute;
-  inset: 0;
-  background: rgba(10, 10, 10, 0.9);
-`;
-
 export const Content = styled.div`
   position: relative;
   z-index: 1;

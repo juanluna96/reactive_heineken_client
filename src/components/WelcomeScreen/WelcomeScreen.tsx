@@ -2,6 +2,7 @@ import backgroundImage from '../../assets/images/background.jpg';
 import heinekenLogo from '../../assets/logos/heineken-logo.png';
 import { LanguageOption } from '../LanguageOption';
 import { PrimaryButton } from '../PrimaryButton';
+import { ScreenOverlay } from '../ScreenOverlay';
 import * as S from './WelcomeScreen.styles';
 import { useWelcomeScreen } from './WelcomeScreen.hooks';
 
@@ -12,7 +13,7 @@ export const WelcomeScreen = () => {
     <S.Screen>
       <S.Background>
         <S.BackgroundImage src={backgroundImage} alt="" />
-        <S.GradientOverlay />
+        <ScreenOverlay />
       </S.Background>
 
       <S.Content>

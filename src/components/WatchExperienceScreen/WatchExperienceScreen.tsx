@@ -2,6 +2,7 @@ import backgroundImage from '../../assets/images/background-2.jpg';
 import videoThumbnail from '../../assets/images/video-thumbnail.jpg';
 import heinekenLogo from '../../assets/logos/heineken-logo.png';
 import { PrimaryButton } from '../PrimaryButton';
+import { ScreenOverlay } from '../ScreenOverlay';
 import { StepIndicator } from '../StepIndicator';
 import * as S from './WatchExperienceScreen.styles';
 import { useWatchExperienceScreen } from './WatchExperienceScreen.hooks';
@@ -14,7 +15,7 @@ export const WatchExperienceScreen = () => {
     <S.Screen>
       <S.Background>
         <S.BackgroundImage src={backgroundImage} alt="" />
-        <S.DarkOverlay />
+        <ScreenOverlay />
       </S.Background>
 
       <S.Content>
