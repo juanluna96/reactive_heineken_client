@@ -1,0 +1,78 @@
+{
+  "welcome": {
+    "title": "WELCOME",
+    "subtitle": "Select your preferred language to\nbegin your experience.",
+    "languageOptions": {
+      "es": "Español",
+      "en": "English"
+    },
+    "cta": "START EXPERIENCE",
+    "footer": "© 2026 HEINEKEN EXPERIENCE. ALL RIGHTS\nRESERVED."
+  },
+  "registration": {
+    "title": "Welcome",
+    "subtitle": "Let's get to know you before starting\nyour experience.",
+    "name": {
+      "label": "NAME",
+      "placeholder": "Enter your full name"
+    },
+    "email": {
+      "label": "EMAIL",
+      "placeholder": "example@email.com"
+    },
+    "restaurant": {
+      "label": "RESTAURANT / BAR",
+      "placeholder": "Select your restaurant"
+    },
+    "consent": {
+      "prefix": "I accept the ",
+      "linkText": "Privacy Policy",
+      "suffix": " and the processing of my personal data."
+    },
+    "cta": "CONTINUE",
+    "step": "STEP 1 OF 3",
+    "errors": {
+      "nameRequired": "Enter your full name",
+      "emailInvalid": "Enter a valid email address",
+      "restaurantRequired": "Select a restaurant",
+      "consentRequired": "You must accept the privacy policy"
+    }
+  },
+  "watchExperience": {
+    "title": "Watch the\nExperience",
+    "subtitle": "Please watch the full video to unlock your\nrating.",
+    "durationLabel": "3:00",
+    "timerLabel": "REMAINING",
+    "helper": "The rating will be available after the\nvideo finishes.",
+    "cta": "RATE YOUR BEER MASTER",
+    "step": "STEP 2 OF 3"
+  },
+  "rateBeerMaster": {
+    "beerMasterLabel": "BEER MASTER",
+    "namePlaceholder": "Beer master's name",
+    "title": "How was your experience?",
+    "subtitle": "Your opinion helps us improve",
+    "tierMessages": [
+      "VERY POOR EXPERIENCE",
+      "COULD BE BETTER",
+      "IT WAS OKAY",
+      "GREAT SERVICE",
+      "EXCELLENT! PERFECT SERVICE!"
+    ],
+    "opinionLabel": "OPINION",
+    "opinionPlaceholder": "Optional feedback...",
+    "cta": "SUBMIT RATING",
+    "step": "STEP 3 OF 3",
+    "errors": {
+      "nameRequired": "Enter the beer master's name",
+      "ratingRequired": "Please select a rating"
+    }
+  },
+  "thankYou": {
+    "title": "Thank You!",
+    "confirmation": "Your rating has been submitted successfully.",
+    "supportingText": "Thanks for helping us improve the Heineken experience. Your feedback is very valuable to us.",
+    "cta": "FINISH",
+    "footer": "© 2026 HEINEKEN EXPERIENCE. ALL RIGHTS\nRESERVED."
+  }
+}

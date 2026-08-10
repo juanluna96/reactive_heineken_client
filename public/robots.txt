@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://heinekenstarserve.reactiveart.com/sitemap.xml
