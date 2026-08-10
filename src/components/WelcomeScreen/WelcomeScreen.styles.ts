@@ -24,6 +24,7 @@ export const BackgroundImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 15% top;
 `;
 
 export const GradientOverlay = styled.div`
@@ -99,7 +100,6 @@ export const LanguageList = styled.div`
   flex: 1 1 auto;
   min-height: 0;
   gap: 12px;
-  padding: clamp(16px, 6dvh, 108px) 0;
 `;
 
 export const Footer = styled.footer`

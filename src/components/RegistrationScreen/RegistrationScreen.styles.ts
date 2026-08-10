@@ -25,6 +25,7 @@ export const BackgroundImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 15% top;
 `;
 
 export const DarkOverlay = styled.div`
