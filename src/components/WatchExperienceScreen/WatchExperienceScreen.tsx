@@ -14,7 +14,7 @@ export const WatchExperienceScreen = () => {
     <S.Screen>
       <S.Background>
         <S.BackgroundImage src={backgroundImage} alt="" />
-        <S.GradientOverlay />
+        <S.DarkOverlay />
       </S.Background>
 
       <S.Content>
