@@ -64,6 +64,7 @@ export interface RateBeerMasterDictionary {
   errors: {
     nameRequired: string;
     ratingRequired: string;
+    submitFailed: string;
   };
 }
 
