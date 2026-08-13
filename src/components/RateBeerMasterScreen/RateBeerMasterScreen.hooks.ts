@@ -6,13 +6,12 @@ import { ROUTES } from '../../routes';
 
 const STAR_VALUES = [1, 2, 3, 4, 5];
 const MAX_COMMENT_LENGTH = 140;
-const DEFAULT_BEER_MASTER_NAME = 'Mark';
 
 export const useRateBeerMasterScreen = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const [beerMasterName, setBeerMasterName] = useState(DEFAULT_BEER_MASTER_NAME);
+  const [beerMasterName, setBeerMasterName] = useState('');
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [comment, setComment] = useState('');
