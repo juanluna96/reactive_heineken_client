@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from '../../i18n';
+import { useRatingStore } from '../../rating';
 import { ROUTES } from '../../routes';
 
 const STAR_VALUES = [1, 2, 3, 4, 5];
@@ -11,10 +12,13 @@ export const useRateBeerMasterScreen = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const [beerMasterName, setBeerMasterName] = useState('');
-  const [rating, setRating] = useState(0);
+  const beerMasterName = useRatingStore((state) => state.beerMasterName);
+  const setBeerMasterName = useRatingStore((state) => state.setBeerMasterName);
+  const rating = useRatingStore((state) => state.rating);
+  const setRating = useRatingStore((state) => state.setRating);
+  const comment = useRatingStore((state) => state.comment);
+  const setComment = useRatingStore((state) => state.setComment);
   const [hoverRating, setHoverRating] = useState(0);
-  const [comment, setComment] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
   const displayRating = hoverRating || rating;

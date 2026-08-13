@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from '../../i18n';
+import { useRegistrationStore } from '../../registration';
 import { ROUTES } from '../../routes';
 import type { SelectFieldOption } from '../SelectField';
 
@@ -15,10 +16,14 @@ export const useRegistrationScreen = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [restaurant, setRestaurant] = useState('');
-  const [accepted, setAccepted] = useState(false);
+  const name = useRegistrationStore((state) => state.name);
+  const setName = useRegistrationStore((state) => state.setName);
+  const email = useRegistrationStore((state) => state.email);
+  const setEmail = useRegistrationStore((state) => state.setEmail);
+  const restaurant = useRegistrationStore((state) => state.restaurant);
+  const setRestaurant = useRegistrationStore((state) => state.setRestaurant);
+  const accepted = useRegistrationStore((state) => state.accepted);
+  const setAccepted = useRegistrationStore((state) => state.setAccepted);
   const [submitted, setSubmitted] = useState(false);
 
   const isNameValid = name.trim().length > 0;
