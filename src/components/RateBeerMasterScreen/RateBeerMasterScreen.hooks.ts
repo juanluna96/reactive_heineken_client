@@ -16,7 +16,7 @@ export const useRateBeerMasterScreen = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const restaurantId = Number(useRegistrationStore((state) => state.restaurantId));
+  const restaurantId = useRegistrationStore((state) => state.restaurantId);
   const customerName = useRegistrationStore((state) => state.name);
   const customerEmail = useRegistrationStore((state) => state.email);
 
@@ -55,10 +55,10 @@ export const useRateBeerMasterScreen = () => {
   // name field instead of forcing a selection from an empty list.
   const hasBeerMasterList = beerMasters.length > 0;
   const beerMasterOptions: SelectFieldOption[] = beerMasters.map((master) => ({
-    value: String(master.id),
+    value: master.id,
     label: master.name,
   }));
-  const selectedBeerMasterId = beerMasterId !== null ? String(beerMasterId) : '';
+  const selectedBeerMasterId = beerMasterId ?? '';
 
   const displayRating = hoverRating || rating;
   const tierMessage = rating > 0 ? t.rateBeerMaster.tierMessages[rating - 1] : '';
@@ -90,7 +90,7 @@ export const useRateBeerMasterScreen = () => {
   };
 
   const handleBeerMasterSelect = (value: string) => {
-    setBeerMasterId(value === '' ? null : Number(value));
+    setBeerMasterId(value === '' ? null : value);
   };
 
   const handleCommentChange = (event: ChangeEvent<HTMLTextAreaElement>) => {

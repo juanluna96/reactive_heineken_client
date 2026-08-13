@@ -1,16 +1,16 @@
 export interface RestaurantDto {
-  id: number;
+  id: string;
   name: string;
 }
 
 export interface BeerMasterDto {
-  id: number;
+  id: string;
   name: string;
 }
 
 export interface CreateRatingPayload {
-  restaurant_id: number;
-  beer_master_id?: number | null;
+  restaurant_id: string;
+  beer_master_id?: string | null;
   beer_master_name?: string | null;
   customer_name: string;
   customer_email: string;
@@ -19,9 +19,9 @@ export interface CreateRatingPayload {
 }
 
 export interface RatingDto {
-  id: number;
-  restaurant_id: number;
-  beer_master_id: number | null;
+  id: string;
+  restaurant_id: string;
+  beer_master_id: string | null;
   beer_master_name: string | null;
   customer_name: string;
   customer_email: string;

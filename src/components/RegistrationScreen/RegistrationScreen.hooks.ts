@@ -28,7 +28,7 @@ export const useRegistrationScreen = () => {
     fetchRestaurants()
       .then((restaurants) => {
         if (cancelled) return;
-        setRestaurantOptions(restaurants.map((restaurant) => ({ value: String(restaurant.id), label: restaurant.name })));
+        setRestaurantOptions(restaurants.map((restaurant) => ({ value: restaurant.id, label: restaurant.name })));
       })
       .catch(() => {
         if (!cancelled) setRestaurantOptions([]);
