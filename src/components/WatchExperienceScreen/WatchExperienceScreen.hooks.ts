@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from '../../i18n';
 import { ROUTES } from '../../routes';
 
-const DURATION_SECONDS = 180;
+const DURATION_SECONDS = 90;
 const RADIUS = 56;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 const AUTOPLAY_DELAY_MS = 1000;
