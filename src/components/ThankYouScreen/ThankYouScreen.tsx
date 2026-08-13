@@ -1,5 +1,5 @@
 import { staggerContainer, staggerItem } from '../../animations/variants';
-import backgroundImage from '../../assets/images/background.jpg';
+import backgroundImage from '../../assets/images/background.png';
 import { BubbleField } from '../BubbleField';
 import { PrimaryButton } from '../PrimaryButton';
 import { ScreenOverlay } from '../ScreenOverlay';
