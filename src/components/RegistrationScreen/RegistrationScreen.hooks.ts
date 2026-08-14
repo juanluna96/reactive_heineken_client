@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { fetchRestaurants } from '../../api';
 import { useTranslation } from '../../i18n';
 import { useRegistrationStore } from '../../registration';
+import { useRestaurantsStore } from '../../restaurants';
 import { ROUTES } from '../../routes';
 import type { SelectFieldOption } from '../SelectField';
 
@@ -21,22 +21,20 @@ export const useRegistrationScreen = () => {
   const accepted = useRegistrationStore((state) => state.accepted);
   const setAccepted = useRegistrationStore((state) => state.setAccepted);
   const [submitted, setSubmitted] = useState(false);
-  const [restaurantOptions, setRestaurantOptions] = useState<SelectFieldOption[]>([]);
+
+  // No-ops if WelcomeScreen already prefetched this — only actually fetches
+  // when someone lands here directly without going through Welcome first.
+  const restaurants = useRestaurantsStore((state) => state.restaurants);
+  const fetchRestaurants = useRestaurantsStore((state) => state.fetchRestaurants);
 
   useEffect(() => {
-    let cancelled = false;
-    fetchRestaurants()
-      .then((restaurants) => {
-        if (cancelled) return;
-        setRestaurantOptions(restaurants.map((restaurant) => ({ value: restaurant.id, label: restaurant.name })));
-      })
-      .catch(() => {
-        if (!cancelled) setRestaurantOptions([]);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+    fetchRestaurants();
+  }, [fetchRestaurants]);
+
+  const restaurantOptions: SelectFieldOption[] = restaurants.map((restaurant) => ({
+    value: restaurant.id,
+    label: restaurant.name,
+  }));
 
   const isNameValid = name.trim().length > 0;
   const isEmailValid = EMAIL_PATTERN.test(email);
