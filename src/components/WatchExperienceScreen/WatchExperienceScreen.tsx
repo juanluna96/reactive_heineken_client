@@ -50,7 +50,15 @@ export const WatchExperienceScreen = () => {
 
           <S.VideoCard variants={staggerItem}>
             {isPlaying ? (
-              <S.Player src={PRESENTATION_VIDEO_SRC} autoPlay controls playsInline loop={false} />
+              <S.Player
+                src={PRESENTATION_VIDEO_SRC}
+                width="100%"
+                height="100%"
+                autoPlay
+                controls
+                playsInline
+                loop={false}
+              />
             ) : (
               <>
                 <S.VideoThumbnail src={videoThumbnail} alt="" />
