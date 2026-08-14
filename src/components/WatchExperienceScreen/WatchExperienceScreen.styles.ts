@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { FaArrowLeft, FaLock, FaPlay } from 'react-icons/fa6';
+import ReactPlayer from 'react-player';
 import styled from 'styled-components';
 
 export const Screen = styled.div`
@@ -123,6 +124,14 @@ export const VideoCard = styled(motion.div)`
 `;
 
 export const VideoThumbnail = styled.img`
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
+export const Player = styled(ReactPlayer)`
   position: absolute;
   inset: 0;
   width: 100%;

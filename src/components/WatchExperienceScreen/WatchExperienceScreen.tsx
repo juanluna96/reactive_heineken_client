@@ -9,6 +9,8 @@ import { StepIndicator } from '../StepIndicator';
 import * as S from './WatchExperienceScreen.styles';
 import { useWatchExperienceScreen } from './WatchExperienceScreen.hooks';
 
+const PRESENTATION_VIDEO_SRC = '/videos/presentation.mp4';
+
 export const WatchExperienceScreen = () => {
   const {
     t,
@@ -47,22 +49,24 @@ export const WatchExperienceScreen = () => {
           </S.HeadingBlock>
 
           <S.VideoCard variants={staggerItem}>
-            <S.VideoThumbnail src={videoThumbnail} alt="" />
-            <S.VideoOverlay>
-              {!isPlaying && (
-                <S.PlayButton type="button" onClick={handlePlay} aria-label="Play video">
-                  <S.PlayIcon aria-hidden="true" />
-                </S.PlayButton>
-              )}
-            </S.VideoOverlay>
-            {!isPlaying && (
-              <S.AutoplayBanner>
-                <S.AutoplayText>{autoplayLabel}</S.AutoplayText>
-              </S.AutoplayBanner>
+            {isPlaying ? (
+              <S.Player src={PRESENTATION_VIDEO_SRC} autoPlay controls playsInline loop={false} />
+            ) : (
+              <>
+                <S.VideoThumbnail src={videoThumbnail} alt="" />
+                <S.VideoOverlay>
+                  <S.PlayButton type="button" onClick={handlePlay} aria-label="Play video">
+                    <S.PlayIcon aria-hidden="true" />
+                  </S.PlayButton>
+                </S.VideoOverlay>
+                <S.AutoplayBanner>
+                  <S.AutoplayText>{autoplayLabel}</S.AutoplayText>
+                </S.AutoplayBanner>
+                <S.DurationBadge>
+                  <S.DurationText>{t.watchExperience.durationLabel}</S.DurationText>
+                </S.DurationBadge>
+              </>
             )}
-            <S.DurationBadge>
-              <S.DurationText>{t.watchExperience.durationLabel}</S.DurationText>
-            </S.DurationBadge>
           </S.VideoCard>
 
           <S.TimerSection variants={staggerItem}>
