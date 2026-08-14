@@ -47,6 +47,7 @@ export interface WatchExperienceDictionary {
   durationLabel: string;
   timerLabel: string;
   helper: string;
+  autoplayMessage: string;
   cta: string;
   step: string;
 }

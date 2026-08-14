@@ -41,9 +41,10 @@
   "watchExperience": {
     "title": "Watch the\nExperience",
     "subtitle": "Please watch the full video to unlock your\nrating.",
-    "durationLabel": "3:00",
+    "durationLabel": "00:30",
     "timerLabel": "REMAINING",
     "helper": "The rating will be available after the\nvideo finishes.",
+    "autoplayMessage": "The video will play in {seconds}...",
     "cta": "RATE YOUR BEER MASTER",
     "step": "STEP 2 OF 3"
   },

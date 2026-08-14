@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { FaArrowLeft, FaLock, FaPlay } from 'react-icons/fa6';
+import ReactPlayer from 'react-player';
 import styled from 'styled-components';
 
 export const Screen = styled.div`
@@ -120,6 +121,23 @@ export const VideoCard = styled(motion.div)`
   border-radius: ${({ theme }) => theme.radii.md};
   border: 1px solid ${({ theme }) => theme.colors.surfaceBorder};
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  &:fullscreen,
+  &:-webkit-full-screen {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    aspect-ratio: unset;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    background: #000;
+
+    video {
+      object-fit: contain !important;
+    }
+  }
 `;
 
 export const VideoThumbnail = styled.img`
@@ -128,6 +146,14 @@ export const VideoThumbnail = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+`;
+
+export const Player = styled(ReactPlayer)`
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
 `;
 
 export const VideoOverlay = styled.div`
@@ -158,6 +184,26 @@ export const PlayIcon = styled(FaPlay)`
   height: 16px;
   margin-left: 3px;
   color: ${({ theme }) => theme.colors.brandGreenLight};
+`;
+
+export const AutoplayBanner = styled.div`
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 13px;
+  border-radius: 8px;
+  border: 1px solid ${({ theme }) => theme.colors.surfaceBorder};
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+`;
+
+export const AutoplayText = styled.span`
+  font-family: ${({ theme }) => theme.fonts.heading};
+  font-size: 12px;
+  line-height: 16px;
+  white-space: nowrap;
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 export const DurationBadge = styled.div`
