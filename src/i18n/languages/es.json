@@ -41,7 +41,7 @@
   "watchExperience": {
     "title": "Mira la\nExperiencia",
     "subtitle": "Por favor mira el video completo para desbloquear tu\ncalificación.",
-    "durationLabel": "3:00",
+    "durationLabel": "00:30",
     "timerLabel": "RESTANTE",
     "helper": "La calificación estará disponible cuando\ntermine el video.",
     "autoplayMessage": "El video se reproducirá en {seconds}...",
