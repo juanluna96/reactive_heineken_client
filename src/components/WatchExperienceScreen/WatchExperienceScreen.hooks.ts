@@ -30,7 +30,13 @@ export const useWatchExperienceScreen = () => {
 
   useEffect(() => {
     if (!isPlaying) return;
-    videoCardRef.current?.requestFullscreen().catch(() => {});
+    const element = videoCardRef.current;
+    if (!element?.requestFullscreen) return;
+    try {
+      element.requestFullscreen()?.catch(() => {});
+    } catch {
+      // Fullscreen not permitted in this context; keep playing inline.
+    }
   }, [isPlaying]);
 
   useEffect(() => {
@@ -66,8 +72,11 @@ export const useWatchExperienceScreen = () => {
   };
 
   const handleEnded = () => {
-    if (document.fullscreenElement) {
-      document.exitFullscreen().catch(() => {});
+    if (!document.fullscreenElement || !document.exitFullscreen) return;
+    try {
+      document.exitFullscreen()?.catch(() => {});
+    } catch {
+      // Nothing to exit; ignore.
     }
   };
 
