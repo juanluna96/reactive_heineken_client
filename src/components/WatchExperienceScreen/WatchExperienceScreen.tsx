@@ -25,6 +25,7 @@ export const WatchExperienceScreen = () => {
     handleBack,
     handlePlay,
     handleRate,
+    handleEnded,
   } = useWatchExperienceScreen();
 
   return (
@@ -60,6 +61,7 @@ export const WatchExperienceScreen = () => {
                 controls
                 playsInline
                 loop={false}
+                onEnded={handleEnded}
               />
             ) : (
               <>

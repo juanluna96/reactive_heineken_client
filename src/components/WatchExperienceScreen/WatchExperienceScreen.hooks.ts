@@ -65,6 +65,12 @@ export const useWatchExperienceScreen = () => {
     setIsPlaying(true);
   };
 
+  const handleEnded = () => {
+    if (document.fullscreenElement) {
+      document.exitFullscreen().catch(() => {});
+    }
+  };
+
   const handleRate = () => {
     if (!isUnlocked) return;
     navigate(ROUTES.rateBeerMaster);
@@ -83,5 +89,6 @@ export const useWatchExperienceScreen = () => {
     handleBack,
     handlePlay,
     handleRate,
+    handleEnded,
   };
 };
