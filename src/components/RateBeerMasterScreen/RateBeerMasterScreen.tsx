@@ -1,9 +1,11 @@
+import { FaChevronDown, FaUser } from 'react-icons/fa6';
 import { staggerContainer, staggerItem } from '../../animations/variants';
-import backgroundImage from '../../assets/images/background-2.jpg';
+import backgroundImage from '../../assets/images/background-2.png';
 import heinekenLogo from '../../assets/logos/heineken-logo.png';
 import { BubbleField } from '../BubbleField';
 import { PrimaryButton } from '../PrimaryButton';
 import { ScreenOverlay } from '../ScreenOverlay';
+import { SelectField } from '../SelectField';
 import { StepIndicator } from '../StepIndicator';
 import * as S from './RateBeerMasterScreen.styles';
 import { useRateBeerMasterScreen } from './RateBeerMasterScreen.hooks';
@@ -11,16 +13,22 @@ import { useRateBeerMasterScreen } from './RateBeerMasterScreen.hooks';
 export const RateBeerMasterScreen = () => {
   const {
     t,
+    hasBeerMasterList,
+    beerMasterOptions,
+    selectedBeerMasterId,
     beerMasterName,
     nameError,
     stars,
     tierMessage,
     ratingError,
     isFormValid,
+    isSubmitting,
+    submitError,
     comment,
     maxCommentLength,
     handleBack,
     handleBeerMasterNameChange,
+    handleBeerMasterSelect,
     handleStarHoverEnd,
     handleCommentChange,
     handleSubmit,
@@ -44,15 +52,30 @@ export const RateBeerMasterScreen = () => {
 
         <S.Hero>
           <S.ProfileSection variants={staggerItem}>
-            <S.NameInput
-              value={beerMasterName}
-              onChange={handleBeerMasterNameChange}
-              placeholder={t.rateBeerMaster.namePlaceholder}
-              aria-label="Beer master name"
-              $hasError={Boolean(nameError)}
-            />
-            <S.BeerMasterLabel>{t.rateBeerMaster.beerMasterLabel}</S.BeerMasterLabel>
-            {nameError && <S.NameError>{nameError}</S.NameError>}
+            {hasBeerMasterList ? (
+              <SelectField
+                icon={FaUser}
+                chevronIcon={FaChevronDown}
+                label={t.rateBeerMaster.beerMasterLabel}
+                placeholder={t.rateBeerMaster.namePlaceholder}
+                options={beerMasterOptions}
+                value={selectedBeerMasterId}
+                onChange={handleBeerMasterSelect}
+                error={nameError}
+              />
+            ) : (
+              <>
+                <S.NameInput
+                  value={beerMasterName}
+                  onChange={handleBeerMasterNameChange}
+                  placeholder={t.rateBeerMaster.namePlaceholder}
+                  aria-label="Beer master name"
+                  $hasError={Boolean(nameError)}
+                />
+                <S.BeerMasterLabel>{t.rateBeerMaster.beerMasterLabel}</S.BeerMasterLabel>
+                {nameError && <S.NameError>{nameError}</S.NameError>}
+              </>
+            )}
           </S.ProfileSection>
 
           <S.RatingSection variants={staggerItem}>
@@ -96,7 +119,8 @@ export const RateBeerMasterScreen = () => {
         </S.Hero>
 
         <S.Footer variants={staggerItem}>
-          <PrimaryButton onClick={handleSubmit} disabled={!isFormValid}>
+          {submitError && <S.RatingError>{submitError}</S.RatingError>}
+          <PrimaryButton onClick={handleSubmit} disabled={!isFormValid || isSubmitting}>
             {t.rateBeerMaster.cta}
           </PrimaryButton>
           <StepIndicator current={3} total={3} label={t.rateBeerMaster.step} />

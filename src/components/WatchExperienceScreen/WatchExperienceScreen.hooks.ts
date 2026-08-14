@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from '../../i18n';
 import { ROUTES } from '../../routes';
+import { DURATION_SECONDS, useWatchExperienceStore } from '../../watchExperience';
 
-const DURATION_SECONDS = 180;
 const RADIUS = 56;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 const AUTOPLAY_DELAY_MS = 1000;
@@ -20,23 +20,24 @@ export const useWatchExperienceScreen = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [secondsRemaining, setSecondsRemaining] = useState(DURATION_SECONDS);
+  const isPlaying = useWatchExperienceStore((state) => state.isPlaying);
+  const setIsPlaying = useWatchExperienceStore((state) => state.setIsPlaying);
+  const secondsRemaining = useWatchExperienceStore((state) => state.secondsRemaining);
+  const tick = useWatchExperienceStore((state) => state.tick);
 
   useEffect(() => {
+    if (isPlaying) return;
     const timeoutId = setTimeout(() => setIsPlaying(true), AUTOPLAY_DELAY_MS);
     return () => clearTimeout(timeoutId);
-  }, []);
+  }, [isPlaying, setIsPlaying]);
 
   useEffect(() => {
     if (!isPlaying) return;
 
-    const intervalId = setInterval(() => {
-      setSecondsRemaining((current) => Math.max(current - 1, 0));
-    }, 1000);
+    const intervalId = setInterval(tick, 1000);
 
     return () => clearInterval(intervalId);
-  }, [isPlaying]);
+  }, [isPlaying, tick]);
 
   const isUnlocked = secondsRemaining === 0;
   const dashoffset = CIRCUMFERENCE * (1 - secondsRemaining / DURATION_SECONDS);

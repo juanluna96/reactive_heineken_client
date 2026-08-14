@@ -1,5 +1,5 @@
 import { staggerContainer, staggerItem } from '../../animations/variants';
-import backgroundImage from '../../assets/images/background-2.jpg';
+import backgroundImage from '../../assets/images/background-2.png';
 import videoThumbnail from '../../assets/images/video-thumbnail.jpg';
 import heinekenLogo from '../../assets/logos/heineken-logo.png';
 import { BubbleField } from '../BubbleField';
