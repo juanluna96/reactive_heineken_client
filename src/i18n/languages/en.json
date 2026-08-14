@@ -65,7 +65,8 @@
     "step": "STEP 3 OF 3",
     "errors": {
       "nameRequired": "Enter the beer master's name",
-      "ratingRequired": "Please select a rating"
+      "ratingRequired": "Please select a rating",
+      "submitFailed": "Failed to submit your rating, please try again"
     }
   },
   "thankYou": {

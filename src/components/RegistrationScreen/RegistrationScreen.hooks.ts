@@ -1,29 +1,46 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { fetchRestaurants } from '../../api';
 import { useTranslation } from '../../i18n';
+import { useRegistrationStore } from '../../registration';
 import { ROUTES } from '../../routes';
 import type { SelectFieldOption } from '../SelectField';
 
-const RESTAURANT_OPTIONS: SelectFieldOption[] = [
-  { value: 'la-terraza', label: 'La Terraza' },
-  { value: 'el-mirador', label: 'El Mirador' },
-  { value: 'bar-central', label: 'Bar Central' },
-];
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const useRegistrationScreen = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [restaurant, setRestaurant] = useState('');
-  const [accepted, setAccepted] = useState(false);
+  const name = useRegistrationStore((state) => state.name);
+  const setName = useRegistrationStore((state) => state.setName);
+  const email = useRegistrationStore((state) => state.email);
+  const setEmail = useRegistrationStore((state) => state.setEmail);
+  const restaurantId = useRegistrationStore((state) => state.restaurantId);
+  const setRestaurantId = useRegistrationStore((state) => state.setRestaurantId);
+  const accepted = useRegistrationStore((state) => state.accepted);
+  const setAccepted = useRegistrationStore((state) => state.setAccepted);
   const [submitted, setSubmitted] = useState(false);
+  const [restaurantOptions, setRestaurantOptions] = useState<SelectFieldOption[]>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchRestaurants()
+      .then((restaurants) => {
+        if (cancelled) return;
+        setRestaurantOptions(restaurants.map((restaurant) => ({ value: restaurant.id, label: restaurant.name })));
+      })
+      .catch(() => {
+        if (!cancelled) setRestaurantOptions([]);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const isNameValid = name.trim().length > 0;
   const isEmailValid = EMAIL_PATTERN.test(email);
-  const isRestaurantValid = restaurant !== '';
+  const isRestaurantValid = restaurantId !== '';
   const isFormValid = isNameValid && isEmailValid && isRestaurantValid && accepted;
 
   const nameError = submitted && !isNameValid ? t.registration.errors.nameRequired : undefined;
@@ -47,9 +64,9 @@ export const useRegistrationScreen = () => {
     t,
     name,
     email,
-    restaurant,
+    restaurant: restaurantId,
     accepted,
-    restaurantOptions: RESTAURANT_OPTIONS,
+    restaurantOptions,
     isFormValid,
     nameError,
     emailError,
@@ -57,7 +74,7 @@ export const useRegistrationScreen = () => {
     consentError,
     setName,
     setEmail,
-    setRestaurant,
+    setRestaurant: setRestaurantId,
     setAccepted,
     handleBack,
     handleContinue,

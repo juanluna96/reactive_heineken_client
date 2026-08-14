@@ -65,7 +65,8 @@
     "step": "PASO 3 DE 3",
     "errors": {
       "nameRequired": "Ingresa el nombre del maestro cervecero",
-      "ratingRequired": "Selecciona una calificación"
+      "ratingRequired": "Selecciona una calificación",
+      "submitFailed": "No se pudo enviar tu calificación, intenta de nuevo"
     }
   },
   "thankYou": {

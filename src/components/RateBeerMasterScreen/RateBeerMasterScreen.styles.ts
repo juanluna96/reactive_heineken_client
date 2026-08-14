@@ -87,10 +87,11 @@ export const Hero = styled.div`
 `;
 
 export const ProfileSection = styled(motion.div)`
-  display: inline-grid;
+  display: grid;
   grid-template-columns: 1fr;
   justify-content: center;
   justify-items: stretch;
+  width: 100%;
   gap: 8px;
 `;
 
