@@ -21,6 +21,7 @@ export const WatchExperienceScreen = () => {
     radius,
     circumference,
     dashoffset,
+    videoRef,
     handleBack,
     handlePlay,
     handleRate,
@@ -51,6 +52,7 @@ export const WatchExperienceScreen = () => {
           <S.VideoCard variants={staggerItem}>
             {isPlaying ? (
               <S.Player
+                ref={videoRef}
                 src={PRESENTATION_VIDEO_SRC}
                 width="100%"
                 height="100%"

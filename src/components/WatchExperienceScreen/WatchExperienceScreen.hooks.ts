@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from '../../i18n';
 import { ROUTES } from '../../routes';
@@ -26,6 +26,12 @@ export const useWatchExperienceScreen = () => {
   const tick = useWatchExperienceStore((state) => state.tick);
 
   const [autoplayCountdown, setAutoplayCountdown] = useState(AUTOPLAY_COUNTDOWN_SECONDS);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (!isPlaying) return;
+    videoRef.current?.requestFullscreen().catch(() => {});
+  }, [isPlaying]);
 
   useEffect(() => {
     if (isPlaying) return;
@@ -73,6 +79,7 @@ export const useWatchExperienceScreen = () => {
     radius: RADIUS,
     circumference: CIRCUMFERENCE,
     dashoffset,
+    videoRef,
     handleBack,
     handlePlay,
     handleRate,
