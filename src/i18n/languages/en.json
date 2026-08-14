@@ -44,6 +44,7 @@
     "durationLabel": "3:00",
     "timerLabel": "REMAINING",
     "helper": "The rating will be available after the\nvideo finishes.",
+    "autoplayMessage": "The video will play in {seconds}...",
     "cta": "RATE YOUR BEER MASTER",
     "step": "STEP 2 OF 3"
   },

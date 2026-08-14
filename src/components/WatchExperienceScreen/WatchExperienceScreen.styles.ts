@@ -160,6 +160,26 @@ export const PlayIcon = styled(FaPlay)`
   color: ${({ theme }) => theme.colors.brandGreenLight};
 `;
 
+export const AutoplayBanner = styled.div`
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 13px;
+  border-radius: 8px;
+  border: 1px solid ${({ theme }) => theme.colors.surfaceBorder};
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+`;
+
+export const AutoplayText = styled.span`
+  font-family: ${({ theme }) => theme.fonts.heading};
+  font-size: 12px;
+  line-height: 16px;
+  white-space: nowrap;
+  color: ${({ theme }) => theme.colors.white};
+`;
+
 export const DurationBadge = styled.div`
   position: absolute;
   right: 16px;

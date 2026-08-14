@@ -10,8 +10,19 @@ import * as S from './WatchExperienceScreen.styles';
 import { useWatchExperienceScreen } from './WatchExperienceScreen.hooks';
 
 export const WatchExperienceScreen = () => {
-  const { t, isPlaying, isUnlocked, timeLabel, radius, circumference, dashoffset, handleBack, handlePlay, handleRate } =
-    useWatchExperienceScreen();
+  const {
+    t,
+    isPlaying,
+    isUnlocked,
+    timeLabel,
+    autoplayLabel,
+    radius,
+    circumference,
+    dashoffset,
+    handleBack,
+    handlePlay,
+    handleRate,
+  } = useWatchExperienceScreen();
 
   return (
     <S.Screen>
@@ -44,6 +55,11 @@ export const WatchExperienceScreen = () => {
                 </S.PlayButton>
               )}
             </S.VideoOverlay>
+            {!isPlaying && (
+              <S.AutoplayBanner>
+                <S.AutoplayText>{autoplayLabel}</S.AutoplayText>
+              </S.AutoplayBanner>
+            )}
             <S.DurationBadge>
               <S.DurationText>{t.watchExperience.durationLabel}</S.DurationText>
             </S.DurationBadge>

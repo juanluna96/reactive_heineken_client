@@ -44,6 +44,7 @@
     "durationLabel": "3:00",
     "timerLabel": "RESTANTE",
     "helper": "La calificación estará disponible cuando\ntermine el video.",
+    "autoplayMessage": "El video se reproducirá en {seconds}...",
     "cta": "CALIFICA A TU MAESTRO CERVECERO",
     "step": "PASO 2 DE 3"
   },
