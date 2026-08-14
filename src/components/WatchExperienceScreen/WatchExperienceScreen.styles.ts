@@ -121,6 +121,23 @@ export const VideoCard = styled(motion.div)`
   border-radius: ${({ theme }) => theme.radii.md};
   border: 1px solid ${({ theme }) => theme.colors.surfaceBorder};
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  &:fullscreen,
+  &:-webkit-full-screen {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    aspect-ratio: unset;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    background: #000;
+
+    video {
+      object-fit: contain !important;
+    }
+  }
 `;
 
 export const VideoThumbnail = styled.img`
@@ -132,11 +149,11 @@ export const VideoThumbnail = styled.img`
 `;
 
 export const Player = styled(ReactPlayer)`
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
 `;
 
 export const VideoOverlay = styled.div`

@@ -21,7 +21,7 @@ export const WatchExperienceScreen = () => {
     radius,
     circumference,
     dashoffset,
-    videoRef,
+    videoCardRef,
     handleBack,
     handlePlay,
     handleRate,
@@ -50,13 +50,10 @@ export const WatchExperienceScreen = () => {
             <S.Subtitle>{t.watchExperience.subtitle}</S.Subtitle>
           </S.HeadingBlock>
 
-          <S.VideoCard variants={staggerItem}>
+          <S.VideoCard ref={videoCardRef} variants={staggerItem}>
             {isPlaying ? (
               <S.Player
-                ref={videoRef}
                 src={PRESENTATION_VIDEO_SRC}
-                width="100%"
-                height="100%"
                 autoPlay
                 controls
                 playsInline

@@ -26,11 +26,11 @@ export const useWatchExperienceScreen = () => {
   const tick = useWatchExperienceStore((state) => state.tick);
 
   const [autoplayCountdown, setAutoplayCountdown] = useState(AUTOPLAY_COUNTDOWN_SECONDS);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoCardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!isPlaying) return;
-    videoRef.current?.requestFullscreen().catch(() => {});
+    videoCardRef.current?.requestFullscreen().catch(() => {});
   }, [isPlaying]);
 
   useEffect(() => {
@@ -85,7 +85,7 @@ export const useWatchExperienceScreen = () => {
     radius: RADIUS,
     circumference: CIRCUMFERENCE,
     dashoffset,
-    videoRef,
+    videoCardRef,
     handleBack,
     handlePlay,
     handleRate,
