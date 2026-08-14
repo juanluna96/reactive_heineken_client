@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from '../../i18n';
 import { ROUTES } from '../../routes';
@@ -6,7 +6,7 @@ import { DURATION_SECONDS, useWatchExperienceStore } from '../../watchExperience
 
 const RADIUS = 56;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
-const AUTOPLAY_DELAY_MS = 1000;
+const AUTOPLAY_COUNTDOWN_SECONDS = 5;
 
 const formatTime = (totalSeconds: number) => {
   const minutes = Math.floor(totalSeconds / 60)
@@ -25,11 +25,25 @@ export const useWatchExperienceScreen = () => {
   const secondsRemaining = useWatchExperienceStore((state) => state.secondsRemaining);
   const tick = useWatchExperienceStore((state) => state.tick);
 
+  const [autoplayCountdown, setAutoplayCountdown] = useState(AUTOPLAY_COUNTDOWN_SECONDS);
+  const videoCardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isPlaying) return;
+    videoCardRef.current?.requestFullscreen().catch(() => {});
+  }, [isPlaying]);
+
   useEffect(() => {
     if (isPlaying) return;
-    const timeoutId = setTimeout(() => setIsPlaying(true), AUTOPLAY_DELAY_MS);
+
+    if (autoplayCountdown <= 0) {
+      setIsPlaying(true);
+      return;
+    }
+
+    const timeoutId = setTimeout(() => setAutoplayCountdown((seconds) => seconds - 1), 1000);
     return () => clearTimeout(timeoutId);
-  }, [isPlaying, setIsPlaying]);
+  }, [isPlaying, autoplayCountdown, setIsPlaying]);
 
   useEffect(() => {
     if (!isPlaying) return;
@@ -41,6 +55,7 @@ export const useWatchExperienceScreen = () => {
 
   const isUnlocked = secondsRemaining === 0;
   const dashoffset = CIRCUMFERENCE * (1 - secondsRemaining / DURATION_SECONDS);
+  const autoplayLabel = t.watchExperience.autoplayMessage.replace('{seconds}', String(autoplayCountdown));
 
   const handleBack = () => {
     navigate(ROUTES.registration);
@@ -48,6 +63,12 @@ export const useWatchExperienceScreen = () => {
 
   const handlePlay = () => {
     setIsPlaying(true);
+  };
+
+  const handleEnded = () => {
+    if (document.fullscreenElement) {
+      document.exitFullscreen().catch(() => {});
+    }
   };
 
   const handleRate = () => {
@@ -60,11 +81,14 @@ export const useWatchExperienceScreen = () => {
     isPlaying,
     isUnlocked,
     timeLabel: formatTime(secondsRemaining),
+    autoplayLabel,
     radius: RADIUS,
     circumference: CIRCUMFERENCE,
     dashoffset,
+    videoCardRef,
     handleBack,
     handlePlay,
     handleRate,
+    handleEnded,
   };
 };

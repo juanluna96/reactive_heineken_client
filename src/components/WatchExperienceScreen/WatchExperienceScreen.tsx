@@ -9,9 +9,24 @@ import { StepIndicator } from '../StepIndicator';
 import * as S from './WatchExperienceScreen.styles';
 import { useWatchExperienceScreen } from './WatchExperienceScreen.hooks';
 
+const PRESENTATION_VIDEO_SRC = '/videos/presentation.mp4';
+
 export const WatchExperienceScreen = () => {
-  const { t, isPlaying, isUnlocked, timeLabel, radius, circumference, dashoffset, handleBack, handlePlay, handleRate } =
-    useWatchExperienceScreen();
+  const {
+    t,
+    isPlaying,
+    isUnlocked,
+    timeLabel,
+    autoplayLabel,
+    radius,
+    circumference,
+    dashoffset,
+    videoCardRef,
+    handleBack,
+    handlePlay,
+    handleRate,
+    handleEnded,
+  } = useWatchExperienceScreen();
 
   return (
     <S.Screen>
@@ -35,18 +50,32 @@ export const WatchExperienceScreen = () => {
             <S.Subtitle>{t.watchExperience.subtitle}</S.Subtitle>
           </S.HeadingBlock>
 
-          <S.VideoCard variants={staggerItem}>
-            <S.VideoThumbnail src={videoThumbnail} alt="" />
-            <S.VideoOverlay>
-              {!isPlaying && (
-                <S.PlayButton type="button" onClick={handlePlay} aria-label="Play video">
-                  <S.PlayIcon aria-hidden="true" />
-                </S.PlayButton>
-              )}
-            </S.VideoOverlay>
-            <S.DurationBadge>
-              <S.DurationText>{t.watchExperience.durationLabel}</S.DurationText>
-            </S.DurationBadge>
+          <S.VideoCard ref={videoCardRef} variants={staggerItem}>
+            {isPlaying ? (
+              <S.Player
+                src={PRESENTATION_VIDEO_SRC}
+                autoPlay
+                controls
+                playsInline
+                loop={false}
+                onEnded={handleEnded}
+              />
+            ) : (
+              <>
+                <S.VideoThumbnail src={videoThumbnail} alt="" />
+                <S.VideoOverlay>
+                  <S.PlayButton type="button" onClick={handlePlay} aria-label="Play video">
+                    <S.PlayIcon aria-hidden="true" />
+                  </S.PlayButton>
+                </S.VideoOverlay>
+                <S.AutoplayBanner>
+                  <S.AutoplayText>{autoplayLabel}</S.AutoplayText>
+                </S.AutoplayBanner>
+                <S.DurationBadge>
+                  <S.DurationText>{t.watchExperience.durationLabel}</S.DurationText>
+                </S.DurationBadge>
+              </>
+            )}
           </S.VideoCard>
 
           <S.TimerSection variants={staggerItem}>
