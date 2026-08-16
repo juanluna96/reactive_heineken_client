@@ -119,15 +119,6 @@ export const FormCard = styled(motion.div)`
   background: ${({ theme }) => theme.colors.cardBackground};
 `;
 
-export const FormError = styled(motion.p)`
-  margin: 0;
-  font-family: ${({ theme }) => theme.fonts.heading};
-  font-size: 12px;
-  line-height: 16px;
-  text-align: center;
-  color: ${({ theme }) => theme.colors.danger};
-`;
-
 export const Footer = styled(motion.footer)`
   display: flex;
   flex-direction: column;

@@ -59,6 +59,10 @@ export const useRegistrationScreen = () => {
     navigate(ROUTES.welcome);
   };
 
+  const handleDismissAlreadyRated = () => {
+    setAlreadyRatedError(undefined);
+  };
+
   const handleContinue = async () => {
     if (!isFormValid) {
       setSubmitted(true);
@@ -103,5 +107,6 @@ export const useRegistrationScreen = () => {
     setAccepted,
     handleBack,
     handleContinue,
+    handleDismissAlreadyRated,
   };
 };

@@ -1,5 +1,5 @@
 import { AnimatePresence } from 'framer-motion';
-import { errorMessageVariants, staggerContainer, staggerItem } from '../../animations/variants';
+import { staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background.png';
 import heinekenLogo from '../../assets/logos/heineken-logo.png';
 import { FaEnvelope, FaUtensils, FaUser } from 'react-icons/fa6';
@@ -10,6 +10,7 @@ import { PrimaryButton } from '../PrimaryButton';
 import { ScreenOverlay } from '../ScreenOverlay';
 import { StepIndicator } from '../StepIndicator';
 import { TextField } from '../TextField';
+import { Toast } from '../Toast';
 import * as S from './RegistrationScreen.styles';
 import { useRegistrationScreen } from './RegistrationScreen.hooks';
 
@@ -34,6 +35,7 @@ export const RegistrationScreen = () => {
     setAccepted,
     handleBack,
     handleContinue,
+    handleDismissAlreadyRated,
   } = useRegistrationScreen();
 
   return (
@@ -43,6 +45,10 @@ export const RegistrationScreen = () => {
         <ScreenOverlay />
         <BubbleField />
       </S.Background>
+
+      <AnimatePresence>
+        {alreadyRatedError && <Toast message={alreadyRatedError} onDismiss={handleDismissAlreadyRated} />}
+      </AnimatePresence>
 
       <S.Content initial="hidden" animate="visible" variants={staggerContainer}>
         <S.Header variants={staggerItem}>
@@ -98,13 +104,6 @@ export const RegistrationScreen = () => {
         </S.Hero>
 
         <S.Footer variants={staggerItem}>
-          <AnimatePresence>
-            {alreadyRatedError && (
-              <S.FormError initial="hidden" animate="visible" exit="exit" variants={errorMessageVariants}>
-                {alreadyRatedError}
-              </S.FormError>
-            )}
-          </AnimatePresence>
           <PrimaryButton onClick={handleContinue} disabled={!isFormValid || isChecking}>
             {t.registration.cta}
           </PrimaryButton>
