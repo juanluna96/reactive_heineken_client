@@ -18,6 +18,11 @@ export interface CreateRatingPayload {
   comment?: string | null;
 }
 
+export interface RatingExistsParams {
+  restaurant_id: string;
+  customer_email: string;
+}
+
 export interface RatingDto {
   id: string;
   restaurant_id: string;

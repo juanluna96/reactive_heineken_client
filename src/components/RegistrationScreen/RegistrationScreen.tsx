@@ -1,4 +1,5 @@
-import { staggerContainer, staggerItem } from '../../animations/variants';
+import { AnimatePresence } from 'framer-motion';
+import { errorMessageVariants, staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background.png';
 import heinekenLogo from '../../assets/logos/heineken-logo.png';
 import { FaEnvelope, FaUtensils, FaUser } from 'react-icons/fa6';
@@ -21,10 +22,12 @@ export const RegistrationScreen = () => {
     accepted,
     restaurantOptions,
     isFormValid,
+    isChecking,
     nameError,
     emailError,
     restaurantError,
     consentError,
+    alreadyRatedError,
     setName,
     setEmail,
     setRestaurant,
@@ -95,7 +98,14 @@ export const RegistrationScreen = () => {
         </S.Hero>
 
         <S.Footer variants={staggerItem}>
-          <PrimaryButton onClick={handleContinue} disabled={!isFormValid}>
+          <AnimatePresence>
+            {alreadyRatedError && (
+              <S.FormError initial="hidden" animate="visible" exit="exit" variants={errorMessageVariants}>
+                {alreadyRatedError}
+              </S.FormError>
+            )}
+          </AnimatePresence>
+          <PrimaryButton onClick={handleContinue} disabled={!isFormValid || isChecking}>
             {t.registration.cta}
           </PrimaryButton>
           <StepIndicator current={1} total={3} label={t.registration.step} />

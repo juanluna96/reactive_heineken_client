@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { checkRatingExists } from '../../api';
 import { useTranslation } from '../../i18n';
 import { useRegistrationStore } from '../../registration';
 import { useRestaurantsStore } from '../../restaurants';
@@ -21,6 +22,8 @@ export const useRegistrationScreen = () => {
   const accepted = useRegistrationStore((state) => state.accepted);
   const setAccepted = useRegistrationStore((state) => state.setAccepted);
   const [submitted, setSubmitted] = useState(false);
+  const [isChecking, setIsChecking] = useState(false);
+  const [alreadyRatedError, setAlreadyRatedError] = useState<string | undefined>(undefined);
 
   // No-ops if WelcomeScreen already prefetched this — only actually fetches
   // when someone lands here directly without going through Welcome first.
@@ -46,16 +49,38 @@ export const useRegistrationScreen = () => {
   const restaurantError = submitted && !isRestaurantValid ? t.registration.errors.restaurantRequired : undefined;
   const consentError = submitted && !accepted ? t.registration.errors.consentRequired : undefined;
 
+  // Clear a stale "already rated" result once the customer changes either
+  // half of the (restaurant, email) pair it was based on.
+  useEffect(() => {
+    setAlreadyRatedError(undefined);
+  }, [email, restaurantId]);
+
   const handleBack = () => {
     navigate(ROUTES.welcome);
   };
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     if (!isFormValid) {
       setSubmitted(true);
       return;
     }
-    navigate(ROUTES.watchExperience);
+
+    setIsChecking(true);
+    setAlreadyRatedError(undefined);
+    try {
+      const alreadyRated = await checkRatingExists({ restaurant_id: restaurantId, customer_email: email });
+      if (alreadyRated) {
+        setAlreadyRatedError(t.registration.errors.alreadyRated);
+        return;
+      }
+      navigate(ROUTES.watchExperience);
+    } catch {
+      // Check failed (e.g. network hiccup) — don't strand the customer here,
+      // the same uniqueness rule is enforced again server-side at final submit.
+      navigate(ROUTES.watchExperience);
+    } finally {
+      setIsChecking(false);
+    }
   };
 
   return {
@@ -66,10 +91,12 @@ export const useRegistrationScreen = () => {
     accepted,
     restaurantOptions,
     isFormValid,
+    isChecking,
     nameError,
     emailError,
     restaurantError,
     consentError,
+    alreadyRatedError,
     setName,
     setEmail,
     setRestaurant: setRestaurantId,

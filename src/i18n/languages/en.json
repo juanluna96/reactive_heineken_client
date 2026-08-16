@@ -36,7 +36,8 @@
       "nameRequired": "Enter your full name",
       "emailInvalid": "Enter a valid email address",
       "restaurantRequired": "Select a restaurant",
-      "consentRequired": "You must accept the privacy policy"
+      "consentRequired": "You must accept the privacy policy",
+      "alreadyRated": "You've already submitted a rating for this restaurant with this email"
     }
   },
   "watchExperience": {
@@ -68,7 +69,8 @@
     "errors": {
       "nameRequired": "Enter the beer master's name",
       "ratingRequired": "Please select a rating",
-      "submitFailed": "Failed to submit your rating, please try again"
+      "submitFailed": "Failed to submit your rating, please try again",
+      "alreadyRated": "You've already submitted a rating for this restaurant"
     }
   },
   "thankYou": {

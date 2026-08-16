@@ -39,6 +39,7 @@ export interface RegistrationDictionary {
     emailInvalid: string;
     restaurantRequired: string;
     consentRequired: string;
+    alreadyRated: string;
   };
 }
 
@@ -67,6 +68,7 @@ export interface RateBeerMasterDictionary {
     nameRequired: string;
     ratingRequired: string;
     submitFailed: string;
+    alreadyRated: string;
   };
 }
 
