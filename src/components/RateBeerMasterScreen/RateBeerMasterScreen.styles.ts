@@ -121,7 +121,7 @@ export const NameInput = styled.input<{ $hasError: boolean }>`
   }
 `;
 
-export const NameError = styled.span`
+export const NameError = styled(motion.span)`
   grid-column: 1;
   font-family: ${({ theme }) => theme.fonts.heading};
   font-size: 12px;
@@ -212,7 +212,7 @@ export const TierMessage = styled.p<{ $visible: boolean }>`
   transition: opacity 0.2s ease;
 `;
 
-export const RatingError = styled.p`
+export const RatingError = styled(motion.p)`
   margin: 8px 0 0;
   font-family: ${({ theme }) => theme.fonts.heading};
   font-size: 12px;

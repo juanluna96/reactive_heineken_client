@@ -61,7 +61,7 @@ export const LinkText = styled.span`
   color: ${({ theme }) => theme.colors.brandGreenLight};
 `;
 
-export const ErrorText = styled.span`
+export const ErrorText = styled(motion.span)`
   margin-left: 32px;
   font-family: ${({ theme }) => theme.fonts.heading};
   font-size: 12px;

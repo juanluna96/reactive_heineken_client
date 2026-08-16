@@ -1,3 +1,5 @@
+import { AnimatePresence } from 'framer-motion';
+import { errorMessageVariants } from '../../animations/variants';
 import * as S from './Checkbox.styles';
 import { useCheckbox } from './Checkbox.hooks';
 import type { CheckboxProps } from './Checkbox.types';
@@ -22,7 +24,13 @@ export const Checkbox = (props: CheckboxProps) => {
           {suffix}
         </S.Label>
       </S.Wrapper>
-      {error && <S.ErrorText>{error}</S.ErrorText>}
+      <AnimatePresence>
+        {error && (
+          <S.ErrorText initial="hidden" animate="visible" exit="exit" variants={errorMessageVariants}>
+            {error}
+          </S.ErrorText>
+        )}
+      </AnimatePresence>
     </S.Container>
   );
 };
