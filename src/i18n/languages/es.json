@@ -22,7 +22,8 @@
     },
     "restaurant": {
       "label": "RESTAURANTE / BAR",
-      "placeholder": "Selecciona tu restaurante"
+      "placeholder": "Busca tu restaurante",
+      "noResults": "No se encontraron restaurantes"
     },
     "consent": {
       "prefix": "Acepto la ",

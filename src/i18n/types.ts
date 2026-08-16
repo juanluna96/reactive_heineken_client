@@ -25,6 +25,7 @@ export interface RegistrationDictionary {
   restaurant: {
     label: string;
     placeholder: string;
+    noResults: string;
   };
   consent: {
     prefix: string;

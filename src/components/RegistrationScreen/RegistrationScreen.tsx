@@ -1,12 +1,12 @@
 import { staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background.png';
 import heinekenLogo from '../../assets/logos/heineken-logo.png';
-import { FaChevronDown, FaEnvelope, FaUtensils, FaUser } from 'react-icons/fa6';
+import { FaEnvelope, FaUtensils, FaUser } from 'react-icons/fa6';
+import { AutocompleteField } from '../AutocompleteField';
 import { BubbleField } from '../BubbleField';
 import { Checkbox } from '../Checkbox';
 import { PrimaryButton } from '../PrimaryButton';
 import { ScreenOverlay } from '../ScreenOverlay';
-import { SelectField } from '../SelectField';
 import { StepIndicator } from '../StepIndicator';
 import { TextField } from '../TextField';
 import * as S from './RegistrationScreen.styles';
@@ -73,15 +73,15 @@ export const RegistrationScreen = () => {
               onChange={setEmail}
               error={emailError}
             />
-            <SelectField
+            <AutocompleteField
               icon={FaUtensils}
-              chevronIcon={FaChevronDown}
               label={t.registration.restaurant.label}
               placeholder={t.registration.restaurant.placeholder}
               options={restaurantOptions}
               value={restaurant}
               onChange={setRestaurant}
               error={restaurantError}
+              noResultsText={t.registration.restaurant.noResults}
             />
             <Checkbox
               checked={accepted}

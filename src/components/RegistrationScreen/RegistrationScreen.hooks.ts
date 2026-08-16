@@ -4,7 +4,7 @@ import { useTranslation } from '../../i18n';
 import { useRegistrationStore } from '../../registration';
 import { useRestaurantsStore } from '../../restaurants';
 import { ROUTES } from '../../routes';
-import type { SelectFieldOption } from '../SelectField';
+import type { AutocompleteFieldOption } from '../AutocompleteField';
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -31,7 +31,7 @@ export const useRegistrationScreen = () => {
     fetchRestaurants();
   }, [fetchRestaurants]);
 
-  const restaurantOptions: SelectFieldOption[] = restaurants.map((restaurant) => ({
+  const restaurantOptions: AutocompleteFieldOption[] = restaurants.map((restaurant) => ({
     value: restaurant.id,
     label: restaurant.name,
   }));
