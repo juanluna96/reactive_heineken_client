@@ -26,11 +26,22 @@ export const useWatchExperienceScreen = () => {
   const tick = useWatchExperienceStore((state) => state.tick);
 
   const [autoplayCountdown, setAutoplayCountdown] = useState(AUTOPLAY_COUNTDOWN_SECONDS);
-  const videoCardRef = useRef<HTMLDivElement>(null);
+  const playerRef = useRef<HTMLVideoElement>(null);
+  // isPlaying lives in the (unmount-surviving) watch experience store, so
+  // it's already true when this screen remounts after the user watched the
+  // video and navigated to rating and back. Only auto-fullscreen when
+  // isPlaying flips to true while mounted (a real Play click) — not when the
+  // screen mounts already in a playing state. Captured once via useRef's
+  // lazy initializer (not mutated inside the effect) so it survives
+  // StrictMode's dev-only double effect invocation on mount unscathed.
+  const wasAlreadyPlayingOnMountRef = useRef(isPlaying);
 
   useEffect(() => {
-    if (!isPlaying) return;
-    const element = videoCardRef.current;
+    if (!isPlaying || wasAlreadyPlayingOnMountRef.current) return;
+    // Request fullscreen on the <video> element itself, not a wrapping div —
+    // otherwise document.fullscreenElement isn't the video, and the native
+    // player controls' own fullscreen/minimize toggle stops working.
+    const element = playerRef.current;
     if (!element?.requestFullscreen) return;
     try {
       element.requestFullscreen()?.catch(() => {});
@@ -94,7 +105,7 @@ export const useWatchExperienceScreen = () => {
     radius: RADIUS,
     circumference: CIRCUMFERENCE,
     dashoffset,
-    videoCardRef,
+    playerRef,
     handleBack,
     handlePlay,
     handleRate,
