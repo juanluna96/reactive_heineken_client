@@ -1,5 +1,6 @@
+import { AnimatePresence } from 'framer-motion';
 import { FaChevronDown, FaUser } from 'react-icons/fa6';
-import { staggerContainer, staggerItem } from '../../animations/variants';
+import { errorMessageVariants, staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background-2.png';
 import heinekenLogo from '../../assets/logos/heineken-logo.png';
 import { BubbleField } from '../BubbleField';
@@ -73,7 +74,13 @@ export const RateBeerMasterScreen = () => {
                   $hasError={Boolean(nameError)}
                 />
                 <S.BeerMasterLabel>{t.rateBeerMaster.beerMasterLabel}</S.BeerMasterLabel>
-                {nameError && <S.NameError>{nameError}</S.NameError>}
+                <AnimatePresence>
+                  {nameError && (
+                    <S.NameError initial="hidden" animate="visible" exit="exit" variants={errorMessageVariants}>
+                      {nameError}
+                    </S.NameError>
+                  )}
+                </AnimatePresence>
               </>
             )}
           </S.ProfileSection>
@@ -100,7 +107,13 @@ export const RateBeerMasterScreen = () => {
             </S.Stars>
 
             <S.TierMessage $visible={Boolean(tierMessage)}>{tierMessage}</S.TierMessage>
-            {ratingError && <S.RatingError>{ratingError}</S.RatingError>}
+            <AnimatePresence>
+              {ratingError && (
+                <S.RatingError initial="hidden" animate="visible" exit="exit" variants={errorMessageVariants}>
+                  {ratingError}
+                </S.RatingError>
+              )}
+            </AnimatePresence>
           </S.RatingSection>
 
           <S.OpinionSection variants={staggerItem}>
@@ -119,7 +132,13 @@ export const RateBeerMasterScreen = () => {
         </S.Hero>
 
         <S.Footer variants={staggerItem}>
-          {submitError && <S.RatingError>{submitError}</S.RatingError>}
+          <AnimatePresence>
+            {submitError && (
+              <S.RatingError initial="hidden" animate="visible" exit="exit" variants={errorMessageVariants}>
+                {submitError}
+              </S.RatingError>
+            )}
+          </AnimatePresence>
           <PrimaryButton onClick={handleSubmit} disabled={!isFormValid || isSubmitting}>
             {t.rateBeerMaster.cta}
           </PrimaryButton>

@@ -22,7 +22,8 @@
     },
     "restaurant": {
       "label": "RESTAURANTE / BAR",
-      "placeholder": "Selecciona tu restaurante"
+      "placeholder": "Busca tu restaurante",
+      "noResults": "No se encontraron restaurantes"
     },
     "consent": {
       "prefix": "Acepto la ",
@@ -35,7 +36,8 @@
       "nameRequired": "Ingresa tu nombre completo",
       "emailInvalid": "Ingresa un correo electrónico válido",
       "restaurantRequired": "Selecciona un restaurante",
-      "consentRequired": "Debes aceptar la política de privacidad"
+      "consentRequired": "Debes aceptar la política de privacidad",
+      "alreadyRated": "Ya enviaste una calificación para este restaurante con este correo"
     }
   },
   "watchExperience": {
@@ -67,7 +69,8 @@
     "errors": {
       "nameRequired": "Ingresa el nombre del maestro cervecero",
       "ratingRequired": "Selecciona una calificación",
-      "submitFailed": "No se pudo enviar tu calificación, intenta de nuevo"
+      "submitFailed": "No se pudo enviar tu calificación, intenta de nuevo",
+      "alreadyRated": "Ya enviaste una calificación para este restaurante"
     }
   },
   "thankYou": {
