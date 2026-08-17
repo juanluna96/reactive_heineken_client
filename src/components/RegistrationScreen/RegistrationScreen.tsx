@@ -1,14 +1,16 @@
+import { AnimatePresence } from 'framer-motion';
 import { staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background.png';
 import heinekenLogo from '../../assets/logos/heineken-logo.png';
-import { FaChevronDown, FaEnvelope, FaUtensils, FaUser } from 'react-icons/fa6';
+import { FaEnvelope, FaUtensils, FaUser } from 'react-icons/fa6';
+import { AutocompleteField } from '../AutocompleteField';
 import { BubbleField } from '../BubbleField';
 import { Checkbox } from '../Checkbox';
 import { PrimaryButton } from '../PrimaryButton';
 import { ScreenOverlay } from '../ScreenOverlay';
-import { SelectField } from '../SelectField';
 import { StepIndicator } from '../StepIndicator';
 import { TextField } from '../TextField';
+import { Toast } from '../Toast';
 import * as S from './RegistrationScreen.styles';
 import { useRegistrationScreen } from './RegistrationScreen.hooks';
 
@@ -21,16 +23,19 @@ export const RegistrationScreen = () => {
     accepted,
     restaurantOptions,
     isFormValid,
+    isChecking,
     nameError,
     emailError,
     restaurantError,
     consentError,
+    alreadyRatedError,
     setName,
     setEmail,
     setRestaurant,
     setAccepted,
     handleBack,
     handleContinue,
+    handleDismissAlreadyRated,
   } = useRegistrationScreen();
 
   return (
@@ -40,6 +45,10 @@ export const RegistrationScreen = () => {
         <ScreenOverlay />
         <BubbleField />
       </S.Background>
+
+      <AnimatePresence>
+        {alreadyRatedError && <Toast message={alreadyRatedError} onDismiss={handleDismissAlreadyRated} />}
+      </AnimatePresence>
 
       <S.Content initial="hidden" animate="visible" variants={staggerContainer}>
         <S.Header variants={staggerItem}>
@@ -73,15 +82,15 @@ export const RegistrationScreen = () => {
               onChange={setEmail}
               error={emailError}
             />
-            <SelectField
+            <AutocompleteField
               icon={FaUtensils}
-              chevronIcon={FaChevronDown}
               label={t.registration.restaurant.label}
               placeholder={t.registration.restaurant.placeholder}
               options={restaurantOptions}
               value={restaurant}
               onChange={setRestaurant}
               error={restaurantError}
+              noResultsText={t.registration.restaurant.noResults}
             />
             <Checkbox
               checked={accepted}
@@ -95,7 +104,7 @@ export const RegistrationScreen = () => {
         </S.Hero>
 
         <S.Footer variants={staggerItem}>
-          <PrimaryButton onClick={handleContinue} disabled={!isFormValid}>
+          <PrimaryButton onClick={handleContinue} disabled={!isFormValid || isChecking}>
             {t.registration.cta}
           </PrimaryButton>
           <StepIndicator current={1} total={3} label={t.registration.step} />

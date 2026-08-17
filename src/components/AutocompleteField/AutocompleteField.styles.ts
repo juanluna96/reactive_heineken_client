@@ -36,12 +36,12 @@ export const Label = styled.span`
   color: ${({ theme }) => theme.colors.mutedText};
 `;
 
-export const SelectWrapper = styled.div`
+export const InputWrapper = styled.div`
   position: relative;
   width: 100%;
 `;
 
-export const Select = styled.select<{ $hasValue: boolean; $hasError: boolean }>`
+export const Input = styled.input<{ $hasError: boolean }>`
   width: 100%;
   height: 56px;
   padding: 0 41px 0 17px;
@@ -50,9 +50,11 @@ export const Select = styled.select<{ $hasValue: boolean; $hasError: boolean }>`
   background: ${({ theme }) => theme.colors.inputBackground};
   font-family: ${({ theme }) => theme.fonts.heading};
   font-size: 16px;
-  color: ${({ theme, $hasValue }) => ($hasValue ? theme.colors.textPrimary : theme.colors.placeholderText)};
-  appearance: none;
-  cursor: pointer;
+  color: ${({ theme }) => theme.colors.white};
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.placeholderText};
+  }
 
   &:focus-visible {
     outline: none;
@@ -60,7 +62,7 @@ export const Select = styled.select<{ $hasValue: boolean; $hasError: boolean }>`
   }
 `;
 
-export const ChevronIcon = styled.span`
+export const SearchIcon = styled.span`
   position: absolute;
   top: 50%;
   right: 17px;
@@ -75,6 +77,45 @@ export const ChevronIcon = styled.span`
     width: 100%;
     height: 100%;
   }
+`;
+
+export const Dropdown = styled(motion.ul)`
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 10;
+  max-height: 220px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+  border-radius: ${({ theme }) => theme.radii.md};
+  border: 1px solid ${({ theme }) => theme.colors.cardBorder};
+  background: ${({ theme }) => theme.colors.cardBackground};
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+`;
+
+export const Option = styled.li<{ $highlighted: boolean }>`
+  padding: 12px;
+  border-radius: ${({ theme }) => theme.radii.md};
+  font-family: ${({ theme }) => theme.fonts.heading};
+  font-size: 14px;
+  color: ${({ theme }) => theme.colors.textPrimary};
+  background: ${({ theme, $highlighted }) => ($highlighted ? theme.colors.surface : 'transparent')};
+  cursor: pointer;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.surface};
+  }
+`;
+
+export const NoResults = styled.li`
+  padding: 12px;
+  font-family: ${({ theme }) => theme.fonts.heading};
+  font-size: 14px;
+  color: ${({ theme }) => theme.colors.placeholderText};
+  text-align: center;
 `;
 
 export const ErrorText = styled(motion.span)`

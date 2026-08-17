@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 export const Field = styled.div`
@@ -56,7 +57,7 @@ export const Input = styled.input<{ $hasError: boolean }>`
   }
 `;
 
-export const ErrorText = styled.span`
+export const ErrorText = styled(motion.span)`
   font-family: ${({ theme }) => theme.fonts.heading};
   font-size: 12px;
   line-height: 16px;

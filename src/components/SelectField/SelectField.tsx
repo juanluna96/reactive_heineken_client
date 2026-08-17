@@ -1,3 +1,5 @@
+import { AnimatePresence } from 'framer-motion';
+import { errorMessageVariants } from '../../animations/variants';
 import * as S from './SelectField.styles';
 import { useSelectField } from './SelectField.hooks';
 import type { SelectFieldProps } from './SelectField.types';
@@ -29,7 +31,13 @@ export const SelectField = (props: SelectFieldProps) => {
           <ChevronIcon />
         </S.ChevronIcon>
       </S.SelectWrapper>
-      {error && <S.ErrorText>{error}</S.ErrorText>}
+      <AnimatePresence>
+        {error && (
+          <S.ErrorText initial="hidden" animate="visible" exit="exit" variants={errorMessageVariants}>
+            {error}
+          </S.ErrorText>
+        )}
+      </AnimatePresence>
     </S.Field>
   );
 };

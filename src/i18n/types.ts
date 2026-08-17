@@ -25,6 +25,7 @@ export interface RegistrationDictionary {
   restaurant: {
     label: string;
     placeholder: string;
+    noResults: string;
   };
   consent: {
     prefix: string;
@@ -38,6 +39,7 @@ export interface RegistrationDictionary {
     emailInvalid: string;
     restaurantRequired: string;
     consentRequired: string;
+    alreadyRated: string;
   };
 }
 
@@ -66,6 +68,7 @@ export interface RateBeerMasterDictionary {
     nameRequired: string;
     ratingRequired: string;
     submitFailed: string;
+    alreadyRated: string;
   };
 }
 

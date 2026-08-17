@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { fetchBeerMasters, createRating } from '../../api';
+import { ApiError, fetchBeerMasters, createRating } from '../../api';
 import type { BeerMasterDto } from '../../api';
 import { useTranslation } from '../../i18n';
 import { useRatingStore } from '../../rating';
@@ -116,8 +116,9 @@ export const useRateBeerMasterScreen = () => {
         comment: comment.trim() ? comment.trim() : null,
       });
       navigate(ROUTES.thankYou);
-    } catch {
-      setSubmitError(t.rateBeerMaster.errors.submitFailed);
+    } catch (err) {
+      const isAlreadyRated = err instanceof ApiError && err.status === 409;
+      setSubmitError(isAlreadyRated ? t.rateBeerMaster.errors.alreadyRated : t.rateBeerMaster.errors.submitFailed);
     } finally {
       setIsSubmitting(false);
     }
