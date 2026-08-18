@@ -13,6 +13,7 @@ export const AdminSidebar = ({ activeItem }: AdminSidebarProps) => {
     handleGoToDashboard,
     handleGoToRestaurants,
     handleGoToBeerMasters,
+    handleGoToRatings,
   } = useAdminSidebar();
   const nav = t.adminDashboard.nav;
 
@@ -46,12 +47,12 @@ export const AdminSidebar = ({ activeItem }: AdminSidebarProps) => {
             </S.NavIcon>
             {nav.beerMasters}
           </S.NavButton>
-          <S.NavItem>
+          <S.NavButton type="button" $active={activeItem === 'ratings'} onClick={handleGoToRatings}>
             <S.NavIcon>
               <S.RatingIcon />
             </S.NavIcon>
             {nav.ratings}
-          </S.NavItem>
+          </S.NavButton>
           <S.NavItem>
             <S.NavIcon>
               <S.SettingsIcon />

@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import {
   fetchBeerMastersRanking as fetchBeerMastersRankingRequest,
   fetchDashboard as fetchDashboardRequest,
+  fetchRatings as fetchRatingsRequest,
   fetchRestaurantsRanking as fetchRestaurantsRankingRequest,
 } from '../api';
 import type { AdminState } from './types';
@@ -71,6 +72,28 @@ export const useAdminStore = create<AdminState>((set, get) => ({
       set({ beerMastersRanking, beerMastersRankingStatus: 'loaded' });
     } catch {
       set({ beerMastersRankingStatus: 'error' });
+    }
+  },
+  ratings: null,
+  ratingsStatus: 'idle',
+  fetchRatings: async () => {
+    if (get().ratingsStatus === 'loading' || get().ratingsStatus === 'loaded') return;
+
+    set({ ratingsStatus: 'loading' });
+    try {
+      const ratings = await fetchRatingsRequest();
+      set({ ratings, ratingsStatus: 'loaded' });
+    } catch {
+      set({ ratingsStatus: 'error' });
+    }
+  },
+  refreshRatings: async () => {
+    set({ ratingsStatus: 'loading' });
+    try {
+      const ratings = await fetchRatingsRequest();
+      set({ ratings, ratingsStatus: 'loaded' });
+    } catch {
+      set({ ratingsStatus: 'error' });
     }
   },
 }));

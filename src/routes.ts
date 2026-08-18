@@ -9,6 +9,7 @@ export const ROUTES = {
   adminHome: '/admin/home',
   adminRestaurants: '/admin/restaurants',
   adminBeerMasters: '/admin/beer-masters',
+  adminRatings: '/admin/ratings',
   authLogin: '/admin/login',
   authRegister: '/admin/register',
   authRememberPassword: '/admin/remember-password',

@@ -204,6 +204,45 @@
       "emptySubtitle": "Once customers start rating them, they'll show up here."
     }
   },
+  "adminRatings": {
+    "pageTitle": "Ratings & Reviews",
+    "pageSubtitle": "Detailed Customer and Venue Feedback",
+    "refreshLabel": "REFRESH",
+    "stats": {
+      "averageLabel": "Overall Average",
+      "totalLabel": "Total Reviews",
+      "totalNote": "Verified by the system",
+      "positiveLabel": "% Positive Ratings",
+      "positiveNote": "4 and 5 stars",
+      "trendUp": "+{value} this month",
+      "trendDown": "{value} this month"
+    },
+    "restaurantFilter": {
+      "label": "Venue",
+      "all": "All Venues"
+    },
+    "ratingFilter": {
+      "label": "Rating",
+      "all": "All Ratings",
+      "five": "5 Stars",
+      "four": "4 Stars",
+      "threeOrLess": "3 or less"
+    },
+    "clearFilters": "Clear Filters",
+    "search": {
+      "placeholder": "Search reviews...",
+      "noResults": "No reviews found matching the current filters"
+    },
+    "restaurantLabel": "Venue: {restaurant}",
+    "beerMasterLabel": "Beer Master: {name}",
+    "loadMore": "Load more reviews",
+    "states": {
+      "loading": "Loading reviews...",
+      "error": "Couldn't load the reviews. Please try again.",
+      "emptyTitle": "No reviews yet",
+      "emptySubtitle": "Once customers start rating, they'll show up here."
+    }
+  },
   "auth": {
     "checkingSession": "Checking session...",
     "login": {

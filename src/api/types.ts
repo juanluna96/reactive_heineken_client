@@ -108,6 +108,25 @@ export interface BeerMasterRankingDto {
   average_rating: number;
 }
 
+export interface RatingReviewDto {
+  id: string;
+  customer_name: string;
+  rating: number;
+  comment: string | null;
+  restaurant_id: string;
+  restaurant_name: string;
+  beer_master_name: string | null;
+  created_at: string;
+}
+
+export interface RatingsDto {
+  reviews: RatingReviewDto[];
+  total_ratings: number;
+  average_rating: number;
+  average_rating_trend: number | null;
+  positive_share_pct: number;
+}
+
 export type AdminRole = 'restaurant' | 'heineken' | 'owner';
 
 export interface AdminUserDto {

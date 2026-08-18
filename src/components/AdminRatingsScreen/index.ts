@@ -1,0 +1,1 @@
+export { AdminRatingsScreen } from './AdminRatingsScreen';

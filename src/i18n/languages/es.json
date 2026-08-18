@@ -204,6 +204,45 @@
       "emptySubtitle": "Cuando los clientes empiecen a calificarlos, aparecerán aquí."
     }
   },
+  "adminRatings": {
+    "pageTitle": "Calificaciones y Reseñas",
+    "pageSubtitle": "Feedback Detallado de Clientes y Sedes",
+    "refreshLabel": "ACTUALIZAR",
+    "stats": {
+      "averageLabel": "Promedio General",
+      "totalLabel": "Total Reseñas",
+      "totalNote": "Verificadas por el sistema",
+      "positiveLabel": "% Calificaciones Positivas",
+      "positiveNote": "4 y 5 estrellas",
+      "trendUp": "+{value} este mes",
+      "trendDown": "{value} este mes"
+    },
+    "restaurantFilter": {
+      "label": "Sede",
+      "all": "Todas las Sedes"
+    },
+    "ratingFilter": {
+      "label": "Calificación",
+      "all": "Todas las Calificaciones",
+      "five": "5 Estrellas",
+      "four": "4 Estrellas",
+      "threeOrLess": "3 o menos"
+    },
+    "clearFilters": "Limpiar Filtros",
+    "search": {
+      "placeholder": "Buscar en reseñas...",
+      "noResults": "No se encontraron reseñas que coincidan con los filtros actuales"
+    },
+    "restaurantLabel": "Sede: {restaurant}",
+    "beerMasterLabel": "Beer Master: {name}",
+    "loadMore": "Cargar más reseñas",
+    "states": {
+      "loading": "Cargando reseñas...",
+      "error": "No se pudieron cargar las reseñas. Intenta de nuevo.",
+      "emptyTitle": "Todavía no hay reseñas",
+      "emptySubtitle": "Cuando los clientes empiecen a calificar, aparecerán aquí."
+    }
+  },
   "auth": {
     "checkingSession": "Verificando sesión...",
     "login": {

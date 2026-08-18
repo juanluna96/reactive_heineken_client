@@ -34,5 +34,6 @@ export const useAdminSidebar = () => {
     handleGoToDashboard: () => navigate(ROUTES.adminHome),
     handleGoToRestaurants: () => navigate(ROUTES.adminRestaurants),
     handleGoToBeerMasters: () => navigate(ROUTES.adminBeerMasters),
+    handleGoToRatings: () => navigate(ROUTES.adminRatings),
   };
 };
