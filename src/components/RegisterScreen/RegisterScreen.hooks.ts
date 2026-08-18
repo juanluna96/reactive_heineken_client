@@ -4,7 +4,7 @@ import { ApiError, register } from '../../api';
 import { useAuthStore } from '../../auth';
 import { useTranslation } from '../../i18n';
 import { useRestaurantsStore } from '../../restaurants';
-import { ROUTES } from '../../routes';
+import { getDefaultAdminRoute, ROUTES } from '../../routes';
 import type { AutocompleteFieldOption } from '../AutocompleteField';
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -100,7 +100,7 @@ export const useRegisterScreen = () => {
     try {
       const user = await register({ full_name: fullName.trim(), email, password, affiliation });
       setUser(user);
-      navigate(ROUTES.adminHome);
+      navigate(getDefaultAdminRoute(user.role));
     } catch (error) {
       if (error instanceof ApiError && error.status === 409) {
         setSubmitError(t.auth.register.errors.emailTaken);

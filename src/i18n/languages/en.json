@@ -143,6 +143,7 @@
     "refreshLabel": "REFRESH",
     "ratingsCount": "{count} reviews",
     "noRatings": "No ratings yet",
+    "ownRestaurantBadge": "Your Restaurant",
     "sort": {
       "label": "Sort by",
       "rating": "Sort by Rating",

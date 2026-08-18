@@ -200,6 +200,7 @@ export interface AdminRestaurantsDictionary {
   refreshLabel: string;
   ratingsCount: string;
   noRatings: string;
+  ownRestaurantBadge: string;
   sort: {
     label: string;
     rating: string;

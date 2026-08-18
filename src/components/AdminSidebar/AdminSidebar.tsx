@@ -4,7 +4,7 @@ import { useAdminSidebar } from './AdminSidebar.hooks';
 import type { AdminSidebarProps } from './AdminSidebar.types';
 
 export const AdminSidebar = ({ activeItem }: AdminSidebarProps) => {
-  const { t, currentUser, currentUserInitials, isOwner, handleLogout, handleGoToDashboard, handleGoToRestaurants } =
+  const { t, currentUser, currentUserInitials, canViewDashboard, handleLogout, handleGoToDashboard, handleGoToRestaurants } =
     useAdminSidebar();
   const nav = t.adminDashboard.nav;
 
@@ -16,28 +16,28 @@ export const AdminSidebar = ({ activeItem }: AdminSidebarProps) => {
           <S.SidebarTagline>{t.adminDashboard.pageTitle}</S.SidebarTagline>
         </S.SidebarBrand>
         <S.NavList>
-          <S.NavButton type="button" $active={activeItem === 'dashboard'} onClick={handleGoToDashboard}>
-            <S.NavIcon>
-              <S.DashboardIcon />
-            </S.NavIcon>
-            {nav.dashboard}
-          </S.NavButton>
-
-          {isOwner ? (
-            <S.NavButton type="button" $active={activeItem === 'restaurants'} onClick={handleGoToRestaurants}>
+          {canViewDashboard ? (
+            <S.NavButton type="button" $active={activeItem === 'dashboard'} onClick={handleGoToDashboard}>
               <S.NavIcon>
-                <S.RestaurantIcon />
+                <S.DashboardIcon />
               </S.NavIcon>
-              {nav.restaurants}
+              {nav.dashboard}
             </S.NavButton>
           ) : (
             <S.NavItem>
               <S.NavIcon>
-                <S.RestaurantIcon />
+                <S.DashboardIcon />
               </S.NavIcon>
-              {nav.restaurants}
+              {nav.dashboard}
             </S.NavItem>
           )}
+
+          <S.NavButton type="button" $active={activeItem === 'restaurants'} onClick={handleGoToRestaurants}>
+            <S.NavIcon>
+              <S.RestaurantIcon />
+            </S.NavIcon>
+            {nav.restaurants}
+          </S.NavButton>
 
           <S.NavItem>
             <S.NavIcon>

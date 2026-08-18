@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useAdminStore } from '../../admin';
+import { useAuthStore } from '../../auth';
 import { useTranslation } from '../../i18n';
 import { initialsFromName } from '../../utils/initialsFromName';
 
@@ -16,9 +17,16 @@ export const useAdminRestaurantsScreen = () => {
   const fetchRestaurantsRanking = useAdminStore((state) => state.fetchRestaurantsRanking);
   const refreshRestaurantsRanking = useAdminStore((state) => state.refreshRestaurantsRanking);
 
+  // Only the restaurant role has a restaurant_id of its own — owner/heineken
+  // see the ranking with nothing highlighted.
+  const currentUser = useAuthStore((state) => state.user);
+  const myRestaurantId = currentUser?.role === 'restaurant' ? currentUser.restaurant_id : null;
+
   const [sortBy, setSortBy] = useState<RestaurantSortOption>('rating');
   const [searchQuery, setSearchQuery] = useState('');
   const [page, setPage] = useState(1);
+  const [hasJumpedToOwnRestaurant, setHasJumpedToOwnRestaurant] = useState(false);
+  const ownCardRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     fetchRestaurantsRanking();
@@ -59,6 +67,7 @@ export const useAdminRestaurantsScreen = () => {
       rank: index + 1,
       initials: initialsFromName(restaurant.name),
       name: restaurant.name,
+      isOwn: restaurant.id === myRestaurantId,
       hasRatings: restaurant.ratings_count > 0,
       averageRating: restaurant.average_rating.toFixed(2),
       ratingsCountLabel: t.adminRestaurants.ratingsCount.replace(
@@ -74,7 +83,7 @@ export const useAdminRestaurantsScreen = () => {
         averageRating: master.average_rating.toFixed(2),
       })),
     }));
-  }, [ranking, sortBy, numberFormatter, t]);
+  }, [ranking, sortBy, myRestaurantId, numberFormatter, t]);
 
   const filteredItems = useMemo(() => {
     const normalizedQuery = searchQuery.trim().toLowerCase();
@@ -88,6 +97,23 @@ export const useAdminRestaurantsScreen = () => {
     () => filteredItems.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE),
     [filteredItems, currentPage],
   );
+
+  // One-time on load: jump straight to whichever page contains the logged-in
+  // restaurant's own card, so they don't have to hunt for their rank.
+  useEffect(() => {
+    if (hasJumpedToOwnRestaurant || !myRestaurantId) return;
+    const indexInList = filteredItems.findIndex((item) => item.id === myRestaurantId);
+    if (indexInList === -1) return;
+    setPage(Math.floor(indexInList / PAGE_SIZE) + 1);
+    setHasJumpedToOwnRestaurant(true);
+  }, [hasJumpedToOwnRestaurant, myRestaurantId, filteredItems]);
+
+  // Runs after the jump above lands on the right page and that card is
+  // actually in `items` (and thus ownCardRef is attached).
+  useEffect(() => {
+    if (!hasJumpedToOwnRestaurant) return;
+    ownCardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, [hasJumpedToOwnRestaurant, items]);
 
   const handlePrevPage = () => setPage((current) => Math.max(1, current - 1));
   const handleNextPage = () => setPage((current) => Math.min(pageCount, current + 1));
@@ -106,6 +132,7 @@ export const useAdminRestaurantsScreen = () => {
     isEmpty,
     hasNoSearchResults,
     items,
+    ownCardRef,
     sortBy,
     setSortBy: handleSortChange,
     searchQuery,

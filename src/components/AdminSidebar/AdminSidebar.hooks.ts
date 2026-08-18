@@ -25,9 +25,10 @@ export const useAdminSidebar = () => {
     t,
     currentUser,
     currentUserInitials: currentUser ? initialsFromName(currentUser.full_name) : '',
-    // The Restaurantes ranking screen is owner-only — see AdminRestaurantsScreen
-    // and ProtectedRoute's allowedRoles. Everyone else sees a static nav item.
-    isOwner: currentUser?.role === 'owner',
+    // Mirrors App.tsx's ProtectedRoute allowedRoles for each admin route —
+    // the restaurant role has no dashboard access, everyone can see the
+    // restaurants ranking.
+    canViewDashboard: currentUser?.role === 'owner' || currentUser?.role === 'heineken',
     handleLogout,
     handleGoToDashboard: () => navigate(ROUTES.adminHome),
     handleGoToRestaurants: () => navigate(ROUTES.adminRestaurants),

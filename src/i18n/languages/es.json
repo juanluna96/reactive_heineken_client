@@ -143,6 +143,7 @@
     "refreshLabel": "ACTUALIZAR",
     "ratingsCount": "{count} reseñas",
     "noRatings": "Sin calificaciones aún",
+    "ownRestaurantBadge": "Tu Restaurante",
     "sort": {
       "label": "Ordenar por",
       "rating": "Ordenar por Calificación",

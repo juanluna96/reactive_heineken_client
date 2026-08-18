@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ApiError, login } from '../../api';
 import { useAuthStore } from '../../auth';
 import { useTranslation } from '../../i18n';
-import { ROUTES } from '../../routes';
+import { getDefaultAdminRoute, ROUTES } from '../../routes';
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -58,7 +58,7 @@ export const useLoginScreen = () => {
     try {
       const user = await login({ email, password });
       setUser(user);
-      navigate(ROUTES.adminHome);
+      navigate(getDefaultAdminRoute(user.role));
     } catch (error) {
       if (error instanceof ApiError && error.status === 401) {
         setSubmitError(t.auth.login.errors.invalidCredentials);

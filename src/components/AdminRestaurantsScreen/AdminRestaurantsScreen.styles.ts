@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { FaArrowsRotate, FaChevronDown, FaChevronLeft, FaChevronRight, FaFilter, FaMagnifyingGlass, FaStar } from 'react-icons/fa6';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { ADMIN_DESKTOP_BREAKPOINT, ADMIN_SIDEBAR_WIDTH } from '../AdminSidebar';
 
 const DESKTOP_BREAKPOINT = ADMIN_DESKTOP_BREAKPOINT;
@@ -267,7 +267,16 @@ const glassPanel = css`
   border-radius: ${({ theme }) => theme.radii.md};
 `;
 
-export const RankCard = styled.div`
+const ownRestaurantPulse = keyframes`
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(112, 220, 141, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(112, 220, 141, 0);
+  }
+`;
+
+export const RankCard = styled.div<{ $isOwn?: boolean }>`
   ${glassPanel}
   padding: 20px;
   display: flex;
@@ -284,6 +293,13 @@ export const RankCard = styled.div`
     align-items: center;
     justify-content: space-between;
   }
+
+  ${({ $isOwn, theme }) =>
+    $isOwn &&
+    css`
+      border-color: ${theme.colors.brandGreenLight};
+      animation: ${ownRestaurantPulse} 1.4s ease-out 3;
+    `}
 `;
 
 export const RankIdentity = styled.div`
@@ -292,6 +308,18 @@ export const RankIdentity = styled.div`
   gap: 16px;
   flex: 1;
   min-width: 0;
+`;
+
+export const OwnBadge = styled.span`
+  flex-shrink: 0;
+  padding: 3px 8px;
+  border-radius: ${({ theme }) => theme.radii.pill};
+  background: rgba(112, 220, 141, 0.15);
+  color: ${({ theme }) => theme.colors.brandGreenLight};
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
 `;
 
 export const RankNumber = styled.span`

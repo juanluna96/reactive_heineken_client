@@ -13,6 +13,7 @@ export const AdminRestaurantsScreen = () => {
     isEmpty,
     hasNoSearchResults,
     items,
+    ownCardRef,
     sortBy,
     setSortBy,
     searchQuery,
@@ -118,11 +119,12 @@ export const AdminRestaurantsScreen = () => {
             ) : (
               <>
                 {items.map((restaurant) => (
-                  <S.RankCard key={restaurant.id}>
+                  <S.RankCard key={restaurant.id} ref={restaurant.isOwn ? ownCardRef : undefined} $isOwn={restaurant.isOwn}>
                     <S.RankIdentity>
                       <S.RankNumber>{String(restaurant.rank).padStart(2, '0')}</S.RankNumber>
                       <S.RestaurantAvatar>{restaurant.initials}</S.RestaurantAvatar>
                       <S.RestaurantName>{restaurant.name}</S.RestaurantName>
+                      {restaurant.isOwn && <S.OwnBadge>{t.adminRestaurants.ownRestaurantBadge}</S.OwnBadge>}
                     </S.RankIdentity>
 
                     <S.RankMeta>

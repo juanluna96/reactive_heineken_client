@@ -64,7 +64,7 @@ function App() {
           path={ROUTES.adminHome}
           element={
             <PageTransition>
-              <ProtectedRoute>
+              <ProtectedRoute allowedRoles={['owner', 'heineken']}>
                 <AdminDashboardScreen />
               </ProtectedRoute>
             </PageTransition>
@@ -74,7 +74,7 @@ function App() {
           path={ROUTES.adminRestaurants}
           element={
             <PageTransition>
-              <ProtectedRoute allowedRoles={['owner']}>
+              <ProtectedRoute allowedRoles={['owner', 'heineken', 'restaurant']}>
                 <AdminRestaurantsScreen />
               </ProtectedRoute>
             </PageTransition>
