@@ -170,6 +170,40 @@
       "emptySubtitle": "Registered venues will show up here once they exist."
     }
   },
+  "adminBeerMasters": {
+    "pageTitle": "Beer Masters Ranking",
+    "pageSubtitle": "Individual Performance and Service Quality",
+    "refreshLabel": "REFRESH",
+    "ratingsCount": "{count} reviews",
+    "noRatings": "No ratings yet",
+    "ownBadge": "From Your Restaurant",
+    "sort": {
+      "label": "Sort by",
+      "rating": "Sort by Rating",
+      "popularity": "Most Popular",
+      "newest": "Newest"
+    },
+    "restaurantFilter": {
+      "label": "Venue",
+      "all": "All Venues",
+      "empty": "No rated beer masters at {restaurant} yet."
+    },
+    "search": {
+      "placeholder": "Search beer master...",
+      "noResults": "No beer masters found matching \"{query}\""
+    },
+    "pagination": {
+      "previous": "Previous page",
+      "next": "Next page",
+      "indicator": "Page {current} of {total}"
+    },
+    "states": {
+      "loading": "Loading beer masters ranking...",
+      "error": "Couldn't load the ranking. Please try again.",
+      "emptyTitle": "No rated beer masters yet",
+      "emptySubtitle": "Once customers start rating them, they'll show up here."
+    }
+  },
   "auth": {
     "checkingSession": "Checking session...",
     "login": {

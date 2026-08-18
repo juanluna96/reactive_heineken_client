@@ -96,6 +96,18 @@ export interface RestaurantRankingDto {
   beer_masters: RestaurantRankingBeerMasterDto[];
 }
 
+export interface BeerMasterRankingDto {
+  // null when every rating for this name was typed freehand — no registered
+  // BeerMaster row to point to.
+  id: string | null;
+  name: string;
+  restaurant_id: string;
+  restaurant_name: string;
+  created_at: string;
+  ratings_count: number;
+  average_rating: number;
+}
+
 export type AdminRole = 'restaurant' | 'heineken' | 'owner';
 
 export interface AdminUserDto {

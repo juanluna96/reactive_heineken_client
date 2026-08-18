@@ -4,8 +4,16 @@ import { useAdminSidebar } from './AdminSidebar.hooks';
 import type { AdminSidebarProps } from './AdminSidebar.types';
 
 export const AdminSidebar = ({ activeItem }: AdminSidebarProps) => {
-  const { t, currentUser, currentUserInitials, canViewDashboard, handleLogout, handleGoToDashboard, handleGoToRestaurants } =
-    useAdminSidebar();
+  const {
+    t,
+    currentUser,
+    currentUserInitials,
+    canViewDashboard,
+    handleLogout,
+    handleGoToDashboard,
+    handleGoToRestaurants,
+    handleGoToBeerMasters,
+  } = useAdminSidebar();
   const nav = t.adminDashboard.nav;
 
   return (
@@ -16,20 +24,13 @@ export const AdminSidebar = ({ activeItem }: AdminSidebarProps) => {
           <S.SidebarTagline>{t.adminDashboard.pageTitle}</S.SidebarTagline>
         </S.SidebarBrand>
         <S.NavList>
-          {canViewDashboard ? (
+          {canViewDashboard && (
             <S.NavButton type="button" $active={activeItem === 'dashboard'} onClick={handleGoToDashboard}>
               <S.NavIcon>
                 <S.DashboardIcon />
               </S.NavIcon>
               {nav.dashboard}
             </S.NavButton>
-          ) : (
-            <S.NavItem>
-              <S.NavIcon>
-                <S.DashboardIcon />
-              </S.NavIcon>
-              {nav.dashboard}
-            </S.NavItem>
           )}
 
           <S.NavButton type="button" $active={activeItem === 'restaurants'} onClick={handleGoToRestaurants}>
@@ -39,12 +40,12 @@ export const AdminSidebar = ({ activeItem }: AdminSidebarProps) => {
             {nav.restaurants}
           </S.NavButton>
 
-          <S.NavItem>
+          <S.NavButton type="button" $active={activeItem === 'beerMasters'} onClick={handleGoToBeerMasters}>
             <S.NavIcon>
               <S.BeerMasterIcon />
             </S.NavIcon>
             {nav.beerMasters}
-          </S.NavItem>
+          </S.NavButton>
           <S.NavItem>
             <S.NavIcon>
               <S.RatingIcon />

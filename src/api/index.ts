@@ -1,4 +1,4 @@
-export { fetchDashboard, fetchRestaurantsRanking } from './admin';
+export { fetchBeerMastersRanking, fetchDashboard, fetchRestaurantsRanking } from './admin';
 export { fetchCurrentUser, login, logout, register } from './auth';
 export { fetchBeerMasters } from './beerMasters';
 export { ApiError } from './client';
@@ -8,6 +8,7 @@ export type {
   AdminRole,
   AdminUserDto,
   BeerMasterDto,
+  BeerMasterRankingDto,
   CreateRatingPayload,
   DashboardDto,
   DashboardTotalsDto,

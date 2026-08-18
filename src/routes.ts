@@ -8,6 +8,7 @@ export const ROUTES = {
   thankYou: '/registration/thanks',
   adminHome: '/admin/home',
   adminRestaurants: '/admin/restaurants',
+  adminBeerMasters: '/admin/beer-masters',
   authLogin: '/admin/login',
   authRegister: '/admin/register',
   authRememberPassword: '/admin/remember-password',

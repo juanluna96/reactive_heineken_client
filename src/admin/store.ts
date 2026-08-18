@@ -1,5 +1,9 @@
 import { create } from 'zustand';
-import { fetchDashboard as fetchDashboardRequest, fetchRestaurantsRanking as fetchRestaurantsRankingRequest } from '../api';
+import {
+  fetchBeerMastersRanking as fetchBeerMastersRankingRequest,
+  fetchDashboard as fetchDashboardRequest,
+  fetchRestaurantsRanking as fetchRestaurantsRankingRequest,
+} from '../api';
 import type { AdminState } from './types';
 
 export const useAdminStore = create<AdminState>((set, get) => ({
@@ -45,6 +49,28 @@ export const useAdminStore = create<AdminState>((set, get) => ({
       set({ restaurantsRanking, restaurantsRankingStatus: 'loaded' });
     } catch {
       set({ restaurantsRankingStatus: 'error' });
+    }
+  },
+  beerMastersRanking: null,
+  beerMastersRankingStatus: 'idle',
+  fetchBeerMastersRanking: async () => {
+    if (get().beerMastersRankingStatus === 'loading' || get().beerMastersRankingStatus === 'loaded') return;
+
+    set({ beerMastersRankingStatus: 'loading' });
+    try {
+      const beerMastersRanking = await fetchBeerMastersRankingRequest();
+      set({ beerMastersRanking, beerMastersRankingStatus: 'loaded' });
+    } catch {
+      set({ beerMastersRankingStatus: 'error' });
+    }
+  },
+  refreshBeerMastersRanking: async () => {
+    set({ beerMastersRankingStatus: 'loading' });
+    try {
+      const beerMastersRanking = await fetchBeerMastersRankingRequest();
+      set({ beerMastersRanking, beerMastersRankingStatus: 'loaded' });
+    } catch {
+      set({ beerMastersRankingStatus: 'error' });
     }
   },
 }));

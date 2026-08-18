@@ -26,11 +26,13 @@ export const useAdminSidebar = () => {
     currentUser,
     currentUserInitials: currentUser ? initialsFromName(currentUser.full_name) : '',
     // Mirrors App.tsx's ProtectedRoute allowedRoles for each admin route —
-    // the restaurant role has no dashboard access, everyone can see the
-    // restaurants ranking.
+    // the nav item for a route the current role can't see is hidden
+    // entirely rather than shown disabled. Restaurants/Beer Masters have no
+    // equivalent flag since every role can already see those.
     canViewDashboard: currentUser?.role === 'owner' || currentUser?.role === 'heineken',
     handleLogout,
     handleGoToDashboard: () => navigate(ROUTES.adminHome),
     handleGoToRestaurants: () => navigate(ROUTES.adminRestaurants),
+    handleGoToBeerMasters: () => navigate(ROUTES.adminBeerMasters),
   };
 };

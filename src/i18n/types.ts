@@ -228,6 +228,41 @@ export interface AdminRestaurantsDictionary {
   };
 }
 
+export interface AdminBeerMastersDictionary {
+  pageTitle: string;
+  pageSubtitle: string;
+  refreshLabel: string;
+  ratingsCount: string;
+  noRatings: string;
+  ownBadge: string;
+  sort: {
+    label: string;
+    rating: string;
+    popularity: string;
+    newest: string;
+  };
+  restaurantFilter: {
+    label: string;
+    all: string;
+    empty: string;
+  };
+  search: {
+    placeholder: string;
+    noResults: string;
+  };
+  pagination: {
+    previous: string;
+    next: string;
+    indicator: string;
+  };
+  states: {
+    loading: string;
+    error: string;
+    emptyTitle: string;
+    emptySubtitle: string;
+  };
+}
+
 export interface TranslationDictionary {
   welcome: WelcomeDictionary;
   registration: RegistrationDictionary;
@@ -236,6 +271,7 @@ export interface TranslationDictionary {
   thankYou: ThankYouDictionary;
   adminDashboard: AdminDashboardDictionary;
   adminRestaurants: AdminRestaurantsDictionary;
+  adminBeerMasters: AdminBeerMastersDictionary;
   auth: AuthDictionary;
 }
 

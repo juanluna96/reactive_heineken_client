@@ -1,4 +1,4 @@
-import type { DashboardDto, RestaurantRankingDto } from '../api';
+import type { BeerMasterRankingDto, DashboardDto, RestaurantRankingDto } from '../api';
 
 export type DashboardStatus = 'idle' | 'loading' | 'loaded' | 'error';
 
@@ -13,4 +13,8 @@ export interface AdminState {
   restaurantsRankingStatus: DashboardStatus;
   fetchRestaurantsRanking: () => Promise<void>;
   refreshRestaurantsRanking: () => Promise<void>;
+  beerMastersRanking: BeerMasterRankingDto[] | null;
+  beerMastersRankingStatus: DashboardStatus;
+  fetchBeerMastersRanking: () => Promise<void>;
+  refreshBeerMastersRanking: () => Promise<void>;
 }

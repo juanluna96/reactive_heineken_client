@@ -170,6 +170,40 @@
       "emptySubtitle": "Los locales registrados aparecerán aquí en cuanto existan."
     }
   },
+  "adminBeerMasters": {
+    "pageTitle": "Ranking de Maestros Cerveceros",
+    "pageSubtitle": "Desempeño Individual y Calidad del Servicio",
+    "refreshLabel": "ACTUALIZAR",
+    "ratingsCount": "{count} reseñas",
+    "noRatings": "Sin calificaciones aún",
+    "ownBadge": "De Tu Restaurante",
+    "sort": {
+      "label": "Ordenar por",
+      "rating": "Ordenar por Calificación",
+      "popularity": "Más Populares",
+      "newest": "Nuevos"
+    },
+    "restaurantFilter": {
+      "label": "Sede",
+      "all": "Todas las Sedes",
+      "empty": "Todavía no hay maestros cerveceros calificados en {restaurant}."
+    },
+    "search": {
+      "placeholder": "Buscar maestro cervecero...",
+      "noResults": "No se encontraron maestros cerveceros que coincidan con \"{query}\""
+    },
+    "pagination": {
+      "previous": "Página anterior",
+      "next": "Página siguiente",
+      "indicator": "Página {current} de {total}"
+    },
+    "states": {
+      "loading": "Cargando ranking de maestros cerveceros...",
+      "error": "No se pudo cargar el ranking. Intenta de nuevo.",
+      "emptyTitle": "Todavía no hay maestros cerveceros calificados",
+      "emptySubtitle": "Cuando los clientes empiecen a calificarlos, aparecerán aquí."
+    }
+  },
   "auth": {
     "checkingSession": "Verificando sesión...",
     "login": {
