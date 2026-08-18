@@ -81,10 +81,14 @@ export interface DashboardDto {
   recent_ratings: RecentRatingDto[];
 }
 
+export type AdminRole = 'restaurant' | 'heineken' | 'owner';
+
 export interface AdminUserDto {
   id: string;
   full_name: string;
   email: string;
+  role: AdminRole;
+  restaurant_id: string | null;
 }
 
 export interface LoginPayload {
@@ -96,4 +100,6 @@ export interface RegisterPayload {
   full_name: string;
   email: string;
   password: string;
+  // A restaurant_id, or the "heineken" sentinel — see RegisterScreen.hooks.ts.
+  affiliation: string;
 }

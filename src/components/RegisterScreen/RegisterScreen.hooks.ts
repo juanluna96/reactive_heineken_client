@@ -1,20 +1,38 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ApiError, register } from '../../api';
 import { useAuthStore } from '../../auth';
 import { useTranslation } from '../../i18n';
+import { useRestaurantsStore } from '../../restaurants';
 import { ROUTES } from '../../routes';
+import type { AutocompleteFieldOption } from '../AutocompleteField';
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MIN_PASSWORD_LENGTH = 8;
+// Sentinel affiliation value for the "Administrador Heineken" option — must
+// match app.roles.HEINEKEN_AFFILIATION on the backend.
+const HEINEKEN_AFFILIATION = 'heineken';
 
 export const useRegisterScreen = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const setUser = useAuthStore((state) => state.setUser);
 
+  const restaurants = useRestaurantsStore((state) => state.restaurants);
+  const fetchRestaurants = useRestaurantsStore((state) => state.fetchRestaurants);
+
+  useEffect(() => {
+    fetchRestaurants();
+  }, [fetchRestaurants]);
+
+  const affiliationOptions: AutocompleteFieldOption[] = [
+    ...restaurants.map((restaurant) => ({ value: restaurant.id, label: restaurant.name })),
+    { value: HEINEKEN_AFFILIATION, label: t.auth.register.affiliation.heinekenOption },
+  ];
+
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
+  const [affiliation, setAffiliation] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -23,12 +41,15 @@ export const useRegisterScreen = () => {
 
   const isFullNameValid = fullName.trim().length > 0;
   const isEmailValid = EMAIL_PATTERN.test(email);
+  const isAffiliationValid = affiliation !== '';
   const isPasswordValid = password.length >= MIN_PASSWORD_LENGTH;
   const doPasswordsMatch = password === confirmPassword;
-  const isFormValid = isFullNameValid && isEmailValid && isPasswordValid && doPasswordsMatch;
+  const isFormValid = isFullNameValid && isEmailValid && isAffiliationValid && isPasswordValid && doPasswordsMatch;
 
   const fullNameError = submitted && !isFullNameValid ? t.auth.register.errors.fullNameRequired : undefined;
   const emailError = submitted && !isEmailValid ? t.auth.register.errors.emailInvalid : undefined;
+  const affiliationError =
+    submitted && !isAffiliationValid ? t.auth.register.errors.affiliationRequired : undefined;
   const passwordError = submitted && !isPasswordValid ? t.auth.register.errors.passwordTooShort : undefined;
   const confirmPasswordError =
     submitted && isPasswordValid && !doPasswordsMatch ? t.auth.register.errors.passwordMismatch : undefined;
@@ -42,6 +63,11 @@ export const useRegisterScreen = () => {
 
   const handleEmailChange = (value: string) => {
     setEmail(value);
+    clearSubmitError();
+  };
+
+  const handleAffiliationChange = (value: string) => {
+    setAffiliation(value);
     clearSubmitError();
   };
 
@@ -72,7 +98,7 @@ export const useRegisterScreen = () => {
     setIsSubmitting(true);
     setSubmitError(undefined);
     try {
-      const user = await register({ full_name: fullName.trim(), email, password });
+      const user = await register({ full_name: fullName.trim(), email, password, affiliation });
       setUser(user);
       navigate(ROUTES.adminHome);
     } catch (error) {
@@ -90,17 +116,21 @@ export const useRegisterScreen = () => {
     t,
     fullName,
     email,
+    affiliation,
+    affiliationOptions,
     password,
     confirmPassword,
     isFormValid,
     isSubmitting,
     fullNameError,
     emailError,
+    affiliationError,
     passwordError,
     confirmPasswordError,
     submitError,
     setFullName: handleFullNameChange,
     setEmail: handleEmailChange,
+    setAffiliation: handleAffiliationChange,
     setPassword: handlePasswordChange,
     setConfirmPassword: handleConfirmPasswordChange,
     handleGoToLogin,

@@ -161,6 +161,7 @@ export interface AuthDictionary {
     subtitle: string;
     fullName: { label: string; placeholder: string };
     email: { label: string; placeholder: string };
+    affiliation: { label: string; placeholder: string; noResults: string; heinekenOption: string };
     password: { label: string; placeholder: string };
     confirmPassword: { label: string; placeholder: string };
     cta: string;
@@ -169,6 +170,7 @@ export interface AuthDictionary {
     errors: {
       fullNameRequired: string;
       emailInvalid: string;
+      affiliationRequired: string;
       passwordTooShort: string;
       passwordMismatch: string;
       emailTaken: string;

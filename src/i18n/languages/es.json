@@ -172,6 +172,12 @@
         "label": "CORREO",
         "placeholder": "ejemplo@correo.com"
       },
+      "affiliation": {
+        "label": "AFILIACIÓN",
+        "placeholder": "Busca tu restaurante",
+        "noResults": "No se encontraron resultados",
+        "heinekenOption": "Administrador Heineken"
+      },
       "password": {
         "label": "CONTRASEÑA",
         "placeholder": "Mínimo 8 caracteres"
@@ -186,6 +192,7 @@
       "errors": {
         "fullNameRequired": "Ingresa tu nombre completo",
         "emailInvalid": "Ingresa un correo electrónico válido",
+        "affiliationRequired": "Selecciona tu afiliación",
         "passwordTooShort": "La contraseña debe tener al menos 8 caracteres",
         "passwordMismatch": "Las contraseñas no coinciden",
         "emailTaken": "Ya existe una cuenta con este correo",

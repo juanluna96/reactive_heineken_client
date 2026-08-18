@@ -172,6 +172,12 @@
         "label": "EMAIL",
         "placeholder": "example@email.com"
       },
+      "affiliation": {
+        "label": "AFFILIATION",
+        "placeholder": "Search for your restaurant",
+        "noResults": "No results found",
+        "heinekenOption": "Heineken Administrator"
+      },
       "password": {
         "label": "PASSWORD",
         "placeholder": "At least 8 characters"
@@ -186,6 +192,7 @@
       "errors": {
         "fullNameRequired": "Enter your full name",
         "emailInvalid": "Enter a valid email address",
+        "affiliationRequired": "Select your affiliation",
         "passwordTooShort": "Password must be at least 8 characters",
         "passwordMismatch": "Passwords don't match",
         "emailTaken": "An account with this email already exists",
