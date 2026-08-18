@@ -79,5 +79,136 @@
     "supportingText": "Gracias por ayudarnos a mejorar la experiencia Heineken. Tu opinión es muy valiosa para nosotros.",
     "cta": "FINALIZAR",
     "footer": "© 2026 HEINEKEN EXPERIENCE. TODOS LOS\nDERECHOS RESERVADOS."
+  },
+  "adminDashboard": {
+    "pageTitle": "Panel de Control",
+    "pageSubtitle": "Resumen de la actividad de restaurantes y calificaciones",
+    "periodLabel": "Últimos 30 días",
+    "refreshLabel": "Actualizar",
+    "nav": {
+      "dashboard": "Panel de Control",
+      "restaurants": "Restaurantes",
+      "beerMasters": "Maestros Cerveceros",
+      "ratings": "Calificaciones",
+      "settings": "Ajustes"
+    },
+    "kpis": {
+      "totalRatings": "Calificaciones Totales",
+      "averageRating": "Promedio de Calificación",
+      "restaurantsRegistered": "Restaurantes Registrados",
+      "newRestaurants": "+{count} nuevos",
+      "beerMastersRegistered": "Maestros Cerveceros",
+      "newBeerMasters": "+{count} nuevos"
+    },
+    "chart": {
+      "title": "Calificaciones a lo largo del tiempo",
+      "subtitle": "Últimos 14 días",
+      "empty": "Aún no hay calificaciones en este periodo"
+    },
+    "rankings": {
+      "title": "Mejores Maestros Cerveceros",
+      "rank": "Rango",
+      "master": "Maestro",
+      "restaurant": "Restaurante",
+      "reviews": "Reseñas",
+      "avgRating": "Calif. Promedio",
+      "empty": "Aún no hay suficientes calificaciones para mostrar un ranking"
+    },
+    "distribution": {
+      "title": "Distribución de Calificaciones",
+      "fiveStarShare": "5 Estrellas",
+      "ratingLabel": "{rating} Estrellas"
+    },
+    "feed": {
+      "title": "Últimas Reseñas",
+      "empty": "Aún no hay reseñas recientes",
+      "noComment": "El cliente no dejó un comentario"
+    },
+    "time": {
+      "justNow": "justo ahora",
+      "minutesAgo": "hace {value} min",
+      "hoursAgo": "hace {value} h",
+      "daysAgo": "hace {value} d"
+    },
+    "states": {
+      "loading": "Cargando datos del panel...",
+      "error": "No se pudieron cargar los datos. Intenta de nuevo.",
+      "emptyTitle": "Todavía no hay datos",
+      "emptySubtitle": "Cuando los clientes empiecen a calificar, verás las métricas aquí."
+    }
+  },
+  "auth": {
+    "checkingSession": "Verificando sesión...",
+    "login": {
+      "title": "Panel Admin",
+      "subtitle": "Inicia sesión para ver el panel de control.",
+      "email": {
+        "label": "CORREO",
+        "placeholder": "ejemplo@correo.com"
+      },
+      "password": {
+        "label": "CONTRASEÑA",
+        "placeholder": "Ingresa tu contraseña"
+      },
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "cta": "INICIAR SESIÓN",
+      "noAccount": "¿No tienes cuenta?",
+      "registerLink": "Regístrate",
+      "errors": {
+        "emailInvalid": "Ingresa un correo electrónico válido",
+        "passwordRequired": "Ingresa tu contraseña",
+        "invalidCredentials": "Correo o contraseña incorrectos",
+        "generic": "No se pudo iniciar sesión, intenta de nuevo"
+      }
+    },
+    "register": {
+      "title": "Crear Cuenta",
+      "subtitle": "Regístrate para administrar el panel de control.",
+      "fullName": {
+        "label": "NOMBRE COMPLETO",
+        "placeholder": "Ingresa tu nombre completo"
+      },
+      "email": {
+        "label": "CORREO",
+        "placeholder": "ejemplo@correo.com"
+      },
+      "password": {
+        "label": "CONTRASEÑA",
+        "placeholder": "Mínimo 8 caracteres"
+      },
+      "confirmPassword": {
+        "label": "CONFIRMAR CONTRASEÑA",
+        "placeholder": "Repite tu contraseña"
+      },
+      "cta": "CREAR CUENTA",
+      "hasAccount": "¿Ya tienes cuenta?",
+      "loginLink": "Inicia sesión",
+      "errors": {
+        "fullNameRequired": "Ingresa tu nombre completo",
+        "emailInvalid": "Ingresa un correo electrónico válido",
+        "passwordTooShort": "La contraseña debe tener al menos 8 caracteres",
+        "passwordMismatch": "Las contraseñas no coinciden",
+        "emailTaken": "Ya existe una cuenta con este correo",
+        "generic": "No se pudo crear la cuenta, intenta de nuevo"
+      }
+    },
+    "rememberPassword": {
+      "title": "Recuperar Contraseña",
+      "subtitle": "Ingresa tu correo y te enviaremos instrucciones para restablecerla.",
+      "email": {
+        "label": "CORREO",
+        "placeholder": "ejemplo@correo.com"
+      },
+      "cta": "ENVIAR INSTRUCCIONES",
+      "backToLogin": "Volver a inicio de sesión",
+      "errors": {
+        "emailInvalid": "Ingresa un correo electrónico válido"
+      },
+      "confirmation": {
+        "title": "Revisa tu correo",
+        "message": "Si existe una cuenta con ese correo, recibirás instrucciones para restablecer tu contraseña en unos minutos.",
+        "cta": "VOLVER A INICIO DE SESIÓN"
+      }
+    }
   }
 }
