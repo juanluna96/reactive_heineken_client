@@ -1,7 +1,9 @@
 import { FaArrowTrendDown, FaArrowTrendUp } from 'react-icons/fa6';
 import backgroundImage from '../../assets/images/background.png';
+import backgroundImageLaptop from '../../assets/images/background-laptop.png';
 import { AdminSidebar } from '../AdminSidebar';
 import { ScreenOverlay } from '../ScreenOverlay';
+import { TABLET_BREAKPOINT } from '../../styles/breakpoints';
 import * as S from './AdminDashboardScreen.styles';
 import { useAdminDashboardScreen } from './AdminDashboardScreen.hooks';
 
@@ -24,7 +26,10 @@ export const AdminDashboardScreen = () => {
 
   const background = (
     <S.Background>
-      <S.BackgroundImage src={backgroundImage} alt="" />
+      <picture>
+        <source media={`(min-width: ${TABLET_BREAKPOINT})`} srcSet={backgroundImageLaptop} />
+        <S.BackgroundImage src={backgroundImage} alt="" />
+      </picture>
       <ScreenOverlay />
     </S.Background>
   );

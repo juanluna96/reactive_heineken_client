@@ -1,6 +1,7 @@
 import { AnimatePresence } from 'framer-motion';
 import { staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background.png';
+import backgroundImageLaptop from '../../assets/images/background-laptop.png';
 import heinekenLogo from '../../assets/logos/heineken-logo.png';
 import { FaEnvelope, FaUtensils, FaUser } from 'react-icons/fa6';
 import { AutocompleteField } from '../AutocompleteField';
@@ -11,6 +12,7 @@ import { ScreenOverlay } from '../ScreenOverlay';
 import { StepIndicator } from '../StepIndicator';
 import { TextField } from '../TextField';
 import { Toast } from '../Toast';
+import { TABLET_BREAKPOINT } from '../../styles/breakpoints';
 import * as S from './RegistrationScreen.styles';
 import { useRegistrationScreen } from './RegistrationScreen.hooks';
 
@@ -41,7 +43,10 @@ export const RegistrationScreen = () => {
   return (
     <S.Screen>
       <S.Background>
-        <S.BackgroundImage src={backgroundImage} alt="" />
+        <picture>
+          <source media={`(min-width: ${TABLET_BREAKPOINT})`} srcSet={backgroundImageLaptop} />
+          <S.BackgroundImage src={backgroundImage} alt="" />
+        </picture>
         <ScreenOverlay />
         <BubbleField />
       </S.Background>

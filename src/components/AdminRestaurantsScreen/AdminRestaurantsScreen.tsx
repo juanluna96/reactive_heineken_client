@@ -1,6 +1,8 @@
 import backgroundImage from '../../assets/images/background.png';
+import backgroundImageLaptop from '../../assets/images/background-laptop.png';
 import { AdminSidebar } from '../AdminSidebar';
 import { ScreenOverlay } from '../ScreenOverlay';
+import { TABLET_BREAKPOINT } from '../../styles/breakpoints';
 import * as S from './AdminRestaurantsScreen.styles';
 import { useAdminRestaurantsScreen } from './AdminRestaurantsScreen.hooks';
 
@@ -29,7 +31,10 @@ export const AdminRestaurantsScreen = () => {
 
   const background = (
     <S.Background>
-      <S.BackgroundImage src={backgroundImage} alt="" />
+      <picture>
+        <source media={`(min-width: ${TABLET_BREAKPOINT})`} srcSet={backgroundImageLaptop} />
+        <S.BackgroundImage src={backgroundImage} alt="" />
+      </picture>
       <ScreenOverlay />
     </S.Background>
   );

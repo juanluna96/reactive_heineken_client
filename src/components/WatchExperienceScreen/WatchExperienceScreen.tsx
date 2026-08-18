@@ -1,11 +1,13 @@
 import { staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background-2.png';
+import backgroundImageLaptop from '../../assets/images/background-laptop-2.png';
 import videoThumbnail from '../../assets/images/video-thumbnail.jpg';
 import heinekenLogo from '../../assets/logos/heineken-logo.png';
 import { BubbleField } from '../BubbleField';
 import { PrimaryButton } from '../PrimaryButton';
 import { ScreenOverlay } from '../ScreenOverlay';
 import { StepIndicator } from '../StepIndicator';
+import { TABLET_BREAKPOINT } from '../../styles/breakpoints';
 import * as S from './WatchExperienceScreen.styles';
 import { useWatchExperienceScreen } from './WatchExperienceScreen.hooks';
 
@@ -31,7 +33,10 @@ export const WatchExperienceScreen = () => {
   return (
     <S.Screen>
       <S.Background>
-        <S.BackgroundImage src={backgroundImage} alt="" />
+        <picture>
+          <source media={`(min-width: ${TABLET_BREAKPOINT})`} srcSet={backgroundImageLaptop} />
+          <S.BackgroundImage src={backgroundImage} alt="" />
+        </picture>
         <ScreenOverlay />
         <BubbleField />
       </S.Background>

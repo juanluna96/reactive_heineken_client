@@ -2,11 +2,13 @@ import { AnimatePresence } from 'framer-motion';
 import { FaEnvelope, FaLock } from 'react-icons/fa6';
 import { staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background.png';
+import backgroundImageLaptop from '../../assets/images/background-laptop.png';
 import heinekenLogo from '../../assets/logos/heineken-logo.png';
 import { PrimaryButton } from '../PrimaryButton';
 import { ScreenOverlay } from '../ScreenOverlay';
 import { TextField } from '../TextField';
 import { Toast } from '../Toast';
+import { TABLET_BREAKPOINT } from '../../styles/breakpoints';
 import * as S from './LoginScreen.styles';
 import { useLoginScreen } from './LoginScreen.hooks';
 
@@ -31,7 +33,10 @@ export const LoginScreen = () => {
   return (
     <S.Screen>
       <S.Background>
-        <S.BackgroundImage src={backgroundImage} alt="" />
+        <picture>
+          <source media={`(min-width: ${TABLET_BREAKPOINT})`} srcSet={backgroundImageLaptop} />
+          <S.BackgroundImage src={backgroundImage} alt="" />
+        </picture>
         <ScreenOverlay />
       </S.Background>
 
