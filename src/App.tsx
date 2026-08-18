@@ -1,6 +1,7 @@
 import { AnimatePresence } from 'framer-motion';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { AdminDashboardScreen } from './components/AdminDashboardScreen';
+import { AdminRestaurantsScreen } from './components/AdminRestaurantsScreen';
 import { LoginScreen } from './components/LoginScreen';
 import { PageTransition } from './components/PageTransition';
 import { ProtectedRoute } from './components/ProtectedRoute';
@@ -65,6 +66,16 @@ function App() {
             <PageTransition>
               <ProtectedRoute>
                 <AdminDashboardScreen />
+              </ProtectedRoute>
+            </PageTransition>
+          }
+        />
+        <Route
+          path={ROUTES.adminRestaurants}
+          element={
+            <PageTransition>
+              <ProtectedRoute allowedRoles={['owner']}>
+                <AdminRestaurantsScreen />
               </ProtectedRoute>
             </PageTransition>
           }

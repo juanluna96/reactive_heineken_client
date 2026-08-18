@@ -1,19 +1,9 @@
 import { useEffect, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useAdminStore } from '../../admin';
-import { logout as logoutRequest } from '../../api';
-import { useAuthStore } from '../../auth';
 import { useTranslation } from '../../i18n';
-import { ROUTES } from '../../routes';
 import { formatRelativeTime } from '../../utils/formatRelativeTime';
 import { formatShortDate } from '../../utils/formatShortDate';
-
-const initialsFromName = (name: string): string => {
-  const parts = name.trim().split(/\s+/).filter(Boolean);
-  if (parts.length === 0) return '?';
-  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
-  return `${parts[0][0]}${parts[parts.length - 1][0]}`.toUpperCase();
-};
+import { initialsFromName } from '../../utils/initialsFromName';
 
 const DONUT_RADIUS = 70;
 const DONUT_CIRCUMFERENCE = 2 * Math.PI * DONUT_RADIUS;
@@ -21,28 +11,15 @@ const DONUT_CIRCUMFERENCE = 2 * Math.PI * DONUT_RADIUS;
 export const useAdminDashboardScreen = () => {
   const { t, language } = useTranslation();
   const numberFormatter = useMemo(() => new Intl.NumberFormat(language), [language]);
-  const navigate = useNavigate();
 
   const dashboard = useAdminStore((state) => state.dashboard);
   const status = useAdminStore((state) => state.status);
   const fetchDashboard = useAdminStore((state) => state.fetchDashboard);
   const refreshDashboard = useAdminStore((state) => state.refreshDashboard);
 
-  const currentUser = useAuthStore((state) => state.user);
-  const clearUser = useAuthStore((state) => state.clearUser);
-
   useEffect(() => {
     fetchDashboard();
   }, [fetchDashboard]);
-
-  const handleLogout = async () => {
-    try {
-      await logoutRequest();
-    } finally {
-      clearUser();
-      navigate(ROUTES.authLogin);
-    }
-  };
 
   const handleRefresh = () => {
     refreshDashboard();
@@ -135,12 +112,8 @@ export const useAdminDashboardScreen = () => {
   const isError = status === 'error';
   const isEmpty = status === 'loaded' && dashboard !== null && dashboard.totals.total_ratings === 0;
 
-  const currentUserInitials = currentUser ? initialsFromName(currentUser.full_name) : '';
-
   return {
     t,
-    currentUser,
-    currentUserInitials,
     isLoading,
     isRefreshing,
     isError,
@@ -151,6 +124,5 @@ export const useAdminDashboardScreen = () => {
     distribution,
     recentRatings,
     handleRefresh,
-    handleLogout,
   };
 };

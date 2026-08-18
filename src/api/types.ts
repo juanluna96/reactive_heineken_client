@@ -81,6 +81,21 @@ export interface DashboardDto {
   recent_ratings: RecentRatingDto[];
 }
 
+export interface RestaurantRankingBeerMasterDto {
+  name: string;
+  ratings_count: number;
+  average_rating: number;
+}
+
+export interface RestaurantRankingDto {
+  id: string;
+  name: string;
+  created_at: string;
+  ratings_count: number;
+  average_rating: number;
+  beer_masters: RestaurantRankingBeerMasterDto[];
+}
+
 export type AdminRole = 'restaurant' | 'heineken' | 'owner';
 
 export interface AdminUserDto {

@@ -5,6 +5,7 @@ export const ROUTES = {
   rateBeerMaster: '/registration/rate',
   thankYou: '/registration/thanks',
   adminHome: '/admin/home',
+  adminRestaurants: '/admin/restaurants',
   authLogin: '/admin/login',
   authRegister: '/admin/register',
   authRememberPassword: '/admin/remember-password',

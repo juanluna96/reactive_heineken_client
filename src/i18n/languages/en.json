@@ -137,6 +137,38 @@
       "emptySubtitle": "Once customers start rating, you'll see metrics here."
     }
   },
+  "adminRestaurants": {
+    "pageTitle": "Venue & Location Ranking",
+    "pageSubtitle": "Global Performance and Quality Ranking",
+    "refreshLabel": "REFRESH",
+    "ratingsCount": "{count} reviews",
+    "noRatings": "No ratings yet",
+    "sort": {
+      "label": "Sort by",
+      "rating": "Sort by Rating",
+      "popularity": "Most Popular",
+      "newest": "Newest"
+    },
+    "search": {
+      "placeholder": "Search restaurant...",
+      "noResults": "No restaurants found matching \"{query}\""
+    },
+    "pagination": {
+      "previous": "Previous page",
+      "next": "Next page",
+      "indicator": "Page {current} of {total}"
+    },
+    "beerMasters": {
+      "toggle": "Beer Masters ({count})",
+      "empty": "No rated beer masters at this venue yet."
+    },
+    "states": {
+      "loading": "Loading restaurant ranking...",
+      "error": "Couldn't load the ranking. Please try again.",
+      "emptyTitle": "No restaurants yet",
+      "emptySubtitle": "Registered venues will show up here once they exist."
+    }
+  },
   "auth": {
     "checkingSession": "Checking session...",
     "login": {

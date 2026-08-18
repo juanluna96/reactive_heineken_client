@@ -1,6 +1,6 @@
 import { FaArrowTrendDown, FaArrowTrendUp } from 'react-icons/fa6';
 import backgroundImage from '../../assets/images/background.png';
-import heinekenLogo from '../../assets/logos/heineken-logo.png';
+import { AdminSidebar } from '../AdminSidebar';
 import { ScreenOverlay } from '../ScreenOverlay';
 import * as S from './AdminDashboardScreen.styles';
 import { useAdminDashboardScreen } from './AdminDashboardScreen.hooks';
@@ -8,8 +8,6 @@ import { useAdminDashboardScreen } from './AdminDashboardScreen.hooks';
 export const AdminDashboardScreen = () => {
   const {
     t,
-    currentUser,
-    currentUserInitials,
     isLoading,
     isRefreshing,
     isError,
@@ -20,65 +18,9 @@ export const AdminDashboardScreen = () => {
     distribution,
     recentRatings,
     handleRefresh,
-    handleLogout,
   } = useAdminDashboardScreen();
 
-  const nav = t.adminDashboard.nav;
-
-  const sidebar = (
-    <S.Sidebar>
-      <div>
-        <S.SidebarBrand>
-          <S.SidebarLogo src={heinekenLogo} alt="Heineken" />
-          <S.SidebarTagline>{t.adminDashboard.pageTitle}</S.SidebarTagline>
-        </S.SidebarBrand>
-        <S.NavList>
-          <S.NavItem $active>
-            <S.NavIcon>
-              <S.DashboardIcon />
-            </S.NavIcon>
-            {nav.dashboard}
-          </S.NavItem>
-          <S.NavItem>
-            <S.NavIcon>
-              <S.RestaurantIcon />
-            </S.NavIcon>
-            {nav.restaurants}
-          </S.NavItem>
-          <S.NavItem>
-            <S.NavIcon>
-              <S.BeerMasterIcon />
-            </S.NavIcon>
-            {nav.beerMasters}
-          </S.NavItem>
-          <S.NavItem>
-            <S.NavIcon>
-              <S.RatingIcon />
-            </S.NavIcon>
-            {nav.ratings}
-          </S.NavItem>
-          <S.NavItem>
-            <S.NavIcon>
-              <S.SettingsIcon />
-            </S.NavIcon>
-            {nav.settings}
-          </S.NavItem>
-        </S.NavList>
-      </div>
-      {currentUser && (
-        <S.UserFooter>
-          <S.Avatar $size={32}>{currentUserInitials}</S.Avatar>
-          <S.UserInfo>
-            <S.UserName>{currentUser.full_name}</S.UserName>
-            <S.UserEmail>{currentUser.email}</S.UserEmail>
-          </S.UserInfo>
-          <S.LogoutButton type="button" onClick={handleLogout} aria-label="Logout">
-            <S.LogoutIcon />
-          </S.LogoutButton>
-        </S.UserFooter>
-      )}
-    </S.Sidebar>
-  );
+  const sidebar = <AdminSidebar activeItem="dashboard" />;
 
   const background = (
     <S.Background>

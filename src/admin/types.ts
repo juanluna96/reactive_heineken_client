@@ -1,4 +1,4 @@
-import type { DashboardDto } from '../api';
+import type { DashboardDto, RestaurantRankingDto } from '../api';
 
 export type DashboardStatus = 'idle' | 'loading' | 'loaded' | 'error';
 
@@ -9,4 +9,8 @@ export interface AdminState {
   fetchDashboard: () => Promise<void>;
   /** Forces a fresh fetch, bypassing the cache (e.g. a manual refresh action). */
   refreshDashboard: () => Promise<void>;
+  restaurantsRanking: RestaurantRankingDto[] | null;
+  restaurantsRankingStatus: DashboardStatus;
+  fetchRestaurantsRanking: () => Promise<void>;
+  refreshRestaurantsRanking: () => Promise<void>;
 }

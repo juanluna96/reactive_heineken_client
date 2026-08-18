@@ -137,6 +137,38 @@
       "emptySubtitle": "Cuando los clientes empiecen a calificar, verás las métricas aquí."
     }
   },
+  "adminRestaurants": {
+    "pageTitle": "Ranking de Sedes y Establecimientos",
+    "pageSubtitle": "Clasificación de Rendimiento y Calidad Global",
+    "refreshLabel": "ACTUALIZAR",
+    "ratingsCount": "{count} reseñas",
+    "noRatings": "Sin calificaciones aún",
+    "sort": {
+      "label": "Ordenar por",
+      "rating": "Ordenar por Calificación",
+      "popularity": "Más Populares",
+      "newest": "Nuevos"
+    },
+    "search": {
+      "placeholder": "Buscar restaurante...",
+      "noResults": "No se encontraron restaurantes que coincidan con \"{query}\""
+    },
+    "pagination": {
+      "previous": "Página anterior",
+      "next": "Página siguiente",
+      "indicator": "Página {current} de {total}"
+    },
+    "beerMasters": {
+      "toggle": "Beer Masters ({count})",
+      "empty": "Todavía no hay maestros cerveceros calificados en este local."
+    },
+    "states": {
+      "loading": "Cargando ranking de restaurantes...",
+      "error": "No se pudo cargar el ranking. Intenta de nuevo.",
+      "emptyTitle": "Todavía no hay restaurantes",
+      "emptySubtitle": "Los locales registrados aparecerán aquí en cuanto existan."
+    }
+  },
   "auth": {
     "checkingSession": "Verificando sesión...",
     "login": {

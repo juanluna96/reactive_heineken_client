@@ -5,9 +5,9 @@ import * as S from './ProtectedRoute.styles';
 import { useProtectedRoute } from './ProtectedRoute.hooks';
 import type { ProtectedRouteProps } from './ProtectedRoute.types';
 
-export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
+export const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) => {
   const { t } = useTranslation();
-  const { isChecking, isAuthenticated } = useProtectedRoute();
+  const { isChecking, isAuthenticated, role } = useProtectedRoute();
 
   if (isChecking) {
     return (
@@ -19,6 +19,10 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
 
   if (!isAuthenticated) {
     return <Navigate to={ROUTES.authLogin} replace />;
+  }
+
+  if (allowedRoles && (!role || !allowedRoles.includes(role))) {
+    return <Navigate to={ROUTES.adminHome} replace />;
   }
 
   return children;
