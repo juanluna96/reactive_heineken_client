@@ -46,7 +46,7 @@
     "durationLabel": "00:30",
     "timerLabel": "RESTANTE",
     "helper": "La calificación estará disponible cuando\ntermine el video.",
-    "autoplayMessage": "El video se reproducirá en {seconds}...",
+    "playButtonLabel": "Haz clic aquí para reproducir",
     "cta": "CALIFICA A TU MAESTRO CERVECERO",
     "step": "PASO 2 DE 3"
   },
@@ -79,5 +79,249 @@
     "supportingText": "Gracias por ayudarnos a mejorar la experiencia Heineken. Tu opinión es muy valiosa para nosotros.",
     "cta": "FINALIZAR",
     "footer": "© 2026 HEINEKEN EXPERIENCE. TODOS LOS\nDERECHOS RESERVADOS."
+  },
+  "adminDashboard": {
+    "pageTitle": "Panel de Control",
+    "pageSubtitle": "Resumen de la actividad de restaurantes y calificaciones",
+    "periodLabel": "Últimos 30 días",
+    "refreshLabel": "Actualizar",
+    "nav": {
+      "dashboard": "Panel de Control",
+      "restaurants": "Restaurantes",
+      "beerMasters": "Maestros Cerveceros",
+      "ratings": "Calificaciones",
+      "settings": "Ajustes"
+    },
+    "kpis": {
+      "totalRatings": "Calificaciones Totales",
+      "averageRating": "Promedio de Calificación",
+      "restaurantsRegistered": "Restaurantes Registrados",
+      "newRestaurants": "+{count} nuevos",
+      "beerMastersRegistered": "Maestros Cerveceros",
+      "newBeerMasters": "+{count} nuevos"
+    },
+    "chart": {
+      "title": "Calificaciones a lo largo del tiempo",
+      "subtitle": "Últimos 14 días",
+      "empty": "Aún no hay calificaciones en este periodo"
+    },
+    "rankings": {
+      "title": "Mejores Maestros Cerveceros",
+      "rank": "Rango",
+      "master": "Maestro",
+      "restaurant": "Restaurante",
+      "reviews": "Reseñas",
+      "avgRating": "Calif. Promedio",
+      "empty": "Aún no hay suficientes calificaciones para mostrar un ranking"
+    },
+    "distribution": {
+      "title": "Distribución de Calificaciones",
+      "fiveStarShare": "5 Estrellas",
+      "ratingLabel": "{rating} Estrellas"
+    },
+    "feed": {
+      "title": "Últimas Reseñas",
+      "empty": "Aún no hay reseñas recientes",
+      "noComment": "El cliente no dejó un comentario"
+    },
+    "time": {
+      "justNow": "justo ahora",
+      "minutesAgo": "hace {value} min",
+      "hoursAgo": "hace {value} h",
+      "daysAgo": "hace {value} d"
+    },
+    "states": {
+      "loading": "Cargando datos del panel...",
+      "error": "No se pudieron cargar los datos. Intenta de nuevo.",
+      "emptyTitle": "Todavía no hay datos",
+      "emptySubtitle": "Cuando los clientes empiecen a calificar, verás las métricas aquí."
+    }
+  },
+  "adminRestaurants": {
+    "pageTitle": "Ranking de Sedes y Establecimientos",
+    "pageSubtitle": "Clasificación de Rendimiento y Calidad Global",
+    "refreshLabel": "ACTUALIZAR",
+    "ratingsCount": "{count} reseñas",
+    "noRatings": "Sin calificaciones aún",
+    "ownRestaurantBadge": "Tu Restaurante",
+    "sort": {
+      "label": "Ordenar por",
+      "rating": "Ordenar por Calificación",
+      "popularity": "Más Populares",
+      "newest": "Nuevos"
+    },
+    "search": {
+      "placeholder": "Buscar restaurante...",
+      "noResults": "No se encontraron restaurantes que coincidan con \"{query}\""
+    },
+    "pagination": {
+      "previous": "Página anterior",
+      "next": "Página siguiente",
+      "indicator": "Página {current} de {total}"
+    },
+    "beerMasters": {
+      "toggle": "Beer Masters ({count})",
+      "empty": "Todavía no hay maestros cerveceros calificados en este local."
+    },
+    "states": {
+      "loading": "Cargando ranking de restaurantes...",
+      "error": "No se pudo cargar el ranking. Intenta de nuevo.",
+      "emptyTitle": "Todavía no hay restaurantes",
+      "emptySubtitle": "Los locales registrados aparecerán aquí en cuanto existan."
+    }
+  },
+  "adminBeerMasters": {
+    "pageTitle": "Ranking de Maestros Cerveceros",
+    "pageSubtitle": "Desempeño Individual y Calidad del Servicio",
+    "refreshLabel": "ACTUALIZAR",
+    "ratingsCount": "{count} reseñas",
+    "noRatings": "Sin calificaciones aún",
+    "ownBadge": "De Tu Restaurante",
+    "sort": {
+      "label": "Ordenar por",
+      "rating": "Ordenar por Calificación",
+      "popularity": "Más Populares",
+      "newest": "Nuevos"
+    },
+    "restaurantFilter": {
+      "label": "Sede",
+      "all": "Todas las Sedes",
+      "empty": "Todavía no hay maestros cerveceros calificados en {restaurant}."
+    },
+    "search": {
+      "placeholder": "Buscar maestro cervecero...",
+      "noResults": "No se encontraron maestros cerveceros que coincidan con \"{query}\""
+    },
+    "pagination": {
+      "previous": "Página anterior",
+      "next": "Página siguiente",
+      "indicator": "Página {current} de {total}"
+    },
+    "states": {
+      "loading": "Cargando ranking de maestros cerveceros...",
+      "error": "No se pudo cargar el ranking. Intenta de nuevo.",
+      "emptyTitle": "Todavía no hay maestros cerveceros calificados",
+      "emptySubtitle": "Cuando los clientes empiecen a calificarlos, aparecerán aquí."
+    }
+  },
+  "adminRatings": {
+    "pageTitle": "Calificaciones y Reseñas",
+    "pageSubtitle": "Feedback Detallado de Clientes y Sedes",
+    "refreshLabel": "ACTUALIZAR",
+    "stats": {
+      "averageLabel": "Promedio General",
+      "totalLabel": "Total Reseñas",
+      "totalNote": "Verificadas por el sistema",
+      "positiveLabel": "% Calificaciones Positivas",
+      "positiveNote": "4 y 5 estrellas",
+      "trendUp": "+{value} este mes",
+      "trendDown": "{value} este mes"
+    },
+    "restaurantFilter": {
+      "label": "Sede",
+      "all": "Todas las Sedes"
+    },
+    "ratingFilter": {
+      "label": "Calificación",
+      "all": "Todas las Calificaciones",
+      "five": "5 Estrellas",
+      "four": "4 Estrellas",
+      "threeOrLess": "3 o menos"
+    },
+    "clearFilters": "Limpiar Filtros",
+    "search": {
+      "placeholder": "Buscar en reseñas...",
+      "noResults": "No se encontraron reseñas que coincidan con los filtros actuales"
+    },
+    "restaurantLabel": "Sede: {restaurant}",
+    "beerMasterLabel": "Beer Master: {name}",
+    "loadMore": "Cargar más reseñas",
+    "states": {
+      "loading": "Cargando reseñas...",
+      "error": "No se pudieron cargar las reseñas. Intenta de nuevo.",
+      "emptyTitle": "Todavía no hay reseñas",
+      "emptySubtitle": "Cuando los clientes empiecen a calificar, aparecerán aquí."
+    }
+  },
+  "auth": {
+    "checkingSession": "Verificando sesión...",
+    "login": {
+      "title": "Panel Admin",
+      "subtitle": "Inicia sesión para ver el panel de control.",
+      "email": {
+        "label": "CORREO",
+        "placeholder": "ejemplo@correo.com"
+      },
+      "password": {
+        "label": "CONTRASEÑA",
+        "placeholder": "Ingresa tu contraseña"
+      },
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "cta": "INICIAR SESIÓN",
+      "noAccount": "¿No tienes cuenta?",
+      "registerLink": "Regístrate",
+      "errors": {
+        "emailInvalid": "Ingresa un correo electrónico válido",
+        "passwordRequired": "Ingresa tu contraseña",
+        "invalidCredentials": "Correo o contraseña incorrectos",
+        "generic": "No se pudo iniciar sesión, intenta de nuevo"
+      }
+    },
+    "register": {
+      "title": "Crear Cuenta",
+      "subtitle": "Regístrate para administrar el panel de control.",
+      "fullName": {
+        "label": "NOMBRE COMPLETO",
+        "placeholder": "Ingresa tu nombre completo"
+      },
+      "email": {
+        "label": "CORREO",
+        "placeholder": "ejemplo@correo.com"
+      },
+      "affiliation": {
+        "label": "AFILIACIÓN",
+        "placeholder": "Busca tu restaurante",
+        "noResults": "No se encontraron resultados",
+        "heinekenOption": "Administrador Heineken"
+      },
+      "password": {
+        "label": "CONTRASEÑA",
+        "placeholder": "Mínimo 8 caracteres"
+      },
+      "confirmPassword": {
+        "label": "CONFIRMAR CONTRASEÑA",
+        "placeholder": "Repite tu contraseña"
+      },
+      "cta": "CREAR CUENTA",
+      "hasAccount": "¿Ya tienes cuenta?",
+      "loginLink": "Inicia sesión",
+      "errors": {
+        "fullNameRequired": "Ingresa tu nombre completo",
+        "emailInvalid": "Ingresa un correo electrónico válido",
+        "affiliationRequired": "Selecciona tu afiliación",
+        "passwordTooShort": "La contraseña debe tener al menos 8 caracteres",
+        "passwordMismatch": "Las contraseñas no coinciden",
+        "emailTaken": "Ya existe una cuenta con este correo",
+        "generic": "No se pudo crear la cuenta, intenta de nuevo"
+      }
+    },
+    "rememberPassword": {
+      "title": "Recuperar Contraseña",
+      "subtitle": "Ingresa tu correo y te enviaremos instrucciones para restablecerla.",
+      "email": {
+        "label": "CORREO",
+        "placeholder": "ejemplo@correo.com"
+      },
+      "cta": "ENVIAR INSTRUCCIONES",
+      "backToLogin": "Volver a inicio de sesión",
+      "errors": {
+        "emailInvalid": "Ingresa un correo electrónico válido"
+      },
+      "confirmation": {
+        "title": "Revisa tu correo",
+        "message": "Si existe una cuenta con ese correo, recibirás instrucciones para restablecer tu contraseña en unos minutos.",
+        "cta": "VOLVER A INICIO DE SESIÓN"
+      }
+    }
   }
 }
