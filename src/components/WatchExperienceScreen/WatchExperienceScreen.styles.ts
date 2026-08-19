@@ -123,37 +123,25 @@ export const VideoCard = styled(motion.div)`
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 `;
 
-export const VideoThumbnail = styled.img`
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
-
 export const Player = styled(ReactPlayer)`
   position: absolute !important;
   inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
+
+  &:fullscreen {
+    object-fit: contain !important;
+  }
 `;
 
-export const VideoOverlay = styled.div`
-  position: absolute;
-  inset: 0;
+export const PlayButton = styled(motion.button)`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.5);
-`;
-
-export const PlayButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 64px;
-  height: 64px;
+  align-self: center;
+  gap: 10px;
+  padding: 14px 24px;
   border: 1px solid rgba(112, 220, 141, 0.4);
   border-radius: ${({ theme }) => theme.radii.pill};
   background: rgba(112, 220, 141, 0.2);
@@ -163,30 +151,17 @@ export const PlayButton = styled.button`
 `;
 
 export const PlayIcon = styled(FaPlay)`
-  width: 16px;
-  height: 16px;
-  margin-left: 3px;
+  width: 14px;
+  height: 14px;
   color: ${({ theme }) => theme.colors.brandGreenLight};
 `;
 
-export const AutoplayBanner = styled.div`
-  position: absolute;
-  top: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 5px 13px;
-  border-radius: 8px;
-  border: 1px solid ${({ theme }) => theme.colors.surfaceBorder};
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(6px);
-`;
-
-export const AutoplayText = styled.span`
+export const PlayLabel = styled.span`
   font-family: ${({ theme }) => theme.fonts.heading};
-  font-size: 12px;
-  line-height: 16px;
-  white-space: nowrap;
-  color: ${({ theme }) => theme.colors.white};
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.4px;
+  color: ${({ theme }) => theme.colors.brandGreenLight};
 `;
 
 export const DurationBadge = styled.div`

@@ -19,7 +19,6 @@ export const WatchExperienceScreen = () => {
     isPlaying,
     isUnlocked,
     timeLabel,
-    autoplayLabel,
     radius,
     circumference,
     dashoffset,
@@ -55,32 +54,32 @@ export const WatchExperienceScreen = () => {
             <S.Subtitle>{t.watchExperience.subtitle}</S.Subtitle>
           </S.HeadingBlock>
 
+          {!isPlaying && (
+            <S.PlayButton
+              type="button"
+              variants={staggerItem}
+              onClick={handlePlay}
+              aria-label="Play video"
+            >
+              <S.PlayIcon aria-hidden="true" />
+              <S.PlayLabel>{t.watchExperience.playButtonLabel}</S.PlayLabel>
+            </S.PlayButton>
+          )}
+
           <S.VideoCard variants={staggerItem}>
-            {isPlaying ? (
-              <S.Player
-                ref={playerRef}
-                src={PRESENTATION_VIDEO_SRC}
-                autoPlay
-                controls
-                playsInline
-                loop={false}
-                onEnded={handleEnded}
-              />
-            ) : (
-              <>
-                <S.VideoThumbnail src={videoThumbnail} alt="" />
-                <S.VideoOverlay>
-                  <S.PlayButton type="button" onClick={handlePlay} aria-label="Play video">
-                    <S.PlayIcon aria-hidden="true" />
-                  </S.PlayButton>
-                </S.VideoOverlay>
-                <S.AutoplayBanner>
-                  <S.AutoplayText>{autoplayLabel}</S.AutoplayText>
-                </S.AutoplayBanner>
-                <S.DurationBadge>
-                  <S.DurationText>{t.watchExperience.durationLabel}</S.DurationText>
-                </S.DurationBadge>
-              </>
+            <S.Player
+              ref={playerRef}
+              src={PRESENTATION_VIDEO_SRC}
+              poster={videoThumbnail}
+              controls={isPlaying}
+              playsInline
+              loop={false}
+              onEnded={handleEnded}
+            />
+            {!isPlaying && (
+              <S.DurationBadge>
+                <S.DurationText>{t.watchExperience.durationLabel}</S.DurationText>
+              </S.DurationBadge>
             )}
           </S.VideoCard>
 

@@ -49,7 +49,7 @@ export interface WatchExperienceDictionary {
   durationLabel: string;
   timerLabel: string;
   helper: string;
-  autoplayMessage: string;
+  playButtonLabel: string;
   cta: string;
   step: string;
 }
