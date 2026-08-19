@@ -70,12 +70,12 @@ export const WatchExperienceScreen = () => {
             <S.Player
               ref={playerRef}
               src={PRESENTATION_VIDEO_SRC}
-              poster={videoThumbnail}
               controls={isPlaying}
               playsInline
               loop={false}
               onEnded={handleEnded}
             />
+            {!isPlaying && <S.PosterImage src={videoThumbnail} alt="" />}
             {!isPlaying && (
               <S.DurationBadge>
                 <S.DurationText>{t.watchExperience.durationLabel}</S.DurationText>
