@@ -1,8 +1,16 @@
 import { AnimatePresence } from 'framer-motion';
 import { Route, Routes, useLocation } from 'react-router-dom';
+import { AdminBeerMastersScreen } from './components/AdminBeerMastersScreen';
+import { AdminDashboardScreen } from './components/AdminDashboardScreen';
+import { AdminRatingsScreen } from './components/AdminRatingsScreen';
+import { AdminRestaurantsScreen } from './components/AdminRestaurantsScreen';
+import { LoginScreen } from './components/LoginScreen';
 import { PageTransition } from './components/PageTransition';
+import { ProtectedRoute } from './components/ProtectedRoute';
 import { RateBeerMasterScreen } from './components/RateBeerMasterScreen';
+import { RegisterScreen } from './components/RegisterScreen';
 import { RegistrationScreen } from './components/RegistrationScreen';
+import { RememberPasswordScreen } from './components/RememberPasswordScreen';
 import { ThankYouScreen } from './components/ThankYouScreen';
 import { WatchExperienceScreen } from './components/WatchExperienceScreen';
 import { WelcomeScreen } from './components/WelcomeScreen';
@@ -51,6 +59,70 @@ function App() {
           element={
             <PageTransition>
               <ThankYouScreen />
+            </PageTransition>
+          }
+        />
+        <Route
+          path={ROUTES.adminHome}
+          element={
+            <PageTransition>
+              <ProtectedRoute allowedRoles={['owner', 'heineken']}>
+                <AdminDashboardScreen />
+              </ProtectedRoute>
+            </PageTransition>
+          }
+        />
+        <Route
+          path={ROUTES.adminRestaurants}
+          element={
+            <PageTransition>
+              <ProtectedRoute allowedRoles={['owner', 'heineken', 'restaurant']}>
+                <AdminRestaurantsScreen />
+              </ProtectedRoute>
+            </PageTransition>
+          }
+        />
+        <Route
+          path={ROUTES.adminBeerMasters}
+          element={
+            <PageTransition>
+              <ProtectedRoute allowedRoles={['owner', 'heineken', 'restaurant']}>
+                <AdminBeerMastersScreen />
+              </ProtectedRoute>
+            </PageTransition>
+          }
+        />
+        <Route
+          path={ROUTES.adminRatings}
+          element={
+            <PageTransition>
+              <ProtectedRoute allowedRoles={['owner', 'heineken', 'restaurant']}>
+                <AdminRatingsScreen />
+              </ProtectedRoute>
+            </PageTransition>
+          }
+        />
+        <Route
+          path={ROUTES.authLogin}
+          element={
+            <PageTransition>
+              <LoginScreen />
+            </PageTransition>
+          }
+        />
+        <Route
+          path={ROUTES.authRegister}
+          element={
+            <PageTransition>
+              <RegisterScreen />
+            </PageTransition>
+          }
+        />
+        <Route
+          path={ROUTES.authRememberPassword}
+          element={
+            <PageTransition>
+              <RememberPasswordScreen />
             </PageTransition>
           }
         />

@@ -46,7 +46,7 @@
     "durationLabel": "00:30",
     "timerLabel": "REMAINING",
     "helper": "The rating will be available after the\nvideo finishes.",
-    "autoplayMessage": "The video will play in {seconds}...",
+    "playButtonLabel": "Click here to play",
     "cta": "RATE YOUR BEER MASTER",
     "step": "STEP 2 OF 3"
   },
@@ -79,5 +79,249 @@
     "supportingText": "Thanks for helping us improve the Heineken experience. Your feedback is very valuable to us.",
     "cta": "FINISH",
     "footer": "© 2026 HEINEKEN EXPERIENCE. ALL RIGHTS\nRESERVED."
+  },
+  "adminDashboard": {
+    "pageTitle": "Dashboard",
+    "pageSubtitle": "Overview of restaurant and rating activity",
+    "periodLabel": "Last 30 days",
+    "refreshLabel": "Refresh",
+    "nav": {
+      "dashboard": "Dashboard",
+      "restaurants": "Restaurants",
+      "beerMasters": "Beer Masters",
+      "ratings": "Ratings",
+      "settings": "Settings"
+    },
+    "kpis": {
+      "totalRatings": "Total Ratings",
+      "averageRating": "Average Rating",
+      "restaurantsRegistered": "Registered Restaurants",
+      "newRestaurants": "+{count} new",
+      "beerMastersRegistered": "Beer Masters",
+      "newBeerMasters": "+{count} new"
+    },
+    "chart": {
+      "title": "Ratings Over Time",
+      "subtitle": "Last 14 days",
+      "empty": "No ratings in this period yet"
+    },
+    "rankings": {
+      "title": "Top Beer Masters",
+      "rank": "Rank",
+      "master": "Master",
+      "restaurant": "Restaurant",
+      "reviews": "Reviews",
+      "avgRating": "Avg. Rating",
+      "empty": "Not enough ratings yet to show a ranking"
+    },
+    "distribution": {
+      "title": "Rating Distribution",
+      "fiveStarShare": "5 Stars",
+      "ratingLabel": "{rating} Stars"
+    },
+    "feed": {
+      "title": "Latest Reviews",
+      "empty": "No recent reviews yet",
+      "noComment": "The customer didn't leave a comment"
+    },
+    "time": {
+      "justNow": "just now",
+      "minutesAgo": "{value}m ago",
+      "hoursAgo": "{value}h ago",
+      "daysAgo": "{value}d ago"
+    },
+    "states": {
+      "loading": "Loading dashboard data...",
+      "error": "Couldn't load the data. Please try again.",
+      "emptyTitle": "No data yet",
+      "emptySubtitle": "Once customers start rating, you'll see metrics here."
+    }
+  },
+  "adminRestaurants": {
+    "pageTitle": "Venue & Location Ranking",
+    "pageSubtitle": "Global Performance and Quality Ranking",
+    "refreshLabel": "REFRESH",
+    "ratingsCount": "{count} reviews",
+    "noRatings": "No ratings yet",
+    "ownRestaurantBadge": "Your Restaurant",
+    "sort": {
+      "label": "Sort by",
+      "rating": "Sort by Rating",
+      "popularity": "Most Popular",
+      "newest": "Newest"
+    },
+    "search": {
+      "placeholder": "Search restaurant...",
+      "noResults": "No restaurants found matching \"{query}\""
+    },
+    "pagination": {
+      "previous": "Previous page",
+      "next": "Next page",
+      "indicator": "Page {current} of {total}"
+    },
+    "beerMasters": {
+      "toggle": "Beer Masters ({count})",
+      "empty": "No rated beer masters at this venue yet."
+    },
+    "states": {
+      "loading": "Loading restaurant ranking...",
+      "error": "Couldn't load the ranking. Please try again.",
+      "emptyTitle": "No restaurants yet",
+      "emptySubtitle": "Registered venues will show up here once they exist."
+    }
+  },
+  "adminBeerMasters": {
+    "pageTitle": "Beer Masters Ranking",
+    "pageSubtitle": "Individual Performance and Service Quality",
+    "refreshLabel": "REFRESH",
+    "ratingsCount": "{count} reviews",
+    "noRatings": "No ratings yet",
+    "ownBadge": "From Your Restaurant",
+    "sort": {
+      "label": "Sort by",
+      "rating": "Sort by Rating",
+      "popularity": "Most Popular",
+      "newest": "Newest"
+    },
+    "restaurantFilter": {
+      "label": "Venue",
+      "all": "All Venues",
+      "empty": "No rated beer masters at {restaurant} yet."
+    },
+    "search": {
+      "placeholder": "Search beer master...",
+      "noResults": "No beer masters found matching \"{query}\""
+    },
+    "pagination": {
+      "previous": "Previous page",
+      "next": "Next page",
+      "indicator": "Page {current} of {total}"
+    },
+    "states": {
+      "loading": "Loading beer masters ranking...",
+      "error": "Couldn't load the ranking. Please try again.",
+      "emptyTitle": "No rated beer masters yet",
+      "emptySubtitle": "Once customers start rating them, they'll show up here."
+    }
+  },
+  "adminRatings": {
+    "pageTitle": "Ratings & Reviews",
+    "pageSubtitle": "Detailed Customer and Venue Feedback",
+    "refreshLabel": "REFRESH",
+    "stats": {
+      "averageLabel": "Overall Average",
+      "totalLabel": "Total Reviews",
+      "totalNote": "Verified by the system",
+      "positiveLabel": "% Positive Ratings",
+      "positiveNote": "4 and 5 stars",
+      "trendUp": "+{value} this month",
+      "trendDown": "{value} this month"
+    },
+    "restaurantFilter": {
+      "label": "Venue",
+      "all": "All Venues"
+    },
+    "ratingFilter": {
+      "label": "Rating",
+      "all": "All Ratings",
+      "five": "5 Stars",
+      "four": "4 Stars",
+      "threeOrLess": "3 or less"
+    },
+    "clearFilters": "Clear Filters",
+    "search": {
+      "placeholder": "Search reviews...",
+      "noResults": "No reviews found matching the current filters"
+    },
+    "restaurantLabel": "Venue: {restaurant}",
+    "beerMasterLabel": "Beer Master: {name}",
+    "loadMore": "Load more reviews",
+    "states": {
+      "loading": "Loading reviews...",
+      "error": "Couldn't load the reviews. Please try again.",
+      "emptyTitle": "No reviews yet",
+      "emptySubtitle": "Once customers start rating, they'll show up here."
+    }
+  },
+  "auth": {
+    "checkingSession": "Checking session...",
+    "login": {
+      "title": "Admin Panel",
+      "subtitle": "Sign in to view the dashboard.",
+      "email": {
+        "label": "EMAIL",
+        "placeholder": "example@email.com"
+      },
+      "password": {
+        "label": "PASSWORD",
+        "placeholder": "Enter your password"
+      },
+      "forgotPassword": "Forgot your password?",
+      "cta": "SIGN IN",
+      "noAccount": "Don't have an account?",
+      "registerLink": "Sign up",
+      "errors": {
+        "emailInvalid": "Enter a valid email address",
+        "passwordRequired": "Enter your password",
+        "invalidCredentials": "Incorrect email or password",
+        "generic": "Couldn't sign in, please try again"
+      }
+    },
+    "register": {
+      "title": "Create Account",
+      "subtitle": "Sign up to manage the dashboard.",
+      "fullName": {
+        "label": "FULL NAME",
+        "placeholder": "Enter your full name"
+      },
+      "email": {
+        "label": "EMAIL",
+        "placeholder": "example@email.com"
+      },
+      "affiliation": {
+        "label": "AFFILIATION",
+        "placeholder": "Search for your restaurant",
+        "noResults": "No results found",
+        "heinekenOption": "Heineken Administrator"
+      },
+      "password": {
+        "label": "PASSWORD",
+        "placeholder": "At least 8 characters"
+      },
+      "confirmPassword": {
+        "label": "CONFIRM PASSWORD",
+        "placeholder": "Repeat your password"
+      },
+      "cta": "CREATE ACCOUNT",
+      "hasAccount": "Already have an account?",
+      "loginLink": "Sign in",
+      "errors": {
+        "fullNameRequired": "Enter your full name",
+        "emailInvalid": "Enter a valid email address",
+        "affiliationRequired": "Select your affiliation",
+        "passwordTooShort": "Password must be at least 8 characters",
+        "passwordMismatch": "Passwords don't match",
+        "emailTaken": "An account with this email already exists",
+        "generic": "Couldn't create your account, please try again"
+      }
+    },
+    "rememberPassword": {
+      "title": "Reset Password",
+      "subtitle": "Enter your email and we'll send you instructions to reset it.",
+      "email": {
+        "label": "EMAIL",
+        "placeholder": "example@email.com"
+      },
+      "cta": "SEND INSTRUCTIONS",
+      "backToLogin": "Back to sign in",
+      "errors": {
+        "emailInvalid": "Enter a valid email address"
+      },
+      "confirmation": {
+        "title": "Check your email",
+        "message": "If an account exists for that email, you'll receive password reset instructions in a few minutes.",
+        "cta": "BACK TO SIGN IN"
+      }
+    }
   }
 }
