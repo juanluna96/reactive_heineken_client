@@ -63,12 +63,12 @@
     "timerLabel": "RESTANTE",
     "helper": "La calificación estará disponible cuando\ntermine el video.",
     "playButtonLabel": "Haz clic aquí para reproducir",
-    "cta": "CALIFICA A TU MAESTRO CERVECERO",
+    "cta": "CALIFICA A TU STARS SERVER",
     "step": "PASO 2 DE 3"
   },
   "rateBeerMaster": {
-    "beerMasterLabel": "MAESTRO CERVECERO",
-    "namePlaceholder": "Nombre del maestro cervecero",
+    "beerMasterLabel": "STARS SERVER",
+    "namePlaceholder": "Nombre del Stars Server",
     "title": "¿Cómo fue tu experiencia?",
     "subtitle": "Tu opinión nos ayuda a mejorar",
     "tierMessages": [
@@ -83,7 +83,7 @@
     "cta": "ENVIAR CALIFICACIÓN",
     "step": "PASO 3 DE 3",
     "errors": {
-      "nameRequired": "Ingresa el nombre del maestro cervecero",
+      "nameRequired": "Ingresa el nombre del Stars Server",
       "ratingRequired": "Selecciona una calificación",
       "submitFailed": "No se pudo enviar tu calificación, intenta de nuevo",
       "alreadyRated": "Ya enviaste una calificación para este restaurante"
@@ -104,7 +104,7 @@
     "nav": {
       "dashboard": "Panel de Control",
       "restaurants": "Restaurantes",
-      "beerMasters": "Maestros Cerveceros",
+      "beerMasters": "Stars Servers",
       "ratings": "Calificaciones",
       "settings": "Ajustes"
     },
@@ -113,7 +113,7 @@
       "averageRating": "Promedio de Calificación",
       "restaurantsRegistered": "Restaurantes Registrados",
       "newRestaurants": "+{count} nuevos",
-      "beerMastersRegistered": "Maestros Cerveceros",
+      "beerMastersRegistered": "Stars Servers",
       "newBeerMasters": "+{count} nuevos"
     },
     "chart": {
@@ -122,9 +122,9 @@
       "empty": "Aún no hay calificaciones en este periodo"
     },
     "rankings": {
-      "title": "Mejores Maestros Cerveceros",
+      "title": "Mejores Stars Servers",
       "rank": "Rango",
-      "master": "Maestro",
+      "master": "Stars Server",
       "restaurant": "Restaurante",
       "reviews": "Reseñas",
       "avgRating": "Calif. Promedio",
@@ -176,8 +176,8 @@
       "indicator": "Página {current} de {total}"
     },
     "beerMasters": {
-      "toggle": "Beer Masters ({count})",
-      "empty": "Todavía no hay maestros cerveceros calificados en este local."
+      "toggle": "Stars Servers ({count})",
+      "empty": "Todavía no hay Stars Servers calificados en este local."
     },
     "states": {
       "loading": "Cargando ranking de restaurantes...",
@@ -187,7 +187,7 @@
     }
   },
   "adminBeerMasters": {
-    "pageTitle": "Ranking de Maestros Cerveceros",
+    "pageTitle": "Ranking de Stars Servers",
     "pageSubtitle": "Desempeño Individual y Calidad del Servicio",
     "refreshLabel": "ACTUALIZAR",
     "ratingsCount": "{count} reseñas",
@@ -202,11 +202,11 @@
     "restaurantFilter": {
       "label": "Sede",
       "all": "Todas las Sedes",
-      "empty": "Todavía no hay maestros cerveceros calificados en {restaurant}."
+      "empty": "Todavía no hay Stars Servers calificados en {restaurant}."
     },
     "search": {
-      "placeholder": "Buscar maestro cervecero...",
-      "noResults": "No se encontraron maestros cerveceros que coincidan con \"{query}\""
+      "placeholder": "Buscar Stars Server...",
+      "noResults": "No se encontraron Stars Servers que coincidan con \"{query}\""
     },
     "pagination": {
       "previous": "Página anterior",
@@ -214,9 +214,9 @@
       "indicator": "Página {current} de {total}"
     },
     "states": {
-      "loading": "Cargando ranking de maestros cerveceros...",
+      "loading": "Cargando ranking de Stars Servers...",
       "error": "No se pudo cargar el ranking. Intenta de nuevo.",
-      "emptyTitle": "Todavía no hay maestros cerveceros calificados",
+      "emptyTitle": "Todavía no hay Stars Servers calificados",
       "emptySubtitle": "Cuando los clientes empiecen a calificarlos, aparecerán aquí."
     }
   },
@@ -250,7 +250,7 @@
       "noResults": "No se encontraron reseñas que coincidan con los filtros actuales"
     },
     "restaurantLabel": "Sede: {restaurant}",
-    "beerMasterLabel": "Beer Master: {name}",
+    "beerMasterLabel": "Stars Server: {name}",
     "loadMore": "Cargar más reseñas",
     "states": {
       "loading": "Cargando reseñas...",
@@ -261,10 +261,10 @@
   },
   "adminSettings": {
     "pageTitle": "Ajustes",
-    "pageSubtitle": "Gestiona los restaurantes y maestros cerveceros registrados",
+    "pageSubtitle": "Gestiona los restaurantes y Stars Servers registrados",
     "tabs": {
       "restaurants": "Restaurantes",
-      "beerMasters": "Maestros Cerveceros"
+      "beerMasters": "Stars Servers"
     },
     "restaurants": {
       "addButton": "Agregar restaurante",
@@ -283,7 +283,7 @@
       },
       "deleteConfirm": {
         "title": "Eliminar restaurante",
-        "message": "¿Seguro que quieres eliminar \"{name}\"? También se eliminarán sus maestros cerveceros y calificaciones asociadas. Esta acción no se puede deshacer.",
+        "message": "¿Seguro que quieres eliminar \"{name}\"? También se eliminarán sus Stars Servers y calificaciones asociadas. Esta acción no se puede deshacer.",
         "cancel": "Cancelar",
         "confirm": "Eliminar",
         "deleting": "Eliminando..."
@@ -299,24 +299,24 @@
         "label": "Restaurante",
         "placeholder": "Selecciona un restaurante"
       },
-      "addButton": "Agregar maestro cervecero",
+      "addButton": "Agregar Stars Server",
       "selectRestaurantTitle": "Selecciona un restaurante",
-      "selectRestaurantSubtitle": "Elige un restaurante arriba para ver y gestionar sus maestros cerveceros.",
-      "emptyTitle": "Todavía no hay maestros cerveceros",
+      "selectRestaurantSubtitle": "Elige un restaurante arriba para ver y gestionar sus Stars Servers.",
+      "emptyTitle": "Todavía no hay Stars Servers",
       "emptySubtitle": "Agrega el primero para este restaurante.",
       "editAction": "Editar",
       "deleteAction": "Eliminar",
       "form": {
-        "addTitle": "Nuevo maestro cervecero",
-        "editTitle": "Editar maestro cervecero",
+        "addTitle": "Nuevo Stars Server",
+        "editTitle": "Editar Stars Server",
         "nameLabel": "Nombre",
-        "namePlaceholder": "Nombre del maestro cervecero",
+        "namePlaceholder": "Nombre del Stars Server",
         "cancel": "Cancelar",
         "save": "Guardar",
         "saving": "Guardando..."
       },
       "deleteConfirm": {
-        "title": "Eliminar maestro cervecero",
+        "title": "Eliminar Stars Server",
         "message": "¿Seguro que quieres eliminar a \"{name}\"? Sus calificaciones existentes se conservarán bajo su nombre. Esta acción no se puede deshacer.",
         "cancel": "Cancelar",
         "confirm": "Eliminar",
@@ -324,7 +324,7 @@
       },
       "errors": {
         "nameRequired": "Ingresa un nombre",
-        "duplicate": "Ya existe un maestro cervecero con este nombre en este restaurante",
+        "duplicate": "Ya existe un Stars Server con este nombre en este restaurante",
         "generic": "Algo salió mal. Intenta de nuevo."
       }
     },

@@ -63,12 +63,12 @@
     "timerLabel": "REMAINING",
     "helper": "The rating will be available after the\nvideo finishes.",
     "playButtonLabel": "Click here to play",
-    "cta": "RATE YOUR BEER MASTER",
+    "cta": "RATE YOUR STARS SERVER",
     "step": "STEP 2 OF 3"
   },
   "rateBeerMaster": {
-    "beerMasterLabel": "BEER MASTER",
-    "namePlaceholder": "Beer master's name",
+    "beerMasterLabel": "STARS SERVER",
+    "namePlaceholder": "Stars Server's name",
     "title": "How was your experience?",
     "subtitle": "Your opinion helps us improve",
     "tierMessages": [
@@ -83,7 +83,7 @@
     "cta": "SUBMIT RATING",
     "step": "STEP 3 OF 3",
     "errors": {
-      "nameRequired": "Enter the beer master's name",
+      "nameRequired": "Enter the Stars Server's name",
       "ratingRequired": "Please select a rating",
       "submitFailed": "Failed to submit your rating, please try again",
       "alreadyRated": "You've already submitted a rating for this restaurant"
@@ -104,7 +104,7 @@
     "nav": {
       "dashboard": "Dashboard",
       "restaurants": "Restaurants",
-      "beerMasters": "Beer Masters",
+      "beerMasters": "Stars Servers",
       "ratings": "Ratings",
       "settings": "Settings"
     },
@@ -113,7 +113,7 @@
       "averageRating": "Average Rating",
       "restaurantsRegistered": "Registered Restaurants",
       "newRestaurants": "+{count} new",
-      "beerMastersRegistered": "Beer Masters",
+      "beerMastersRegistered": "Stars Servers",
       "newBeerMasters": "+{count} new"
     },
     "chart": {
@@ -122,9 +122,9 @@
       "empty": "No ratings in this period yet"
     },
     "rankings": {
-      "title": "Top Beer Masters",
+      "title": "Top Stars Servers",
       "rank": "Rank",
-      "master": "Master",
+      "master": "Stars Server",
       "restaurant": "Restaurant",
       "reviews": "Reviews",
       "avgRating": "Avg. Rating",
@@ -176,8 +176,8 @@
       "indicator": "Page {current} of {total}"
     },
     "beerMasters": {
-      "toggle": "Beer Masters ({count})",
-      "empty": "No rated beer masters at this venue yet."
+      "toggle": "Stars Servers ({count})",
+      "empty": "No rated Stars Servers at this venue yet."
     },
     "states": {
       "loading": "Loading restaurant ranking...",
@@ -187,7 +187,7 @@
     }
   },
   "adminBeerMasters": {
-    "pageTitle": "Beer Masters Ranking",
+    "pageTitle": "Stars Servers Ranking",
     "pageSubtitle": "Individual Performance and Service Quality",
     "refreshLabel": "REFRESH",
     "ratingsCount": "{count} reviews",
@@ -202,11 +202,11 @@
     "restaurantFilter": {
       "label": "Venue",
       "all": "All Venues",
-      "empty": "No rated beer masters at {restaurant} yet."
+      "empty": "No rated Stars Servers at {restaurant} yet."
     },
     "search": {
-      "placeholder": "Search beer master...",
-      "noResults": "No beer masters found matching \"{query}\""
+      "placeholder": "Search Stars Server...",
+      "noResults": "No Stars Servers found matching \"{query}\""
     },
     "pagination": {
       "previous": "Previous page",
@@ -214,9 +214,9 @@
       "indicator": "Page {current} of {total}"
     },
     "states": {
-      "loading": "Loading beer masters ranking...",
+      "loading": "Loading Stars Servers ranking...",
       "error": "Couldn't load the ranking. Please try again.",
-      "emptyTitle": "No rated beer masters yet",
+      "emptyTitle": "No rated Stars Servers yet",
       "emptySubtitle": "Once customers start rating them, they'll show up here."
     }
   },
@@ -250,7 +250,7 @@
       "noResults": "No reviews found matching the current filters"
     },
     "restaurantLabel": "Venue: {restaurant}",
-    "beerMasterLabel": "Beer Master: {name}",
+    "beerMasterLabel": "Stars Server: {name}",
     "loadMore": "Load more reviews",
     "states": {
       "loading": "Loading reviews...",
@@ -261,10 +261,10 @@
   },
   "adminSettings": {
     "pageTitle": "Settings",
-    "pageSubtitle": "Manage registered restaurants and beer masters",
+    "pageSubtitle": "Manage registered restaurants and Stars Servers",
     "tabs": {
       "restaurants": "Restaurants",
-      "beerMasters": "Beer Masters"
+      "beerMasters": "Stars Servers"
     },
     "restaurants": {
       "addButton": "Add restaurant",
@@ -283,7 +283,7 @@
       },
       "deleteConfirm": {
         "title": "Delete restaurant",
-        "message": "Are you sure you want to delete \"{name}\"? Its beer masters and associated ratings will also be deleted. This action can't be undone.",
+        "message": "Are you sure you want to delete \"{name}\"? Its Stars Servers and associated ratings will also be deleted. This action can't be undone.",
         "cancel": "Cancel",
         "confirm": "Delete",
         "deleting": "Deleting..."
@@ -299,24 +299,24 @@
         "label": "Restaurant",
         "placeholder": "Select a restaurant"
       },
-      "addButton": "Add beer master",
+      "addButton": "Add Stars Server",
       "selectRestaurantTitle": "Select a restaurant",
-      "selectRestaurantSubtitle": "Choose a restaurant above to view and manage its beer masters.",
-      "emptyTitle": "No beer masters yet",
+      "selectRestaurantSubtitle": "Choose a restaurant above to view and manage its Stars Servers.",
+      "emptyTitle": "No Stars Servers yet",
       "emptySubtitle": "Add the first one for this restaurant.",
       "editAction": "Edit",
       "deleteAction": "Delete",
       "form": {
-        "addTitle": "New beer master",
-        "editTitle": "Edit beer master",
+        "addTitle": "New Stars Server",
+        "editTitle": "Edit Stars Server",
         "nameLabel": "Name",
-        "namePlaceholder": "Beer master name",
+        "namePlaceholder": "Stars Server name",
         "cancel": "Cancel",
         "save": "Save",
         "saving": "Saving..."
       },
       "deleteConfirm": {
-        "title": "Delete beer master",
+        "title": "Delete Stars Server",
         "message": "Are you sure you want to delete \"{name}\"? Their existing ratings will be kept under their name. This action can't be undone.",
         "cancel": "Cancel",
         "confirm": "Delete",
@@ -324,7 +324,7 @@
       },
       "errors": {
         "nameRequired": "Enter a name",
-        "duplicate": "A beer master with this name already exists at this restaurant",
+        "duplicate": "A Stars Server with this name already exists at this restaurant",
         "generic": "Something went wrong. Please try again."
       }
     },
