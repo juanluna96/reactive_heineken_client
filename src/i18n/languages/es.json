@@ -9,6 +9,19 @@
     "cta": "COMENZAR EXPERIENCIA",
     "footer": "© 2026 HEINEKEN EXPERIENCE. TODOS LOS\nDERECHOS RESERVADOS."
   },
+  "ageVerification": {
+    "title": "Verificación de Edad",
+    "subtitle": "Esta activación está relacionada con bebidas alcohólicas.\nConfirma tu fecha de nacimiento para continuar.",
+    "birthDate": {
+      "label": "FECHA DE NACIMIENTO",
+      "placeholder": "DD/MM/AAAA"
+    },
+    "cta": "CONTINUAR",
+    "errors": {
+      "required": "Ingresa tu fecha de nacimiento",
+      "underage": "Debes ser mayor de edad para participar en esta encuesta"
+    }
+  },
   "registration": {
     "title": "Bienvenido",
     "subtitle": "Conozcámonos antes de comenzar\ntu experiencia.",
@@ -29,6 +42,9 @@
       "prefix": "Acepto la ",
       "linkText": "Política de Privacidad",
       "suffix": " y el tratamiento de mis datos personales."
+    },
+    "resultsConsent": {
+      "prefix": "Deseo recibir por correo electrónico información y resultados relacionados con esta activación."
     },
     "cta": "CONTINUAR",
     "step": "PASO 1 DE 3",

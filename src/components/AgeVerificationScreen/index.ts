@@ -1,0 +1,1 @@
+export { AgeVerificationScreen } from './AgeVerificationScreen';

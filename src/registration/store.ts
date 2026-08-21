@@ -6,6 +6,7 @@ const initialState = {
   email: '',
   restaurantId: '',
   accepted: false,
+  resultsConsent: false,
 };
 
 export const useRegistrationStore = create<RegistrationState>((set) => ({
@@ -14,5 +15,6 @@ export const useRegistrationStore = create<RegistrationState>((set) => ({
   setEmail: (email) => set({ email }),
   setRestaurantId: (restaurantId) => set({ restaurantId }),
   setAccepted: (accepted) => set({ accepted }),
+  setResultsConsent: (resultsConsent) => set({ resultsConsent }),
   reset: () => set(initialState),
 }));

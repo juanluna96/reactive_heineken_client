@@ -32,6 +32,9 @@ export interface RegistrationDictionary {
     linkText: string;
     suffix: string;
   };
+  resultsConsent: {
+    prefix: string;
+  };
   cta: string;
   step: string;
   errors: {
@@ -40,6 +43,20 @@ export interface RegistrationDictionary {
     restaurantRequired: string;
     consentRequired: string;
     alreadyRated: string;
+  };
+}
+
+export interface AgeVerificationDictionary {
+  title: string;
+  subtitle: string;
+  birthDate: {
+    label: string;
+    placeholder: string;
+  };
+  cta: string;
+  errors: {
+    required: string;
+    underage: string;
   };
 }
 
@@ -401,6 +418,7 @@ export interface NotFoundDictionary {
 
 export interface TranslationDictionary {
   welcome: WelcomeDictionary;
+  ageVerification: AgeVerificationDictionary;
   registration: RegistrationDictionary;
   watchExperience: WatchExperienceDictionary;
   rateBeerMaster: RateBeerMasterDictionary;

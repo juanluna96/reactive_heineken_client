@@ -19,6 +19,7 @@ export const useRateBeerMasterScreen = () => {
   const restaurantId = useRegistrationStore((state) => state.restaurantId);
   const customerName = useRegistrationStore((state) => state.name);
   const customerEmail = useRegistrationStore((state) => state.email);
+  const resultsConsent = useRegistrationStore((state) => state.resultsConsent);
 
   const beerMasterId = useRatingStore((state) => state.beerMasterId);
   const setBeerMasterId = useRatingStore((state) => state.setBeerMasterId);
@@ -114,6 +115,7 @@ export const useRateBeerMasterScreen = () => {
         customer_email: customerEmail,
         rating,
         comment: comment.trim() ? comment.trim() : null,
+        results_email_consent: resultsConsent,
       });
       navigate(ROUTES.thankYou);
     } catch (err) {

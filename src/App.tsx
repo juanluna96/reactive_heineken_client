@@ -5,6 +5,7 @@ import { AdminDashboardScreen } from './components/AdminDashboardScreen';
 import { AdminRatingsScreen } from './components/AdminRatingsScreen';
 import { AdminRestaurantsScreen } from './components/AdminRestaurantsScreen';
 import { AdminSettingsScreen } from './components/AdminSettingsScreen';
+import { AgeVerificationScreen } from './components/AgeVerificationScreen';
 import { LoginScreen } from './components/LoginScreen';
 import { NotFoundScreen } from './components/NotFoundScreen';
 import { PageTransition } from './components/PageTransition';
@@ -30,6 +31,14 @@ function App() {
           element={
             <PageTransition>
               <WelcomeScreen />
+            </PageTransition>
+          }
+        />
+        <Route
+          path={ROUTES.ageVerification}
+          element={
+            <PageTransition>
+              <AgeVerificationScreen />
             </PageTransition>
           }
         />

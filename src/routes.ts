@@ -2,6 +2,7 @@ import type { AdminRole } from './api';
 
 export const ROUTES = {
   welcome: '/',
+  ageVerification: '/registration/age-verification',
   registration: '/registration',
   watchExperience: '/registration/watch',
   rateBeerMaster: '/registration/rate',
