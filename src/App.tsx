@@ -1,11 +1,12 @@
 import { AnimatePresence } from 'framer-motion';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { AdminBeerMastersScreen } from './components/AdminBeerMastersScreen';
 import { AdminDashboardScreen } from './components/AdminDashboardScreen';
 import { AdminRatingsScreen } from './components/AdminRatingsScreen';
 import { AdminRestaurantsScreen } from './components/AdminRestaurantsScreen';
 import { AdminSettingsScreen } from './components/AdminSettingsScreen';
 import { LoginScreen } from './components/LoginScreen';
+import { NotFoundScreen } from './components/NotFoundScreen';
 import { PageTransition } from './components/PageTransition';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { RateBeerMasterScreen } from './components/RateBeerMasterScreen';
@@ -64,6 +65,7 @@ function App() {
             </PageTransition>
           }
         />
+        <Route path={ROUTES.admin} element={<Navigate to={ROUTES.authLogin} replace />} />
         <Route
           path={ROUTES.adminHome}
           element={
@@ -143,6 +145,14 @@ function App() {
           element={
             <PageTransition>
               <ResetPasswordScreen />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <PageTransition>
+              <NotFoundScreen />
             </PageTransition>
           }
         />

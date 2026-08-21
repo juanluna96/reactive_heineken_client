@@ -428,5 +428,12 @@
         "cta": "VOLVER A INICIO DE SESIÓN"
       }
     }
+  },
+  "notFound": {
+    "eyebrow": "ERROR 404",
+    "title": "¡Ups! Parece que no encontramos lo que buscas.",
+    "subtitle": "La página que buscas no existe o fue movida. Volvamos a un lugar seguro.",
+    "cta": "VOLVER AL INICIO",
+    "adminCta": "VOLVER AL PANEL ADMIN"
   }
 }

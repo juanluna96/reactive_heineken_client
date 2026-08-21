@@ -6,6 +6,7 @@ export const ROUTES = {
   watchExperience: '/registration/watch',
   rateBeerMaster: '/registration/rate',
   thankYou: '/registration/thanks',
+  admin: '/admin',
   adminHome: '/admin/home',
   adminRestaurants: '/admin/restaurants',
   adminBeerMasters: '/admin/beer-masters',

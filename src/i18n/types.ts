@@ -391,6 +391,14 @@ export interface AdminSettingsDictionary {
   };
 }
 
+export interface NotFoundDictionary {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  cta: string;
+  adminCta: string;
+}
+
 export interface TranslationDictionary {
   welcome: WelcomeDictionary;
   registration: RegistrationDictionary;
@@ -403,6 +411,7 @@ export interface TranslationDictionary {
   adminRatings: AdminRatingsDictionary;
   adminSettings: AdminSettingsDictionary;
   auth: AuthDictionary;
+  notFound: NotFoundDictionary;
 }
 
 export interface LanguageState {
