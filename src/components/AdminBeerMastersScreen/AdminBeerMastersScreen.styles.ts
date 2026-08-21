@@ -9,9 +9,10 @@ import {
   FaStar,
 } from 'react-icons/fa6';
 import styled, { css, keyframes } from 'styled-components';
-import { ADMIN_DESKTOP_BREAKPOINT, ADMIN_SIDEBAR_WIDTH } from '../AdminSidebar';
+import { ADMIN_DESKTOP_BREAKPOINT, ADMIN_MOBILE_BREAKPOINT, ADMIN_SIDEBAR_WIDTH } from '../AdminSidebar';
 
 const DESKTOP_BREAKPOINT = ADMIN_DESKTOP_BREAKPOINT;
+const MOBILE_BREAKPOINT = ADMIN_MOBILE_BREAKPOINT;
 
 export const Screen = styled.div`
   position: relative;
@@ -85,6 +86,12 @@ export const TopBarActions = styled.div`
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
 const filterControl = css`
@@ -95,6 +102,10 @@ const filterControl = css`
   border-radius: ${({ theme }) => theme.radii.md};
   background: ${({ theme }) => theme.colors.cardBackground};
   color: ${({ theme }) => theme.colors.brandGreenLight};
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    width: 100%;
+  }
 `;
 
 export const SortControl = styled.div`
@@ -118,6 +129,7 @@ export const RestaurantFilterIcon = styled(FaLocationDot)`
 `;
 
 const filterSelect = css`
+  flex: 1;
   border: none;
   background: transparent;
   color: ${({ theme }) => theme.colors.textPrimary};
@@ -133,6 +145,10 @@ const filterSelect = css`
   option {
     color: #000;
   }
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    max-width: none;
+  }
 `;
 
 export const SortSelect = styled.select`
@@ -146,6 +162,7 @@ export const RestaurantFilterSelect = styled.select`
 export const RefreshButton = styled(motion.button)<{ $spinning?: boolean }>`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   border: none;
   border-radius: ${({ theme }) => theme.radii.md};
@@ -158,6 +175,10 @@ export const RefreshButton = styled(motion.button)<{ $spinning?: boolean }>`
   text-transform: uppercase;
   letter-spacing: 0.6px;
   cursor: pointer;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    width: 100%;
+  }
 
   svg {
     width: 13px;
@@ -191,6 +212,10 @@ export const SearchFieldWrapper = styled(motion.div)`
   position: relative;
   width: 100%;
   max-width: 360px;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    max-width: none;
+  }
 `;
 
 export const SearchIcon = styled(FaMagnifyingGlass)`
@@ -408,10 +433,25 @@ export const RankMeta = styled.div`
   @media (min-width: 640px) {
     flex-shrink: 0;
   }
+
+  // Below 640px RankCard stacks to a column (see above) — let this row's
+  // rating block grow to use the full width instead of sitting narrow at
+  // its own content size.
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    width: 100%;
+
+    & > * {
+      flex: 1;
+    }
+  }
 `;
 
 export const RatingBlock = styled.div`
   min-width: 88px;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    width: 100%;
+  }
 `;
 
 export const RatingRow = styled.div`
@@ -439,6 +479,10 @@ export const RatingTrack = styled.div`
   border-radius: ${({ theme }) => theme.radii.pill};
   background: ${({ theme }) => theme.colors.timerTrack};
   overflow: hidden;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    max-width: none;
+  }
 `;
 
 export const RatingFill = styled.div<{ $pct: number }>`

@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
 import { FaArrowsRotate, FaCalendarDays, FaMedal, FaRegStar, FaStar, FaUtensils } from 'react-icons/fa6';
 import styled, { css } from 'styled-components';
-import { ADMIN_DESKTOP_BREAKPOINT, ADMIN_SIDEBAR_WIDTH } from '../AdminSidebar';
+import { ADMIN_DESKTOP_BREAKPOINT, ADMIN_MOBILE_BREAKPOINT, ADMIN_SIDEBAR_WIDTH } from '../AdminSidebar';
 
 const DESKTOP_BREAKPOINT = ADMIN_DESKTOP_BREAKPOINT;
+const MOBILE_BREAKPOINT = ADMIN_MOBILE_BREAKPOINT;
 
 export const Screen = styled.div`
   position: relative;
@@ -76,11 +77,18 @@ export const TopBarActions = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
 export const PeriodBadge = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 8px 14px;
   border-radius: ${({ theme }) => theme.radii.md};
@@ -88,6 +96,10 @@ export const PeriodBadge = styled.div`
   color: ${({ theme }) => theme.colors.mutedText};
   font-size: 12px;
   font-weight: 500;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    width: 100%;
+  }
 `;
 
 export const PeriodIcon = styled(FaCalendarDays)`
@@ -98,6 +110,7 @@ export const PeriodIcon = styled(FaCalendarDays)`
 export const RefreshButton = styled(motion.button)<{ $spinning?: boolean }>`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   border: none;
   border-radius: ${({ theme }) => theme.radii.md};
@@ -110,6 +123,10 @@ export const RefreshButton = styled(motion.button)<{ $spinning?: boolean }>`
   text-transform: uppercase;
   letter-spacing: 0.6px;
   cursor: pointer;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    width: 100%;
+  }
 
   svg {
     width: 13px;

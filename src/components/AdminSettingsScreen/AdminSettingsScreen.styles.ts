@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
 import { FaChevronLeft, FaChevronRight, FaPen, FaPlus, FaTrash } from 'react-icons/fa6';
 import styled, { css } from 'styled-components';
-import { ADMIN_DESKTOP_BREAKPOINT, ADMIN_SIDEBAR_WIDTH } from '../AdminSidebar';
+import { ADMIN_DESKTOP_BREAKPOINT, ADMIN_MOBILE_BREAKPOINT, ADMIN_SIDEBAR_WIDTH } from '../AdminSidebar';
 
 const DESKTOP_BREAKPOINT = ADMIN_DESKTOP_BREAKPOINT;
+const MOBILE_BREAKPOINT = ADMIN_MOBILE_BREAKPOINT;
 
 export const Screen = styled.div`
   position: relative;
@@ -75,6 +76,10 @@ export const PageSubtitle = styled.p`
 export const TabList = styled.div`
   display: flex;
   gap: 8px;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    width: 100%;
+  }
 `;
 
 export const TabButton = styled.button<{ $active?: boolean }>`
@@ -87,6 +92,10 @@ export const TabButton = styled.button<{ $active?: boolean }>`
   text-transform: uppercase;
   letter-spacing: 0.6px;
   cursor: pointer;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    flex: 1;
+  }
 
   ${({ $active, theme }) =>
     $active
@@ -119,15 +128,26 @@ export const SectionHeader = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
 export const RestaurantPickerWrapper = styled.div`
   max-width: 360px;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    max-width: none;
+    width: 100%;
+  }
 `;
 
 export const AddButton = styled(motion.button)`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   border: none;
   border-radius: ${({ theme }) => theme.radii.md};
@@ -136,6 +156,10 @@ export const AddButton = styled(motion.button)`
   color: #003918;
   font-family: inherit;
   font-size: 12px;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    width: 100%;
+  }
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.6px;
@@ -308,6 +332,11 @@ export const FormActions = styled.div`
   align-items: center;
   justify-content: flex-end;
   gap: 12px;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
 `;
 
 export const CancelButton = styled.button`
@@ -331,6 +360,10 @@ export const CancelButton = styled.button`
   &:hover:not(:disabled) {
     color: ${({ theme }) => theme.colors.white};
   }
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    width: 100%;
+  }
 `;
 
 export const SaveButton = styled.button`
@@ -349,6 +382,10 @@ export const SaveButton = styled.button`
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    width: 100%;
   }
 `;
 
@@ -383,6 +420,10 @@ export const DangerButton = styled.button`
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    width: 100%;
   }
 `;
 

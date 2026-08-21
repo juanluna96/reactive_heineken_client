@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
 import { FaArrowsRotate, FaArrowTrendDown, FaArrowTrendUp, FaChevronDown, FaMagnifyingGlass, FaRegStar, FaStar } from 'react-icons/fa6';
 import styled, { css } from 'styled-components';
-import { ADMIN_DESKTOP_BREAKPOINT, ADMIN_SIDEBAR_WIDTH } from '../AdminSidebar';
+import { ADMIN_DESKTOP_BREAKPOINT, ADMIN_MOBILE_BREAKPOINT, ADMIN_SIDEBAR_WIDTH } from '../AdminSidebar';
 
 const DESKTOP_BREAKPOINT = ADMIN_DESKTOP_BREAKPOINT;
+const MOBILE_BREAKPOINT = ADMIN_MOBILE_BREAKPOINT;
 
 export const Screen = styled.div`
   position: relative;
@@ -75,6 +76,7 @@ export const PageSubtitle = styled.p`
 export const RefreshButton = styled(motion.button)<{ $spinning?: boolean }>`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   border: none;
   border-radius: ${({ theme }) => theme.radii.md};
@@ -87,6 +89,10 @@ export const RefreshButton = styled(motion.button)<{ $spinning?: boolean }>`
   text-transform: uppercase;
   letter-spacing: 0.6px;
   cursor: pointer;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    width: 100%;
+  }
 
   svg {
     width: 13px;
@@ -246,9 +252,15 @@ export const FiltersBar = styled.div`
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
 const filterSelect = css`
+  flex: 1;
   appearance: none;
   border: none;
   background: transparent;
@@ -265,6 +277,10 @@ const filterSelect = css`
   option {
     color: #000;
   }
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    max-width: none;
+  }
 `;
 
 export const FilterControl = styled.div`
@@ -275,6 +291,10 @@ export const FilterControl = styled.div`
   border-radius: ${({ theme }) => theme.radii.md};
   background: ${({ theme }) => theme.colors.cardBackground};
   color: ${({ theme }) => theme.colors.brandGreenLight};
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    width: 100%;
+  }
 `;
 
 export const FilterIcon = styled(FaChevronDown)`
@@ -304,12 +324,20 @@ export const ClearFiltersButton = styled.button`
     border-color: ${({ theme }) => theme.colors.brandGreenLight};
     color: ${({ theme }) => theme.colors.brandGreenLight};
   }
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    width: 100%;
+  }
 `;
 
 export const SearchFieldWrapper = styled.div`
   position: relative;
   width: 100%;
   max-width: 360px;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    max-width: none;
+  }
 `;
 
 export const SearchIcon = styled(FaMagnifyingGlass)`
@@ -435,11 +463,16 @@ export const LoadMoreWrapper = styled.div`
   display: flex;
   justify-content: center;
   padding-top: 8px;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    width: 100%;
+  }
 `;
 
 export const LoadMoreButton = styled.button`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 12px 24px;
   border-radius: ${({ theme }) => theme.radii.pill};
@@ -452,6 +485,10 @@ export const LoadMoreButton = styled.button`
   text-transform: uppercase;
   letter-spacing: 0.8px;
   cursor: pointer;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    width: 100%;
+  }
 
   &:hover {
     border-color: ${({ theme }) => theme.colors.brandGreenLight};
