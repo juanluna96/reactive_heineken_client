@@ -1,11 +1,17 @@
 import { FaArrowTrendDown, FaArrowTrendUp } from 'react-icons/fa6';
+import { staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background.png';
 import backgroundImageLaptop from '../../assets/images/background-laptop.png';
 import { AdminSidebar } from '../AdminSidebar';
 import { ScreenOverlay } from '../ScreenOverlay';
+import { Skeleton } from '../Skeleton';
 import { TABLET_BREAKPOINT } from '../../styles/breakpoints';
 import * as S from './AdminDashboardScreen.styles';
 import { useAdminDashboardScreen } from './AdminDashboardScreen.hooks';
+
+const SKELETON_KPI_CARDS = 4;
+const SKELETON_TABLE_ROWS = 5;
+const SKELETON_FEED_CARDS = 4;
 
 export const AdminDashboardScreen = () => {
   const {
@@ -40,9 +46,68 @@ export const AdminDashboardScreen = () => {
         {background}
         {sidebar}
         <S.Main>
-          <S.StatusScreen>
-            <S.StatusSubtitle>{t.adminDashboard.states.loading}</S.StatusSubtitle>
-          </S.StatusScreen>
+          <S.TopBar>
+            <S.TitleGroup>
+              <S.PageTitle>{t.adminDashboard.pageTitle}</S.PageTitle>
+              <S.PageSubtitle>{t.adminDashboard.pageSubtitle}</S.PageSubtitle>
+            </S.TitleGroup>
+          </S.TopBar>
+
+          <S.Content initial="hidden" animate="visible" variants={staggerContainer}>
+            <S.KpiGrid variants={staggerItem}>
+              {Array.from({ length: SKELETON_KPI_CARDS }).map((_, index) => (
+                <S.KpiCard key={index}>
+                  <Skeleton width="90px" height="12px" />
+                  <Skeleton width="60px" height="28px" style={{ marginTop: '12px' }} />
+                </S.KpiCard>
+              ))}
+            </S.KpiGrid>
+
+            <S.MainGrid>
+              <S.AnalyticsColumn>
+                <S.Panel variants={staggerItem}>
+                  <Skeleton width="160px" height="18px" />
+                  <S.ChartArea>
+                    <Skeleton width="100%" height="100%" />
+                  </S.ChartArea>
+                </S.Panel>
+
+                <S.Panel variants={staggerItem}>
+                  <Skeleton width="160px" height="18px" style={{ marginBottom: '24px' }} />
+                  {Array.from({ length: SKELETON_TABLE_ROWS }).map((_, index) => (
+                    <S.SkeletonTableRow key={index}>
+                      <Skeleton width="28px" height="20px" />
+                      <Skeleton width="140px" height="16px" />
+                      <Skeleton width="80px" height="16px" />
+                    </S.SkeletonTableRow>
+                  ))}
+                </S.Panel>
+              </S.AnalyticsColumn>
+
+              <S.SideColumn>
+                <S.Panel variants={staggerItem}>
+                  <Skeleton width="140px" height="18px" style={{ marginBottom: '24px' }} />
+                  <S.DonutWrapper>
+                    <Skeleton width="160px" height="160px" radius="9999px" />
+                  </S.DonutWrapper>
+                </S.Panel>
+
+                <S.FeedPanel variants={staggerItem}>
+                  <S.FeedHeader>
+                    <Skeleton width="120px" height="18px" />
+                  </S.FeedHeader>
+                  <S.FeedList>
+                    {Array.from({ length: SKELETON_FEED_CARDS }).map((_, index) => (
+                      <S.FeedCard key={index}>
+                        <Skeleton width="70%" height="14px" />
+                        <Skeleton width="90%" height="13px" />
+                      </S.FeedCard>
+                    ))}
+                  </S.FeedList>
+                </S.FeedPanel>
+              </S.SideColumn>
+            </S.MainGrid>
+          </S.Content>
         </S.Main>
       </S.Screen>
     );
@@ -100,8 +165,8 @@ export const AdminDashboardScreen = () => {
             <S.StatusSubtitle>{t.adminDashboard.states.emptySubtitle}</S.StatusSubtitle>
           </S.StatusScreen>
         ) : (
-          <S.Content>
-            <S.KpiGrid>
+          <S.Content initial="hidden" animate="visible" variants={staggerContainer}>
+            <S.KpiGrid variants={staggerItem}>
               <S.KpiCard>
                 <S.KpiIconBackdrop>
                   <S.RatingIcon />
@@ -158,7 +223,7 @@ export const AdminDashboardScreen = () => {
 
             <S.MainGrid>
               <S.AnalyticsColumn>
-                <S.Panel>
+                <S.Panel variants={staggerItem}>
                   <S.PanelHeader>
                     <div>
                       <S.PanelTitle>{t.adminDashboard.chart.title}</S.PanelTitle>
@@ -189,7 +254,7 @@ export const AdminDashboardScreen = () => {
                   )}
                 </S.Panel>
 
-                <S.Panel>
+                <S.Panel variants={staggerItem}>
                   <S.PanelHeader>
                     <S.PanelTitle>{t.adminDashboard.rankings.title}</S.PanelTitle>
                   </S.PanelHeader>
@@ -241,7 +306,7 @@ export const AdminDashboardScreen = () => {
               </S.AnalyticsColumn>
 
               <S.SideColumn>
-                <S.Panel>
+                <S.Panel variants={staggerItem}>
                   <S.PanelTitle style={{ marginBottom: 24 }}>{t.adminDashboard.distribution.title}</S.PanelTitle>
                   <S.DonutWrapper>
                     <S.DonutSvg viewBox="0 0 160 160">
@@ -272,7 +337,7 @@ export const AdminDashboardScreen = () => {
                   </S.DistributionList>
                 </S.Panel>
 
-                <S.FeedPanel>
+                <S.FeedPanel variants={staggerItem}>
                   <S.FeedHeader>
                     <S.PanelTitle>{t.adminDashboard.feed.title}</S.PanelTitle>
                   </S.FeedHeader>

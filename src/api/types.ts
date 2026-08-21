@@ -3,8 +3,16 @@ export interface RestaurantDto {
   name: string;
 }
 
+export interface RestaurantWritePayload {
+  name: string;
+}
+
 export interface BeerMasterDto {
   id: string;
+  name: string;
+}
+
+export interface BeerMasterWritePayload {
   name: string;
 }
 
@@ -16,6 +24,8 @@ export interface CreateRatingPayload {
   customer_email: string;
   rating: number;
   comment?: string | null;
+  /** Independent opt-in for emailing the participant this activation's results — see RegistrationScreen. */
+  results_email_consent?: boolean;
 }
 
 export interface RatingExistsParams {
@@ -32,6 +42,7 @@ export interface RatingDto {
   customer_email: string;
   rating: number;
   comment: string | null;
+  results_email_consent: boolean;
   created_at: string;
 }
 
@@ -148,4 +159,9 @@ export interface RegisterPayload {
   password: string;
   // A restaurant_id, or the "heineken" sentinel — see RegisterScreen.hooks.ts.
   affiliation: string;
+}
+
+export interface ResetPasswordPayload {
+  token: string;
+  new_password: string;
 }

@@ -1,14 +1,15 @@
 export { fetchBeerMastersRanking, fetchDashboard, fetchRatings, fetchRestaurantsRanking } from './admin';
-export { fetchCurrentUser, login, logout, register } from './auth';
-export { fetchBeerMasters } from './beerMasters';
+export { fetchCurrentUser, login, logout, register, requestPasswordReset, resetPassword } from './auth';
+export { createBeerMaster, deleteBeerMaster, fetchBeerMasters, updateBeerMaster } from './beerMasters';
 export { ApiError } from './client';
 export { checkRatingExists, createRating } from './ratings';
-export { fetchRestaurants } from './restaurants';
+export { createRestaurant, deleteRestaurant, fetchRestaurants, updateRestaurant } from './restaurants';
 export type {
   AdminRole,
   AdminUserDto,
   BeerMasterDto,
   BeerMasterRankingDto,
+  BeerMasterWritePayload,
   CreateRatingPayload,
   DashboardDto,
   DashboardTotalsDto,
@@ -20,8 +21,10 @@ export type {
   RatingsOverTimePointDto,
   RecentRatingDto,
   RegisterPayload,
+  ResetPasswordPayload,
   RestaurantDto,
   RestaurantRankingBeerMasterDto,
   RestaurantRankingDto,
+  RestaurantWritePayload,
   TopBeerMasterDto,
 } from './types';

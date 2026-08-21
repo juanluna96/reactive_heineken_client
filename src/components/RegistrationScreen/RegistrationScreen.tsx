@@ -23,6 +23,7 @@ export const RegistrationScreen = () => {
     email,
     restaurant,
     accepted,
+    resultsConsent,
     restaurantOptions,
     isFormValid,
     isChecking,
@@ -35,6 +36,7 @@ export const RegistrationScreen = () => {
     setEmail,
     setRestaurant,
     setAccepted,
+    setResultsConsent,
     handleBack,
     handleContinue,
     handleDismissAlreadyRated,
@@ -105,6 +107,7 @@ export const RegistrationScreen = () => {
               suffix={t.registration.consent.suffix}
               error={consentError}
             />
+            <Checkbox checked={resultsConsent} onChange={setResultsConsent} prefix={t.registration.resultsConsent.prefix} />
           </S.FormCard>
         </S.Hero>
 

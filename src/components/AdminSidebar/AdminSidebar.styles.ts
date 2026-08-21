@@ -1,24 +1,79 @@
-import { FaGauge, FaGear, FaMedal, FaRightFromBracket, FaStar, FaUtensils } from 'react-icons/fa6';
+import { motion } from 'framer-motion';
+import { FaBars, FaGauge, FaGear, FaMedal, FaRightFromBracket, FaStar, FaUtensils, FaXmark } from 'react-icons/fa6';
 import styled, { css } from 'styled-components';
 import { ADMIN_DESKTOP_BREAKPOINT, ADMIN_SIDEBAR_WIDTH } from './AdminSidebar.constants';
 
-export const Sidebar = styled.aside`
-  display: none;
+// Below ADMIN_DESKTOP_BREAKPOINT this is an off-canvas drawer — always
+// mounted (so it can transition), just translated off-screen when closed.
+// At/above the breakpoint it becomes the permanent static sidebar, ignoring
+// $isOpen entirely.
+export const Sidebar = styled.aside<{ $isOpen?: boolean }>`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: ${ADMIN_SIDEBAR_WIDTH};
+  max-width: 85vw;
+  padding: 24px 16px;
+  background: #131313;
+  border-right: 1px solid ${({ theme }) => theme.colors.surfaceBorder};
+  z-index: 30;
+  transform: translateX(${({ $isOpen }) => ($isOpen ? '0' : '-100%')});
+  transition: transform 0.3s ease;
+  overflow-y: auto;
 
   @media (min-width: ${ADMIN_DESKTOP_BREAKPOINT}) {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: fixed;
-    inset: 0 auto 0 0;
-    width: ${ADMIN_SIDEBAR_WIDTH};
-    padding: 24px 16px;
+    max-width: none;
     background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(24px);
-    border-right: 1px solid ${({ theme }) => theme.colors.surfaceBorder};
     z-index: 10;
+    transform: none;
   }
 `;
+
+export const Backdrop = styled(motion.div)`
+  position: fixed;
+  inset: 0;
+  z-index: 25;
+  background: rgba(0, 0, 0, 0.6);
+
+  @media (min-width: ${ADMIN_DESKTOP_BREAKPOINT}) {
+    display: none;
+  }
+`;
+
+export const MenuButton = styled(motion.button)`
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  /* Above Backdrop (z-index 25) so it stays clickable as a close control
+     while the drawer is open, not just as the open trigger. */
+  z-index: 26;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border: none;
+  border-radius: ${({ theme }) => theme.radii.pill};
+  background: ${({ theme }) => theme.colors.brandGreen};
+  color: ${({ theme }) => theme.colors.ctaText};
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media (min-width: ${ADMIN_DESKTOP_BREAKPOINT}) {
+    display: none;
+  }
+`;
+
+export const MenuIcon = styled(FaBars)``;
+export const CloseMenuIcon = styled(FaXmark)``;
 
 export const SidebarBrand = styled.div`
   padding: 0 12px 32px;
@@ -73,12 +128,6 @@ const navItemStyles = css<{ $active?: boolean }>`
         `}
 `;
 
-// Static, non-clickable placeholder for sections that don't have a screen yet.
-export const NavItem = styled.div<{ $active?: boolean }>`
-  ${navItemStyles}
-`;
-
-// Real navigation — used once a section has a screen to route to.
 export const NavButton = styled.button<{ $active?: boolean }>`
   border: none;
   background: none;

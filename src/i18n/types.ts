@@ -32,6 +32,9 @@ export interface RegistrationDictionary {
     linkText: string;
     suffix: string;
   };
+  resultsConsent: {
+    prefix: string;
+  };
   cta: string;
   step: string;
   errors: {
@@ -40,6 +43,20 @@ export interface RegistrationDictionary {
     restaurantRequired: string;
     consentRequired: string;
     alreadyRated: string;
+  };
+}
+
+export interface AgeVerificationDictionary {
+  title: string;
+  subtitle: string;
+  birthDate: {
+    label: string;
+    placeholder: string;
+  };
+  cta: string;
+  errors: {
+    required: string;
+    underage: string;
   };
 }
 
@@ -185,8 +202,33 @@ export interface AuthDictionary {
     backToLogin: string;
     errors: {
       emailInvalid: string;
+      generic: string;
     };
     confirmation: {
+      title: string;
+      message: string;
+      cta: string;
+    };
+  };
+  resetPassword: {
+    title: string;
+    subtitle: string;
+    password: { label: string; placeholder: string };
+    confirmPassword: { label: string; placeholder: string };
+    cta: string;
+    backToLogin: string;
+    errors: {
+      passwordTooShort: string;
+      passwordMismatch: string;
+      invalidToken: string;
+      generic: string;
+    };
+    confirmation: {
+      title: string;
+      message: string;
+      cta: string;
+    };
+    invalidLink: {
       title: string;
       message: string;
       cta: string;
@@ -303,8 +345,80 @@ export interface AdminRatingsDictionary {
   };
 }
 
+export interface AdminSettingsFormDictionary {
+  addTitle: string;
+  editTitle: string;
+  nameLabel: string;
+  namePlaceholder: string;
+  cancel: string;
+  save: string;
+  saving: string;
+}
+
+export interface AdminSettingsDeleteConfirmDictionary {
+  title: string;
+  message: string;
+  cancel: string;
+  confirm: string;
+  deleting: string;
+}
+
+export interface AdminSettingsErrorsDictionary {
+  nameRequired: string;
+  duplicate: string;
+  generic: string;
+}
+
+export interface AdminSettingsDictionary {
+  pageTitle: string;
+  pageSubtitle: string;
+  tabs: {
+    restaurants: string;
+    beerMasters: string;
+  };
+  restaurants: {
+    addButton: string;
+    emptyTitle: string;
+    emptySubtitle: string;
+    editAction: string;
+    deleteAction: string;
+    form: AdminSettingsFormDictionary;
+    deleteConfirm: AdminSettingsDeleteConfirmDictionary;
+    errors: AdminSettingsErrorsDictionary;
+  };
+  beerMasters: {
+    restaurantPicker: {
+      label: string;
+      placeholder: string;
+    };
+    addButton: string;
+    selectRestaurantTitle: string;
+    selectRestaurantSubtitle: string;
+    emptyTitle: string;
+    emptySubtitle: string;
+    editAction: string;
+    deleteAction: string;
+    form: AdminSettingsFormDictionary;
+    deleteConfirm: AdminSettingsDeleteConfirmDictionary;
+    errors: AdminSettingsErrorsDictionary;
+  };
+  states: {
+    loading: string;
+    error: string;
+  };
+}
+
+export interface NotFoundDictionary {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  cta: string;
+  adminCta: string;
+}
+
 export interface TranslationDictionary {
   welcome: WelcomeDictionary;
+  ageVerification: AgeVerificationDictionary;
   registration: RegistrationDictionary;
   watchExperience: WatchExperienceDictionary;
   rateBeerMaster: RateBeerMasterDictionary;
@@ -313,7 +427,9 @@ export interface TranslationDictionary {
   adminRestaurants: AdminRestaurantsDictionary;
   adminBeerMasters: AdminBeerMastersDictionary;
   adminRatings: AdminRatingsDictionary;
+  adminSettings: AdminSettingsDictionary;
   auth: AuthDictionary;
+  notFound: NotFoundDictionary;
 }
 
 export interface LanguageState {

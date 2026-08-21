@@ -2,17 +2,21 @@ import type { AdminRole } from './api';
 
 export const ROUTES = {
   welcome: '/',
+  ageVerification: '/registration/age-verification',
   registration: '/registration',
   watchExperience: '/registration/watch',
   rateBeerMaster: '/registration/rate',
   thankYou: '/registration/thanks',
+  admin: '/admin',
   adminHome: '/admin/home',
   adminRestaurants: '/admin/restaurants',
   adminBeerMasters: '/admin/beer-masters',
   adminRatings: '/admin/ratings',
+  adminSettings: '/admin/settings',
   authLogin: '/admin/login',
   authRegister: '/admin/register',
   authRememberPassword: '/admin/remember-password',
+  authResetPassword: '/admin/reset-password',
 } as const;
 
 // Where an admin lands right after login/register, and where ProtectedRoute

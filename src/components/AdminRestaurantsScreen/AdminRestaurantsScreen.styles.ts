@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
-import { FaArrowsRotate, FaChevronDown, FaChevronLeft, FaChevronRight, FaFilter, FaMagnifyingGlass, FaStar } from 'react-icons/fa6';
+import { FaArrowsRotate, FaChevronDown, FaChevronLeft, FaChevronRight, FaMagnifyingGlass, FaStar } from 'react-icons/fa6';
 import styled, { css, keyframes } from 'styled-components';
-import { ADMIN_DESKTOP_BREAKPOINT, ADMIN_SIDEBAR_WIDTH } from '../AdminSidebar';
+import { ADMIN_DESKTOP_BREAKPOINT, ADMIN_MOBILE_BREAKPOINT, ADMIN_SIDEBAR_WIDTH } from '../AdminSidebar';
 
 const DESKTOP_BREAKPOINT = ADMIN_DESKTOP_BREAKPOINT;
+const MOBILE_BREAKPOINT = ADMIN_MOBILE_BREAKPOINT;
 
 export const Screen = styled.div`
   position: relative;
@@ -77,44 +78,18 @@ export const TopBarActions = styled.div`
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
-`;
 
-export const SortControl = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
-  border-radius: ${({ theme }) => theme.radii.md};
-  background: ${({ theme }) => theme.colors.cardBackground};
-  color: ${({ theme }) => theme.colors.brandGreenLight};
-`;
-
-export const SortIcon = styled(FaFilter)`
-  width: 12px;
-  height: 12px;
-  flex-shrink: 0;
-`;
-
-export const SortSelect = styled.select`
-  border: none;
-  background: transparent;
-  color: ${({ theme }) => theme.colors.textPrimary};
-  font-family: inherit;
-  font-size: 12px;
-  cursor: pointer;
-
-  &:focus-visible {
-    outline: none;
-  }
-
-  option {
-    color: #000;
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
   }
 `;
 
 export const RefreshButton = styled(motion.button)<{ $spinning?: boolean }>`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   border: none;
   border-radius: ${({ theme }) => theme.radii.md};
@@ -127,6 +102,10 @@ export const RefreshButton = styled(motion.button)<{ $spinning?: boolean }>`
   text-transform: uppercase;
   letter-spacing: 0.6px;
   cursor: pointer;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    width: 100%;
+  }
 
   svg {
     width: 13px;
@@ -143,7 +122,7 @@ export const RefreshButton = styled(motion.button)<{ $spinning?: boolean }>`
 
 export const RefreshIcon = styled(FaArrowsRotate)``;
 
-export const Content = styled.div`
+export const Content = styled(motion.div)`
   max-width: 1100px;
   margin: 0 auto;
   padding: 20px;
@@ -156,10 +135,14 @@ export const Content = styled.div`
   }
 `;
 
-export const SearchFieldWrapper = styled.div`
+export const SearchFieldWrapper = styled(motion.div)`
   position: relative;
   width: 100%;
   max-width: 360px;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    max-width: none;
+  }
 `;
 
 export const SearchIcon = styled(FaMagnifyingGlass)`
@@ -276,7 +259,7 @@ const ownRestaurantPulse = keyframes`
   }
 `;
 
-export const RankCard = styled.div<{ $isOwn?: boolean }>`
+export const RankCard = styled(motion.div)<{ $isOwn?: boolean }>`
   ${glassPanel}
   padding: 20px;
   display: flex;
@@ -362,6 +345,17 @@ export const RankMeta = styled.div`
 
   @media (min-width: 640px) {
     flex-shrink: 0;
+  }
+
+  // Below 640px RankCard stacks to a column (see above) — let this row's
+  // items (rating block, beer masters toggle) grow to share the full width
+  // evenly instead of sitting left-aligned at their own content size.
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    width: 100%;
+
+    & > * {
+      flex: 1;
+    }
   }
 `;
 

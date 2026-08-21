@@ -1,3 +1,4 @@
+import { AnimatePresence } from 'framer-motion';
 import { FaEnvelope } from 'react-icons/fa6';
 import { staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background.png';
@@ -6,13 +7,24 @@ import heinekenLogo from '../../assets/logos/heineken-logo.png';
 import { PrimaryButton } from '../PrimaryButton';
 import { ScreenOverlay } from '../ScreenOverlay';
 import { TextField } from '../TextField';
+import { Toast } from '../Toast';
 import { TABLET_BREAKPOINT } from '../../styles/breakpoints';
 import * as S from './RememberPasswordScreen.styles';
 import { useRememberPasswordScreen } from './RememberPasswordScreen.hooks';
 
 export const RememberPasswordScreen = () => {
-  const { t, email, emailError, isSubmitted, setEmail, handleGoToLogin, handleSubmit } =
-    useRememberPasswordScreen();
+  const {
+    t,
+    email,
+    emailError,
+    isSubmitting,
+    isSubmitted,
+    submitError,
+    setEmail,
+    handleGoToLogin,
+    handleSubmit,
+    handleDismissError,
+  } = useRememberPasswordScreen();
 
   return (
     <S.Screen>
@@ -23,6 +35,8 @@ export const RememberPasswordScreen = () => {
         </picture>
         <ScreenOverlay />
       </S.Background>
+
+      <AnimatePresence>{submitError && <Toast message={submitError} onDismiss={handleDismissError} />}</AnimatePresence>
 
       <S.Content initial="hidden" animate="visible" variants={staggerContainer}>
         <S.Header variants={staggerItem}>
@@ -64,7 +78,11 @@ export const RememberPasswordScreen = () => {
         )}
 
         <S.Footer variants={staggerItem}>
-          <PrimaryButton onClick={isSubmitted ? handleGoToLogin : handleSubmit} showIcon={!isSubmitted}>
+          <PrimaryButton
+            onClick={isSubmitted ? handleGoToLogin : handleSubmit}
+            disabled={!isSubmitted && isSubmitting}
+            showIcon={!isSubmitted}
+          >
             {isSubmitted ? t.auth.rememberPassword.confirmation.cta : t.auth.rememberPassword.cta}
           </PrimaryButton>
           {!isSubmitted && (
