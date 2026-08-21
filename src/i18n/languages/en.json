@@ -9,6 +9,19 @@
     "cta": "START EXPERIENCE",
     "footer": "© 2026 HEINEKEN EXPERIENCE. ALL RIGHTS\nRESERVED."
   },
+  "ageVerification": {
+    "title": "Age Verification",
+    "subtitle": "This activation is related to alcoholic beverages.\nConfirm your date of birth to continue.",
+    "birthDate": {
+      "label": "DATE OF BIRTH",
+      "placeholder": "MM/DD/YYYY"
+    },
+    "cta": "CONTINUE",
+    "errors": {
+      "required": "Enter your date of birth",
+      "underage": "You must be of legal age to take part in this survey"
+    }
+  },
   "registration": {
     "title": "Welcome",
     "subtitle": "Let's get to know you before starting\nyour experience.",
@@ -29,6 +42,9 @@
       "prefix": "I accept the ",
       "linkText": "Privacy Policy",
       "suffix": " and the processing of my personal data."
+    },
+    "resultsConsent": {
+      "prefix": "I'd like to receive information and results related to this activation by email."
     },
     "cta": "CONTINUE",
     "step": "STEP 1 OF 3",
@@ -243,6 +259,80 @@
       "emptySubtitle": "Once customers start rating, they'll show up here."
     }
   },
+  "adminSettings": {
+    "pageTitle": "Settings",
+    "pageSubtitle": "Manage registered restaurants and beer masters",
+    "tabs": {
+      "restaurants": "Restaurants",
+      "beerMasters": "Beer Masters"
+    },
+    "restaurants": {
+      "addButton": "Add restaurant",
+      "emptyTitle": "No restaurants yet",
+      "emptySubtitle": "Add the first one to start collecting ratings.",
+      "editAction": "Edit",
+      "deleteAction": "Delete",
+      "form": {
+        "addTitle": "New restaurant",
+        "editTitle": "Edit restaurant",
+        "nameLabel": "Name",
+        "namePlaceholder": "Restaurant name",
+        "cancel": "Cancel",
+        "save": "Save",
+        "saving": "Saving..."
+      },
+      "deleteConfirm": {
+        "title": "Delete restaurant",
+        "message": "Are you sure you want to delete \"{name}\"? Its beer masters and associated ratings will also be deleted. This action can't be undone.",
+        "cancel": "Cancel",
+        "confirm": "Delete",
+        "deleting": "Deleting..."
+      },
+      "errors": {
+        "nameRequired": "Enter a name",
+        "duplicate": "A restaurant with this name already exists",
+        "generic": "Something went wrong. Please try again."
+      }
+    },
+    "beerMasters": {
+      "restaurantPicker": {
+        "label": "Restaurant",
+        "placeholder": "Select a restaurant"
+      },
+      "addButton": "Add beer master",
+      "selectRestaurantTitle": "Select a restaurant",
+      "selectRestaurantSubtitle": "Choose a restaurant above to view and manage its beer masters.",
+      "emptyTitle": "No beer masters yet",
+      "emptySubtitle": "Add the first one for this restaurant.",
+      "editAction": "Edit",
+      "deleteAction": "Delete",
+      "form": {
+        "addTitle": "New beer master",
+        "editTitle": "Edit beer master",
+        "nameLabel": "Name",
+        "namePlaceholder": "Beer master name",
+        "cancel": "Cancel",
+        "save": "Save",
+        "saving": "Saving..."
+      },
+      "deleteConfirm": {
+        "title": "Delete beer master",
+        "message": "Are you sure you want to delete \"{name}\"? Their existing ratings will be kept under their name. This action can't be undone.",
+        "cancel": "Cancel",
+        "confirm": "Delete",
+        "deleting": "Deleting..."
+      },
+      "errors": {
+        "nameRequired": "Enter a name",
+        "duplicate": "A beer master with this name already exists at this restaurant",
+        "generic": "Something went wrong. Please try again."
+      }
+    },
+    "states": {
+      "loading": "Loading...",
+      "error": "Couldn't load the information. Please try again."
+    }
+  },
   "auth": {
     "checkingSession": "Checking session...",
     "login": {
@@ -315,13 +405,51 @@
       "cta": "SEND INSTRUCTIONS",
       "backToLogin": "Back to sign in",
       "errors": {
-        "emailInvalid": "Enter a valid email address"
+        "emailInvalid": "Enter a valid email address",
+        "generic": "Couldn't send the request, please try again"
       },
       "confirmation": {
         "title": "Check your email",
         "message": "If an account exists for that email, you'll receive password reset instructions in a few minutes.",
         "cta": "BACK TO SIGN IN"
       }
+    },
+    "resetPassword": {
+      "title": "New Password",
+      "subtitle": "Choose a new password for your account.",
+      "password": {
+        "label": "NEW PASSWORD",
+        "placeholder": "At least 8 characters"
+      },
+      "confirmPassword": {
+        "label": "CONFIRM PASSWORD",
+        "placeholder": "Repeat your password"
+      },
+      "cta": "RESET PASSWORD",
+      "backToLogin": "Back to sign in",
+      "errors": {
+        "passwordTooShort": "Password must be at least 8 characters",
+        "passwordMismatch": "Passwords don't match",
+        "invalidToken": "This link is no longer valid. Request a new one.",
+        "generic": "Couldn't reset your password, please try again"
+      },
+      "confirmation": {
+        "title": "Password updated",
+        "message": "Your password was updated successfully. You can now sign in with it.",
+        "cta": "SIGN IN"
+      },
+      "invalidLink": {
+        "title": "Invalid link",
+        "message": "This reset link is invalid or has expired. Request a new one from the sign-in screen.",
+        "cta": "BACK TO SIGN IN"
+      }
     }
+  },
+  "notFound": {
+    "eyebrow": "ERROR 404",
+    "title": "Oops! Looks like we couldn't find what you're looking for.",
+    "subtitle": "The page you're looking for doesn't exist or was moved. Let's get you back somewhere safe.",
+    "cta": "BACK TO HOME",
+    "adminCta": "BACK TO ADMIN PANEL"
   }
 }

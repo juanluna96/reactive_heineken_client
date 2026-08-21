@@ -21,6 +21,8 @@ export const useRegistrationScreen = () => {
   const setRestaurantId = useRegistrationStore((state) => state.setRestaurantId);
   const accepted = useRegistrationStore((state) => state.accepted);
   const setAccepted = useRegistrationStore((state) => state.setAccepted);
+  const resultsConsent = useRegistrationStore((state) => state.resultsConsent);
+  const setResultsConsent = useRegistrationStore((state) => state.setResultsConsent);
   const [submitted, setSubmitted] = useState(false);
   const [isChecking, setIsChecking] = useState(false);
   const [alreadyRatedError, setAlreadyRatedError] = useState<string | undefined>(undefined);
@@ -56,7 +58,7 @@ export const useRegistrationScreen = () => {
   }, [email, restaurantId]);
 
   const handleBack = () => {
-    navigate(ROUTES.welcome);
+    navigate(ROUTES.ageVerification);
   };
 
   const handleDismissAlreadyRated = () => {
@@ -93,6 +95,7 @@ export const useRegistrationScreen = () => {
     email,
     restaurant: restaurantId,
     accepted,
+    resultsConsent,
     restaurantOptions,
     isFormValid,
     isChecking,
@@ -105,6 +108,7 @@ export const useRegistrationScreen = () => {
     setEmail,
     setRestaurant: setRestaurantId,
     setAccepted,
+    setResultsConsent,
     handleBack,
     handleContinue,
     handleDismissAlreadyRated,

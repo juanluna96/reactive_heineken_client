@@ -123,6 +123,15 @@ export const VideoCard = styled(motion.div)`
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 `;
 
+export const PosterImage = styled.img`
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
 export const Player = styled(ReactPlayer)`
   position: absolute !important;
   inset: 0 !important;
@@ -166,6 +175,7 @@ export const PlayLabel = styled.span`
 
 export const DurationBadge = styled.div`
   position: absolute;
+  z-index: 2;
   right: 16px;
   bottom: 16px;
   padding: 5px 13px;

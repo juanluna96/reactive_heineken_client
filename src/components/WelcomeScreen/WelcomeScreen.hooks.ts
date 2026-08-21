@@ -17,7 +17,10 @@ export const useWelcomeScreen = () => {
   }, [fetchRestaurants]);
 
   const handleStart = () => {
-    navigate(ROUTES.registration);
+    // Legal gate (counsel guidance, 2026-08-21): majority-age must be
+    // verified before the registration form itself starts collecting any
+    // personal data — see AgeVerificationScreen.
+    navigate(ROUTES.ageVerification);
   };
 
   return { t, handleStart };

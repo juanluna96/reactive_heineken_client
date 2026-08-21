@@ -9,6 +9,19 @@
     "cta": "COMENZAR EXPERIENCIA",
     "footer": "© 2026 HEINEKEN EXPERIENCE. TODOS LOS\nDERECHOS RESERVADOS."
   },
+  "ageVerification": {
+    "title": "Verificación de Edad",
+    "subtitle": "Esta activación está relacionada con bebidas alcohólicas.\nConfirma tu fecha de nacimiento para continuar.",
+    "birthDate": {
+      "label": "FECHA DE NACIMIENTO",
+      "placeholder": "DD/MM/AAAA"
+    },
+    "cta": "CONTINUAR",
+    "errors": {
+      "required": "Ingresa tu fecha de nacimiento",
+      "underage": "Debes ser mayor de edad para participar en esta encuesta"
+    }
+  },
   "registration": {
     "title": "Bienvenido",
     "subtitle": "Conozcámonos antes de comenzar\ntu experiencia.",
@@ -29,6 +42,9 @@
       "prefix": "Acepto la ",
       "linkText": "Política de Privacidad",
       "suffix": " y el tratamiento de mis datos personales."
+    },
+    "resultsConsent": {
+      "prefix": "Deseo recibir por correo electrónico información y resultados relacionados con esta activación."
     },
     "cta": "CONTINUAR",
     "step": "PASO 1 DE 3",
@@ -243,6 +259,80 @@
       "emptySubtitle": "Cuando los clientes empiecen a calificar, aparecerán aquí."
     }
   },
+  "adminSettings": {
+    "pageTitle": "Ajustes",
+    "pageSubtitle": "Gestiona los restaurantes y maestros cerveceros registrados",
+    "tabs": {
+      "restaurants": "Restaurantes",
+      "beerMasters": "Maestros Cerveceros"
+    },
+    "restaurants": {
+      "addButton": "Agregar restaurante",
+      "emptyTitle": "Todavía no hay restaurantes",
+      "emptySubtitle": "Agrega el primero para empezar a recibir calificaciones.",
+      "editAction": "Editar",
+      "deleteAction": "Eliminar",
+      "form": {
+        "addTitle": "Nuevo restaurante",
+        "editTitle": "Editar restaurante",
+        "nameLabel": "Nombre",
+        "namePlaceholder": "Nombre del restaurante",
+        "cancel": "Cancelar",
+        "save": "Guardar",
+        "saving": "Guardando..."
+      },
+      "deleteConfirm": {
+        "title": "Eliminar restaurante",
+        "message": "¿Seguro que quieres eliminar \"{name}\"? También se eliminarán sus maestros cerveceros y calificaciones asociadas. Esta acción no se puede deshacer.",
+        "cancel": "Cancelar",
+        "confirm": "Eliminar",
+        "deleting": "Eliminando..."
+      },
+      "errors": {
+        "nameRequired": "Ingresa un nombre",
+        "duplicate": "Ya existe un restaurante con este nombre",
+        "generic": "Algo salió mal. Intenta de nuevo."
+      }
+    },
+    "beerMasters": {
+      "restaurantPicker": {
+        "label": "Restaurante",
+        "placeholder": "Selecciona un restaurante"
+      },
+      "addButton": "Agregar maestro cervecero",
+      "selectRestaurantTitle": "Selecciona un restaurante",
+      "selectRestaurantSubtitle": "Elige un restaurante arriba para ver y gestionar sus maestros cerveceros.",
+      "emptyTitle": "Todavía no hay maestros cerveceros",
+      "emptySubtitle": "Agrega el primero para este restaurante.",
+      "editAction": "Editar",
+      "deleteAction": "Eliminar",
+      "form": {
+        "addTitle": "Nuevo maestro cervecero",
+        "editTitle": "Editar maestro cervecero",
+        "nameLabel": "Nombre",
+        "namePlaceholder": "Nombre del maestro cervecero",
+        "cancel": "Cancelar",
+        "save": "Guardar",
+        "saving": "Guardando..."
+      },
+      "deleteConfirm": {
+        "title": "Eliminar maestro cervecero",
+        "message": "¿Seguro que quieres eliminar a \"{name}\"? Sus calificaciones existentes se conservarán bajo su nombre. Esta acción no se puede deshacer.",
+        "cancel": "Cancelar",
+        "confirm": "Eliminar",
+        "deleting": "Eliminando..."
+      },
+      "errors": {
+        "nameRequired": "Ingresa un nombre",
+        "duplicate": "Ya existe un maestro cervecero con este nombre en este restaurante",
+        "generic": "Algo salió mal. Intenta de nuevo."
+      }
+    },
+    "states": {
+      "loading": "Cargando...",
+      "error": "No se pudo cargar la información. Intenta de nuevo."
+    }
+  },
   "auth": {
     "checkingSession": "Verificando sesión...",
     "login": {
@@ -315,13 +405,51 @@
       "cta": "ENVIAR INSTRUCCIONES",
       "backToLogin": "Volver a inicio de sesión",
       "errors": {
-        "emailInvalid": "Ingresa un correo electrónico válido"
+        "emailInvalid": "Ingresa un correo electrónico válido",
+        "generic": "No se pudo enviar la solicitud, intenta de nuevo"
       },
       "confirmation": {
         "title": "Revisa tu correo",
         "message": "Si existe una cuenta con ese correo, recibirás instrucciones para restablecer tu contraseña en unos minutos.",
         "cta": "VOLVER A INICIO DE SESIÓN"
       }
+    },
+    "resetPassword": {
+      "title": "Nueva Contraseña",
+      "subtitle": "Elige una nueva contraseña para tu cuenta.",
+      "password": {
+        "label": "NUEVA CONTRASEÑA",
+        "placeholder": "Al menos 8 caracteres"
+      },
+      "confirmPassword": {
+        "label": "CONFIRMAR CONTRASEÑA",
+        "placeholder": "Repite tu contraseña"
+      },
+      "cta": "RESTABLECER CONTRASEÑA",
+      "backToLogin": "Volver a inicio de sesión",
+      "errors": {
+        "passwordTooShort": "La contraseña debe tener al menos 8 caracteres",
+        "passwordMismatch": "Las contraseñas no coinciden",
+        "invalidToken": "Este enlace ya no es válido. Solicita uno nuevo.",
+        "generic": "No se pudo restablecer la contraseña, intenta de nuevo"
+      },
+      "confirmation": {
+        "title": "Contraseña actualizada",
+        "message": "Tu contraseña se actualizó correctamente. Ya puedes iniciar sesión con ella.",
+        "cta": "INICIAR SESIÓN"
+      },
+      "invalidLink": {
+        "title": "Enlace inválido",
+        "message": "Este enlace de restablecimiento no es válido o ya venció. Solicita uno nuevo desde la pantalla de inicio de sesión.",
+        "cta": "VOLVER A INICIO DE SESIÓN"
+      }
     }
+  },
+  "notFound": {
+    "eyebrow": "ERROR 404",
+    "title": "¡Ups! Parece que no encontramos lo que buscas.",
+    "subtitle": "La página que buscas no existe o fue movida. Volvamos a un lugar seguro.",
+    "cta": "VOLVER AL INICIO",
+    "adminCta": "VOLVER AL PANEL ADMIN"
   }
 }

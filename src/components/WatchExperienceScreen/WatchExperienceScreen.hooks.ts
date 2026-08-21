@@ -7,6 +7,12 @@ import { DURATION_SECONDS, useWatchExperienceStore } from '../../watchExperience
 const RADIUS = 56;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
+// iOS Safari exposes native video fullscreen only through this proprietary
+// method, not the standard Fullscreen API.
+type FullscreenVideoElement = HTMLVideoElement & {
+  webkitEnterFullscreen?: () => void;
+};
+
 const formatTime = (totalSeconds: number) => {
   const minutes = Math.floor(totalSeconds / 60)
     .toString()
@@ -48,12 +54,23 @@ export const useWatchExperienceScreen = () => {
     // gesture. Target the <video> element itself, not a wrapping div, so
     // document.fullscreenElement is the video and its native fullscreen
     // toggle keeps working.
-    const element = playerRef.current;
-    if (element?.requestFullscreen && !document.fullscreenElement) {
-      try {
-        element.requestFullscreen()?.catch(() => {});
-      } catch {
-        // Fullscreen not permitted in this context; keep playing inline.
+    const element = playerRef.current as FullscreenVideoElement | null;
+    if (element && !document.fullscreenElement) {
+      if (element.requestFullscreen) {
+        try {
+          element.requestFullscreen()?.catch(() => {});
+        } catch {
+          // Fullscreen not permitted in this context; keep playing inline.
+        }
+      } else if (element.webkitEnterFullscreen) {
+        // iOS Safari doesn't implement the standard Fullscreen API for
+        // <video> elements — this proprietary method is the only way to
+        // get native fullscreen playback there, even with `playsInline` set.
+        try {
+          element.webkitEnterFullscreen();
+        } catch {
+          // Fullscreen not permitted in this context; keep playing inline.
+        }
       }
     }
     element?.play?.().catch(() => {});

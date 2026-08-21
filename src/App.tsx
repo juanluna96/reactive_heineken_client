@@ -1,16 +1,20 @@
 import { AnimatePresence } from 'framer-motion';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { AdminBeerMastersScreen } from './components/AdminBeerMastersScreen';
 import { AdminDashboardScreen } from './components/AdminDashboardScreen';
 import { AdminRatingsScreen } from './components/AdminRatingsScreen';
 import { AdminRestaurantsScreen } from './components/AdminRestaurantsScreen';
+import { AdminSettingsScreen } from './components/AdminSettingsScreen';
+import { AgeVerificationScreen } from './components/AgeVerificationScreen';
 import { LoginScreen } from './components/LoginScreen';
+import { NotFoundScreen } from './components/NotFoundScreen';
 import { PageTransition } from './components/PageTransition';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { RateBeerMasterScreen } from './components/RateBeerMasterScreen';
 import { RegisterScreen } from './components/RegisterScreen';
 import { RegistrationScreen } from './components/RegistrationScreen';
 import { RememberPasswordScreen } from './components/RememberPasswordScreen';
+import { ResetPasswordScreen } from './components/ResetPasswordScreen';
 import { ThankYouScreen } from './components/ThankYouScreen';
 import { WatchExperienceScreen } from './components/WatchExperienceScreen';
 import { WelcomeScreen } from './components/WelcomeScreen';
@@ -27,6 +31,14 @@ function App() {
           element={
             <PageTransition>
               <WelcomeScreen />
+            </PageTransition>
+          }
+        />
+        <Route
+          path={ROUTES.ageVerification}
+          element={
+            <PageTransition>
+              <AgeVerificationScreen />
             </PageTransition>
           }
         />
@@ -62,6 +74,7 @@ function App() {
             </PageTransition>
           }
         />
+        <Route path={ROUTES.admin} element={<Navigate to={ROUTES.authLogin} replace />} />
         <Route
           path={ROUTES.adminHome}
           element={
@@ -103,6 +116,16 @@ function App() {
           }
         />
         <Route
+          path={ROUTES.adminSettings}
+          element={
+            <PageTransition>
+              <ProtectedRoute allowedRoles={['owner']}>
+                <AdminSettingsScreen />
+              </ProtectedRoute>
+            </PageTransition>
+          }
+        />
+        <Route
           path={ROUTES.authLogin}
           element={
             <PageTransition>
@@ -123,6 +146,22 @@ function App() {
           element={
             <PageTransition>
               <RememberPasswordScreen />
+            </PageTransition>
+          }
+        />
+        <Route
+          path={ROUTES.authResetPassword}
+          element={
+            <PageTransition>
+              <ResetPasswordScreen />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <PageTransition>
+              <NotFoundScreen />
             </PageTransition>
           }
         />

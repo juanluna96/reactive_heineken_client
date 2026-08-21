@@ -20,7 +20,7 @@ export const Checkbox = (props: CheckboxProps) => {
         />
         <S.Label>
           {prefix}
-          <S.LinkText>{linkText}</S.LinkText>
+          {linkText && <S.LinkText>{linkText}</S.LinkText>}
           {suffix}
         </S.Label>
       </S.Wrapper>

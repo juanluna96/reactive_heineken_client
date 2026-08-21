@@ -1,10 +1,16 @@
+import { FaFilter } from 'react-icons/fa6';
+import { staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background.png';
 import backgroundImageLaptop from '../../assets/images/background-laptop.png';
 import { AdminSidebar } from '../AdminSidebar';
+import { FilterDropdown } from '../FilterDropdown';
 import { ScreenOverlay } from '../ScreenOverlay';
+import { Skeleton } from '../Skeleton';
 import { TABLET_BREAKPOINT } from '../../styles/breakpoints';
 import * as S from './AdminRestaurantsScreen.styles';
 import { useAdminRestaurantsScreen } from './AdminRestaurantsScreen.hooks';
+
+const SKELETON_ROWS = 6;
 
 export const AdminRestaurantsScreen = () => {
   const {
@@ -45,9 +51,27 @@ export const AdminRestaurantsScreen = () => {
         {background}
         {sidebar}
         <S.Main>
-          <S.StatusScreen>
-            <S.StatusSubtitle>{t.adminRestaurants.states.loading}</S.StatusSubtitle>
-          </S.StatusScreen>
+          <S.TopBar>
+            <S.TitleGroup>
+              <S.PageTitle>{t.adminRestaurants.pageTitle}</S.PageTitle>
+              <S.PageSubtitle>{t.adminRestaurants.pageSubtitle}</S.PageSubtitle>
+            </S.TitleGroup>
+          </S.TopBar>
+          <S.Content initial="hidden" animate="visible" variants={staggerContainer}>
+            <S.SearchFieldWrapper variants={staggerItem}>
+              <Skeleton width="100%" height="44px" />
+            </S.SearchFieldWrapper>
+            {Array.from({ length: SKELETON_ROWS }).map((_, index) => (
+              <S.RankCard key={index} variants={staggerItem}>
+                <S.RankIdentity>
+                  <Skeleton width="28px" height="24px" />
+                  <Skeleton width="48px" height="48px" />
+                  <Skeleton width="160px" height="16px" />
+                </S.RankIdentity>
+                <Skeleton width="72px" height="40px" />
+              </S.RankCard>
+            ))}
+          </S.Content>
         </S.Main>
       </S.Screen>
     );
@@ -83,18 +107,17 @@ export const AdminRestaurantsScreen = () => {
             <S.PageSubtitle>{t.adminRestaurants.pageSubtitle}</S.PageSubtitle>
           </S.TitleGroup>
           <S.TopBarActions>
-            <S.SortControl>
-              <S.SortIcon />
-              <S.SortSelect
-                aria-label={t.adminRestaurants.sort.label}
-                value={sortBy}
-                onChange={(event) => setSortBy(event.target.value as typeof sortBy)}
-              >
-                <option value="rating">{t.adminRestaurants.sort.rating}</option>
-                <option value="popularity">{t.adminRestaurants.sort.popularity}</option>
-                <option value="newest">{t.adminRestaurants.sort.newest}</option>
-              </S.SortSelect>
-            </S.SortControl>
+            <FilterDropdown
+              icon={FaFilter}
+              label={t.adminRestaurants.sort.label}
+              value={sortBy}
+              onChange={(value) => setSortBy(value as typeof sortBy)}
+              options={[
+                { value: 'rating', label: t.adminRestaurants.sort.rating },
+                { value: 'popularity', label: t.adminRestaurants.sort.popularity },
+                { value: 'newest', label: t.adminRestaurants.sort.newest },
+              ]}
+            />
             <S.RefreshButton type="button" onClick={handleRefresh} $spinning={isRefreshing} whileTap={{ scale: 0.96 }}>
               <S.RefreshIcon />
               {t.adminRestaurants.refreshLabel}
@@ -108,8 +131,8 @@ export const AdminRestaurantsScreen = () => {
             <S.StatusSubtitle>{t.adminRestaurants.states.emptySubtitle}</S.StatusSubtitle>
           </S.StatusScreen>
         ) : (
-          <S.Content>
-            <S.SearchFieldWrapper>
+          <S.Content initial="hidden" animate="visible" variants={staggerContainer}>
+            <S.SearchFieldWrapper variants={staggerItem}>
               <S.SearchIcon />
               <S.SearchInput
                 type="text"
@@ -124,7 +147,12 @@ export const AdminRestaurantsScreen = () => {
             ) : (
               <>
                 {items.map((restaurant) => (
-                  <S.RankCard key={restaurant.id} ref={restaurant.isOwn ? ownCardRef : undefined} $isOwn={restaurant.isOwn}>
+                  <S.RankCard
+                    key={restaurant.id}
+                    ref={restaurant.isOwn ? ownCardRef : undefined}
+                    $isOwn={restaurant.isOwn}
+                    variants={staggerItem}
+                  >
                     <S.RankIdentity>
                       <S.RankNumber>{String(restaurant.rank).padStart(2, '0')}</S.RankNumber>
                       <S.RestaurantAvatar>{restaurant.initials}</S.RestaurantAvatar>
