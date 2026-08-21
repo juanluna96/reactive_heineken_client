@@ -185,8 +185,33 @@ export interface AuthDictionary {
     backToLogin: string;
     errors: {
       emailInvalid: string;
+      generic: string;
     };
     confirmation: {
+      title: string;
+      message: string;
+      cta: string;
+    };
+  };
+  resetPassword: {
+    title: string;
+    subtitle: string;
+    password: { label: string; placeholder: string };
+    confirmPassword: { label: string; placeholder: string };
+    cta: string;
+    backToLogin: string;
+    errors: {
+      passwordTooShort: string;
+      passwordMismatch: string;
+      invalidToken: string;
+      generic: string;
+    };
+    confirmation: {
+      title: string;
+      message: string;
+      cta: string;
+    };
+    invalidLink: {
       title: string;
       message: string;
       cta: string;

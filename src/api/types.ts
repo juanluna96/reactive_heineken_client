@@ -157,3 +157,8 @@ export interface RegisterPayload {
   // A restaurant_id, or the "heineken" sentinel — see RegisterScreen.hooks.ts.
   affiliation: string;
 }
+
+export interface ResetPasswordPayload {
+  token: string;
+  new_password: string;
+}

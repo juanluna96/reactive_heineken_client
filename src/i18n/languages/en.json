@@ -389,11 +389,42 @@
       "cta": "SEND INSTRUCTIONS",
       "backToLogin": "Back to sign in",
       "errors": {
-        "emailInvalid": "Enter a valid email address"
+        "emailInvalid": "Enter a valid email address",
+        "generic": "Couldn't send the request, please try again"
       },
       "confirmation": {
         "title": "Check your email",
         "message": "If an account exists for that email, you'll receive password reset instructions in a few minutes.",
+        "cta": "BACK TO SIGN IN"
+      }
+    },
+    "resetPassword": {
+      "title": "New Password",
+      "subtitle": "Choose a new password for your account.",
+      "password": {
+        "label": "NEW PASSWORD",
+        "placeholder": "At least 8 characters"
+      },
+      "confirmPassword": {
+        "label": "CONFIRM PASSWORD",
+        "placeholder": "Repeat your password"
+      },
+      "cta": "RESET PASSWORD",
+      "backToLogin": "Back to sign in",
+      "errors": {
+        "passwordTooShort": "Password must be at least 8 characters",
+        "passwordMismatch": "Passwords don't match",
+        "invalidToken": "This link is no longer valid. Request a new one.",
+        "generic": "Couldn't reset your password, please try again"
+      },
+      "confirmation": {
+        "title": "Password updated",
+        "message": "Your password was updated successfully. You can now sign in with it.",
+        "cta": "SIGN IN"
+      },
+      "invalidLink": {
+        "title": "Invalid link",
+        "message": "This reset link is invalid or has expired. Request a new one from the sign-in screen.",
         "cta": "BACK TO SIGN IN"
       }
     }

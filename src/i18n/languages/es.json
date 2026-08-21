@@ -389,11 +389,42 @@
       "cta": "ENVIAR INSTRUCCIONES",
       "backToLogin": "Volver a inicio de sesión",
       "errors": {
-        "emailInvalid": "Ingresa un correo electrónico válido"
+        "emailInvalid": "Ingresa un correo electrónico válido",
+        "generic": "No se pudo enviar la solicitud, intenta de nuevo"
       },
       "confirmation": {
         "title": "Revisa tu correo",
         "message": "Si existe una cuenta con ese correo, recibirás instrucciones para restablecer tu contraseña en unos minutos.",
+        "cta": "VOLVER A INICIO DE SESIÓN"
+      }
+    },
+    "resetPassword": {
+      "title": "Nueva Contraseña",
+      "subtitle": "Elige una nueva contraseña para tu cuenta.",
+      "password": {
+        "label": "NUEVA CONTRASEÑA",
+        "placeholder": "Al menos 8 caracteres"
+      },
+      "confirmPassword": {
+        "label": "CONFIRMAR CONTRASEÑA",
+        "placeholder": "Repite tu contraseña"
+      },
+      "cta": "RESTABLECER CONTRASEÑA",
+      "backToLogin": "Volver a inicio de sesión",
+      "errors": {
+        "passwordTooShort": "La contraseña debe tener al menos 8 caracteres",
+        "passwordMismatch": "Las contraseñas no coinciden",
+        "invalidToken": "Este enlace ya no es válido. Solicita uno nuevo.",
+        "generic": "No se pudo restablecer la contraseña, intenta de nuevo"
+      },
+      "confirmation": {
+        "title": "Contraseña actualizada",
+        "message": "Tu contraseña se actualizó correctamente. Ya puedes iniciar sesión con ella.",
+        "cta": "INICIAR SESIÓN"
+      },
+      "invalidLink": {
+        "title": "Enlace inválido",
+        "message": "Este enlace de restablecimiento no es válido o ya venció. Solicita uno nuevo desde la pantalla de inicio de sesión.",
         "cta": "VOLVER A INICIO DE SESIÓN"
       }
     }

@@ -14,6 +14,7 @@ export const ROUTES = {
   authLogin: '/admin/login',
   authRegister: '/admin/register',
   authRememberPassword: '/admin/remember-password',
+  authResetPassword: '/admin/reset-password',
 } as const;
 
 // Where an admin lands right after login/register, and where ProtectedRoute

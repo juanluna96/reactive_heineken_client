@@ -12,6 +12,7 @@ import { RateBeerMasterScreen } from './components/RateBeerMasterScreen';
 import { RegisterScreen } from './components/RegisterScreen';
 import { RegistrationScreen } from './components/RegistrationScreen';
 import { RememberPasswordScreen } from './components/RememberPasswordScreen';
+import { ResetPasswordScreen } from './components/ResetPasswordScreen';
 import { ThankYouScreen } from './components/ThankYouScreen';
 import { WatchExperienceScreen } from './components/WatchExperienceScreen';
 import { WelcomeScreen } from './components/WelcomeScreen';
@@ -134,6 +135,14 @@ function App() {
           element={
             <PageTransition>
               <RememberPasswordScreen />
+            </PageTransition>
+          }
+        />
+        <Route
+          path={ROUTES.authResetPassword}
+          element={
+            <PageTransition>
+              <ResetPasswordScreen />
             </PageTransition>
           }
         />
