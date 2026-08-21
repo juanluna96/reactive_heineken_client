@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
-import { FaChevronLeft, FaChevronRight, FaRegCalendar } from 'react-icons/fa6';
+import { FaChevronDown, FaChevronLeft, FaChevronRight, FaRegCalendar } from 'react-icons/fa6';
 import styled, { css } from 'styled-components';
+import { TABLET_BREAKPOINT } from '../../styles/breakpoints';
 
 export const Field = styled.div`
   position: relative;
@@ -81,17 +82,48 @@ export const ErrorText = styled(motion.span)`
   color: ${({ theme }) => theme.colors.danger};
 `;
 
+// Anchored dropdown under the field at tablet/desktop widths, same as
+// AutocompleteField's Dropdown. Below TABLET_BREAKPOINT it instead becomes a
+// full-viewport dimmed layer that flex-centers the Popover card — a
+// centered modal reads much better than a cramped anchored dropdown on a
+// phone screen. Positioning lives here (on the wrapper), not on Popover
+// itself, so framer-motion is free to own Popover's `transform` for the
+// entrance animation without a CSS `transform: translate(...)` fighting it.
+export const Backdrop = styled.div`
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+
+  @media (max-width: ${TABLET_BREAKPOINT}) {
+    position: fixed;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    pointer-events: auto;
+  }
+`;
+
 export const Popover = styled(motion.div)`
   position: absolute;
   top: calc(100% + 8px);
   left: 0;
   right: 0;
-  z-index: 10;
   padding: 16px;
   border-radius: ${({ theme }) => theme.radii.md};
   border: 1px solid ${({ theme }) => theme.colors.cardBorder};
   background: ${({ theme }) => theme.colors.cardBackground};
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+  pointer-events: auto;
+
+  @media (max-width: ${TABLET_BREAKPOINT}) {
+    position: static;
+    width: 100%;
+    max-width: 360px;
+  }
 `;
 
 export const CalendarHeader = styled.div`
@@ -136,37 +168,112 @@ export const MonthYearSelects = styled.div`
   min-width: 0;
 `;
 
+export const MonthSelectWrapper = styled.div`
+  position: relative;
+  flex: 1.4;
+  min-width: 116px;
+`;
+
+export const YearSelectWrapper = styled.div`
+  position: relative;
+  flex-shrink: 0;
+  min-width: 92px;
+`;
+
 const selectStyles = css`
-  border: none;
+  appearance: none;
+  width: 100%;
+  border: 1px solid ${({ theme }) => theme.colors.cardBorder};
   border-radius: ${({ theme }) => theme.radii.md};
-  padding: 6px 8px;
+  padding: 8px 30px 8px 14px;
   background: ${({ theme }) => theme.colors.inputBackground};
   color: ${({ theme }) => theme.colors.textPrimary};
   font-family: ${({ theme }) => theme.fonts.heading};
   font-size: 13px;
   font-weight: 700;
+  text-align: left;
   text-transform: capitalize;
   cursor: pointer;
+  transition: border-color 0.2s ease;
+
+  &:hover {
+    border-color: ${({ theme }) => theme.colors.brandGreenLight};
+  }
 
   &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.colors.brandGreenLight};
-    outline-offset: 1px;
-  }
-
-  option {
-    color: #000;
-    text-transform: capitalize;
+    outline: none;
+    border-color: ${({ theme }) => theme.colors.brandGreenLight};
   }
 `;
 
-export const MonthSelect = styled.select`
+// Trigger buttons for the month/year custom dropdowns below — replacing
+// native <select>/<option>, whose option popup is rendered by the OS and
+// can't be styled via CSS at all.
+export const MonthSelect = styled.button`
   ${selectStyles}
-  flex: 1;
-  min-width: 0;
 `;
 
-export const YearSelect = styled.select`
+export const YearSelect = styled.button`
   ${selectStyles}
+`;
+
+export const SelectChevron = styled(FaChevronDown)`
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  width: 10px;
+  height: 10px;
+  color: ${({ theme }) => theme.colors.mutedText};
+  transform: translateY(-50%);
+  pointer-events: none;
+`;
+
+export const OptionsDropdown = styled(motion.ul)`
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 10;
+  max-height: 220px;
+  overflow-y: auto;
+  padding: 8px;
+  border-radius: ${({ theme }) => theme.radii.md};
+  border: 1px solid ${({ theme }) => theme.colors.cardBorder};
+  background: ${({ theme }) => theme.colors.cardBackground};
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+  list-style: none;
+
+  scrollbar-width: thin;
+  scrollbar-color: ${({ theme }) => theme.colors.brandGreenLight} transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.colors.brandGreenLight};
+    border-radius: ${({ theme }) => theme.radii.pill};
+  }
+`;
+
+export const OptionItem = styled.li<{ $highlighted: boolean }>`
+  padding: 10px 12px;
+  border-radius: ${({ theme }) => theme.radii.md};
+  font-family: ${({ theme }) => theme.fonts.heading};
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: ${({ theme }) => theme.colors.textPrimary};
+  background: ${({ theme, $highlighted }) => ($highlighted ? theme.colors.surface : 'transparent')};
+  cursor: pointer;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.surface};
+  }
 `;
 
 export const WeekdaysRow = styled.div`

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import type { MouseEvent as ReactMouseEvent } from 'react';
 import { useTranslation } from '../../i18n';
 import type { DatePickerDay, DatePickerProps } from './DatePicker.types';
 
@@ -32,6 +33,13 @@ export const useDatePicker = ({ value, onChange, min, max }: DatePickerProps) =>
   const [viewDate, setViewDate] = useState(() => selectedDate ?? (maxDate ?? today));
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Month/year are custom dropdowns (not native <select>) so their option
+  // lists can actually be styled — native <option> popups are rendered by
+  // the OS and ignore CSS almost entirely.
+  const [isMonthDropdownOpen, setIsMonthDropdownOpen] = useState(false);
+  const [isYearDropdownOpen, setIsYearDropdownOpen] = useState(false);
+  const yearListRef = useRef<HTMLUListElement>(null);
+
   useEffect(() => {
     if (!isOpen) return;
     const handlePointerDown = (event: MouseEvent) => {
@@ -49,6 +57,16 @@ export const useDatePicker = ({ value, onChange, min, max }: DatePickerProps) =>
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [isOpen]);
+
+  // Tapping the dimmed backdrop closes the calendar in its mobile
+  // (TABLET_BREAKPOINT-and-below) modal presentation — see DatePicker.styles.ts.
+  // The document mousedown listener above already covers the desktop
+  // anchored-dropdown case, but there "outside" the field is also outside
+  // Backdrop; here Backdrop fills the viewport, so a dedicated check for
+  // "clicked Backdrop itself, not something inside it" is needed instead.
+  const handleBackdropMouseDown = (event: ReactMouseEvent) => {
+    if (event.target === event.currentTarget) setIsOpen(false);
+  };
 
   const handleToggleOpen = () => {
     if (!isOpen) setViewDate(selectedDate ?? viewDate);
@@ -123,8 +141,34 @@ export const useDatePicker = ({ value, onChange, min, max }: DatePickerProps) =>
 
   const handlePrevMonth = () => setViewDate(new Date(viewYear, viewMonth - 1, 1));
   const handleNextMonth = () => setViewDate(new Date(viewYear, viewMonth + 1, 1));
-  const handleMonthChange = (month: number) => setViewDate(new Date(viewYear, month, 1));
-  const handleYearChange = (year: number) => setViewDate(new Date(year, viewMonth, 1));
+
+  const handleToggleMonthDropdown = () => {
+    setIsYearDropdownOpen(false);
+    setIsMonthDropdownOpen((open) => !open);
+  };
+  const handleToggleYearDropdown = () => {
+    setIsMonthDropdownOpen(false);
+    setIsYearDropdownOpen((open) => !open);
+  };
+  const handleMonthDropdownBlur = () => setIsMonthDropdownOpen(false);
+  const handleYearDropdownBlur = () => setIsYearDropdownOpen(false);
+
+  const handleSelectMonth = (month: number) => {
+    setViewDate(new Date(viewYear, month, 1));
+    setIsMonthDropdownOpen(false);
+  };
+  const handleSelectYear = (year: number) => {
+    setViewDate(new Date(year, viewMonth, 1));
+    setIsYearDropdownOpen(false);
+  };
+
+  // Jumps the year list to the currently viewed year on open — with up to
+  // ~120 entries, starting scrolled to the top every time would defeat the
+  // point of a quick year jump for anyone born decades ago.
+  useEffect(() => {
+    if (!isYearDropdownOpen) return;
+    yearListRef.current?.querySelector('[data-selected="true"]')?.scrollIntoView({ block: 'center' });
+  }, [isYearDropdownOpen]);
 
   return {
     isOpen,
@@ -137,11 +181,19 @@ export const useDatePicker = ({ value, onChange, min, max }: DatePickerProps) =>
     yearOptions,
     viewMonth,
     viewYear,
+    isMonthDropdownOpen,
+    isYearDropdownOpen,
+    yearListRef,
     handleToggleOpen,
+    handleBackdropMouseDown,
     handleSelectDay,
     handlePrevMonth,
     handleNextMonth,
-    handleMonthChange,
-    handleYearChange,
+    handleToggleMonthDropdown,
+    handleToggleYearDropdown,
+    handleMonthDropdownBlur,
+    handleYearDropdownBlur,
+    handleSelectMonth,
+    handleSelectYear,
   };
 };
