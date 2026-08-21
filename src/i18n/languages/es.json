@@ -243,6 +243,80 @@
       "emptySubtitle": "Cuando los clientes empiecen a calificar, aparecerán aquí."
     }
   },
+  "adminSettings": {
+    "pageTitle": "Ajustes",
+    "pageSubtitle": "Gestiona los restaurantes y maestros cerveceros registrados",
+    "tabs": {
+      "restaurants": "Restaurantes",
+      "beerMasters": "Maestros Cerveceros"
+    },
+    "restaurants": {
+      "addButton": "Agregar restaurante",
+      "emptyTitle": "Todavía no hay restaurantes",
+      "emptySubtitle": "Agrega el primero para empezar a recibir calificaciones.",
+      "editAction": "Editar",
+      "deleteAction": "Eliminar",
+      "form": {
+        "addTitle": "Nuevo restaurante",
+        "editTitle": "Editar restaurante",
+        "nameLabel": "Nombre",
+        "namePlaceholder": "Nombre del restaurante",
+        "cancel": "Cancelar",
+        "save": "Guardar",
+        "saving": "Guardando..."
+      },
+      "deleteConfirm": {
+        "title": "Eliminar restaurante",
+        "message": "¿Seguro que quieres eliminar \"{name}\"? También se eliminarán sus maestros cerveceros y calificaciones asociadas. Esta acción no se puede deshacer.",
+        "cancel": "Cancelar",
+        "confirm": "Eliminar",
+        "deleting": "Eliminando..."
+      },
+      "errors": {
+        "nameRequired": "Ingresa un nombre",
+        "duplicate": "Ya existe un restaurante con este nombre",
+        "generic": "Algo salió mal. Intenta de nuevo."
+      }
+    },
+    "beerMasters": {
+      "restaurantPicker": {
+        "label": "Restaurante",
+        "placeholder": "Selecciona un restaurante"
+      },
+      "addButton": "Agregar maestro cervecero",
+      "selectRestaurantTitle": "Selecciona un restaurante",
+      "selectRestaurantSubtitle": "Elige un restaurante arriba para ver y gestionar sus maestros cerveceros.",
+      "emptyTitle": "Todavía no hay maestros cerveceros",
+      "emptySubtitle": "Agrega el primero para este restaurante.",
+      "editAction": "Editar",
+      "deleteAction": "Eliminar",
+      "form": {
+        "addTitle": "Nuevo maestro cervecero",
+        "editTitle": "Editar maestro cervecero",
+        "nameLabel": "Nombre",
+        "namePlaceholder": "Nombre del maestro cervecero",
+        "cancel": "Cancelar",
+        "save": "Guardar",
+        "saving": "Guardando..."
+      },
+      "deleteConfirm": {
+        "title": "Eliminar maestro cervecero",
+        "message": "¿Seguro que quieres eliminar a \"{name}\"? Sus calificaciones existentes se conservarán bajo su nombre. Esta acción no se puede deshacer.",
+        "cancel": "Cancelar",
+        "confirm": "Eliminar",
+        "deleting": "Eliminando..."
+      },
+      "errors": {
+        "nameRequired": "Ingresa un nombre",
+        "duplicate": "Ya existe un maestro cervecero con este nombre en este restaurante",
+        "generic": "Algo salió mal. Intenta de nuevo."
+      }
+    },
+    "states": {
+      "loading": "Cargando...",
+      "error": "No se pudo cargar la información. Intenta de nuevo."
+    }
+  },
   "auth": {
     "checkingSession": "Verificando sesión...",
     "login": {

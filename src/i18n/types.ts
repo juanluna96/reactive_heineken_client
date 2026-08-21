@@ -303,6 +303,69 @@ export interface AdminRatingsDictionary {
   };
 }
 
+export interface AdminSettingsFormDictionary {
+  addTitle: string;
+  editTitle: string;
+  nameLabel: string;
+  namePlaceholder: string;
+  cancel: string;
+  save: string;
+  saving: string;
+}
+
+export interface AdminSettingsDeleteConfirmDictionary {
+  title: string;
+  message: string;
+  cancel: string;
+  confirm: string;
+  deleting: string;
+}
+
+export interface AdminSettingsErrorsDictionary {
+  nameRequired: string;
+  duplicate: string;
+  generic: string;
+}
+
+export interface AdminSettingsDictionary {
+  pageTitle: string;
+  pageSubtitle: string;
+  tabs: {
+    restaurants: string;
+    beerMasters: string;
+  };
+  restaurants: {
+    addButton: string;
+    emptyTitle: string;
+    emptySubtitle: string;
+    editAction: string;
+    deleteAction: string;
+    form: AdminSettingsFormDictionary;
+    deleteConfirm: AdminSettingsDeleteConfirmDictionary;
+    errors: AdminSettingsErrorsDictionary;
+  };
+  beerMasters: {
+    restaurantPicker: {
+      label: string;
+      placeholder: string;
+    };
+    addButton: string;
+    selectRestaurantTitle: string;
+    selectRestaurantSubtitle: string;
+    emptyTitle: string;
+    emptySubtitle: string;
+    editAction: string;
+    deleteAction: string;
+    form: AdminSettingsFormDictionary;
+    deleteConfirm: AdminSettingsDeleteConfirmDictionary;
+    errors: AdminSettingsErrorsDictionary;
+  };
+  states: {
+    loading: string;
+    error: string;
+  };
+}
+
 export interface TranslationDictionary {
   welcome: WelcomeDictionary;
   registration: RegistrationDictionary;
@@ -313,6 +376,7 @@ export interface TranslationDictionary {
   adminRestaurants: AdminRestaurantsDictionary;
   adminBeerMasters: AdminBeerMastersDictionary;
   adminRatings: AdminRatingsDictionary;
+  adminSettings: AdminSettingsDictionary;
   auth: AuthDictionary;
 }
 

@@ -243,6 +243,80 @@
       "emptySubtitle": "Once customers start rating, they'll show up here."
     }
   },
+  "adminSettings": {
+    "pageTitle": "Settings",
+    "pageSubtitle": "Manage registered restaurants and beer masters",
+    "tabs": {
+      "restaurants": "Restaurants",
+      "beerMasters": "Beer Masters"
+    },
+    "restaurants": {
+      "addButton": "Add restaurant",
+      "emptyTitle": "No restaurants yet",
+      "emptySubtitle": "Add the first one to start collecting ratings.",
+      "editAction": "Edit",
+      "deleteAction": "Delete",
+      "form": {
+        "addTitle": "New restaurant",
+        "editTitle": "Edit restaurant",
+        "nameLabel": "Name",
+        "namePlaceholder": "Restaurant name",
+        "cancel": "Cancel",
+        "save": "Save",
+        "saving": "Saving..."
+      },
+      "deleteConfirm": {
+        "title": "Delete restaurant",
+        "message": "Are you sure you want to delete \"{name}\"? Its beer masters and associated ratings will also be deleted. This action can't be undone.",
+        "cancel": "Cancel",
+        "confirm": "Delete",
+        "deleting": "Deleting..."
+      },
+      "errors": {
+        "nameRequired": "Enter a name",
+        "duplicate": "A restaurant with this name already exists",
+        "generic": "Something went wrong. Please try again."
+      }
+    },
+    "beerMasters": {
+      "restaurantPicker": {
+        "label": "Restaurant",
+        "placeholder": "Select a restaurant"
+      },
+      "addButton": "Add beer master",
+      "selectRestaurantTitle": "Select a restaurant",
+      "selectRestaurantSubtitle": "Choose a restaurant above to view and manage its beer masters.",
+      "emptyTitle": "No beer masters yet",
+      "emptySubtitle": "Add the first one for this restaurant.",
+      "editAction": "Edit",
+      "deleteAction": "Delete",
+      "form": {
+        "addTitle": "New beer master",
+        "editTitle": "Edit beer master",
+        "nameLabel": "Name",
+        "namePlaceholder": "Beer master name",
+        "cancel": "Cancel",
+        "save": "Save",
+        "saving": "Saving..."
+      },
+      "deleteConfirm": {
+        "title": "Delete beer master",
+        "message": "Are you sure you want to delete \"{name}\"? Their existing ratings will be kept under their name. This action can't be undone.",
+        "cancel": "Cancel",
+        "confirm": "Delete",
+        "deleting": "Deleting..."
+      },
+      "errors": {
+        "nameRequired": "Enter a name",
+        "duplicate": "A beer master with this name already exists at this restaurant",
+        "generic": "Something went wrong. Please try again."
+      }
+    },
+    "states": {
+      "loading": "Loading...",
+      "error": "Couldn't load the information. Please try again."
+    }
+  },
   "auth": {
     "checkingSession": "Checking session...",
     "login": {

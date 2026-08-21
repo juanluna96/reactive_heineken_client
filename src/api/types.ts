@@ -3,8 +3,16 @@ export interface RestaurantDto {
   name: string;
 }
 
+export interface RestaurantWritePayload {
+  name: string;
+}
+
 export interface BeerMasterDto {
   id: string;
+  name: string;
+}
+
+export interface BeerMasterWritePayload {
   name: string;
 }
 

@@ -30,10 +30,14 @@ export const useAdminSidebar = () => {
     // entirely rather than shown disabled. Restaurants/Beer Masters have no
     // equivalent flag since every role can already see those.
     canViewDashboard: currentUser?.role === 'owner' || currentUser?.role === 'heineken',
+    // Settings (restaurant/beer master CRUD) is owner-only, per App.tsx's
+    // ProtectedRoute allowedRoles for ROUTES.adminSettings.
+    canViewSettings: currentUser?.role === 'owner',
     handleLogout,
     handleGoToDashboard: () => navigate(ROUTES.adminHome),
     handleGoToRestaurants: () => navigate(ROUTES.adminRestaurants),
     handleGoToBeerMasters: () => navigate(ROUTES.adminBeerMasters),
     handleGoToRatings: () => navigate(ROUTES.adminRatings),
+    handleGoToSettings: () => navigate(ROUTES.adminSettings),
   };
 };

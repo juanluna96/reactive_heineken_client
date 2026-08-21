@@ -4,6 +4,7 @@ import { AdminBeerMastersScreen } from './components/AdminBeerMastersScreen';
 import { AdminDashboardScreen } from './components/AdminDashboardScreen';
 import { AdminRatingsScreen } from './components/AdminRatingsScreen';
 import { AdminRestaurantsScreen } from './components/AdminRestaurantsScreen';
+import { AdminSettingsScreen } from './components/AdminSettingsScreen';
 import { LoginScreen } from './components/LoginScreen';
 import { PageTransition } from './components/PageTransition';
 import { ProtectedRoute } from './components/ProtectedRoute';
@@ -98,6 +99,16 @@ function App() {
             <PageTransition>
               <ProtectedRoute allowedRoles={['owner', 'heineken', 'restaurant']}>
                 <AdminRatingsScreen />
+              </ProtectedRoute>
+            </PageTransition>
+          }
+        />
+        <Route
+          path={ROUTES.adminSettings}
+          element={
+            <PageTransition>
+              <ProtectedRoute allowedRoles={['owner']}>
+                <AdminSettingsScreen />
               </ProtectedRoute>
             </PageTransition>
           }

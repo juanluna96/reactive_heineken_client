@@ -10,6 +10,7 @@ export const ROUTES = {
   adminRestaurants: '/admin/restaurants',
   adminBeerMasters: '/admin/beer-masters',
   adminRatings: '/admin/ratings',
+  adminSettings: '/admin/settings',
   authLogin: '/admin/login',
   authRegister: '/admin/register',
   authRememberPassword: '/admin/remember-password',

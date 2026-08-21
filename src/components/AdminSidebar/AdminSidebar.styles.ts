@@ -73,12 +73,6 @@ const navItemStyles = css<{ $active?: boolean }>`
         `}
 `;
 
-// Static, non-clickable placeholder for sections that don't have a screen yet.
-export const NavItem = styled.div<{ $active?: boolean }>`
-  ${navItemStyles}
-`;
-
-// Real navigation — used once a section has a screen to route to.
 export const NavButton = styled.button<{ $active?: boolean }>`
   border: none;
   background: none;
