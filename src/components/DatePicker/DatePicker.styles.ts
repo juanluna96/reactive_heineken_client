@@ -180,24 +180,38 @@ export const YearSelectWrapper = styled.div`
   min-width: 92px;
 `;
 
+// Matches the admin filter-select pill used across AdminRatingsScreen,
+// AdminRestaurantsScreen and AdminBeerMastersScreen (FilterControl/SortControl
+// + FilterSelect/SortSelect: cardBackground fill, radii.md, 10px 14px padding,
+// 8px gap, brandGreenLight icon, textPrimary/12px select text). Unlike those
+// (real <select> elements sitting directly on the page background), this is a
+// custom trigger button living inside a Popover that is itself cardBackground
+// — an identical fill would make the pill's edge disappear — so a subtle
+// cardBorder outline is kept for definition, brightening to brandGreenLight
+// on hover/focus the same way the admin screens' other controls do.
 const selectStyles = css`
-  appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
   width: 100%;
+  appearance: none;
   border: 1px solid ${({ theme }) => theme.colors.cardBorder};
   border-radius: ${({ theme }) => theme.radii.md};
-  padding: 8px 30px 8px 14px;
-  background: ${({ theme }) => theme.colors.inputBackground};
+  padding: 10px 14px;
+  background: ${({ theme }) => theme.colors.cardBackground};
   color: ${({ theme }) => theme.colors.textPrimary};
   font-family: ${({ theme }) => theme.fonts.heading};
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   text-align: left;
   text-transform: capitalize;
   cursor: pointer;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, color 0.2s ease;
 
   &:hover {
     border-color: ${({ theme }) => theme.colors.brandGreenLight};
+    color: ${({ theme }) => theme.colors.brandGreenLight};
   }
 
   &:focus-visible {
@@ -218,13 +232,10 @@ export const YearSelect = styled.button`
 `;
 
 export const SelectChevron = styled(FaChevronDown)`
-  position: absolute;
-  top: 50%;
-  right: 12px;
-  width: 10px;
-  height: 10px;
-  color: ${({ theme }) => theme.colors.mutedText};
-  transform: translateY(-50%);
+  flex-shrink: 0;
+  width: 11px;
+  height: 11px;
+  color: ${({ theme }) => theme.colors.brandGreenLight};
   pointer-events: none;
 `;
 

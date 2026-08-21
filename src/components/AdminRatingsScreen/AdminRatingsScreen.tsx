@@ -1,8 +1,10 @@
+import { FaLocationDot, FaStar } from 'react-icons/fa6';
 import { staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background.png';
 import backgroundImageLaptop from '../../assets/images/background-laptop.png';
 import { TABLET_BREAKPOINT } from '../../styles/breakpoints';
 import { AdminSidebar } from '../AdminSidebar';
+import { FilterDropdown } from '../FilterDropdown';
 import { ScreenOverlay } from '../ScreenOverlay';
 import { Skeleton } from '../Skeleton';
 import * as S from './AdminRatingsScreen.styles';
@@ -178,36 +180,30 @@ export const AdminRatingsScreen = () => {
               </S.SearchFieldWrapper>
 
               {restaurantOptions.length > 1 && (
-                <S.FilterControl>
-                  <S.FilterSelect
-                    aria-label={t.adminRatings.restaurantFilter.label}
-                    value={restaurantFilter}
-                    onChange={(event) => setRestaurantFilter(event.target.value)}
-                  >
-                    <option value={ALL_RESTAURANTS}>{t.adminRatings.restaurantFilter.all}</option>
-                    {restaurantOptions.map((option) => (
-                      <option key={option.id} value={option.id}>
-                        {option.name}
-                      </option>
-                    ))}
-                  </S.FilterSelect>
-                  <S.FilterIcon />
-                </S.FilterControl>
+                <FilterDropdown
+                  icon={FaLocationDot}
+                  label={t.adminRatings.restaurantFilter.label}
+                  value={restaurantFilter}
+                  onChange={setRestaurantFilter}
+                  options={[
+                    { value: ALL_RESTAURANTS, label: t.adminRatings.restaurantFilter.all },
+                    ...restaurantOptions.map((option) => ({ value: option.id, label: option.name })),
+                  ]}
+                />
               )}
 
-              <S.FilterControl>
-                <S.FilterSelect
-                  aria-label={t.adminRatings.ratingFilter.label}
-                  value={ratingFilter}
-                  onChange={(event) => setRatingFilter(event.target.value as RatingFilterOption)}
-                >
-                  <option value={ALL_RATINGS}>{t.adminRatings.ratingFilter.all}</option>
-                  <option value="5">{t.adminRatings.ratingFilter.five}</option>
-                  <option value="4">{t.adminRatings.ratingFilter.four}</option>
-                  <option value="3-">{t.adminRatings.ratingFilter.threeOrLess}</option>
-                </S.FilterSelect>
-                <S.FilterIcon />
-              </S.FilterControl>
+              <FilterDropdown
+                icon={FaStar}
+                label={t.adminRatings.ratingFilter.label}
+                value={ratingFilter}
+                onChange={(value) => setRatingFilter(value as RatingFilterOption)}
+                options={[
+                  { value: ALL_RATINGS, label: t.adminRatings.ratingFilter.all },
+                  { value: '5', label: t.adminRatings.ratingFilter.five },
+                  { value: '4', label: t.adminRatings.ratingFilter.four },
+                  { value: '3-', label: t.adminRatings.ratingFilter.threeOrLess },
+                ]}
+              />
 
               <S.ClearFiltersButton type="button" onClick={handleClearFilters}>
                 {t.adminRatings.clearFilters}

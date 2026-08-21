@@ -1,7 +1,9 @@
+import { FaFilter } from 'react-icons/fa6';
 import { staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background.png';
 import backgroundImageLaptop from '../../assets/images/background-laptop.png';
 import { AdminSidebar } from '../AdminSidebar';
+import { FilterDropdown } from '../FilterDropdown';
 import { ScreenOverlay } from '../ScreenOverlay';
 import { Skeleton } from '../Skeleton';
 import { TABLET_BREAKPOINT } from '../../styles/breakpoints';
@@ -105,18 +107,17 @@ export const AdminRestaurantsScreen = () => {
             <S.PageSubtitle>{t.adminRestaurants.pageSubtitle}</S.PageSubtitle>
           </S.TitleGroup>
           <S.TopBarActions>
-            <S.SortControl>
-              <S.SortIcon />
-              <S.SortSelect
-                aria-label={t.adminRestaurants.sort.label}
-                value={sortBy}
-                onChange={(event) => setSortBy(event.target.value as typeof sortBy)}
-              >
-                <option value="rating">{t.adminRestaurants.sort.rating}</option>
-                <option value="popularity">{t.adminRestaurants.sort.popularity}</option>
-                <option value="newest">{t.adminRestaurants.sort.newest}</option>
-              </S.SortSelect>
-            </S.SortControl>
+            <FilterDropdown
+              icon={FaFilter}
+              label={t.adminRestaurants.sort.label}
+              value={sortBy}
+              onChange={(value) => setSortBy(value as typeof sortBy)}
+              options={[
+                { value: 'rating', label: t.adminRestaurants.sort.rating },
+                { value: 'popularity', label: t.adminRestaurants.sort.popularity },
+                { value: 'newest', label: t.adminRestaurants.sort.newest },
+              ]}
+            />
             <S.RefreshButton type="button" onClick={handleRefresh} $spinning={isRefreshing} whileTap={{ scale: 0.96 }}>
               <S.RefreshIcon />
               {t.adminRestaurants.refreshLabel}

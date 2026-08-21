@@ -1,13 +1,5 @@
 import { motion } from 'framer-motion';
-import {
-  FaArrowsRotate,
-  FaChevronLeft,
-  FaChevronRight,
-  FaFilter,
-  FaLocationDot,
-  FaMagnifyingGlass,
-  FaStar,
-} from 'react-icons/fa6';
+import { FaArrowsRotate, FaChevronLeft, FaChevronRight, FaMagnifyingGlass, FaStar } from 'react-icons/fa6';
 import styled, { css, keyframes } from 'styled-components';
 import { ADMIN_DESKTOP_BREAKPOINT, ADMIN_MOBILE_BREAKPOINT, ADMIN_SIDEBAR_WIDTH } from '../AdminSidebar';
 
@@ -92,71 +84,6 @@ export const TopBarActions = styled.div`
     flex-direction: column;
     align-items: stretch;
   }
-`;
-
-const filterControl = css`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
-  border-radius: ${({ theme }) => theme.radii.md};
-  background: ${({ theme }) => theme.colors.cardBackground};
-  color: ${({ theme }) => theme.colors.brandGreenLight};
-
-  @media (max-width: ${MOBILE_BREAKPOINT}) {
-    width: 100%;
-  }
-`;
-
-export const SortControl = styled.div`
-  ${filterControl}
-`;
-
-export const RestaurantFilterControl = styled.div`
-  ${filterControl}
-`;
-
-export const SortIcon = styled(FaFilter)`
-  width: 12px;
-  height: 12px;
-  flex-shrink: 0;
-`;
-
-export const RestaurantFilterIcon = styled(FaLocationDot)`
-  width: 12px;
-  height: 12px;
-  flex-shrink: 0;
-`;
-
-const filterSelect = css`
-  flex: 1;
-  border: none;
-  background: transparent;
-  color: ${({ theme }) => theme.colors.textPrimary};
-  font-family: inherit;
-  font-size: 12px;
-  cursor: pointer;
-  max-width: 160px;
-
-  &:focus-visible {
-    outline: none;
-  }
-
-  option {
-    color: #000;
-  }
-
-  @media (max-width: ${MOBILE_BREAKPOINT}) {
-    max-width: none;
-  }
-`;
-
-export const SortSelect = styled.select`
-  ${filterSelect}
-`;
-
-export const RestaurantFilterSelect = styled.select`
-  ${filterSelect}
 `;
 
 export const RefreshButton = styled(motion.button)<{ $spinning?: boolean }>`

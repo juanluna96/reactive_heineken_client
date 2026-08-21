@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FaArrowsRotate, FaChevronDown, FaChevronLeft, FaChevronRight, FaFilter, FaMagnifyingGlass, FaStar } from 'react-icons/fa6';
+import { FaArrowsRotate, FaChevronDown, FaChevronLeft, FaChevronRight, FaMagnifyingGlass, FaStar } from 'react-icons/fa6';
 import styled, { css, keyframes } from 'styled-components';
 import { ADMIN_DESKTOP_BREAKPOINT, ADMIN_MOBILE_BREAKPOINT, ADMIN_SIDEBAR_WIDTH } from '../AdminSidebar';
 
@@ -83,44 +83,6 @@ export const TopBarActions = styled.div`
     width: 100%;
     flex-direction: column;
     align-items: stretch;
-  }
-`;
-
-export const SortControl = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
-  border-radius: ${({ theme }) => theme.radii.md};
-  background: ${({ theme }) => theme.colors.cardBackground};
-  color: ${({ theme }) => theme.colors.brandGreenLight};
-
-  @media (max-width: ${MOBILE_BREAKPOINT}) {
-    width: 100%;
-  }
-`;
-
-export const SortIcon = styled(FaFilter)`
-  width: 12px;
-  height: 12px;
-  flex-shrink: 0;
-`;
-
-export const SortSelect = styled.select`
-  flex: 1;
-  border: none;
-  background: transparent;
-  color: ${({ theme }) => theme.colors.textPrimary};
-  font-family: inherit;
-  font-size: 12px;
-  cursor: pointer;
-
-  &:focus-visible {
-    outline: none;
-  }
-
-  option {
-    color: #000;
   }
 `;
 

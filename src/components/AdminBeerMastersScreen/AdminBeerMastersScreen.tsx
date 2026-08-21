@@ -1,7 +1,9 @@
+import { FaFilter, FaLocationDot } from 'react-icons/fa6';
 import { staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background.png';
 import backgroundImageLaptop from '../../assets/images/background-laptop.png';
 import { AdminSidebar } from '../AdminSidebar';
+import { FilterDropdown } from '../FilterDropdown';
 import { ScreenOverlay } from '../ScreenOverlay';
 import { Skeleton } from '../Skeleton';
 import { TABLET_BREAKPOINT } from '../../styles/breakpoints';
@@ -113,33 +115,27 @@ export const AdminBeerMastersScreen = () => {
             <S.PageSubtitle>{t.adminBeerMasters.pageSubtitle}</S.PageSubtitle>
           </S.TitleGroup>
           <S.TopBarActions>
-            <S.RestaurantFilterControl>
-              <S.RestaurantFilterIcon />
-              <S.RestaurantFilterSelect
-                aria-label={t.adminBeerMasters.restaurantFilter.label}
-                value={restaurantFilter}
-                onChange={(event) => setRestaurantFilter(event.target.value)}
-              >
-                <option value={ALL_RESTAURANTS}>{t.adminBeerMasters.restaurantFilter.all}</option>
-                {restaurantOptions.map((option) => (
-                  <option key={option.id} value={option.id}>
-                    {option.name}
-                  </option>
-                ))}
-              </S.RestaurantFilterSelect>
-            </S.RestaurantFilterControl>
-            <S.SortControl>
-              <S.SortIcon />
-              <S.SortSelect
-                aria-label={t.adminBeerMasters.sort.label}
-                value={sortBy}
-                onChange={(event) => setSortBy(event.target.value as typeof sortBy)}
-              >
-                <option value="rating">{t.adminBeerMasters.sort.rating}</option>
-                <option value="popularity">{t.adminBeerMasters.sort.popularity}</option>
-                <option value="newest">{t.adminBeerMasters.sort.newest}</option>
-              </S.SortSelect>
-            </S.SortControl>
+            <FilterDropdown
+              icon={FaLocationDot}
+              label={t.adminBeerMasters.restaurantFilter.label}
+              value={restaurantFilter}
+              onChange={setRestaurantFilter}
+              options={[
+                { value: ALL_RESTAURANTS, label: t.adminBeerMasters.restaurantFilter.all },
+                ...restaurantOptions.map((option) => ({ value: option.id, label: option.name })),
+              ]}
+            />
+            <FilterDropdown
+              icon={FaFilter}
+              label={t.adminBeerMasters.sort.label}
+              value={sortBy}
+              onChange={(value) => setSortBy(value as typeof sortBy)}
+              options={[
+                { value: 'rating', label: t.adminBeerMasters.sort.rating },
+                { value: 'popularity', label: t.adminBeerMasters.sort.popularity },
+                { value: 'newest', label: t.adminBeerMasters.sort.newest },
+              ]}
+            />
             <S.RefreshButton type="button" onClick={handleRefresh} $spinning={isRefreshing} whileTap={{ scale: 0.96 }}>
               <S.RefreshIcon />
               {t.adminBeerMasters.refreshLabel}

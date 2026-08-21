@@ -84,8 +84,8 @@ export const DatePicker = (props: DatePickerProps) => {
                         onBlur={handleMonthDropdownBlur}
                       >
                         {selectedMonthLabel}
+                        <S.SelectChevron aria-hidden="true" />
                       </S.MonthSelect>
-                      <S.SelectChevron aria-hidden="true" />
                       <AnimatePresence>
                         {isMonthDropdownOpen && (
                           <S.OptionsDropdown
@@ -122,8 +122,8 @@ export const DatePicker = (props: DatePickerProps) => {
                         onBlur={handleYearDropdownBlur}
                       >
                         {viewYear}
+                        <S.SelectChevron aria-hidden="true" />
                       </S.YearSelect>
-                      <S.SelectChevron aria-hidden="true" />
                       <AnimatePresence>
                         {isYearDropdownOpen && (
                           <S.OptionsDropdown

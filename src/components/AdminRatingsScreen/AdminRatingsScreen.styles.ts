@@ -259,52 +259,10 @@ export const FiltersBar = styled.div`
   }
 `;
 
-const filterSelect = css`
-  flex: 1;
-  appearance: none;
-  border: none;
-  background: transparent;
-  color: ${({ theme }) => theme.colors.textPrimary};
-  font-family: inherit;
-  font-size: 12px;
-  cursor: pointer;
-  max-width: 160px;
-
-  &:focus-visible {
-    outline: none;
-  }
-
-  option {
-    color: #000;
-  }
-
-  @media (max-width: ${MOBILE_BREAKPOINT}) {
-    max-width: none;
-  }
-`;
-
-export const FilterControl = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
-  border-radius: ${({ theme }) => theme.radii.md};
-  background: ${({ theme }) => theme.colors.cardBackground};
-  color: ${({ theme }) => theme.colors.brandGreenLight};
-
-  @media (max-width: ${MOBILE_BREAKPOINT}) {
-    width: 100%;
-  }
-`;
-
 export const FilterIcon = styled(FaChevronDown)`
   width: 11px;
   height: 11px;
   flex-shrink: 0;
-`;
-
-export const FilterSelect = styled.select`
-  ${filterSelect}
 `;
 
 export const ClearFiltersButton = styled.button`
