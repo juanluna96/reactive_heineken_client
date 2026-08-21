@@ -6,7 +6,7 @@ import { initialsFromName } from '../../utils/initialsFromName';
 
 export type RatingFilterOption = 'all' | '5' | '4' | '3-';
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 25;
 export const ALL_RESTAURANTS = 'all';
 export const ALL_RATINGS = 'all';
 

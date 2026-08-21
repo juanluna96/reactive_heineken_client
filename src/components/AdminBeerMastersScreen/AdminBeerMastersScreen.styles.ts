@@ -174,7 +174,7 @@ export const RefreshButton = styled(motion.button)<{ $spinning?: boolean }>`
 
 export const RefreshIcon = styled(FaArrowsRotate)``;
 
-export const Content = styled.div`
+export const Content = styled(motion.div)`
   max-width: 1100px;
   margin: 0 auto;
   padding: 20px;
@@ -187,7 +187,7 @@ export const Content = styled.div`
   }
 `;
 
-export const SearchFieldWrapper = styled.div`
+export const SearchFieldWrapper = styled(motion.div)`
   position: relative;
   width: 100%;
   max-width: 360px;
@@ -307,7 +307,7 @@ const ownBeerMasterPulse = keyframes`
   }
 `;
 
-export const RankCard = styled.div<{ $isOwn?: boolean }>`
+export const RankCard = styled(motion.div)<{ $isOwn?: boolean }>`
   ${glassPanel}
   padding: 20px;
   display: flex;

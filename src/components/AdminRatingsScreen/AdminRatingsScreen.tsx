@@ -1,9 +1,14 @@
+import { staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background.png';
 import backgroundImageLaptop from '../../assets/images/background-laptop.png';
 import { TABLET_BREAKPOINT } from '../../styles/breakpoints';
 import { AdminSidebar } from '../AdminSidebar';
 import { ScreenOverlay } from '../ScreenOverlay';
+import { Skeleton } from '../Skeleton';
 import * as S from './AdminRatingsScreen.styles';
+
+const SKELETON_STAT_CARDS = 3;
+const SKELETON_REVIEW_CARDS = 6;
 import {
   ALL_RATINGS,
   ALL_RESTAURANTS,
@@ -52,9 +57,31 @@ export const AdminRatingsScreen = () => {
         {background}
         {sidebar}
         <S.Main>
-          <S.StatusScreen>
-            <S.StatusSubtitle>{t.adminRatings.states.loading}</S.StatusSubtitle>
-          </S.StatusScreen>
+          <S.TopBar>
+            <S.TitleGroup>
+              <S.PageTitle>{t.adminRatings.pageTitle}</S.PageTitle>
+              <S.PageSubtitle>{t.adminRatings.pageSubtitle}</S.PageSubtitle>
+            </S.TitleGroup>
+          </S.TopBar>
+          <S.Content initial="hidden" animate="visible" variants={staggerContainer}>
+            <S.StatsGrid variants={staggerItem}>
+              {Array.from({ length: SKELETON_STAT_CARDS }).map((_, index) => (
+                <S.StatCard key={index}>
+                  <Skeleton width="100px" height="12px" />
+                  <Skeleton width="70px" height="28px" style={{ marginTop: '10px' }} />
+                </S.StatCard>
+              ))}
+            </S.StatsGrid>
+            {Array.from({ length: SKELETON_REVIEW_CARDS }).map((_, index) => (
+              <S.ReviewCard key={index} variants={staggerItem}>
+                <Skeleton width="44px" height="44px" radius="9999px" />
+                <S.ReviewBody style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <Skeleton width="140px" height="16px" />
+                  <Skeleton width="90%" height="14px" />
+                </S.ReviewBody>
+              </S.ReviewCard>
+            ))}
+          </S.Content>
         </S.Main>
       </S.Screen>
     );
@@ -101,9 +128,9 @@ export const AdminRatingsScreen = () => {
             <S.StatusSubtitle>{t.adminRatings.states.emptySubtitle}</S.StatusSubtitle>
           </S.StatusScreen>
         ) : (
-          <S.Content>
+          <S.Content initial="hidden" animate="visible" variants={staggerContainer}>
             {stats && (
-              <S.StatsGrid>
+              <S.StatsGrid variants={staggerItem}>
                 <S.StatCard>
                   <S.StatLabel>{t.adminRatings.stats.averageLabel}</S.StatLabel>
                   <S.StatValueRow>
@@ -192,7 +219,7 @@ export const AdminRatingsScreen = () => {
             ) : (
               <>
                 {items.map((review) => (
-                  <S.ReviewCard key={review.id}>
+                  <S.ReviewCard key={review.id} variants={staggerItem}>
                     <S.Avatar>{review.initials}</S.Avatar>
                     <S.ReviewBody>
                       <S.ReviewHeader>

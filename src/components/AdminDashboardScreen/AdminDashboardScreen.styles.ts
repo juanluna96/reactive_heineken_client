@@ -124,7 +124,7 @@ export const RefreshButton = styled(motion.button)<{ $spinning?: boolean }>`
   }
 `;
 
-export const Content = styled.div`
+export const Content = styled(motion.div)`
   max-width: 1400px;
   margin: 0 auto;
   padding: 20px;
@@ -144,7 +144,7 @@ const glassPanel = css`
   border-radius: ${({ theme }) => theme.radii.md};
 `;
 
-export const KpiGrid = styled.div`
+export const KpiGrid = styled(motion.div)`
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
@@ -262,7 +262,7 @@ export const SideColumn = styled.div`
   min-width: 0;
 `;
 
-export const Panel = styled.div`
+export const Panel = styled(motion.div)`
   ${glassPanel}
   padding: 24px;
 `;
@@ -354,6 +354,17 @@ export const Th = styled.th`
 `;
 
 export const Tr = styled.tr`
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+`;
+
+// Non-table stand-in for a Tr/Td row, used only while S.Table's real rows
+// are still loading (a <table> isn't a great place for shimmering
+// placeholder blocks, so the skeleton uses a plain flex row instead).
+export const SkeletonTableRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 `;
 

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FaPen, FaPlus, FaTrash } from 'react-icons/fa6';
+import { FaChevronLeft, FaChevronRight, FaPen, FaPlus, FaTrash } from 'react-icons/fa6';
 import styled, { css } from 'styled-components';
 import { ADMIN_DESKTOP_BREAKPOINT, ADMIN_SIDEBAR_WIDTH } from '../AdminSidebar';
 
@@ -100,7 +100,7 @@ export const TabButton = styled.button<{ $active?: boolean }>`
         `}
 `;
 
-export const Content = styled.div`
+export const Content = styled(motion.div)`
   max-width: 900px;
   margin: 0 auto;
   padding: 20px;
@@ -161,13 +161,13 @@ const glassPanel = css`
   border-radius: ${({ theme }) => theme.radii.md};
 `;
 
-export const ItemList = styled.div`
+export const ItemList = styled(motion.div)`
   display: flex;
   flex-direction: column;
   gap: 12px;
 `;
 
-export const ItemCard = styled.div`
+export const ItemCard = styled(motion.div)`
   ${glassPanel}
   padding: 16px 20px;
   display: flex;
@@ -384,4 +384,52 @@ export const DangerButton = styled.button`
     opacity: 0.5;
     cursor: not-allowed;
   }
+`;
+
+// --- Pagination (same shape as AdminRestaurantsScreen's) ---
+
+export const Pagination = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding-top: 8px;
+`;
+
+export const PaginationButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: ${({ theme }) => theme.radii.pill};
+  border: 1px solid ${({ theme }) => theme.colors.cardBorder};
+  background: ${({ theme }) => theme.colors.cardBackground};
+  color: ${({ theme }) => theme.colors.textPrimary};
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled):hover {
+    border-color: ${({ theme }) => theme.colors.brandGreenLight};
+  }
+
+  svg {
+    width: 11px;
+    height: 11px;
+  }
+`;
+
+export const PrevPageIcon = styled(FaChevronLeft)``;
+export const NextPageIcon = styled(FaChevronRight)``;
+
+export const PaginationLabel = styled.span`
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: ${({ theme }) => theme.colors.mutedText};
 `;

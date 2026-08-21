@@ -1,10 +1,14 @@
+import { staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background.png';
 import backgroundImageLaptop from '../../assets/images/background-laptop.png';
 import { AdminSidebar } from '../AdminSidebar';
 import { ScreenOverlay } from '../ScreenOverlay';
+import { Skeleton } from '../Skeleton';
 import { TABLET_BREAKPOINT } from '../../styles/breakpoints';
 import * as S from './AdminBeerMastersScreen.styles';
 import { ALL_RESTAURANTS, useAdminBeerMastersScreen } from './AdminBeerMastersScreen.hooks';
+
+const SKELETON_ROWS = 6;
 
 export const AdminBeerMastersScreen = () => {
   const {
@@ -49,9 +53,27 @@ export const AdminBeerMastersScreen = () => {
         {background}
         {sidebar}
         <S.Main>
-          <S.StatusScreen>
-            <S.StatusSubtitle>{t.adminBeerMasters.states.loading}</S.StatusSubtitle>
-          </S.StatusScreen>
+          <S.TopBar>
+            <S.TitleGroup>
+              <S.PageTitle>{t.adminBeerMasters.pageTitle}</S.PageTitle>
+              <S.PageSubtitle>{t.adminBeerMasters.pageSubtitle}</S.PageSubtitle>
+            </S.TitleGroup>
+          </S.TopBar>
+          <S.Content initial="hidden" animate="visible" variants={staggerContainer}>
+            <S.SearchFieldWrapper variants={staggerItem}>
+              <Skeleton width="100%" height="44px" />
+            </S.SearchFieldWrapper>
+            {Array.from({ length: SKELETON_ROWS }).map((_, index) => (
+              <S.RankCard key={index} variants={staggerItem}>
+                <S.RankIdentity>
+                  <Skeleton width="28px" height="24px" />
+                  <Skeleton width="48px" height="48px" radius="9999px" />
+                  <Skeleton width="160px" height="16px" />
+                </S.RankIdentity>
+                <Skeleton width="72px" height="40px" />
+              </S.RankCard>
+            ))}
+          </S.Content>
         </S.Main>
       </S.Screen>
     );
@@ -131,8 +153,8 @@ export const AdminBeerMastersScreen = () => {
             <S.StatusSubtitle>{t.adminBeerMasters.states.emptySubtitle}</S.StatusSubtitle>
           </S.StatusScreen>
         ) : (
-          <S.Content>
-            <S.SearchFieldWrapper>
+          <S.Content initial="hidden" animate="visible" variants={staggerContainer}>
+            <S.SearchFieldWrapper variants={staggerItem}>
               <S.SearchIcon />
               <S.SearchInput
                 type="text"
@@ -151,6 +173,7 @@ export const AdminBeerMastersScreen = () => {
                     key={beerMaster.key}
                     ref={beerMaster.isOwn ? ownCardRef : undefined}
                     $isOwn={beerMaster.isOwn}
+                    variants={staggerItem}
                   >
                     <S.RankIdentity>
                       <S.RankNumber>{String(beerMaster.rank).padStart(2, '0')}</S.RankNumber>

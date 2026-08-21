@@ -16,6 +16,11 @@ import { useTranslation } from '../../i18n';
 export type AdminSettingsTab = 'restaurants' | 'beerMasters';
 type FetchStatus = 'idle' | 'loading' | 'loaded' | 'error';
 
+// Both lists here can only grow over time (every restaurant/beer master ever
+// added, no filtering) — paginate so a large roster doesn't render as one
+// giant unbroken list. See AdminRestaurantsScreen for the same page-size.
+const PAGE_SIZE = 25;
+
 type RestaurantFormState = { mode: 'add' } | { mode: 'edit'; restaurant: RestaurantDto } | null;
 type BeerMasterFormState = { mode: 'add' } | { mode: 'edit'; beerMaster: BeerMasterDto } | null;
 
@@ -44,6 +49,16 @@ export const useAdminSettingsScreen = () => {
     loadRestaurants();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const [restaurantsPage, setRestaurantsPage] = useState(1);
+  const restaurantsPageCount = Math.max(1, Math.ceil((restaurants?.length ?? 0) / PAGE_SIZE));
+  const restaurantsCurrentPage = Math.min(restaurantsPage, restaurantsPageCount);
+  const paginatedRestaurants = (restaurants ?? []).slice(
+    (restaurantsCurrentPage - 1) * PAGE_SIZE,
+    restaurantsCurrentPage * PAGE_SIZE,
+  );
+  const handleRestaurantsPrevPage = () => setRestaurantsPage((page) => Math.max(1, page - 1));
+  const handleRestaurantsNextPage = () => setRestaurantsPage((page) => Math.min(restaurantsPageCount, page + 1));
 
   // --- Restaurant form (add/edit) ---
   const [restaurantForm, setRestaurantForm] = useState<RestaurantFormState>(null);
@@ -136,6 +151,7 @@ export const useAdminSettingsScreen = () => {
   const [selectedRestaurantId, setSelectedRestaurantId] = useState('');
   const [beerMasters, setBeerMasters] = useState<BeerMasterDto[] | null>(null);
   const [beerMastersStatus, setBeerMastersStatus] = useState<FetchStatus>('idle');
+  const [beerMastersPage, setBeerMastersPage] = useState(1);
 
   const loadBeerMasters = async (restaurantId: string) => {
     setBeerMastersStatus('loading');
@@ -149,6 +165,7 @@ export const useAdminSettingsScreen = () => {
   };
 
   useEffect(() => {
+    setBeerMastersPage(1);
     if (!selectedRestaurantId) {
       setBeerMasters(null);
       setBeerMastersStatus('idle');
@@ -157,6 +174,15 @@ export const useAdminSettingsScreen = () => {
     loadBeerMasters(selectedRestaurantId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedRestaurantId]);
+
+  const beerMastersPageCount = Math.max(1, Math.ceil((beerMasters?.length ?? 0) / PAGE_SIZE));
+  const beerMastersCurrentPage = Math.min(beerMastersPage, beerMastersPageCount);
+  const paginatedBeerMasters = (beerMasters ?? []).slice(
+    (beerMastersCurrentPage - 1) * PAGE_SIZE,
+    beerMastersCurrentPage * PAGE_SIZE,
+  );
+  const handleBeerMastersPrevPage = () => setBeerMastersPage((page) => Math.max(1, page - 1));
+  const handleBeerMastersNextPage = () => setBeerMastersPage((page) => Math.min(beerMastersPageCount, page + 1));
 
   // --- Beer master form (add/edit) ---
   const [beerMasterForm, setBeerMasterForm] = useState<BeerMasterFormState>(null);
@@ -248,6 +274,11 @@ export const useAdminSettingsScreen = () => {
     restaurants,
     restaurantsStatus,
     handleRefreshRestaurants: loadRestaurants,
+    paginatedRestaurants,
+    restaurantsCurrentPage,
+    restaurantsPageCount,
+    handleRestaurantsPrevPage,
+    handleRestaurantsNextPage,
 
     restaurantForm,
     restaurantFormName,
@@ -270,6 +301,11 @@ export const useAdminSettingsScreen = () => {
     setSelectedRestaurantId,
     beerMasters,
     beerMastersStatus,
+    paginatedBeerMasters,
+    beerMastersCurrentPage,
+    beerMastersPageCount,
+    handleBeerMastersPrevPage,
+    handleBeerMastersNextPage,
 
     beerMasterForm,
     beerMasterFormName,

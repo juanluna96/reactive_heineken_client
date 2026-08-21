@@ -103,7 +103,7 @@ export const RefreshButton = styled(motion.button)<{ $spinning?: boolean }>`
 
 export const RefreshIcon = styled(FaArrowsRotate)``;
 
-export const Content = styled.div`
+export const Content = styled(motion.div)`
   max-width: 1100px;
   margin: 0 auto;
   padding: 20px;
@@ -146,7 +146,7 @@ const glassPanel = css`
 
 /* Stats bento */
 
-export const StatsGrid = styled.div`
+export const StatsGrid = styled(motion.div)`
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
@@ -156,7 +156,7 @@ export const StatsGrid = styled.div`
   }
 `;
 
-export const StatCard = styled.div<{ $accent?: boolean }>`
+export const StatCard = styled(motion.div)<{ $accent?: boolean }>`
   ${glassPanel}
   padding: 20px;
   display: flex;
@@ -345,7 +345,7 @@ export const SearchInput = styled.input`
 
 /* Review cards */
 
-export const ReviewCard = styled.div`
+export const ReviewCard = styled(motion.div)`
   ${glassPanel}
   padding: 20px;
   display: flex;
