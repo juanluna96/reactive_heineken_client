@@ -556,6 +556,22 @@ export const FeedList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  scrollbar-width: thin;
+  scrollbar-color: ${({ theme }) => theme.colors.brandGreenLight} transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.colors.brandGreenLight};
+    border-radius: ${({ theme }) => theme.radii.pill};
+  }
 `;
 
 export const FeedCard = styled.div`
