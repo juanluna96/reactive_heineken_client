@@ -1,13 +1,13 @@
 import { AnimatePresence } from 'framer-motion';
-import { FaChevronDown, FaUser } from 'react-icons/fa6';
+import { FaUser } from 'react-icons/fa6';
 import { errorMessageVariants, staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background-2.png';
 import backgroundImageLaptop from '../../assets/images/background-laptop-2.png';
 import heinekenLogo from '../../assets/logos/heineken-logo.png';
+import { AutocompleteField } from '../AutocompleteField';
 import { BubbleField } from '../BubbleField';
 import { PrimaryButton } from '../PrimaryButton';
 import { ScreenOverlay } from '../ScreenOverlay';
-import { SelectField } from '../SelectField';
 import { StepIndicator } from '../StepIndicator';
 import { TABLET_BREAKPOINT } from '../../styles/breakpoints';
 import * as S from './RateBeerMasterScreen.styles';
@@ -16,7 +16,6 @@ import { useRateBeerMasterScreen } from './RateBeerMasterScreen.hooks';
 export const RateBeerMasterScreen = () => {
   const {
     t,
-    hasBeerMasterList,
     beerMasterOptions,
     selectedBeerMasterId,
     beerMasterName,
@@ -30,7 +29,7 @@ export const RateBeerMasterScreen = () => {
     comment,
     maxCommentLength,
     handleBack,
-    handleBeerMasterNameChange,
+    setBeerMasterName,
     handleBeerMasterSelect,
     handleStarHoverEnd,
     handleCommentChange,
@@ -58,36 +57,19 @@ export const RateBeerMasterScreen = () => {
 
         <S.Hero>
           <S.ProfileSection variants={staggerItem}>
-            {hasBeerMasterList ? (
-              <SelectField
-                icon={FaUser}
-                chevronIcon={FaChevronDown}
-                label={t.rateBeerMaster.beerMasterLabel}
-                placeholder={t.rateBeerMaster.namePlaceholder}
-                options={beerMasterOptions}
-                value={selectedBeerMasterId}
-                onChange={handleBeerMasterSelect}
-                error={nameError}
-              />
-            ) : (
-              <>
-                <S.NameInput
-                  value={beerMasterName}
-                  onChange={handleBeerMasterNameChange}
-                  placeholder={t.rateBeerMaster.namePlaceholder}
-                  aria-label="Beer master name"
-                  $hasError={Boolean(nameError)}
-                />
-                <S.BeerMasterLabel>{t.rateBeerMaster.beerMasterLabel}</S.BeerMasterLabel>
-                <AnimatePresence>
-                  {nameError && (
-                    <S.NameError initial="hidden" animate="visible" exit="exit" variants={errorMessageVariants}>
-                      {nameError}
-                    </S.NameError>
-                  )}
-                </AnimatePresence>
-              </>
-            )}
+            <AutocompleteField
+              icon={FaUser}
+              label={t.rateBeerMaster.beerMasterLabel}
+              placeholder={t.rateBeerMaster.namePlaceholder}
+              options={beerMasterOptions}
+              value={selectedBeerMasterId}
+              onChange={handleBeerMasterSelect}
+              allowCustomValue
+              freeTextValue={beerMasterName}
+              onCustomValueChange={setBeerMasterName}
+              error={nameError}
+              noResultsText={t.rateBeerMaster.noResults}
+            />
           </S.ProfileSection>
 
           <S.RatingSection variants={staggerItem}>

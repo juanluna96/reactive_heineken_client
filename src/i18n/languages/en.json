@@ -69,6 +69,7 @@
   "rateBeerMaster": {
     "beerMasterLabel": "STARS SERVER",
     "namePlaceholder": "Stars Server's name",
+    "noResults": "No Stars Server found with that name",
     "title": "How was your experience?",
     "subtitle": "Your opinion helps us improve",
     "tierMessages": [

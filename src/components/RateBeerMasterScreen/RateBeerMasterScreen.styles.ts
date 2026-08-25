@@ -95,54 +95,6 @@ export const ProfileSection = styled(motion.div)`
   gap: 8px;
 `;
 
-export const NameInput = styled.input<{ $hasError: boolean }>`
-  grid-column: 1;
-  width: 100%;
-  min-width: 0;
-  box-sizing: border-box;
-  text-align: center;
-  padding: 13px 17px;
-  border-radius: ${({ theme }) => theme.radii.md};
-  border: 1px solid ${({ theme, $hasError }) => ($hasError ? theme.colors.danger : theme.colors.cardBorder)};
-  background: rgba(14, 14, 14, 0.8);
-  backdrop-filter: blur(20px);
-  font-family: ${({ theme }) => theme.fonts.heading};
-  font-size: 16px;
-  line-height: 24px;
-  color: ${({ theme }) => theme.colors.textPrimary};
-
-  &::placeholder {
-    color: ${({ theme }) => theme.colors.placeholderText};
-  }
-
-  &:focus-visible {
-    outline: none;
-    border-color: ${({ theme }) => theme.colors.brandGreenLight};
-  }
-`;
-
-export const NameError = styled(motion.span)`
-  grid-column: 1;
-  font-family: ${({ theme }) => theme.fonts.heading};
-  font-size: 12px;
-  line-height: 16px;
-  text-align: center;
-  color: ${({ theme }) => theme.colors.danger};
-`;
-
-export const BeerMasterLabel = styled.span`
-  grid-column: 1;
-  width: max-content;
-  justify-self: center;
-  font-family: ${({ theme }) => theme.fonts.heading};
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0.7px;
-  text-transform: uppercase;
-  color: ${({ theme }) => theme.colors.mutedText};
-  opacity: 0.8;
-`;
-
 export const RatingSection = styled(motion.div)`
   display: flex;
   flex-direction: column;

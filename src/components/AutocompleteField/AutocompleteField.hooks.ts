@@ -2,16 +2,23 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { ChangeEvent, KeyboardEvent } from 'react';
 import type { AutocompleteFieldOption, AutocompleteFieldProps } from './AutocompleteField.types';
 
-export const useAutocompleteField = ({ options, value, onChange }: AutocompleteFieldProps) => {
+export const useAutocompleteField = ({
+  options,
+  value,
+  onChange,
+  allowCustomValue = false,
+  freeTextValue,
+  onCustomValueChange,
+}: AutocompleteFieldProps) => {
   const selectedOption = options.find((option) => option.value === value);
-  const [query, setQuery] = useState(selectedOption?.label ?? '');
+  const [query, setQuery] = useState(selectedOption?.label ?? freeTextValue ?? '');
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setQuery(selectedOption?.label ?? '');
-  }, [selectedOption?.label]);
+    setQuery(selectedOption?.label ?? freeTextValue ?? '');
+  }, [selectedOption?.label, freeTextValue]);
 
   const filteredOptions = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -27,11 +34,17 @@ export const useAutocompleteField = ({ options, value, onChange }: AutocompleteF
     onChange(option.value);
     setQuery(option.label);
     setIsOpen(false);
+    if (allowCustomValue) onCustomValueChange?.('');
   };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value);
+    const next = event.target.value;
+    setQuery(next);
     setIsOpen(true);
+    if (allowCustomValue) {
+      onCustomValueChange?.(next);
+      if (value !== '') onChange('');
+    }
   };
 
   const handleFocus = () => setIsOpen(true);
@@ -42,7 +55,11 @@ export const useAutocompleteField = ({ options, value, onChange }: AutocompleteF
     if (matched) {
       if (matched.value !== value) onChange(matched.value);
       setQuery(matched.label);
-    } else if (query !== '') {
+      if (allowCustomValue) onCustomValueChange?.('');
+      return;
+    }
+    if (allowCustomValue) return;
+    if (query !== '') {
       onChange('');
       setQuery('');
     }

@@ -74,6 +74,7 @@ export interface WatchExperienceDictionary {
 export interface RateBeerMasterDictionary {
   beerMasterLabel: string;
   namePlaceholder: string;
+  noResults: string;
   title: string;
   subtitle: string;
   tierMessages: string[];

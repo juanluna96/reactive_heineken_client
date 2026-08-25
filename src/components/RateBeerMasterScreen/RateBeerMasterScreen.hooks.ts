@@ -7,7 +7,7 @@ import { useTranslation } from '../../i18n';
 import { useRatingStore } from '../../rating';
 import { useRegistrationStore } from '../../registration';
 import { ROUTES } from '../../routes';
-import type { SelectFieldOption } from '../SelectField';
+import type { AutocompleteFieldOption } from '../AutocompleteField';
 
 const STAR_VALUES = [1, 2, 3, 4, 5];
 const MAX_COMMENT_LENGTH = 140;
@@ -52,10 +52,10 @@ export const useRateBeerMasterScreen = () => {
     };
   }, [restaurantId]);
 
-  // Restaurants without beer masters registered yet fall back to a free-text
-  // name field instead of forcing a selection from an empty list.
-  const hasBeerMasterList = beerMasters.length > 0;
-  const beerMasterOptions: SelectFieldOption[] = beerMasters.map((master) => ({
+  // Suggestions from the restaurant's existing Stars Server list — typing a
+  // name that isn't among them is still accepted (AutocompleteField's
+  // allowCustomValue) and may get auto-registered server-side.
+  const beerMasterOptions: AutocompleteFieldOption[] = beerMasters.map((master) => ({
     value: master.id,
     label: master.name,
   }));
@@ -64,7 +64,7 @@ export const useRateBeerMasterScreen = () => {
   const displayRating = hoverRating || rating;
   const tierMessage = rating > 0 ? t.rateBeerMaster.tierMessages[rating - 1] : '';
 
-  const isNameValid = hasBeerMasterList ? beerMasterId !== null : beerMasterName.trim().length > 0;
+  const isNameValid = beerMasterId !== null || beerMasterName.trim().length > 0;
   const isRatingValid = rating > 0;
   const isFormValid = isNameValid && isRatingValid;
 
@@ -86,10 +86,6 @@ export const useRateBeerMasterScreen = () => {
     navigate(ROUTES.watchExperience);
   };
 
-  const handleBeerMasterNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setBeerMasterName(event.target.value);
-  };
-
   const handleBeerMasterSelect = (value: string) => {
     setBeerMasterId(value === '' ? null : value);
   };
@@ -109,8 +105,8 @@ export const useRateBeerMasterScreen = () => {
     try {
       await createRating({
         restaurant_id: restaurantId,
-        beer_master_id: hasBeerMasterList ? beerMasterId : null,
-        beer_master_name: hasBeerMasterList ? null : beerMasterName.trim(),
+        beer_master_id: beerMasterId,
+        beer_master_name: beerMasterId ? null : beerMasterName.trim(),
         customer_name: customerName,
         customer_email: customerEmail,
         rating,
@@ -128,7 +124,6 @@ export const useRateBeerMasterScreen = () => {
 
   return {
     t,
-    hasBeerMasterList,
     beerMasterOptions,
     selectedBeerMasterId,
     beerMasterName,
@@ -142,7 +137,7 @@ export const useRateBeerMasterScreen = () => {
     comment,
     maxCommentLength: MAX_COMMENT_LENGTH,
     handleBack,
-    handleBeerMasterNameChange,
+    setBeerMasterName,
     handleBeerMasterSelect,
     handleStarHoverEnd,
     handleCommentChange,
