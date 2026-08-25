@@ -1,13 +1,13 @@
 import { AnimatePresence } from 'framer-motion';
-import { FaChevronDown, FaMedal, FaUtensils } from 'react-icons/fa6';
-import { staggerContainer, staggerItem } from '../../animations/variants';
+import { FaMedal, FaUtensils } from 'react-icons/fa6';
+import { staggerContainer, staggerItem, tabPanelVariants } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background.png';
 import backgroundImageLaptop from '../../assets/images/background-laptop.png';
 import { initialsFromName } from '../../utils/initialsFromName';
 import { AdminSidebar } from '../AdminSidebar';
+import { AutocompleteField } from '../AutocompleteField';
 import { Modal } from '../Modal';
 import { ScreenOverlay } from '../ScreenOverlay';
-import { SelectField } from '../SelectField';
 import { Skeleton } from '../Skeleton';
 import { TextField } from '../TextField';
 import { TABLET_BREAKPOINT } from '../../styles/breakpoints';
@@ -20,7 +20,8 @@ export const AdminSettingsScreen = () => {
   const {
     t,
     activeTab,
-    setActiveTab,
+    tabDirection,
+    handleTabChange,
 
     restaurants,
     restaurantsStatus,
@@ -73,6 +74,16 @@ export const AdminSettingsScreen = () => {
     openDeleteBeerMaster,
     closeDeleteBeerMaster,
     confirmDeleteBeerMaster,
+
+    beerMasterTransferTarget,
+    transferTargetRestaurantId,
+    setTransferTargetRestaurantId,
+    transferRestaurantOptions,
+    transferError,
+    isTransferringBeerMaster,
+    openTransferBeerMaster,
+    closeTransferBeerMaster,
+    confirmTransferBeerMaster,
   } = useAdminSettingsScreen();
 
   const copy = t.adminSettings;
@@ -153,197 +164,215 @@ export const AdminSettingsScreen = () => {
             <S.PageSubtitle>{copy.pageSubtitle}</S.PageSubtitle>
           </S.TitleGroup>
           <S.TabList>
-            <S.TabButton type="button" $active={activeTab === 'restaurants'} onClick={() => setActiveTab('restaurants')}>
+            <S.TabButton type="button" $active={activeTab === 'restaurants'} onClick={() => handleTabChange('restaurants')}>
               {copy.tabs.restaurants}
             </S.TabButton>
-            <S.TabButton type="button" $active={activeTab === 'beerMasters'} onClick={() => setActiveTab('beerMasters')}>
+            <S.TabButton type="button" $active={activeTab === 'beerMasters'} onClick={() => handleTabChange('beerMasters')}>
               {copy.tabs.beerMasters}
             </S.TabButton>
           </S.TabList>
         </S.TopBar>
 
         <S.Content initial="hidden" animate="visible" variants={staggerContainer}>
-          {activeTab === 'restaurants' ? (
-            <>
-              <S.SectionHeader>
-                <div />
-                <S.AddButton type="button" onClick={openAddRestaurant} whileTap={{ scale: 0.96 }}>
-                  <S.AddIcon />
-                  {copy.restaurants.addButton}
-                </S.AddButton>
-              </S.SectionHeader>
+          <AnimatePresence mode="wait" custom={tabDirection} initial={false}>
+            <S.TabPanel
+              key={activeTab}
+              custom={tabDirection}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={tabPanelVariants}
+            >
+              {activeTab === 'restaurants' ? (
+                <>
+                  <S.SectionHeader>
+                    <div />
+                    <S.AddButton type="button" onClick={openAddRestaurant} whileTap={{ scale: 0.96 }}>
+                      <S.AddIcon />
+                      {copy.restaurants.addButton}
+                    </S.AddButton>
+                  </S.SectionHeader>
 
-              {(restaurants ?? []).length === 0 ? (
-                <S.EmptyState>
-                  <S.EmptyTitle>{copy.restaurants.emptyTitle}</S.EmptyTitle>
-                  <S.EmptySubtitle>{copy.restaurants.emptySubtitle}</S.EmptySubtitle>
-                </S.EmptyState>
+                  {(restaurants ?? []).length === 0 ? (
+                    <S.EmptyState>
+                      <S.EmptyTitle>{copy.restaurants.emptyTitle}</S.EmptyTitle>
+                      <S.EmptySubtitle>{copy.restaurants.emptySubtitle}</S.EmptySubtitle>
+                    </S.EmptyState>
+                  ) : (
+                    <>
+                      <S.ItemList variants={staggerContainer}>
+                        {paginatedRestaurants.map((restaurant) => (
+                          <S.ItemCard key={restaurant.id} variants={staggerItem}>
+                            <S.ItemIdentity>
+                              <S.ItemAvatar>{initialsFromName(restaurant.name)}</S.ItemAvatar>
+                              <S.ItemName>{restaurant.name}</S.ItemName>
+                            </S.ItemIdentity>
+                            <S.ItemActions>
+                              <S.EditButton
+                                type="button"
+                                onClick={() => openEditRestaurant(restaurant)}
+                                aria-label={copy.restaurants.editAction}
+                              >
+                                <S.EditIcon />
+                              </S.EditButton>
+                              <S.DeleteButton
+                                type="button"
+                                onClick={() => openDeleteRestaurant(restaurant)}
+                                aria-label={copy.restaurants.deleteAction}
+                              >
+                                <S.DeleteIcon />
+                              </S.DeleteButton>
+                            </S.ItemActions>
+                          </S.ItemCard>
+                        ))}
+                      </S.ItemList>
+
+                      {restaurantsPageCount > 1 && (
+                        <S.Pagination>
+                          <S.PaginationButton
+                            type="button"
+                            onClick={handleRestaurantsPrevPage}
+                            disabled={restaurantsCurrentPage === 1}
+                            aria-label={t.adminRestaurants.pagination.previous}
+                          >
+                            <S.PrevPageIcon />
+                          </S.PaginationButton>
+                          <S.PaginationLabel>
+                            {t.adminRestaurants.pagination.indicator
+                              .replace('{current}', String(restaurantsCurrentPage))
+                              .replace('{total}', String(restaurantsPageCount))}
+                          </S.PaginationLabel>
+                          <S.PaginationButton
+                            type="button"
+                            onClick={handleRestaurantsNextPage}
+                            disabled={restaurantsCurrentPage === restaurantsPageCount}
+                            aria-label={t.adminRestaurants.pagination.next}
+                          >
+                            <S.NextPageIcon />
+                          </S.PaginationButton>
+                        </S.Pagination>
+                      )}
+                    </>
+                  )}
+                </>
               ) : (
                 <>
-                  <S.ItemList variants={staggerContainer}>
-                    {paginatedRestaurants.map((restaurant) => (
-                      <S.ItemCard key={restaurant.id} variants={staggerItem}>
-                        <S.ItemIdentity>
-                          <S.ItemAvatar>{initialsFromName(restaurant.name)}</S.ItemAvatar>
-                          <S.ItemName>{restaurant.name}</S.ItemName>
-                        </S.ItemIdentity>
-                        <S.ItemActions>
-                          <S.EditButton
-                            type="button"
-                            onClick={() => openEditRestaurant(restaurant)}
-                            aria-label={copy.restaurants.editAction}
-                          >
-                            <S.EditIcon />
-                          </S.EditButton>
-                          <S.DeleteButton
-                            type="button"
-                            onClick={() => openDeleteRestaurant(restaurant)}
-                            aria-label={copy.restaurants.deleteAction}
-                          >
-                            <S.DeleteIcon />
-                          </S.DeleteButton>
-                        </S.ItemActions>
-                      </S.ItemCard>
-                    ))}
-                  </S.ItemList>
+                  <S.SectionHeader>
+                    <S.RestaurantPickerWrapper>
+                      <AutocompleteField
+                        icon={FaUtensils}
+                        label={copy.beerMasters.restaurantPicker.label}
+                        placeholder={copy.beerMasters.restaurantPicker.placeholder}
+                        options={restaurantOptions}
+                        value={selectedRestaurantId}
+                        onChange={setSelectedRestaurantId}
+                        noResultsText={copy.beerMasters.restaurantPicker.noResults}
+                      />
+                    </S.RestaurantPickerWrapper>
+                    <S.AddButton
+                      type="button"
+                      onClick={openAddBeerMaster}
+                      disabled={!selectedRestaurantId}
+                      whileTap={selectedRestaurantId ? { scale: 0.96 } : undefined}
+                    >
+                      <S.AddIcon />
+                      {copy.beerMasters.addButton}
+                    </S.AddButton>
+                  </S.SectionHeader>
 
-                  {restaurantsPageCount > 1 && (
-                    <S.Pagination>
-                      <S.PaginationButton
-                        type="button"
-                        onClick={handleRestaurantsPrevPage}
-                        disabled={restaurantsCurrentPage === 1}
-                        aria-label={t.adminRestaurants.pagination.previous}
-                      >
-                        <S.PrevPageIcon />
-                      </S.PaginationButton>
-                      <S.PaginationLabel>
-                        {t.adminRestaurants.pagination.indicator
-                          .replace('{current}', String(restaurantsCurrentPage))
-                          .replace('{total}', String(restaurantsPageCount))}
-                      </S.PaginationLabel>
-                      <S.PaginationButton
-                        type="button"
-                        onClick={handleRestaurantsNextPage}
-                        disabled={restaurantsCurrentPage === restaurantsPageCount}
-                        aria-label={t.adminRestaurants.pagination.next}
-                      >
-                        <S.NextPageIcon />
-                      </S.PaginationButton>
-                    </S.Pagination>
+                  {!selectedRestaurantId ? (
+                    <S.EmptyState>
+                      <S.EmptyTitle>{copy.beerMasters.selectRestaurantTitle}</S.EmptyTitle>
+                      <S.EmptySubtitle>{copy.beerMasters.selectRestaurantSubtitle}</S.EmptySubtitle>
+                    </S.EmptyState>
+                  ) : beerMastersStatus === 'loading' && !beerMasters ? (
+                    <S.ItemList variants={staggerContainer}>
+                      {Array.from({ length: SKELETON_ROWS }).map((_, index) => (
+                        <S.ItemCard key={index} variants={staggerItem}>
+                          <S.ItemIdentity>
+                            <Skeleton width="40px" height="40px" />
+                            <Skeleton width="160px" height="16px" />
+                          </S.ItemIdentity>
+                          <Skeleton width="76px" height="34px" />
+                        </S.ItemCard>
+                      ))}
+                    </S.ItemList>
+                  ) : beerMastersStatus === 'error' ? (
+                    <S.EmptyState>
+                      <S.EmptySubtitle>{copy.states.error}</S.EmptySubtitle>
+                    </S.EmptyState>
+                  ) : (beerMasters ?? []).length === 0 ? (
+                    <S.EmptyState>
+                      <S.EmptyTitle>{copy.beerMasters.emptyTitle}</S.EmptyTitle>
+                      <S.EmptySubtitle>{copy.beerMasters.emptySubtitle}</S.EmptySubtitle>
+                    </S.EmptyState>
+                  ) : (
+                    <>
+                      <S.ItemList variants={staggerContainer}>
+                        {paginatedBeerMasters.map((beerMaster) => (
+                          <S.ItemCard key={beerMaster.id} variants={staggerItem}>
+                            <S.ItemIdentity>
+                              <S.ItemAvatar>{initialsFromName(beerMaster.name)}</S.ItemAvatar>
+                              <S.ItemName>{beerMaster.name}</S.ItemName>
+                            </S.ItemIdentity>
+                            <S.ItemActions>
+                              <S.EditButton
+                                type="button"
+                                onClick={() => openEditBeerMaster(beerMaster)}
+                                aria-label={copy.beerMasters.editAction}
+                              >
+                                <S.EditIcon />
+                              </S.EditButton>
+                              <S.TransferButton
+                                type="button"
+                                onClick={() => openTransferBeerMaster(beerMaster)}
+                                aria-label={copy.beerMasters.transferAction}
+                              >
+                                <S.TransferIcon />
+                              </S.TransferButton>
+                              <S.DeleteButton
+                                type="button"
+                                onClick={() => openDeleteBeerMaster(beerMaster)}
+                                aria-label={copy.beerMasters.deleteAction}
+                              >
+                                <S.DeleteIcon />
+                              </S.DeleteButton>
+                            </S.ItemActions>
+                          </S.ItemCard>
+                        ))}
+                      </S.ItemList>
+
+                      {beerMastersPageCount > 1 && (
+                        <S.Pagination>
+                          <S.PaginationButton
+                            type="button"
+                            onClick={handleBeerMastersPrevPage}
+                            disabled={beerMastersCurrentPage === 1}
+                            aria-label={t.adminRestaurants.pagination.previous}
+                          >
+                            <S.PrevPageIcon />
+                          </S.PaginationButton>
+                          <S.PaginationLabel>
+                            {t.adminRestaurants.pagination.indicator
+                              .replace('{current}', String(beerMastersCurrentPage))
+                              .replace('{total}', String(beerMastersPageCount))}
+                          </S.PaginationLabel>
+                          <S.PaginationButton
+                            type="button"
+                            onClick={handleBeerMastersNextPage}
+                            disabled={beerMastersCurrentPage === beerMastersPageCount}
+                            aria-label={t.adminRestaurants.pagination.next}
+                          >
+                            <S.NextPageIcon />
+                          </S.PaginationButton>
+                        </S.Pagination>
+                      )}
+                    </>
                   )}
                 </>
               )}
-            </>
-          ) : (
-            <>
-              <S.SectionHeader>
-                <S.RestaurantPickerWrapper>
-                  <SelectField
-                    icon={FaUtensils}
-                    chevronIcon={FaChevronDown}
-                    label={copy.beerMasters.restaurantPicker.label}
-                    placeholder={copy.beerMasters.restaurantPicker.placeholder}
-                    options={restaurantOptions}
-                    value={selectedRestaurantId}
-                    onChange={setSelectedRestaurantId}
-                  />
-                </S.RestaurantPickerWrapper>
-                <S.AddButton
-                  type="button"
-                  onClick={openAddBeerMaster}
-                  disabled={!selectedRestaurantId}
-                  whileTap={selectedRestaurantId ? { scale: 0.96 } : undefined}
-                >
-                  <S.AddIcon />
-                  {copy.beerMasters.addButton}
-                </S.AddButton>
-              </S.SectionHeader>
-
-              {!selectedRestaurantId ? (
-                <S.EmptyState>
-                  <S.EmptyTitle>{copy.beerMasters.selectRestaurantTitle}</S.EmptyTitle>
-                  <S.EmptySubtitle>{copy.beerMasters.selectRestaurantSubtitle}</S.EmptySubtitle>
-                </S.EmptyState>
-              ) : beerMastersStatus === 'loading' && !beerMasters ? (
-                <S.ItemList variants={staggerContainer}>
-                  {Array.from({ length: SKELETON_ROWS }).map((_, index) => (
-                    <S.ItemCard key={index} variants={staggerItem}>
-                      <S.ItemIdentity>
-                        <Skeleton width="40px" height="40px" />
-                        <Skeleton width="160px" height="16px" />
-                      </S.ItemIdentity>
-                      <Skeleton width="76px" height="34px" />
-                    </S.ItemCard>
-                  ))}
-                </S.ItemList>
-              ) : beerMastersStatus === 'error' ? (
-                <S.EmptyState>
-                  <S.EmptySubtitle>{copy.states.error}</S.EmptySubtitle>
-                </S.EmptyState>
-              ) : (beerMasters ?? []).length === 0 ? (
-                <S.EmptyState>
-                  <S.EmptyTitle>{copy.beerMasters.emptyTitle}</S.EmptyTitle>
-                  <S.EmptySubtitle>{copy.beerMasters.emptySubtitle}</S.EmptySubtitle>
-                </S.EmptyState>
-              ) : (
-                <>
-                  <S.ItemList variants={staggerContainer}>
-                    {paginatedBeerMasters.map((beerMaster) => (
-                      <S.ItemCard key={beerMaster.id} variants={staggerItem}>
-                        <S.ItemIdentity>
-                          <S.ItemAvatar>{initialsFromName(beerMaster.name)}</S.ItemAvatar>
-                          <S.ItemName>{beerMaster.name}</S.ItemName>
-                        </S.ItemIdentity>
-                        <S.ItemActions>
-                          <S.EditButton
-                            type="button"
-                            onClick={() => openEditBeerMaster(beerMaster)}
-                            aria-label={copy.beerMasters.editAction}
-                          >
-                            <S.EditIcon />
-                          </S.EditButton>
-                          <S.DeleteButton
-                            type="button"
-                            onClick={() => openDeleteBeerMaster(beerMaster)}
-                            aria-label={copy.beerMasters.deleteAction}
-                          >
-                            <S.DeleteIcon />
-                          </S.DeleteButton>
-                        </S.ItemActions>
-                      </S.ItemCard>
-                    ))}
-                  </S.ItemList>
-
-                  {beerMastersPageCount > 1 && (
-                    <S.Pagination>
-                      <S.PaginationButton
-                        type="button"
-                        onClick={handleBeerMastersPrevPage}
-                        disabled={beerMastersCurrentPage === 1}
-                        aria-label={t.adminRestaurants.pagination.previous}
-                      >
-                        <S.PrevPageIcon />
-                      </S.PaginationButton>
-                      <S.PaginationLabel>
-                        {t.adminRestaurants.pagination.indicator
-                          .replace('{current}', String(beerMastersCurrentPage))
-                          .replace('{total}', String(beerMastersPageCount))}
-                      </S.PaginationLabel>
-                      <S.PaginationButton
-                        type="button"
-                        onClick={handleBeerMastersNextPage}
-                        disabled={beerMastersCurrentPage === beerMastersPageCount}
-                        aria-label={t.adminRestaurants.pagination.next}
-                      >
-                        <S.NextPageIcon />
-                      </S.PaginationButton>
-                    </S.Pagination>
-                  )}
-                </>
-              )}
-            </>
-          )}
+            </S.TabPanel>
+          </AnimatePresence>
         </S.Content>
       </S.Main>
 
@@ -447,6 +476,41 @@ export const AdminSettingsScreen = () => {
                 {isDeletingBeerMaster ? copy.beerMasters.deleteConfirm.deleting : copy.beerMasters.deleteConfirm.confirm}
               </S.DangerButton>
             </S.FormActions>
+          </Modal>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {beerMasterTransferTarget && (
+          <Modal title={copy.beerMasters.transfer.title} onClose={closeTransferBeerMaster}>
+            <S.ConfirmMessage>
+              {copy.beerMasters.transfer.message.replace('{name}', beerMasterTransferTarget.name)}
+            </S.ConfirmMessage>
+            <S.Form
+              onSubmit={(event) => {
+                event.preventDefault();
+                confirmTransferBeerMaster();
+              }}
+            >
+              <AutocompleteField
+                icon={FaUtensils}
+                label={copy.beerMasters.transfer.restaurantLabel}
+                placeholder={copy.beerMasters.transfer.restaurantPlaceholder}
+                options={transferRestaurantOptions}
+                value={transferTargetRestaurantId}
+                onChange={setTransferTargetRestaurantId}
+                noResultsText={copy.beerMasters.transfer.noResults}
+                error={transferError}
+              />
+              <S.FormActions>
+                <S.CancelButton type="button" onClick={closeTransferBeerMaster} disabled={isTransferringBeerMaster}>
+                  {copy.beerMasters.transfer.cancel}
+                </S.CancelButton>
+                <S.SaveButton type="submit" disabled={isTransferringBeerMaster}>
+                  {isTransferringBeerMaster ? copy.beerMasters.transfer.transferring : copy.beerMasters.transfer.confirm}
+                </S.SaveButton>
+              </S.FormActions>
+            </S.Form>
           </Modal>
         )}
       </AnimatePresence>

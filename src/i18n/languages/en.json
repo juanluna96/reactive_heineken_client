@@ -298,7 +298,8 @@
     "beerMasters": {
       "restaurantPicker": {
         "label": "Restaurant",
-        "placeholder": "Select a restaurant"
+        "placeholder": "Search for a restaurant",
+        "noResults": "No restaurants found"
       },
       "addButton": "Add Stars Server",
       "selectRestaurantTitle": "Select a restaurant",
@@ -307,6 +308,7 @@
       "emptySubtitle": "Add the first one for this restaurant.",
       "editAction": "Edit",
       "deleteAction": "Delete",
+      "transferAction": "Transfer",
       "form": {
         "addTitle": "New Stars Server",
         "editTitle": "Edit Stars Server",
@@ -322,6 +324,21 @@
         "cancel": "Cancel",
         "confirm": "Delete",
         "deleting": "Deleting..."
+      },
+      "transfer": {
+        "title": "Transfer Stars Server",
+        "message": "Choose the restaurant to transfer \"{name}\" to. Their existing ratings will move with them.",
+        "restaurantLabel": "New restaurant",
+        "restaurantPlaceholder": "Search for a restaurant",
+        "noResults": "No restaurants found",
+        "cancel": "Cancel",
+        "confirm": "Transfer",
+        "transferring": "Transferring...",
+        "errors": {
+          "restaurantRequired": "Select a restaurant",
+          "duplicate": "Can't transfer: either a Stars Server with this name already exists at the target restaurant, or one of their customers already has a rating there",
+          "generic": "Couldn't transfer the Stars Server, please try again"
+        }
       },
       "errors": {
         "nameRequired": "Enter a name",

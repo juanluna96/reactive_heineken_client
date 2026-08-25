@@ -22,3 +22,13 @@ export const updateBeerMaster = (
 
 export const deleteBeerMaster = (restaurantId: string, beerMasterId: string): Promise<void> =>
   apiRequest<void>(`/restaurants/${restaurantId}/beer-masters/${beerMasterId}`, { method: 'DELETE' });
+
+export const transferBeerMaster = (
+  restaurantId: string,
+  beerMasterId: string,
+  targetRestaurantId: string,
+): Promise<BeerMasterDto> =>
+  apiRequest<BeerMasterDto>(`/restaurants/${restaurantId}/beer-masters/${beerMasterId}/transfer`, {
+    method: 'POST',
+    body: JSON.stringify({ target_restaurant_id: targetRestaurantId }),
+  });

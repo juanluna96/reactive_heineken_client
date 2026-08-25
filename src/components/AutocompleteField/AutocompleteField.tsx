@@ -1,5 +1,6 @@
 import { AnimatePresence } from 'framer-motion';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
+import { createPortal } from 'react-dom';
 import { dropdownVariants, errorMessageVariants } from '../../animations/variants';
 import * as S from './AutocompleteField.styles';
 import { useAutocompleteField } from './AutocompleteField.hooks';
@@ -13,6 +14,8 @@ export const AutocompleteField = (props: AutocompleteFieldProps) => {
     filteredOptions,
     highlightedIndex,
     containerRef,
+    inputWrapperRef,
+    dropdownRect,
     handleInputChange,
     handleFocus,
     handleBlur,
@@ -28,7 +31,7 @@ export const AutocompleteField = (props: AutocompleteFieldProps) => {
         </S.Icon>
         <S.Label>{label}</S.Label>
       </S.LabelRow>
-      <S.InputWrapper>
+      <S.InputWrapper ref={inputWrapperRef}>
         <S.Input
           type="text"
           role="combobox"
@@ -45,9 +48,18 @@ export const AutocompleteField = (props: AutocompleteFieldProps) => {
         <S.SearchIcon aria-hidden="true">
           <FaMagnifyingGlass />
         </S.SearchIcon>
+      </S.InputWrapper>
+      {createPortal(
         <AnimatePresence>
-          {isOpen && (
-            <S.Dropdown role="listbox" initial="hidden" animate="visible" exit="exit" variants={dropdownVariants}>
+          {isOpen && dropdownRect && (
+            <S.Dropdown
+              role="listbox"
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={dropdownVariants}
+              style={{ top: dropdownRect.top, left: dropdownRect.left, width: dropdownRect.width }}
+            >
               {filteredOptions.length > 0 ? (
                 filteredOptions.map((option, index) => (
                   <S.Option
@@ -66,8 +78,9 @@ export const AutocompleteField = (props: AutocompleteFieldProps) => {
               )}
             </S.Dropdown>
           )}
-        </AnimatePresence>
-      </S.InputWrapper>
+        </AnimatePresence>,
+        document.body,
+      )}
       <AnimatePresence>
         {error && (
           <S.ErrorText initial="hidden" animate="visible" exit="exit" variants={errorMessageVariants}>

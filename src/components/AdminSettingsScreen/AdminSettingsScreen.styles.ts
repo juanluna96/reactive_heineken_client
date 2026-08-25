@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FaChevronLeft, FaChevronRight, FaPen, FaPlus, FaTrash } from 'react-icons/fa6';
+import { FaChevronLeft, FaChevronRight, FaPen, FaPlus, FaRightLeft, FaTrash } from 'react-icons/fa6';
 import styled, { css } from 'styled-components';
 import { ADMIN_DESKTOP_BREAKPOINT, ADMIN_MOBILE_BREAKPOINT, ADMIN_SIDEBAR_WIDTH } from '../AdminSidebar';
 
@@ -120,6 +120,13 @@ export const Content = styled(motion.div)`
   @media (min-width: ${DESKTOP_BREAKPOINT}) {
     padding: 40px;
   }
+`;
+
+export const TabPanel = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
 `;
 
 export const SectionHeader = styled.div`
@@ -277,8 +284,18 @@ export const DeleteButton = styled.button`
   }
 `;
 
+export const TransferButton = styled.button`
+  ${iconButtonBase}
+  color: ${({ theme }) => theme.colors.mutedText};
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.brandGreenLight};
+  }
+`;
+
 export const EditIcon = styled(FaPen)``;
 export const DeleteIcon = styled(FaTrash)``;
+export const TransferIcon = styled(FaRightLeft)``;
 
 export const StatusScreen = styled.div`
   display: flex;

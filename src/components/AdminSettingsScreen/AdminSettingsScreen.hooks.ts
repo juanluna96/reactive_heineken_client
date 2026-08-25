@@ -7,14 +7,20 @@ import {
   deleteRestaurant,
   fetchBeerMasters,
   fetchRestaurants,
+  transferBeerMaster,
   updateBeerMaster,
   updateRestaurant,
 } from '../../api';
 import type { BeerMasterDto, RestaurantDto } from '../../api';
 import { useTranslation } from '../../i18n';
+import type { AutocompleteFieldOption } from '../AutocompleteField';
 
 export type AdminSettingsTab = 'restaurants' | 'beerMasters';
 type FetchStatus = 'idle' | 'loading' | 'loaded' | 'error';
+
+// Order backs the tab-switch animation's direction (see handleTabChange) —
+// sliding toward whichever side the newly active tab sits on.
+const TAB_ORDER: AdminSettingsTab[] = ['restaurants', 'beerMasters'];
 
 // Both lists here can only grow over time (every restaurant/beer master ever
 // added, no filtering) — paginate so a large roster doesn't render as one
@@ -28,6 +34,15 @@ export const useAdminSettingsScreen = () => {
   const { t } = useTranslation();
 
   const [activeTab, setActiveTab] = useState<AdminSettingsTab>('restaurants');
+  // 1 when the newly selected tab sits to the right in TAB_ORDER, -1 when it
+  // sits to the left — drives which way S.TabPanel slides in/out.
+  const [tabDirection, setTabDirection] = useState(0);
+
+  const handleTabChange = (tab: AdminSettingsTab) => {
+    if (tab === activeTab) return;
+    setTabDirection(TAB_ORDER.indexOf(tab) > TAB_ORDER.indexOf(activeTab) ? 1 : -1);
+    setActiveTab(tab);
+  };
 
   // Shared across both tabs: the restaurant list backs tab 1's CRUD list
   // and tab 2's restaurant picker, so it's fetched once here.
@@ -266,10 +281,60 @@ export const useAdminSettingsScreen = () => {
     }
   };
 
+  // --- Beer master transfer (move to a different restaurant) ---
+  const [beerMasterTransferTarget, setBeerMasterTransferTarget] = useState<BeerMasterDto | null>(null);
+  const [transferTargetRestaurantId, setTransferTargetRestaurantId] = useState('');
+  const [transferError, setTransferError] = useState<string | undefined>(undefined);
+  const [isTransferringBeerMaster, setIsTransferringBeerMaster] = useState(false);
+
+  // Excludes the restaurant the beer master already belongs to — the API
+  // rejects transferring to the current restaurant anyway.
+  const transferRestaurantOptions: AutocompleteFieldOption[] = (restaurants ?? [])
+    .filter((restaurant) => restaurant.id !== selectedRestaurantId)
+    .map((restaurant) => ({ value: restaurant.id, label: restaurant.name }));
+
+  const openTransferBeerMaster = (beerMaster: BeerMasterDto) => {
+    setBeerMasterTransferTarget(beerMaster);
+    setTransferTargetRestaurantId('');
+    setTransferError(undefined);
+  };
+
+  const closeTransferBeerMaster = () => {
+    if (isTransferringBeerMaster) return;
+    setBeerMasterTransferTarget(null);
+  };
+
+  const confirmTransferBeerMaster = async () => {
+    if (!beerMasterTransferTarget || !selectedRestaurantId) return;
+    if (!transferTargetRestaurantId) {
+      setTransferError(t.adminSettings.beerMasters.transfer.errors.restaurantRequired);
+      return;
+    }
+
+    setIsTransferringBeerMaster(true);
+    setTransferError(undefined);
+    try {
+      await transferBeerMaster(selectedRestaurantId, beerMasterTransferTarget.id, transferTargetRestaurantId);
+      // The transferred Stars Server no longer belongs to the restaurant
+      // currently picked — reload so it drops out of this list.
+      await loadBeerMasters(selectedRestaurantId);
+      setBeerMasterTransferTarget(null);
+    } catch (error) {
+      setTransferError(
+        error instanceof ApiError && error.status === 409
+          ? t.adminSettings.beerMasters.transfer.errors.duplicate
+          : t.adminSettings.beerMasters.transfer.errors.generic,
+      );
+    } finally {
+      setIsTransferringBeerMaster(false);
+    }
+  };
+
   return {
     t,
     activeTab,
-    setActiveTab,
+    tabDirection,
+    handleTabChange,
 
     restaurants,
     restaurantsStatus,
@@ -323,5 +388,15 @@ export const useAdminSettingsScreen = () => {
     openDeleteBeerMaster,
     closeDeleteBeerMaster,
     confirmDeleteBeerMaster,
+
+    beerMasterTransferTarget,
+    transferTargetRestaurantId,
+    setTransferTargetRestaurantId,
+    transferRestaurantOptions,
+    transferError,
+    isTransferringBeerMaster,
+    openTransferBeerMaster,
+    closeTransferBeerMaster,
+    confirmTransferBeerMaster,
   };
 };

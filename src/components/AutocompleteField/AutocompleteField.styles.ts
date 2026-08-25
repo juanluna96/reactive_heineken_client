@@ -80,11 +80,11 @@ export const SearchIcon = styled.span`
 `;
 
 export const Dropdown = styled(motion.ul)`
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  right: 0;
-  z-index: 10;
+  /* Portaled to <body> (see AutocompleteField.tsx) so a scrollable ancestor
+     — a modal panel, most notably — can't clip it. top/left/width come from
+     the input's measured position via an inline style. */
+  position: fixed;
+  z-index: 1000;
   max-height: 220px;
   overflow-y: auto;
   margin: 0;

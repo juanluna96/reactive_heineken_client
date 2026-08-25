@@ -370,6 +370,22 @@ export interface AdminSettingsErrorsDictionary {
   generic: string;
 }
 
+export interface AdminSettingsTransferDictionary {
+  title: string;
+  message: string;
+  restaurantLabel: string;
+  restaurantPlaceholder: string;
+  noResults: string;
+  cancel: string;
+  confirm: string;
+  transferring: string;
+  errors: {
+    restaurantRequired: string;
+    duplicate: string;
+    generic: string;
+  };
+}
+
 export interface AdminSettingsDictionary {
   pageTitle: string;
   pageSubtitle: string;
@@ -391,6 +407,7 @@ export interface AdminSettingsDictionary {
     restaurantPicker: {
       label: string;
       placeholder: string;
+      noResults: string;
     };
     addButton: string;
     selectRestaurantTitle: string;
@@ -399,8 +416,10 @@ export interface AdminSettingsDictionary {
     emptySubtitle: string;
     editAction: string;
     deleteAction: string;
+    transferAction: string;
     form: AdminSettingsFormDictionary;
     deleteConfirm: AdminSettingsDeleteConfirmDictionary;
+    transfer: AdminSettingsTransferDictionary;
     errors: AdminSettingsErrorsDictionary;
   };
   states: {

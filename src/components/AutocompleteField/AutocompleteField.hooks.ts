@@ -1,6 +1,12 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { ChangeEvent, KeyboardEvent } from 'react';
 import type { AutocompleteFieldOption, AutocompleteFieldProps } from './AutocompleteField.types';
+
+interface DropdownRect {
+  top: number;
+  left: number;
+  width: number;
+}
 
 export const useAutocompleteField = ({
   options,
@@ -15,10 +21,35 @@ export const useAutocompleteField = ({
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const inputWrapperRef = useRef<HTMLDivElement>(null);
+  // The dropdown is portaled to <body> (see AutocompleteField.tsx) so it
+  // isn't clipped by an ancestor with overflow:hidden/auto — a modal's
+  // scrollable panel, for instance — so its position is computed in
+  // viewport coordinates instead of relying on CSS position:absolute.
+  const [dropdownRect, setDropdownRect] = useState<DropdownRect | null>(null);
 
   useEffect(() => {
     setQuery(selectedOption?.label ?? freeTextValue ?? '');
   }, [selectedOption?.label, freeTextValue]);
+
+  useLayoutEffect(() => {
+    if (!isOpen) return;
+
+    const updateRect = () => {
+      const rect = inputWrapperRef.current?.getBoundingClientRect();
+      if (rect) setDropdownRect({ top: rect.bottom + 8, left: rect.left, width: rect.width });
+    };
+
+    updateRect();
+    // capture:true so this also fires for scrolls inside a nested scroll
+    // container (e.g. a modal panel), not just the window itself.
+    window.addEventListener('scroll', updateRect, true);
+    window.addEventListener('resize', updateRect);
+    return () => {
+      window.removeEventListener('scroll', updateRect, true);
+      window.removeEventListener('resize', updateRect);
+    };
+  }, [isOpen]);
 
   const filteredOptions = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -90,6 +121,8 @@ export const useAutocompleteField = ({
     filteredOptions,
     highlightedIndex,
     containerRef,
+    inputWrapperRef,
+    dropdownRect,
     handleInputChange,
     handleFocus,
     handleBlur,
