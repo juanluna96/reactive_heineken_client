@@ -107,6 +107,13 @@ export interface RestaurantRankingDto {
   beer_masters: RestaurantRankingBeerMasterDto[];
 }
 
+export interface AdminBeerMasterDto {
+  id: string;
+  name: string;
+  restaurant_id: string;
+  restaurant_name: string;
+}
+
 export interface BeerMasterRankingDto {
   // null when every rating for this name was typed freehand — no registered
   // BeerMaster row to point to.

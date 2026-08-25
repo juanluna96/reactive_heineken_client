@@ -297,15 +297,15 @@
     },
     "beerMasters": {
       "restaurantPicker": {
-        "label": "Restaurante",
-        "placeholder": "Busca un restaurante",
+        "label": "Filtrar por restaurante",
+        "placeholder": "Todos los restaurantes",
         "noResults": "No se encontraron restaurantes"
       },
       "addButton": "Agregar Stars Server",
-      "selectRestaurantTitle": "Selecciona un restaurante",
-      "selectRestaurantSubtitle": "Elige un restaurante arriba para ver y gestionar sus Stars Servers.",
-      "emptyTitle": "Todavía no hay Stars Servers",
-      "emptySubtitle": "Agrega el primero para este restaurante.",
+      "emptyTitle": "Todavía no hay Stars Servers registrados",
+      "emptySubtitle": "Elige un restaurante arriba y agrega el primero.",
+      "noRestaurantResultsTitle": "Este restaurante no tiene Stars Servers",
+      "noRestaurantResultsSubtitle": "Agrega el primero para este restaurante.",
       "editAction": "Editar",
       "deleteAction": "Eliminar",
       "transferAction": "Transferir",

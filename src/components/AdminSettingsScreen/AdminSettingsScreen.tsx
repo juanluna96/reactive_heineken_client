@@ -50,7 +50,8 @@ export const AdminSettingsScreen = () => {
 
     selectedRestaurantId,
     setSelectedRestaurantId,
-    beerMasters,
+    allBeerMasters,
+    filteredBeerMasters,
     beerMastersStatus,
     paginatedBeerMasters,
     beerMastersCurrentPage,
@@ -280,12 +281,7 @@ export const AdminSettingsScreen = () => {
                     </S.AddButton>
                   </S.SectionHeader>
 
-                  {!selectedRestaurantId ? (
-                    <S.EmptyState>
-                      <S.EmptyTitle>{copy.beerMasters.selectRestaurantTitle}</S.EmptyTitle>
-                      <S.EmptySubtitle>{copy.beerMasters.selectRestaurantSubtitle}</S.EmptySubtitle>
-                    </S.EmptyState>
-                  ) : beerMastersStatus === 'loading' && !beerMasters ? (
+                  {beerMastersStatus === 'loading' && !allBeerMasters ? (
                     <S.ItemList variants={staggerContainer}>
                       {Array.from({ length: SKELETON_ROWS }).map((_, index) => (
                         <S.ItemCard key={index} variants={staggerItem}>
@@ -301,10 +297,16 @@ export const AdminSettingsScreen = () => {
                     <S.EmptyState>
                       <S.EmptySubtitle>{copy.states.error}</S.EmptySubtitle>
                     </S.EmptyState>
-                  ) : (beerMasters ?? []).length === 0 ? (
+                  ) : filteredBeerMasters.length === 0 ? (
                     <S.EmptyState>
-                      <S.EmptyTitle>{copy.beerMasters.emptyTitle}</S.EmptyTitle>
-                      <S.EmptySubtitle>{copy.beerMasters.emptySubtitle}</S.EmptySubtitle>
+                      <S.EmptyTitle>
+                        {selectedRestaurantId ? copy.beerMasters.noRestaurantResultsTitle : copy.beerMasters.emptyTitle}
+                      </S.EmptyTitle>
+                      <S.EmptySubtitle>
+                        {selectedRestaurantId
+                          ? copy.beerMasters.noRestaurantResultsSubtitle
+                          : copy.beerMasters.emptySubtitle}
+                      </S.EmptySubtitle>
                     </S.EmptyState>
                   ) : (
                     <>
@@ -313,7 +315,10 @@ export const AdminSettingsScreen = () => {
                           <S.ItemCard key={beerMaster.id} variants={staggerItem}>
                             <S.ItemIdentity>
                               <S.ItemAvatar>{initialsFromName(beerMaster.name)}</S.ItemAvatar>
-                              <S.ItemName>{beerMaster.name}</S.ItemName>
+                              <S.NameBlock>
+                                <S.ItemName>{beerMaster.name}</S.ItemName>
+                                <S.RestaurantLabel>{beerMaster.restaurant_name}</S.RestaurantLabel>
+                              </S.NameBlock>
                             </S.ItemIdentity>
                             <S.ItemActions>
                               <S.EditButton

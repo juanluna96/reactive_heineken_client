@@ -410,10 +410,10 @@ export interface AdminSettingsDictionary {
       noResults: string;
     };
     addButton: string;
-    selectRestaurantTitle: string;
-    selectRestaurantSubtitle: string;
     emptyTitle: string;
     emptySubtitle: string;
+    noRestaurantResultsTitle: string;
+    noRestaurantResultsSubtitle: string;
     editAction: string;
     deleteAction: string;
     transferAction: string;

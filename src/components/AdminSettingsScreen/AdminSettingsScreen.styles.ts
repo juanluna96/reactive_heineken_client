@@ -242,6 +242,22 @@ export const ItemName = styled.p`
   text-overflow: ellipsis;
 `;
 
+// Wraps ItemName + RestaurantLabel for a Stars Server row, so its
+// restaurant affiliation can sit right under the name (unused by
+// restaurant rows, which have no affiliation of their own to show).
+export const NameBlock = styled.div`
+  min-width: 0;
+`;
+
+export const RestaurantLabel = styled.p`
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: ${({ theme }) => theme.colors.mutedText};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
 export const ItemActions = styled.div`
   display: flex;
   align-items: center;
