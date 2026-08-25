@@ -395,6 +395,10 @@ export interface AdminSettingsDictionary {
   };
   restaurants: {
     addButton: string;
+    search: {
+      placeholder: string;
+      noResults: string;
+    };
     emptyTitle: string;
     emptySubtitle: string;
     editAction: string;

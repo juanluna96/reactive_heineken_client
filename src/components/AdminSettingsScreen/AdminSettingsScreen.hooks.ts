@@ -66,9 +66,19 @@ export const useAdminSettingsScreen = () => {
   }, []);
 
   const [restaurantsPage, setRestaurantsPage] = useState(1);
-  const restaurantsPageCount = Math.max(1, Math.ceil((restaurants?.length ?? 0) / PAGE_SIZE));
+  const [restaurantSearchQuery, setRestaurantSearchQueryState] = useState('');
+
+  const setRestaurantSearchQuery = (query: string) => {
+    setRestaurantSearchQueryState(query);
+    setRestaurantsPage(1);
+  };
+
+  const filteredRestaurants = (restaurants ?? []).filter((restaurant) =>
+    restaurant.name.toLowerCase().includes(restaurantSearchQuery.trim().toLowerCase()),
+  );
+  const restaurantsPageCount = Math.max(1, Math.ceil(filteredRestaurants.length / PAGE_SIZE));
   const restaurantsCurrentPage = Math.min(restaurantsPage, restaurantsPageCount);
-  const paginatedRestaurants = (restaurants ?? []).slice(
+  const paginatedRestaurants = filteredRestaurants.slice(
     (restaurantsCurrentPage - 1) * PAGE_SIZE,
     restaurantsCurrentPage * PAGE_SIZE,
   );
@@ -343,6 +353,9 @@ export const useAdminSettingsScreen = () => {
     restaurants,
     restaurantsStatus,
     handleRefreshRestaurants: loadRestaurants,
+    restaurantSearchQuery,
+    setRestaurantSearchQuery,
+    filteredRestaurants,
     paginatedRestaurants,
     restaurantsCurrentPage,
     restaurantsPageCount,

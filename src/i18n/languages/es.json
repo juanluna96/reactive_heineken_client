@@ -269,6 +269,10 @@
     },
     "restaurants": {
       "addButton": "Agregar restaurante",
+      "search": {
+        "placeholder": "Buscar restaurante...",
+        "noResults": "No se encontraron restaurantes que coincidan con \"{query}\""
+      },
       "emptyTitle": "Todavía no hay restaurantes",
       "emptySubtitle": "Agrega el primero para empezar a recibir calificaciones.",
       "editAction": "Editar",

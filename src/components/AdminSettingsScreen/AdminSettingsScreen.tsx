@@ -25,6 +25,9 @@ export const AdminSettingsScreen = () => {
 
     restaurants,
     restaurantsStatus,
+    restaurantSearchQuery,
+    setRestaurantSearchQuery,
+    filteredRestaurants,
     paginatedRestaurants,
     restaurantsCurrentPage,
     restaurantsPageCount,
@@ -187,7 +190,19 @@ export const AdminSettingsScreen = () => {
               {activeTab === 'restaurants' ? (
                 <>
                   <S.SectionHeader>
-                    <div />
+                    {(restaurants ?? []).length > 0 ? (
+                      <S.SearchFieldWrapper>
+                        <S.SearchIcon />
+                        <S.SearchInput
+                          type="text"
+                          placeholder={copy.restaurants.search.placeholder}
+                          value={restaurantSearchQuery}
+                          onChange={(event) => setRestaurantSearchQuery(event.target.value)}
+                        />
+                      </S.SearchFieldWrapper>
+                    ) : (
+                      <div />
+                    )}
                     <S.AddButton type="button" onClick={openAddRestaurant} whileTap={{ scale: 0.96 }}>
                       <S.AddIcon />
                       {copy.restaurants.addButton}
@@ -198,6 +213,12 @@ export const AdminSettingsScreen = () => {
                     <S.EmptyState>
                       <S.EmptyTitle>{copy.restaurants.emptyTitle}</S.EmptyTitle>
                       <S.EmptySubtitle>{copy.restaurants.emptySubtitle}</S.EmptySubtitle>
+                    </S.EmptyState>
+                  ) : filteredRestaurants.length === 0 ? (
+                    <S.EmptyState>
+                      <S.EmptySubtitle>
+                        {copy.restaurants.search.noResults.replace('{query}', restaurantSearchQuery)}
+                      </S.EmptySubtitle>
                     </S.EmptyState>
                   ) : (
                     <>

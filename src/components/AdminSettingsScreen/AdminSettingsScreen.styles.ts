@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FaChevronLeft, FaChevronRight, FaPen, FaPlus, FaRightLeft, FaTrash } from 'react-icons/fa6';
+import { FaChevronLeft, FaChevronRight, FaMagnifyingGlass, FaPen, FaPlus, FaRightLeft, FaTrash } from 'react-icons/fa6';
 import styled, { css } from 'styled-components';
 import { ADMIN_DESKTOP_BREAKPOINT, ADMIN_MOBILE_BREAKPOINT, ADMIN_SIDEBAR_WIDTH } from '../AdminSidebar';
 
@@ -148,6 +148,47 @@ export const RestaurantPickerWrapper = styled.div`
   @media (max-width: ${MOBILE_BREAKPOINT}) {
     max-width: none;
     width: 100%;
+  }
+`;
+
+export const SearchFieldWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    max-width: none;
+  }
+`;
+
+export const SearchIcon = styled(FaMagnifyingGlass)`
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  width: 13px;
+  height: 13px;
+  transform: translateY(-50%);
+  color: ${({ theme }) => theme.colors.placeholderText};
+`;
+
+export const SearchInput = styled.input`
+  width: 100%;
+  height: 44px;
+  padding: 0 14px 0 38px;
+  border-radius: ${({ theme }) => theme.radii.md};
+  border: 1px solid ${({ theme }) => theme.colors.cardBorder};
+  background: ${({ theme }) => theme.colors.inputBackground};
+  font-family: inherit;
+  font-size: 13px;
+  color: ${({ theme }) => theme.colors.white};
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.placeholderText};
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-color: ${({ theme }) => theme.colors.brandGreenLight};
   }
 `;
 
