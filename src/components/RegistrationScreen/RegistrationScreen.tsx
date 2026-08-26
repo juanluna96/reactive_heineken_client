@@ -104,6 +104,7 @@ export const RegistrationScreen = () => {
               onChange={setAccepted}
               prefix={t.registration.consent.prefix}
               linkText={t.registration.consent.linkText}
+              linkHref="/docs/politica-tratamiento-datos-personales.pdf"
               suffix={t.registration.consent.suffix}
               error={consentError}
             />
