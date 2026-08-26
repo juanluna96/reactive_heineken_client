@@ -65,7 +65,10 @@ export const AdminSettingsScreen = () => {
     beerMasterForm,
     beerMasterFormName,
     setBeerMasterFormName,
+    beerMasterFormRestaurantId,
+    setBeerMasterFormRestaurantId,
     beerMasterFormError,
+    beerMasterFormRestaurantError,
     isSavingBeerMaster,
     openAddBeerMaster,
     openEditBeerMaster,
@@ -291,12 +294,7 @@ export const AdminSettingsScreen = () => {
                         noResultsText={copy.beerMasters.restaurantPicker.noResults}
                       />
                     </S.RestaurantPickerWrapper>
-                    <S.AddButton
-                      type="button"
-                      onClick={openAddBeerMaster}
-                      disabled={!selectedRestaurantId}
-                      whileTap={selectedRestaurantId ? { scale: 0.96 } : undefined}
-                    >
+                    <S.AddButton type="button" onClick={openAddBeerMaster} whileTap={{ scale: 0.96 }}>
                       <S.AddIcon />
                       {copy.beerMasters.addButton}
                     </S.AddButton>
@@ -466,6 +464,18 @@ export const AdminSettingsScreen = () => {
                 submitBeerMasterForm();
               }}
             >
+              {beerMasterForm?.mode === 'add' && (
+                <AutocompleteField
+                  icon={FaUtensils}
+                  label={copy.beerMasters.form.restaurantLabel}
+                  placeholder={copy.beerMasters.form.restaurantPlaceholder}
+                  options={restaurantOptions}
+                  value={beerMasterFormRestaurantId}
+                  onChange={setBeerMasterFormRestaurantId}
+                  noResultsText={copy.beerMasters.form.restaurantNoResults}
+                  error={beerMasterFormRestaurantError}
+                />
+              )}
               <TextField
                 icon={FaMedal}
                 label={copy.beerMasters.form.nameLabel}

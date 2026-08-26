@@ -307,7 +307,7 @@
       },
       "addButton": "Add Stars Server",
       "emptyTitle": "No Stars Servers registered yet",
-      "emptySubtitle": "Choose a restaurant above and add the first one.",
+      "emptySubtitle": "Use the \"Add Stars Server\" button to register the first one.",
       "noRestaurantResultsTitle": "This restaurant has no Stars Servers",
       "noRestaurantResultsSubtitle": "Add the first one for this restaurant.",
       "editAction": "Edit",
@@ -316,6 +316,9 @@
       "form": {
         "addTitle": "New Stars Server",
         "editTitle": "Edit Stars Server",
+        "restaurantLabel": "Restaurant",
+        "restaurantPlaceholder": "Search for a restaurant",
+        "restaurantNoResults": "No restaurants found",
         "nameLabel": "Name",
         "namePlaceholder": "Stars Server name",
         "cancel": "Cancel",
@@ -346,6 +349,7 @@
       },
       "errors": {
         "nameRequired": "Enter a name",
+        "restaurantRequired": "Select a restaurant",
         "duplicate": "A Stars Server with this name already exists at this restaurant",
         "generic": "Something went wrong. Please try again."
       }

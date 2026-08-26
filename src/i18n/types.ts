@@ -356,6 +356,12 @@ export interface AdminSettingsFormDictionary {
   saving: string;
 }
 
+export interface AdminSettingsBeerMasterFormDictionary extends AdminSettingsFormDictionary {
+  restaurantLabel: string;
+  restaurantPlaceholder: string;
+  restaurantNoResults: string;
+}
+
 export interface AdminSettingsDeleteConfirmDictionary {
   title: string;
   message: string;
@@ -368,6 +374,10 @@ export interface AdminSettingsErrorsDictionary {
   nameRequired: string;
   duplicate: string;
   generic: string;
+}
+
+export interface AdminSettingsBeerMasterErrorsDictionary extends AdminSettingsErrorsDictionary {
+  restaurantRequired: string;
 }
 
 export interface AdminSettingsTransferDictionary {
@@ -421,10 +431,10 @@ export interface AdminSettingsDictionary {
     editAction: string;
     deleteAction: string;
     transferAction: string;
-    form: AdminSettingsFormDictionary;
+    form: AdminSettingsBeerMasterFormDictionary;
     deleteConfirm: AdminSettingsDeleteConfirmDictionary;
     transfer: AdminSettingsTransferDictionary;
-    errors: AdminSettingsErrorsDictionary;
+    errors: AdminSettingsBeerMasterErrorsDictionary;
   };
   states: {
     loading: string;

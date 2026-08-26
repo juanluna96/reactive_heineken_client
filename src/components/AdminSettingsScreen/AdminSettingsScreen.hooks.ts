@@ -215,13 +215,20 @@ export const useAdminSettingsScreen = () => {
   // --- Beer master form (add/edit) ---
   const [beerMasterForm, setBeerMasterForm] = useState<BeerMasterFormState>(null);
   const [beerMasterFormName, setBeerMasterFormName] = useState('');
+  // Only meaningful in 'add' mode — the restaurant to create the Stars Server
+  // under, picked in the modal itself. Pre-filled from the page's restaurant
+  // filter (if any) as a convenience, but always changeable there.
+  const [beerMasterFormRestaurantId, setBeerMasterFormRestaurantId] = useState('');
   const [beerMasterFormError, setBeerMasterFormError] = useState<string | undefined>(undefined);
+  const [beerMasterFormRestaurantError, setBeerMasterFormRestaurantError] = useState<string | undefined>(undefined);
   const [isSavingBeerMaster, setIsSavingBeerMaster] = useState(false);
 
   const openAddBeerMaster = () => {
     setBeerMasterForm({ mode: 'add' });
     setBeerMasterFormName('');
+    setBeerMasterFormRestaurantId(selectedRestaurantId);
     setBeerMasterFormError(undefined);
+    setBeerMasterFormRestaurantError(undefined);
   };
 
   const openEditBeerMaster = (beerMaster: AdminBeerMasterDto) => {
@@ -236,10 +243,15 @@ export const useAdminSettingsScreen = () => {
   };
 
   const submitBeerMasterForm = async () => {
-    // Adding targets whichever restaurant is picked in the filter; editing
-    // always targets the row's own restaurant, regardless of the filter.
-    const restaurantId = beerMasterForm?.mode === 'edit' ? beerMasterForm.beerMaster.restaurant_id : selectedRestaurantId;
-    if (!restaurantId) return;
+    // Adding targets whichever restaurant is picked in the modal; editing
+    // always targets the row's own restaurant (moving it is a separate
+    // "transfer" action).
+    const restaurantId =
+      beerMasterForm?.mode === 'edit' ? beerMasterForm.beerMaster.restaurant_id : beerMasterFormRestaurantId;
+    if (!restaurantId) {
+      setBeerMasterFormRestaurantError(t.adminSettings.beerMasters.errors.restaurantRequired);
+      return;
+    }
     const name = beerMasterFormName.trim();
     if (!name) {
       setBeerMasterFormError(t.adminSettings.beerMasters.errors.nameRequired);
@@ -248,6 +260,7 @@ export const useAdminSettingsScreen = () => {
 
     setIsSavingBeerMaster(true);
     setBeerMasterFormError(undefined);
+    setBeerMasterFormRestaurantError(undefined);
     try {
       if (beerMasterForm?.mode === 'edit') {
         await updateBeerMaster(restaurantId, beerMasterForm.beerMaster.id, { name });
@@ -393,7 +406,10 @@ export const useAdminSettingsScreen = () => {
     beerMasterForm,
     beerMasterFormName,
     setBeerMasterFormName,
+    beerMasterFormRestaurantId,
+    setBeerMasterFormRestaurantId,
     beerMasterFormError,
+    beerMasterFormRestaurantError,
     isSavingBeerMaster,
     openAddBeerMaster,
     openEditBeerMaster,
