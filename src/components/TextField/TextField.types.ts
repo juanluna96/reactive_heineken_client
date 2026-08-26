@@ -7,5 +7,7 @@ export interface TextFieldProps {
   type?: 'text' | 'email' | 'password';
   value: string;
   onChange: (value: string) => void;
+  /** Called when Enter is pressed in the field — wire to a form's submit handler. */
+  onEnter?: () => void;
   error?: string;
 }

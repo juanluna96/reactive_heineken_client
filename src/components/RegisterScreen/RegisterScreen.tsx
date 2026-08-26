@@ -101,6 +101,7 @@ export const RegisterScreen = () => {
               type="password"
               value={password}
               onChange={setPassword}
+              onEnter={handleSubmit}
               error={passwordError}
             />
             <TextField
@@ -110,6 +111,7 @@ export const RegisterScreen = () => {
               type="password"
               value={confirmPassword}
               onChange={setConfirmPassword}
+              onEnter={handleSubmit}
               error={confirmPasswordError}
             />
           </S.FormCard>

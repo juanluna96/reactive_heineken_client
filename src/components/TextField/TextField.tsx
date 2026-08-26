@@ -7,7 +7,7 @@ import type { TextFieldProps } from './TextField.types';
 
 export const TextField = (props: TextFieldProps) => {
   const { icon: Icon, label, placeholder, value, error } = props;
-  const { inputType, isPasswordField, isPasswordVisible, handleChange, togglePasswordVisibility } =
+  const { inputType, isPasswordField, isPasswordVisible, handleChange, handleKeyDown, togglePasswordVisibility } =
     useTextField(props);
 
   return (
@@ -24,6 +24,7 @@ export const TextField = (props: TextFieldProps) => {
           placeholder={placeholder}
           value={value}
           onChange={handleChange}
+          onKeyDown={handleKeyDown}
           $hasError={Boolean(error)}
           $hasToggle={isPasswordField}
         />
