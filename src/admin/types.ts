@@ -21,4 +21,7 @@ export interface AdminState {
   ratingsStatus: DashboardStatus;
   fetchRatings: () => Promise<void>;
   refreshRatings: () => Promise<void>;
+  /** Clears every cached slice back to idle — call on login/logout so a
+   *  role switch can't show the previous session's (differently-scoped) data. */
+  resetAdminData: () => void;
 }

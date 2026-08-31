@@ -21,7 +21,6 @@ export const AdminBeerMastersScreen = () => {
     isEmpty,
     hasNoResults,
     items,
-    ownCardRef,
     sortBy,
     setSortBy,
     restaurantFilter,
@@ -115,16 +114,18 @@ export const AdminBeerMastersScreen = () => {
             <S.PageSubtitle>{t.adminBeerMasters.pageSubtitle}</S.PageSubtitle>
           </S.TitleGroup>
           <S.TopBarActions>
-            <FilterDropdown
-              icon={FaLocationDot}
-              label={t.adminBeerMasters.restaurantFilter.label}
-              value={restaurantFilter}
-              onChange={setRestaurantFilter}
-              options={[
-                { value: ALL_RESTAURANTS, label: t.adminBeerMasters.restaurantFilter.all },
-                ...restaurantOptions.map((option) => ({ value: option.id, label: option.name })),
-              ]}
-            />
+            {restaurantOptions.length > 1 && (
+              <FilterDropdown
+                icon={FaLocationDot}
+                label={t.adminBeerMasters.restaurantFilter.label}
+                value={restaurantFilter}
+                onChange={setRestaurantFilter}
+                options={[
+                  { value: ALL_RESTAURANTS, label: t.adminBeerMasters.restaurantFilter.all },
+                  ...restaurantOptions.map((option) => ({ value: option.id, label: option.name })),
+                ]}
+              />
+            )}
             <FilterDropdown
               icon={FaFilter}
               label={t.adminBeerMasters.sort.label}
@@ -165,12 +166,7 @@ export const AdminBeerMastersScreen = () => {
             ) : (
               <>
                 {items.map((beerMaster) => (
-                  <S.RankCard
-                    key={beerMaster.key}
-                    ref={beerMaster.isOwn ? ownCardRef : undefined}
-                    $isOwn={beerMaster.isOwn}
-                    variants={staggerItem}
-                  >
+                  <S.RankCard key={beerMaster.key} variants={staggerItem}>
                     <S.RankIdentity>
                       <S.RankNumber>{String(beerMaster.rank).padStart(2, '0')}</S.RankNumber>
                       <S.Avatar>{beerMaster.initials}</S.Avatar>
@@ -178,7 +174,6 @@ export const AdminBeerMastersScreen = () => {
                         <S.BeerMasterName>{beerMaster.name}</S.BeerMasterName>
                         <S.RestaurantLabel>{beerMaster.restaurantName}</S.RestaurantLabel>
                       </S.NameBlock>
-                      {beerMaster.isOwn && <S.OwnBadge>{t.adminBeerMasters.ownBadge}</S.OwnBadge>}
                     </S.RankIdentity>
 
                     <S.RankMeta>

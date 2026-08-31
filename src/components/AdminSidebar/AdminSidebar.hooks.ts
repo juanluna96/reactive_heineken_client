@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { logout as logoutRequest } from '../../api';
+import { useAdminStore } from '../../admin';
 import { useAuthStore } from '../../auth';
 import { useTranslation } from '../../i18n';
 import { ROUTES } from '../../routes';
@@ -12,6 +13,7 @@ export const useAdminSidebar = () => {
 
   const currentUser = useAuthStore((state) => state.user);
   const clearUser = useAuthStore((state) => state.clearUser);
+  const resetAdminData = useAdminStore((state) => state.resetAdminData);
 
   // Below ADMIN_DESKTOP_BREAKPOINT the sidebar is an off-canvas drawer
   // (see AdminSidebar.styles.ts) toggled by a floating menu button — this
@@ -33,6 +35,7 @@ export const useAdminSidebar = () => {
       await logoutRequest();
     } finally {
       clearUser();
+      resetAdminData();
       navigate(ROUTES.authLogin);
       closeMobileMenu();
     }

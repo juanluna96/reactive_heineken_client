@@ -268,7 +268,6 @@ export interface AdminBeerMastersDictionary {
   refreshLabel: string;
   ratingsCount: string;
   noRatings: string;
-  ownBadge: string;
   sort: {
     label: string;
     rating: string;
