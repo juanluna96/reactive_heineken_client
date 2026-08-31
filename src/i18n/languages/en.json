@@ -29,9 +29,11 @@
       "label": "NAME",
       "placeholder": "Enter your full name"
     },
-    "email": {
-      "label": "EMAIL",
-      "placeholder": "example@email.com"
+    "phone": {
+      "label": "PHONE",
+      "placeholder": "6123 4567",
+      "country": "Country",
+      "noResults": "No country found"
     },
     "restaurant": {
       "label": "RESTAURANT / BAR",
@@ -43,17 +45,14 @@
       "linkText": "Privacy Policy",
       "suffix": " and the processing of my personal data."
     },
-    "resultsConsent": {
-      "prefix": "I'd like to receive information and results related to this activation by email."
-    },
     "cta": "CONTINUE",
     "step": "STEP 1 OF 3",
     "errors": {
       "nameRequired": "Enter your full name",
-      "emailInvalid": "Enter a valid email address",
+      "phoneInvalid": "Enter a valid phone number",
       "restaurantRequired": "Select a restaurant",
       "consentRequired": "You must accept the privacy policy",
-      "alreadyRated": "You've already submitted a rating for this restaurant with this email"
+      "alreadyRated": "You've already submitted a rating for this restaurant with this number"
     }
   },
   "watchExperience": {

@@ -6,8 +6,11 @@ import { useRegistrationStore } from '../../registration';
 import { useRestaurantsStore } from '../../restaurants';
 import { ROUTES } from '../../routes';
 import type { AutocompleteFieldOption } from '../AutocompleteField';
+import { toE164 } from '../PhoneField';
 
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// `+` then 7–15 digits (E.164's cap). Mirrors the server's PHONE_RE
+// (see app/schemas.py). toE164 already reduces the number to `+<digits>`.
+const PHONE_PATTERN = /^\+\d{7,15}$/;
 
 export const useRegistrationScreen = () => {
   const { t } = useTranslation();
@@ -15,14 +18,14 @@ export const useRegistrationScreen = () => {
 
   const name = useRegistrationStore((state) => state.name);
   const setName = useRegistrationStore((state) => state.setName);
-  const email = useRegistrationStore((state) => state.email);
-  const setEmail = useRegistrationStore((state) => state.setEmail);
+  const phone = useRegistrationStore((state) => state.phone);
+  const setPhone = useRegistrationStore((state) => state.setPhone);
+  const phoneCountry = useRegistrationStore((state) => state.phoneCountry);
+  const setPhoneCountry = useRegistrationStore((state) => state.setPhoneCountry);
   const restaurantId = useRegistrationStore((state) => state.restaurantId);
   const setRestaurantId = useRegistrationStore((state) => state.setRestaurantId);
   const accepted = useRegistrationStore((state) => state.accepted);
   const setAccepted = useRegistrationStore((state) => state.setAccepted);
-  const resultsConsent = useRegistrationStore((state) => state.resultsConsent);
-  const setResultsConsent = useRegistrationStore((state) => state.setResultsConsent);
   const [submitted, setSubmitted] = useState(false);
   const [isChecking, setIsChecking] = useState(false);
   const [alreadyRatedError, setAlreadyRatedError] = useState<string | undefined>(undefined);
@@ -41,21 +44,23 @@ export const useRegistrationScreen = () => {
     label: restaurant.name,
   }));
 
+  const phoneE164 = toE164(phoneCountry, phone);
+
   const isNameValid = name.trim().length > 0;
-  const isEmailValid = EMAIL_PATTERN.test(email);
+  const isPhoneValid = PHONE_PATTERN.test(phoneE164);
   const isRestaurantValid = restaurantId !== '';
-  const isFormValid = isNameValid && isEmailValid && isRestaurantValid && accepted;
+  const isFormValid = isNameValid && isPhoneValid && isRestaurantValid && accepted;
 
   const nameError = submitted && !isNameValid ? t.registration.errors.nameRequired : undefined;
-  const emailError = submitted && !isEmailValid ? t.registration.errors.emailInvalid : undefined;
+  const phoneError = submitted && !isPhoneValid ? t.registration.errors.phoneInvalid : undefined;
   const restaurantError = submitted && !isRestaurantValid ? t.registration.errors.restaurantRequired : undefined;
   const consentError = submitted && !accepted ? t.registration.errors.consentRequired : undefined;
 
   // Clear a stale "already rated" result once the customer changes either
-  // half of the (restaurant, email) pair it was based on.
+  // half of the (restaurant, phone) pair it was based on.
   useEffect(() => {
     setAlreadyRatedError(undefined);
-  }, [email, restaurantId]);
+  }, [phone, phoneCountry, restaurantId]);
 
   const handleBack = () => {
     navigate(ROUTES.ageVerification);
@@ -74,7 +79,10 @@ export const useRegistrationScreen = () => {
     setIsChecking(true);
     setAlreadyRatedError(undefined);
     try {
-      const alreadyRated = await checkRatingExists({ restaurant_id: restaurantId, customer_email: email });
+      const alreadyRated = await checkRatingExists({
+        restaurant_id: restaurantId,
+        customer_phone: phoneE164,
+      });
       if (alreadyRated) {
         setAlreadyRatedError(t.registration.errors.alreadyRated);
         return;
@@ -92,23 +100,23 @@ export const useRegistrationScreen = () => {
   return {
     t,
     name,
-    email,
+    phone,
+    phoneCountry,
     restaurant: restaurantId,
     accepted,
-    resultsConsent,
     restaurantOptions,
     isFormValid,
     isChecking,
     nameError,
-    emailError,
+    phoneError,
     restaurantError,
     consentError,
     alreadyRatedError,
     setName,
-    setEmail,
+    setPhone,
+    setPhoneCountry,
     setRestaurant: setRestaurantId,
     setAccepted,
-    setResultsConsent,
     handleBack,
     handleContinue,
     handleDismissAlreadyRated,

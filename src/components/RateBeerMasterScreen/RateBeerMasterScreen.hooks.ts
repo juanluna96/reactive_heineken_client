@@ -8,6 +8,7 @@ import { useRatingStore } from '../../rating';
 import { useRegistrationStore } from '../../registration';
 import { ROUTES } from '../../routes';
 import type { AutocompleteFieldOption } from '../AutocompleteField';
+import { toE164 } from '../PhoneField';
 
 const STAR_VALUES = [1, 2, 3, 4, 5];
 const MAX_COMMENT_LENGTH = 140;
@@ -18,8 +19,8 @@ export const useRateBeerMasterScreen = () => {
 
   const restaurantId = useRegistrationStore((state) => state.restaurantId);
   const customerName = useRegistrationStore((state) => state.name);
-  const customerEmail = useRegistrationStore((state) => state.email);
-  const resultsConsent = useRegistrationStore((state) => state.resultsConsent);
+  const customerPhone = useRegistrationStore((state) => state.phone);
+  const customerPhoneCountry = useRegistrationStore((state) => state.phoneCountry);
 
   const beerMasterId = useRatingStore((state) => state.beerMasterId);
   const setBeerMasterId = useRatingStore((state) => state.setBeerMasterId);
@@ -108,10 +109,9 @@ export const useRateBeerMasterScreen = () => {
         beer_master_id: beerMasterId,
         beer_master_name: beerMasterId ? null : beerMasterName.trim(),
         customer_name: customerName,
-        customer_email: customerEmail,
+        customer_phone: toE164(customerPhoneCountry, customerPhone),
         rating,
         comment: comment.trim() ? comment.trim() : null,
-        results_email_consent: resultsConsent,
       });
       navigate(ROUTES.thankYou);
     } catch (err) {

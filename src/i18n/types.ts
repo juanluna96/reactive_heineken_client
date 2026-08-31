@@ -18,9 +18,11 @@ export interface RegistrationDictionary {
     label: string;
     placeholder: string;
   };
-  email: {
+  phone: {
     label: string;
     placeholder: string;
+    country: string;
+    noResults: string;
   };
   restaurant: {
     label: string;
@@ -32,14 +34,11 @@ export interface RegistrationDictionary {
     linkText: string;
     suffix: string;
   };
-  resultsConsent: {
-    prefix: string;
-  };
   cta: string;
   step: string;
   errors: {
     nameRequired: string;
-    emailInvalid: string;
+    phoneInvalid: string;
     restaurantRequired: string;
     consentRequired: string;
     alreadyRated: string;

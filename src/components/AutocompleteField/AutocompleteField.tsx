@@ -15,9 +15,11 @@ export const AutocompleteField = (props: AutocompleteFieldProps) => {
     highlightedIndex,
     containerRef,
     inputWrapperRef,
+    highlightedOptionRef,
     dropdownRect,
     handleInputChange,
     handleFocus,
+    handleClick,
     handleBlur,
     handleKeyDown,
     handleSelect,
@@ -41,6 +43,7 @@ export const AutocompleteField = (props: AutocompleteFieldProps) => {
           value={query}
           onChange={handleInputChange}
           onFocus={handleFocus}
+          onClick={handleClick}
           onBlur={handleBlur}
           onKeyDown={handleKeyDown}
           $hasError={Boolean(error)}
@@ -64,6 +67,7 @@ export const AutocompleteField = (props: AutocompleteFieldProps) => {
                 filteredOptions.map((option, index) => (
                   <S.Option
                     key={option.value}
+                    ref={index === highlightedIndex ? highlightedOptionRef : undefined}
                     role="option"
                     aria-selected={index === highlightedIndex}
                     $highlighted={index === highlightedIndex}

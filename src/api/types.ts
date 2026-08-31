@@ -21,16 +21,14 @@ export interface CreateRatingPayload {
   beer_master_id?: string | null;
   beer_master_name?: string | null;
   customer_name: string;
-  customer_email: string;
+  customer_phone: string;
   rating: number;
   comment?: string | null;
-  /** Independent opt-in for emailing the participant this activation's results — see RegistrationScreen. */
-  results_email_consent?: boolean;
 }
 
 export interface RatingExistsParams {
   restaurant_id: string;
-  customer_email: string;
+  customer_phone: string;
 }
 
 export interface RatingDto {
@@ -39,10 +37,9 @@ export interface RatingDto {
   beer_master_id: string | null;
   beer_master_name: string | null;
   customer_name: string;
-  customer_email: string;
+  customer_phone: string;
   rating: number;
   comment: string | null;
-  results_email_consent: boolean;
   created_at: string;
 }
 

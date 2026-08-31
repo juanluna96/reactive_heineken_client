@@ -24,4 +24,14 @@ export interface AutocompleteFieldProps {
   /** Fired with the raw typed text whenever it no longer matches an option.
    *  Only relevant when `allowCustomValue` is true. */
   onCustomValueChange?: (query: string) => void;
+  /** Minimum width (px) for the portaled dropdown, for fields that are
+   *  narrower than their option labels need (e.g. a country-code picker sat
+   *  next to another field). The dropdown still grows to the field's own
+   *  width when that is larger, and is nudged left to stay on screen. */
+  dropdownMinWidth?: number;
+  /** Text shown in the input for the current selection when the field isn't
+   *  being searched, instead of the selected option's `label`. Lets the
+   *  collapsed field be more compact than its dropdown rows (e.g. show
+   *  "🇲🇽 +52" while the list shows "🇲🇽 +52 México"). */
+  collapsedLabel?: string;
 }
