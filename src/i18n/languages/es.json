@@ -29,9 +29,11 @@
       "label": "NOMBRE",
       "placeholder": "Ingresa tu nombre completo"
     },
-    "email": {
-      "label": "CORREO",
-      "placeholder": "ejemplo@correo.com"
+    "phone": {
+      "label": "TELÉFONO",
+      "placeholder": "6123 4567",
+      "country": "País",
+      "noResults": "No se encontró el país"
     },
     "restaurant": {
       "label": "RESTAURANTE / BAR",
@@ -43,33 +45,23 @@
       "linkText": "Política de Privacidad",
       "suffix": " y el tratamiento de mis datos personales."
     },
-    "resultsConsent": {
-      "prefix": "Deseo recibir por correo electrónico información y resultados relacionados con esta activación."
-    },
     "cta": "CONTINUAR",
-    "step": "PASO 1 DE 3",
+    "step": "PASO 1 DE 2",
     "errors": {
       "nameRequired": "Ingresa tu nombre completo",
-      "emailInvalid": "Ingresa un correo electrónico válido",
+      "phoneInvalid": "Ingresa un número de teléfono válido",
       "restaurantRequired": "Selecciona un restaurante",
       "consentRequired": "Debes aceptar la política de privacidad",
-      "alreadyRated": "Ya enviaste una calificación para este restaurante con este correo"
+      "alreadyRated": "Ya enviaste una calificación para este restaurante con este número"
     }
   },
-  "watchExperience": {
-    "title": "Mira la\nExperiencia",
-    "subtitle": "Por favor mira el video completo para desbloquear tu\ncalificación.",
-    "durationLabel": "00:30",
-    "timerLabel": "RESTANTE",
-    "helper": "La calificación estará disponible cuando\ntermine el video.",
-    "playButtonLabel": "Haz clic aquí para reproducir",
-    "cta": "CALIFICA A TU MAESTRO CERVECERO",
-    "step": "PASO 2 DE 3"
-  },
   "rateBeerMaster": {
-    "beerMasterLabel": "MAESTRO CERVECERO",
-    "namePlaceholder": "Nombre del maestro cervecero",
+    "beerMasterLabel": "EMBAJADOR DEL SERVICIO",
+    "namePlaceholder": "Nombre del embajador del servicio",
+    "noResults": "No se encontró ningún embajador del servicio con ese nombre",
     "title": "¿Cómo fue tu experiencia?",
+    "skillsQuestion": "¿Cómo calificarías sus habilidades el día de hoy?",
+    "serviceQuestion": "¿Cómo calificarías el servicio?",
     "subtitle": "Tu opinión nos ayuda a mejorar",
     "tierMessages": [
       "MUY MALA EXPERIENCIA",
@@ -81,9 +73,9 @@
     "opinionLabel": "OPINIÓN",
     "opinionPlaceholder": "Comentario opcional...",
     "cta": "ENVIAR CALIFICACIÓN",
-    "step": "PASO 3 DE 3",
+    "step": "PASO 2 DE 2",
     "errors": {
-      "nameRequired": "Ingresa el nombre del maestro cervecero",
+      "nameRequired": "Ingresa el nombre del embajador del servicio",
       "ratingRequired": "Selecciona una calificación",
       "submitFailed": "No se pudo enviar tu calificación, intenta de nuevo",
       "alreadyRated": "Ya enviaste una calificación para este restaurante"
@@ -104,7 +96,7 @@
     "nav": {
       "dashboard": "Panel de Control",
       "restaurants": "Restaurantes",
-      "beerMasters": "Maestros Cerveceros",
+      "beerMasters": "Embajadores del servicio",
       "ratings": "Calificaciones",
       "settings": "Ajustes"
     },
@@ -113,7 +105,7 @@
       "averageRating": "Promedio de Calificación",
       "restaurantsRegistered": "Restaurantes Registrados",
       "newRestaurants": "+{count} nuevos",
-      "beerMastersRegistered": "Maestros Cerveceros",
+      "beerMastersRegistered": "Embajadores del servicio",
       "newBeerMasters": "+{count} nuevos"
     },
     "chart": {
@@ -122,9 +114,9 @@
       "empty": "Aún no hay calificaciones en este periodo"
     },
     "rankings": {
-      "title": "Mejores Maestros Cerveceros",
+      "title": "Mejores embajadores del servicio",
       "rank": "Rango",
-      "master": "Maestro",
+      "master": "Embajador del servicio",
       "restaurant": "Restaurante",
       "reviews": "Reseñas",
       "avgRating": "Calif. Promedio",
@@ -138,7 +130,8 @@
     "feed": {
       "title": "Últimas Reseñas",
       "empty": "Aún no hay reseñas recientes",
-      "noComment": "El cliente no dejó un comentario"
+      "noComment": "El cliente no dejó un comentario",
+      "subRatings": "Habilidades {skills} · Servicio {service}"
     },
     "time": {
       "justNow": "justo ahora",
@@ -157,11 +150,13 @@
     "pageTitle": "Ranking de Sedes y Establecimientos",
     "pageSubtitle": "Clasificación de Rendimiento y Calidad Global",
     "refreshLabel": "ACTUALIZAR",
-    "ratingsCount": "{count} reseñas",
-    "noRatings": "Sin calificaciones aún",
     "ownRestaurantBadge": "Tu Restaurante",
+    "scoreLabel": "PUNTAJE",
+    "scoreEmpty": "—",
+    "scoreBreakdownToggle": "Ver desglose del puntaje",
     "sort": {
       "label": "Ordenar por",
+      "score": "Ordenar por Puntaje",
       "rating": "Ordenar por Calificación",
       "popularity": "Más Populares",
       "newest": "Nuevos"
@@ -175,10 +170,6 @@
       "next": "Página siguiente",
       "indicator": "Página {current} de {total}"
     },
-    "beerMasters": {
-      "toggle": "Beer Masters ({count})",
-      "empty": "Todavía no hay maestros cerveceros calificados en este local."
-    },
     "states": {
       "loading": "Cargando ranking de restaurantes...",
       "error": "No se pudo cargar el ranking. Intenta de nuevo.",
@@ -187,12 +178,11 @@
     }
   },
   "adminBeerMasters": {
-    "pageTitle": "Ranking de Maestros Cerveceros",
+    "pageTitle": "Ranking de embajadores del servicio",
     "pageSubtitle": "Desempeño Individual y Calidad del Servicio",
     "refreshLabel": "ACTUALIZAR",
     "ratingsCount": "{count} reseñas",
     "noRatings": "Sin calificaciones aún",
-    "ownBadge": "De Tu Restaurante",
     "sort": {
       "label": "Ordenar por",
       "rating": "Ordenar por Calificación",
@@ -202,11 +192,11 @@
     "restaurantFilter": {
       "label": "Sede",
       "all": "Todas las Sedes",
-      "empty": "Todavía no hay maestros cerveceros calificados en {restaurant}."
+      "empty": "Todavía no hay embajadores del servicio calificados en {restaurant}."
     },
     "search": {
-      "placeholder": "Buscar maestro cervecero...",
-      "noResults": "No se encontraron maestros cerveceros que coincidan con \"{query}\""
+      "placeholder": "Buscar embajador del servicio...",
+      "noResults": "No se encontraron embajadores del servicio que coincidan con \"{query}\""
     },
     "pagination": {
       "previous": "Página anterior",
@@ -214,9 +204,9 @@
       "indicator": "Página {current} de {total}"
     },
     "states": {
-      "loading": "Cargando ranking de maestros cerveceros...",
+      "loading": "Cargando ranking de embajadores del servicio...",
       "error": "No se pudo cargar el ranking. Intenta de nuevo.",
-      "emptyTitle": "Todavía no hay maestros cerveceros calificados",
+      "emptyTitle": "Todavía no hay embajadores del servicio calificados",
       "emptySubtitle": "Cuando los clientes empiecen a calificarlos, aparecerán aquí."
     }
   },
@@ -250,7 +240,9 @@
       "noResults": "No se encontraron reseñas que coincidan con los filtros actuales"
     },
     "restaurantLabel": "Sede: {restaurant}",
-    "beerMasterLabel": "Beer Master: {name}",
+    "beerMasterLabel": "Embajador del servicio: {name}",
+    "skillsLabel": "Habilidades",
+    "serviceLabel": "Servicio",
     "loadMore": "Cargar más reseñas",
     "states": {
       "loading": "Cargando reseñas...",
@@ -261,13 +253,18 @@
   },
   "adminSettings": {
     "pageTitle": "Ajustes",
-    "pageSubtitle": "Gestiona los restaurantes y maestros cerveceros registrados",
+    "pageSubtitle": "Gestiona los restaurantes y embajadores del servicio registrados",
     "tabs": {
       "restaurants": "Restaurantes",
-      "beerMasters": "Maestros Cerveceros"
+      "beerMasters": "Embajadores del servicio",
+      "scoring": "Puntaje"
     },
     "restaurants": {
       "addButton": "Agregar restaurante",
+      "search": {
+        "placeholder": "Buscar restaurante...",
+        "noResults": "No se encontraron restaurantes que coincidan con \"{query}\""
+      },
       "emptyTitle": "Todavía no hay restaurantes",
       "emptySubtitle": "Agrega el primero para empezar a recibir calificaciones.",
       "editAction": "Editar",
@@ -283,7 +280,7 @@
       },
       "deleteConfirm": {
         "title": "Eliminar restaurante",
-        "message": "¿Seguro que quieres eliminar \"{name}\"? También se eliminarán sus maestros cerveceros y calificaciones asociadas. Esta acción no se puede deshacer.",
+        "message": "¿Seguro que quieres eliminar \"{name}\"? También se eliminarán sus embajadores del servicio y calificaciones asociadas. Esta acción no se puede deshacer.",
         "cancel": "Cancelar",
         "confirm": "Eliminar",
         "deleting": "Eliminando..."
@@ -296,35 +293,103 @@
     },
     "beerMasters": {
       "restaurantPicker": {
-        "label": "Restaurante",
-        "placeholder": "Selecciona un restaurante"
+        "label": "Filtrar por restaurante",
+        "placeholder": "Todos los restaurantes",
+        "noResults": "No se encontraron restaurantes"
       },
-      "addButton": "Agregar maestro cervecero",
-      "selectRestaurantTitle": "Selecciona un restaurante",
-      "selectRestaurantSubtitle": "Elige un restaurante arriba para ver y gestionar sus maestros cerveceros.",
-      "emptyTitle": "Todavía no hay maestros cerveceros",
-      "emptySubtitle": "Agrega el primero para este restaurante.",
+      "addButton": "Agregar embajador del servicio",
+      "emptyTitle": "Todavía no hay embajadores del servicio registrados",
+      "emptySubtitle": "Usa el botón \"Agregar embajador del servicio\" para registrar el primero.",
+      "noRestaurantResultsTitle": "Este restaurante no tiene embajadores del servicio",
+      "noRestaurantResultsSubtitle": "Agrega el primero para este restaurante.",
       "editAction": "Editar",
       "deleteAction": "Eliminar",
+      "transferAction": "Transferir",
       "form": {
-        "addTitle": "Nuevo maestro cervecero",
-        "editTitle": "Editar maestro cervecero",
+        "addTitle": "Nuevo embajador del servicio",
+        "editTitle": "Editar embajador del servicio",
+        "restaurantLabel": "Restaurante",
+        "restaurantPlaceholder": "Busca un restaurante",
+        "restaurantNoResults": "No se encontraron restaurantes",
         "nameLabel": "Nombre",
-        "namePlaceholder": "Nombre del maestro cervecero",
+        "namePlaceholder": "Nombre del embajador del servicio",
         "cancel": "Cancelar",
         "save": "Guardar",
         "saving": "Guardando..."
       },
       "deleteConfirm": {
-        "title": "Eliminar maestro cervecero",
+        "title": "Eliminar embajador del servicio",
         "message": "¿Seguro que quieres eliminar a \"{name}\"? Sus calificaciones existentes se conservarán bajo su nombre. Esta acción no se puede deshacer.",
         "cancel": "Cancelar",
         "confirm": "Eliminar",
         "deleting": "Eliminando..."
       },
+      "transfer": {
+        "title": "Transferir embajador del servicio",
+        "message": "Elige el restaurante al que quieres transferir a \"{name}\". Sus calificaciones existentes se transferirán junto con él.",
+        "restaurantLabel": "Nuevo restaurante",
+        "restaurantPlaceholder": "Busca un restaurante",
+        "noResults": "No se encontraron restaurantes",
+        "cancel": "Cancelar",
+        "confirm": "Transferir",
+        "transferring": "Transfiriendo...",
+        "errors": {
+          "restaurantRequired": "Selecciona un restaurante",
+          "duplicate": "No se pudo transferir: ya existe un embajador del servicio con este nombre en el restaurante destino, o alguno de sus clientes ya calificó ahí",
+          "generic": "No se pudo transferir el embajador del servicio, intenta de nuevo"
+        }
+      },
       "errors": {
         "nameRequired": "Ingresa un nombre",
-        "duplicate": "Ya existe un maestro cervecero con este nombre en este restaurante",
+        "restaurantRequired": "Selecciona un restaurante",
+        "duplicate": "Ya existe un embajador del servicio con este nombre en este restaurante",
+        "generic": "Algo salió mal. Intenta de nuevo."
+      }
+    },
+    "scoring": {
+      "title": "Sistema de puntaje",
+      "subtitle": "Ajusta cómo se calcula el puntaje STAR SERVE (0–100) que aparece en los rankings.",
+      "componentsTitle": "Componentes",
+      "componentsSubtitle": "Los pesos se normalizan automáticamente; el puntaje siempre queda entre 0 y 100.",
+      "weightSum": "Suma de pesos: {sum}%",
+      "weightSumHint": "Recomendado 100%. Si no suman 100 se normaliza igualmente.",
+      "weightLabel": "Peso",
+      "kLabel": "k (confianza)",
+      "kHint": "Calificaciones necesarias para confiar en el promedio propio.",
+      "enabledLabel": "Activo",
+      "growthPctLabel": "Es % de crecimiento",
+      "ceilingLabel": "Techo %",
+      "manualBadge": "Manual",
+      "autoBadge": "Automático",
+      "deleteAction": "Eliminar",
+      "addButton": "Agregar componente",
+      "inputsTitle": "Valores por restaurante",
+      "inputsSubtitle": "Valor manual de cada restaurante para los componentes manuales (ej. % de crecimiento de venta).",
+      "noManualComponents": "No hay componentes manuales. Agrega uno arriba para capturar valores por restaurante.",
+      "inputPlaceholder": "—",
+      "restaurantColumn": "Restaurante",
+      "form": {
+        "addTitle": "Nuevo componente",
+        "labelLabel": "Nombre",
+        "labelPlaceholder": "Ej. Volumen de cuenta",
+        "weightLabel": "Peso (0–1)",
+        "growthPctLabel": "El valor por restaurante es un % de crecimiento",
+        "ceilingLabel": "Techo de crecimiento (%)",
+        "cancel": "Cancelar",
+        "save": "Crear",
+        "saving": "Creando..."
+      },
+      "deleteConfirm": {
+        "title": "Eliminar componente",
+        "message": "¿Seguro que quieres eliminar \"{name}\"? Se borrarán también sus valores por restaurante. Esta acción no se puede deshacer.",
+        "cancel": "Cancelar",
+        "confirm": "Eliminar",
+        "deleting": "Eliminando..."
+      },
+      "errors": {
+        "labelRequired": "Ingresa un nombre",
+        "weightInvalid": "El peso debe estar entre 0 y 1",
+        "ceilingRequired": "Ingresa el techo de crecimiento",
         "generic": "Algo salió mal. Intenta de nuevo."
       }
     },

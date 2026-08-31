@@ -556,6 +556,22 @@ export const FeedList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  scrollbar-width: thin;
+  scrollbar-color: ${({ theme }) => theme.colors.brandGreenLight} transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.colors.brandGreenLight};
+    border-radius: ${({ theme }) => theme.radii.pill};
+  }
 `;
 
 export const FeedCard = styled.div`
@@ -599,6 +615,12 @@ export const FeedTime = styled.p`
 `;
 
 export const FeedContext = styled.p`
+  margin: 0;
+  font-size: 11px;
+  color: ${({ theme }) => theme.colors.mutedText};
+`;
+
+export const FeedSubRatings = styled.p`
   margin: 0;
   font-size: 11px;
   color: ${({ theme }) => theme.colors.mutedText};

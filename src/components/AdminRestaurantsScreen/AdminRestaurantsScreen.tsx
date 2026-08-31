@@ -113,6 +113,7 @@ export const AdminRestaurantsScreen = () => {
               value={sortBy}
               onChange={(value) => setSortBy(value as typeof sortBy)}
               options={[
+                { value: 'score', label: t.adminRestaurants.sort.score },
                 { value: 'rating', label: t.adminRestaurants.sort.rating },
                 { value: 'popularity', label: t.adminRestaurants.sort.popularity },
                 { value: 'newest', label: t.adminRestaurants.sort.newest },
@@ -161,34 +162,10 @@ export const AdminRestaurantsScreen = () => {
                     </S.RankIdentity>
 
                     <S.RankMeta>
-                      {restaurant.hasRatings ? (
-                        <S.RatingBlock>
-                          <S.RatingRow>
-                            <S.StarIcon />
-                            <S.RatingValue>{restaurant.averageRating}</S.RatingValue>
-                          </S.RatingRow>
-                          <S.ReviewsLabel>{restaurant.ratingsCountLabel}</S.ReviewsLabel>
-                        </S.RatingBlock>
-                      ) : (
-                        <S.NoRatingsBadge>{t.adminRestaurants.noRatings}</S.NoRatingsBadge>
-                      )}
-
-                      {restaurant.beerMasters.length > 0 && (
-                        <S.BeerMastersDetails>
-                          <S.BeerMastersSummary>
-                            {restaurant.beerMastersToggleLabel}
-                            <S.ChevronIcon />
-                          </S.BeerMastersSummary>
-                          <S.BeerMastersList>
-                            {restaurant.beerMasters.map((master) => (
-                              <S.BeerMasterRow key={master.name}>
-                                <S.BeerMasterName>{master.name}</S.BeerMasterName>
-                                <S.BeerMasterScore>{master.averageRating}</S.BeerMasterScore>
-                              </S.BeerMasterRow>
-                            ))}
-                          </S.BeerMastersList>
-                        </S.BeerMastersDetails>
-                      )}
+                      <S.ScoreBlock title={t.adminRestaurants.scoreBreakdownToggle}>
+                        <S.ScoreValue $muted={restaurant.score == null}>{restaurant.scoreLabel}</S.ScoreValue>
+                        <S.ScoreLabel>{t.adminRestaurants.scoreLabel}</S.ScoreLabel>
+                      </S.ScoreBlock>
                     </S.RankMeta>
                   </S.RankCard>
                 ))}

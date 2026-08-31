@@ -1,6 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useAdminStore } from '../../admin';
-import { useAuthStore } from '../../auth';
 import { useTranslation } from '../../i18n';
 import { initialsFromName } from '../../utils/initialsFromName';
 
@@ -18,17 +17,10 @@ export const useAdminBeerMastersScreen = () => {
   const fetchBeerMastersRanking = useAdminStore((state) => state.fetchBeerMastersRanking);
   const refreshBeerMastersRanking = useAdminStore((state) => state.refreshBeerMastersRanking);
 
-  // Only the restaurant role has a restaurant_id of its own — owner/heineken
-  // see the ranking with nothing highlighted.
-  const currentUser = useAuthStore((state) => state.user);
-  const myRestaurantId = currentUser?.role === 'restaurant' ? currentUser.restaurant_id : null;
-
   const [sortBy, setSortBy] = useState<BeerMasterSortOption>('rating');
   const [restaurantFilter, setRestaurantFilter] = useState<string>(ALL_RESTAURANTS);
   const [searchQuery, setSearchQuery] = useState('');
   const [page, setPage] = useState(1);
-  const [hasJumpedToOwnRestaurant, setHasJumpedToOwnRestaurant] = useState(false);
-  const ownCardRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     fetchBeerMastersRanking();
@@ -87,7 +79,6 @@ export const useAdminBeerMastersScreen = () => {
       name: beerMaster.name,
       restaurantId: beerMaster.restaurant_id,
       restaurantName: beerMaster.restaurant_name,
-      isOwn: beerMaster.restaurant_id === myRestaurantId,
       hasRatings: beerMaster.ratings_count > 0,
       averageRating: beerMaster.average_rating.toFixed(2),
       ratingPct: Math.max(4, Math.round((beerMaster.average_rating / 5) * 100)),
@@ -96,7 +87,7 @@ export const useAdminBeerMastersScreen = () => {
         numberFormatter.format(beerMaster.ratings_count),
       ),
     }));
-  }, [ranking, sortBy, myRestaurantId, numberFormatter, t]);
+  }, [ranking, sortBy, numberFormatter, t]);
 
   const filteredItems = useMemo(() => {
     let result = rankedItems;
@@ -116,24 +107,6 @@ export const useAdminBeerMastersScreen = () => {
     () => filteredItems.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE),
     [filteredItems, currentPage],
   );
-
-  // One-time on load: jump straight to whichever page contains the first of
-  // the logged-in restaurant's own beer masters, so they don't have to hunt
-  // for their rank.
-  useEffect(() => {
-    if (hasJumpedToOwnRestaurant || !myRestaurantId) return;
-    const indexInList = filteredItems.findIndex((item) => item.isOwn);
-    if (indexInList === -1) return;
-    setPage(Math.floor(indexInList / PAGE_SIZE) + 1);
-    setHasJumpedToOwnRestaurant(true);
-  }, [hasJumpedToOwnRestaurant, myRestaurantId, filteredItems]);
-
-  // Runs after the jump above lands on the right page and that card is
-  // actually in `items` (and thus ownCardRef is attached).
-  useEffect(() => {
-    if (!hasJumpedToOwnRestaurant) return;
-    ownCardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }, [hasJumpedToOwnRestaurant, items]);
 
   const handlePrevPage = () => setPage((current) => Math.max(1, current - 1));
   const handleNextPage = () => setPage((current) => Math.min(pageCount, current + 1));
@@ -156,7 +129,6 @@ export const useAdminBeerMastersScreen = () => {
     isEmpty,
     hasNoResults,
     items,
-    ownCardRef,
     sortBy,
     setSortBy: handleSortChange,
     restaurantFilter,

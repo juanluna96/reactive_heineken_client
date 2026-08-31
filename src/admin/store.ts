@@ -7,9 +7,20 @@ import {
 } from '../api';
 import type { AdminState } from './types';
 
-export const useAdminStore = create<AdminState>((set, get) => ({
+const emptyData = {
   dashboard: null,
   status: 'idle',
+  restaurantsRanking: null,
+  restaurantsRankingStatus: 'idle',
+  beerMastersRanking: null,
+  beerMastersRankingStatus: 'idle',
+  ratings: null,
+  ratingsStatus: 'idle',
+} satisfies Partial<AdminState>;
+
+export const useAdminStore = create<AdminState>((set, get) => ({
+  ...emptyData,
+  resetAdminData: () => set({ ...emptyData }),
   fetchDashboard: async () => {
     if (get().status === 'loading' || get().status === 'loaded') return;
 
@@ -30,8 +41,6 @@ export const useAdminStore = create<AdminState>((set, get) => ({
       set({ status: 'error' });
     }
   },
-  restaurantsRanking: null,
-  restaurantsRankingStatus: 'idle',
   fetchRestaurantsRanking: async () => {
     if (get().restaurantsRankingStatus === 'loading' || get().restaurantsRankingStatus === 'loaded') return;
 
@@ -52,8 +61,6 @@ export const useAdminStore = create<AdminState>((set, get) => ({
       set({ restaurantsRankingStatus: 'error' });
     }
   },
-  beerMastersRanking: null,
-  beerMastersRankingStatus: 'idle',
   fetchBeerMastersRanking: async () => {
     if (get().beerMastersRankingStatus === 'loading' || get().beerMastersRankingStatus === 'loaded') return;
 
@@ -74,8 +81,6 @@ export const useAdminStore = create<AdminState>((set, get) => ({
       set({ beerMastersRankingStatus: 'error' });
     }
   },
-  ratings: null,
-  ratingsStatus: 'idle',
   fetchRatings: async () => {
     if (get().ratingsStatus === 'loading' || get().ratingsStatus === 'loaded') return;
 

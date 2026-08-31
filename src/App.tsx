@@ -16,7 +16,6 @@ import { RegistrationScreen } from './components/RegistrationScreen';
 import { RememberPasswordScreen } from './components/RememberPasswordScreen';
 import { ResetPasswordScreen } from './components/ResetPasswordScreen';
 import { ThankYouScreen } from './components/ThankYouScreen';
-import { WatchExperienceScreen } from './components/WatchExperienceScreen';
 import { WelcomeScreen } from './components/WelcomeScreen';
 import { ROUTES } from './routes';
 
@@ -47,14 +46,6 @@ function App() {
           element={
             <PageTransition>
               <RegistrationScreen />
-            </PageTransition>
-          }
-        />
-        <Route
-          path={ROUTES.watchExperience}
-          element={
-            <PageTransition>
-              <WatchExperienceScreen />
             </PageTransition>
           }
         />

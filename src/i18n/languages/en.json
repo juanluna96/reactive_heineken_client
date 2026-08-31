@@ -29,9 +29,11 @@
       "label": "NAME",
       "placeholder": "Enter your full name"
     },
-    "email": {
-      "label": "EMAIL",
-      "placeholder": "example@email.com"
+    "phone": {
+      "label": "PHONE",
+      "placeholder": "6123 4567",
+      "country": "Country",
+      "noResults": "No country found"
     },
     "restaurant": {
       "label": "RESTAURANT / BAR",
@@ -43,33 +45,23 @@
       "linkText": "Privacy Policy",
       "suffix": " and the processing of my personal data."
     },
-    "resultsConsent": {
-      "prefix": "I'd like to receive information and results related to this activation by email."
-    },
     "cta": "CONTINUE",
-    "step": "STEP 1 OF 3",
+    "step": "STEP 1 OF 2",
     "errors": {
       "nameRequired": "Enter your full name",
-      "emailInvalid": "Enter a valid email address",
+      "phoneInvalid": "Enter a valid phone number",
       "restaurantRequired": "Select a restaurant",
       "consentRequired": "You must accept the privacy policy",
-      "alreadyRated": "You've already submitted a rating for this restaurant with this email"
+      "alreadyRated": "You've already submitted a rating for this restaurant with this number"
     }
   },
-  "watchExperience": {
-    "title": "Watch the\nExperience",
-    "subtitle": "Please watch the full video to unlock your\nrating.",
-    "durationLabel": "00:30",
-    "timerLabel": "REMAINING",
-    "helper": "The rating will be available after the\nvideo finishes.",
-    "playButtonLabel": "Click here to play",
-    "cta": "RATE YOUR BEER MASTER",
-    "step": "STEP 2 OF 3"
-  },
   "rateBeerMaster": {
-    "beerMasterLabel": "BEER MASTER",
-    "namePlaceholder": "Beer master's name",
+    "beerMasterLabel": "BAR STAFF",
+    "namePlaceholder": "Bar staff's name",
+    "noResults": "No bar staff found with that name",
     "title": "How was your experience?",
+    "skillsQuestion": "How would you rate their skills today?",
+    "serviceQuestion": "How would you rate the service?",
     "subtitle": "Your opinion helps us improve",
     "tierMessages": [
       "VERY POOR EXPERIENCE",
@@ -81,9 +73,9 @@
     "opinionLabel": "OPINION",
     "opinionPlaceholder": "Optional feedback...",
     "cta": "SUBMIT RATING",
-    "step": "STEP 3 OF 3",
+    "step": "STEP 2 OF 2",
     "errors": {
-      "nameRequired": "Enter the beer master's name",
+      "nameRequired": "Enter the bar staff's name",
       "ratingRequired": "Please select a rating",
       "submitFailed": "Failed to submit your rating, please try again",
       "alreadyRated": "You've already submitted a rating for this restaurant"
@@ -104,7 +96,7 @@
     "nav": {
       "dashboard": "Dashboard",
       "restaurants": "Restaurants",
-      "beerMasters": "Beer Masters",
+      "beerMasters": "Bar Staff",
       "ratings": "Ratings",
       "settings": "Settings"
     },
@@ -113,7 +105,7 @@
       "averageRating": "Average Rating",
       "restaurantsRegistered": "Registered Restaurants",
       "newRestaurants": "+{count} new",
-      "beerMastersRegistered": "Beer Masters",
+      "beerMastersRegistered": "Bar Staff",
       "newBeerMasters": "+{count} new"
     },
     "chart": {
@@ -122,9 +114,9 @@
       "empty": "No ratings in this period yet"
     },
     "rankings": {
-      "title": "Top Beer Masters",
+      "title": "Top Bar Staff",
       "rank": "Rank",
-      "master": "Master",
+      "master": "Bar Staff",
       "restaurant": "Restaurant",
       "reviews": "Reviews",
       "avgRating": "Avg. Rating",
@@ -138,7 +130,8 @@
     "feed": {
       "title": "Latest Reviews",
       "empty": "No recent reviews yet",
-      "noComment": "The customer didn't leave a comment"
+      "noComment": "The customer didn't leave a comment",
+      "subRatings": "Skills {skills} · Service {service}"
     },
     "time": {
       "justNow": "just now",
@@ -157,11 +150,13 @@
     "pageTitle": "Venue & Location Ranking",
     "pageSubtitle": "Global Performance and Quality Ranking",
     "refreshLabel": "REFRESH",
-    "ratingsCount": "{count} reviews",
-    "noRatings": "No ratings yet",
     "ownRestaurantBadge": "Your Restaurant",
+    "scoreLabel": "SCORE",
+    "scoreEmpty": "—",
+    "scoreBreakdownToggle": "See score breakdown",
     "sort": {
       "label": "Sort by",
+      "score": "Sort by Score",
       "rating": "Sort by Rating",
       "popularity": "Most Popular",
       "newest": "Newest"
@@ -175,10 +170,6 @@
       "next": "Next page",
       "indicator": "Page {current} of {total}"
     },
-    "beerMasters": {
-      "toggle": "Beer Masters ({count})",
-      "empty": "No rated beer masters at this venue yet."
-    },
     "states": {
       "loading": "Loading restaurant ranking...",
       "error": "Couldn't load the ranking. Please try again.",
@@ -187,12 +178,11 @@
     }
   },
   "adminBeerMasters": {
-    "pageTitle": "Beer Masters Ranking",
+    "pageTitle": "Bar Staff Ranking",
     "pageSubtitle": "Individual Performance and Service Quality",
     "refreshLabel": "REFRESH",
     "ratingsCount": "{count} reviews",
     "noRatings": "No ratings yet",
-    "ownBadge": "From Your Restaurant",
     "sort": {
       "label": "Sort by",
       "rating": "Sort by Rating",
@@ -202,11 +192,11 @@
     "restaurantFilter": {
       "label": "Venue",
       "all": "All Venues",
-      "empty": "No rated beer masters at {restaurant} yet."
+      "empty": "No rated bar staff at {restaurant} yet."
     },
     "search": {
-      "placeholder": "Search beer master...",
-      "noResults": "No beer masters found matching \"{query}\""
+      "placeholder": "Search bar staff...",
+      "noResults": "No bar staff found matching \"{query}\""
     },
     "pagination": {
       "previous": "Previous page",
@@ -214,9 +204,9 @@
       "indicator": "Page {current} of {total}"
     },
     "states": {
-      "loading": "Loading beer masters ranking...",
+      "loading": "Loading bar staff ranking...",
       "error": "Couldn't load the ranking. Please try again.",
-      "emptyTitle": "No rated beer masters yet",
+      "emptyTitle": "No rated bar staff yet",
       "emptySubtitle": "Once customers start rating them, they'll show up here."
     }
   },
@@ -250,7 +240,9 @@
       "noResults": "No reviews found matching the current filters"
     },
     "restaurantLabel": "Venue: {restaurant}",
-    "beerMasterLabel": "Beer Master: {name}",
+    "beerMasterLabel": "Bar Staff: {name}",
+    "skillsLabel": "Skills",
+    "serviceLabel": "Service",
     "loadMore": "Load more reviews",
     "states": {
       "loading": "Loading reviews...",
@@ -261,13 +253,18 @@
   },
   "adminSettings": {
     "pageTitle": "Settings",
-    "pageSubtitle": "Manage registered restaurants and beer masters",
+    "pageSubtitle": "Manage registered restaurants and bar staff",
     "tabs": {
       "restaurants": "Restaurants",
-      "beerMasters": "Beer Masters"
+      "beerMasters": "Bar Staff",
+      "scoring": "Score"
     },
     "restaurants": {
       "addButton": "Add restaurant",
+      "search": {
+        "placeholder": "Search restaurants...",
+        "noResults": "No restaurants found matching \"{query}\""
+      },
       "emptyTitle": "No restaurants yet",
       "emptySubtitle": "Add the first one to start collecting ratings.",
       "editAction": "Edit",
@@ -283,7 +280,7 @@
       },
       "deleteConfirm": {
         "title": "Delete restaurant",
-        "message": "Are you sure you want to delete \"{name}\"? Its beer masters and associated ratings will also be deleted. This action can't be undone.",
+        "message": "Are you sure you want to delete \"{name}\"? Its bar staff and associated ratings will also be deleted. This action can't be undone.",
         "cancel": "Cancel",
         "confirm": "Delete",
         "deleting": "Deleting..."
@@ -296,35 +293,103 @@
     },
     "beerMasters": {
       "restaurantPicker": {
-        "label": "Restaurant",
-        "placeholder": "Select a restaurant"
+        "label": "Filter by restaurant",
+        "placeholder": "All restaurants",
+        "noResults": "No restaurants found"
       },
-      "addButton": "Add beer master",
-      "selectRestaurantTitle": "Select a restaurant",
-      "selectRestaurantSubtitle": "Choose a restaurant above to view and manage its beer masters.",
-      "emptyTitle": "No beer masters yet",
-      "emptySubtitle": "Add the first one for this restaurant.",
+      "addButton": "Add bar staff",
+      "emptyTitle": "No bar staff registered yet",
+      "emptySubtitle": "Use the \"Add bar staff\" button to register the first one.",
+      "noRestaurantResultsTitle": "This restaurant has no bar staff",
+      "noRestaurantResultsSubtitle": "Add the first one for this restaurant.",
       "editAction": "Edit",
       "deleteAction": "Delete",
+      "transferAction": "Transfer",
       "form": {
-        "addTitle": "New beer master",
-        "editTitle": "Edit beer master",
+        "addTitle": "New bar staff",
+        "editTitle": "Edit bar staff",
+        "restaurantLabel": "Restaurant",
+        "restaurantPlaceholder": "Search for a restaurant",
+        "restaurantNoResults": "No restaurants found",
         "nameLabel": "Name",
-        "namePlaceholder": "Beer master name",
+        "namePlaceholder": "Bar staff name",
         "cancel": "Cancel",
         "save": "Save",
         "saving": "Saving..."
       },
       "deleteConfirm": {
-        "title": "Delete beer master",
+        "title": "Delete bar staff",
         "message": "Are you sure you want to delete \"{name}\"? Their existing ratings will be kept under their name. This action can't be undone.",
         "cancel": "Cancel",
         "confirm": "Delete",
         "deleting": "Deleting..."
       },
+      "transfer": {
+        "title": "Transfer bar staff",
+        "message": "Choose the restaurant to transfer \"{name}\" to. Their existing ratings will move with them.",
+        "restaurantLabel": "New restaurant",
+        "restaurantPlaceholder": "Search for a restaurant",
+        "noResults": "No restaurants found",
+        "cancel": "Cancel",
+        "confirm": "Transfer",
+        "transferring": "Transferring...",
+        "errors": {
+          "restaurantRequired": "Select a restaurant",
+          "duplicate": "Can't transfer: either a bar staff with this name already exists at the target restaurant, or one of their customers already has a rating there",
+          "generic": "Couldn't transfer the bar staff, please try again"
+        }
+      },
       "errors": {
         "nameRequired": "Enter a name",
-        "duplicate": "A beer master with this name already exists at this restaurant",
+        "restaurantRequired": "Select a restaurant",
+        "duplicate": "A bar staff with this name already exists at this restaurant",
+        "generic": "Something went wrong. Please try again."
+      }
+    },
+    "scoring": {
+      "title": "Scoring system",
+      "subtitle": "Tune how the STAR SERVE score (0–100) shown in the rankings is calculated.",
+      "componentsTitle": "Components",
+      "componentsSubtitle": "Weights are auto-normalized; the score always stays between 0 and 100.",
+      "weightSum": "Weight sum: {sum}%",
+      "weightSumHint": "100% recommended. If they don't add up to 100 it's normalized anyway.",
+      "weightLabel": "Weight",
+      "kLabel": "k (confidence)",
+      "kHint": "Ratings needed before trusting the individual average.",
+      "enabledLabel": "Active",
+      "growthPctLabel": "Is a growth %",
+      "ceilingLabel": "Ceiling %",
+      "manualBadge": "Manual",
+      "autoBadge": "Automatic",
+      "deleteAction": "Delete",
+      "addButton": "Add component",
+      "inputsTitle": "Per-restaurant values",
+      "inputsSubtitle": "Each restaurant's manual value for the manual components (e.g. beer-sales growth %).",
+      "noManualComponents": "No manual components. Add one above to capture per-restaurant values.",
+      "inputPlaceholder": "—",
+      "restaurantColumn": "Restaurant",
+      "form": {
+        "addTitle": "New component",
+        "labelLabel": "Name",
+        "labelPlaceholder": "e.g. Account volume",
+        "weightLabel": "Weight (0–1)",
+        "growthPctLabel": "The per-restaurant value is a growth %",
+        "ceilingLabel": "Growth ceiling (%)",
+        "cancel": "Cancel",
+        "save": "Create",
+        "saving": "Creating..."
+      },
+      "deleteConfirm": {
+        "title": "Delete component",
+        "message": "Delete \"{name}\"? Its per-restaurant values will also be removed. This can't be undone.",
+        "cancel": "Cancel",
+        "confirm": "Delete",
+        "deleting": "Deleting..."
+      },
+      "errors": {
+        "labelRequired": "Enter a name",
+        "weightInvalid": "Weight must be between 0 and 1",
+        "ceilingRequired": "Enter the growth ceiling",
         "generic": "Something went wrong. Please try again."
       }
     },

@@ -3,10 +3,11 @@ import { staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background.png';
 import backgroundImageLaptop from '../../assets/images/background-laptop.png';
 import heinekenLogo from '../../assets/logos/heineken-logo.png';
-import { FaEnvelope, FaUtensils, FaUser } from 'react-icons/fa6';
+import { FaPhone, FaUtensils, FaUser } from 'react-icons/fa6';
 import { AutocompleteField } from '../AutocompleteField';
 import { BubbleField } from '../BubbleField';
 import { Checkbox } from '../Checkbox';
+import { PhoneField } from '../PhoneField';
 import { PrimaryButton } from '../PrimaryButton';
 import { ScreenOverlay } from '../ScreenOverlay';
 import { StepIndicator } from '../StepIndicator';
@@ -20,23 +21,23 @@ export const RegistrationScreen = () => {
   const {
     t,
     name,
-    email,
+    phone,
+    phoneCountry,
     restaurant,
     accepted,
-    resultsConsent,
     restaurantOptions,
     isFormValid,
     isChecking,
     nameError,
-    emailError,
+    phoneError,
     restaurantError,
     consentError,
     alreadyRatedError,
     setName,
-    setEmail,
+    setPhone,
+    setPhoneCountry,
     setRestaurant,
     setAccepted,
-    setResultsConsent,
     handleBack,
     handleContinue,
     handleDismissAlreadyRated,
@@ -80,14 +81,17 @@ export const RegistrationScreen = () => {
               onChange={setName}
               error={nameError}
             />
-            <TextField
-              icon={FaEnvelope}
-              label={t.registration.email.label}
-              placeholder={t.registration.email.placeholder}
-              type="email"
-              value={email}
-              onChange={setEmail}
-              error={emailError}
+            <PhoneField
+              icon={FaPhone}
+              label={t.registration.phone.label}
+              placeholder={t.registration.phone.placeholder}
+              countryLabel={t.registration.phone.country}
+              countryNoResults={t.registration.phone.noResults}
+              country={phoneCountry}
+              onCountryChange={setPhoneCountry}
+              number={phone}
+              onNumberChange={setPhone}
+              error={phoneError}
             />
             <AutocompleteField
               icon={FaUtensils}
@@ -104,10 +108,10 @@ export const RegistrationScreen = () => {
               onChange={setAccepted}
               prefix={t.registration.consent.prefix}
               linkText={t.registration.consent.linkText}
+              linkHref="/docs/politica-tratamiento-datos-personales.pdf"
               suffix={t.registration.consent.suffix}
               error={consentError}
             />
-            <Checkbox checked={resultsConsent} onChange={setResultsConsent} prefix={t.registration.resultsConsent.prefix} />
           </S.FormCard>
         </S.Hero>
 
@@ -115,7 +119,7 @@ export const RegistrationScreen = () => {
           <PrimaryButton onClick={handleContinue} disabled={!isFormValid || isChecking}>
             {t.registration.cta}
           </PrimaryButton>
-          <StepIndicator current={1} total={3} label={t.registration.step} />
+          <StepIndicator current={1} total={2} label={t.registration.step} />
         </S.Footer>
       </S.Content>
     </S.Screen>

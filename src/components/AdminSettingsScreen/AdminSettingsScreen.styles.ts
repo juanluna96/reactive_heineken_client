@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FaChevronLeft, FaChevronRight, FaPen, FaPlus, FaTrash } from 'react-icons/fa6';
+import { FaChevronLeft, FaChevronRight, FaMagnifyingGlass, FaPen, FaPlus, FaRightLeft, FaTrash } from 'react-icons/fa6';
 import styled, { css } from 'styled-components';
 import { ADMIN_DESKTOP_BREAKPOINT, ADMIN_MOBILE_BREAKPOINT, ADMIN_SIDEBAR_WIDTH } from '../AdminSidebar';
 
@@ -78,6 +78,10 @@ export const TabList = styled.div`
   gap: 8px;
 
   @media (max-width: ${MOBILE_BREAKPOINT}) {
+    /* "Embajadores del servicio" is too long to sit abreast the other two
+       on a phone — stack the three as full-width rows so every label stays
+       readable and reachable. */
+    flex-direction: column;
     width: 100%;
   }
 `;
@@ -94,7 +98,8 @@ export const TabButton = styled.button<{ $active?: boolean }>`
   cursor: pointer;
 
   @media (max-width: ${MOBILE_BREAKPOINT}) {
-    flex: 1;
+    width: 100%;
+    text-align: center;
   }
 
   ${({ $active, theme }) =>
@@ -122,6 +127,13 @@ export const Content = styled(motion.div)`
   }
 `;
 
+export const TabPanel = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+`;
+
 export const SectionHeader = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -141,6 +153,47 @@ export const RestaurantPickerWrapper = styled.div`
   @media (max-width: ${MOBILE_BREAKPOINT}) {
     max-width: none;
     width: 100%;
+  }
+`;
+
+export const SearchFieldWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    max-width: none;
+  }
+`;
+
+export const SearchIcon = styled(FaMagnifyingGlass)`
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  width: 13px;
+  height: 13px;
+  transform: translateY(-50%);
+  color: ${({ theme }) => theme.colors.placeholderText};
+`;
+
+export const SearchInput = styled.input`
+  width: 100%;
+  height: 44px;
+  padding: 0 14px 0 38px;
+  border-radius: ${({ theme }) => theme.radii.md};
+  border: 1px solid ${({ theme }) => theme.colors.cardBorder};
+  background: ${({ theme }) => theme.colors.inputBackground};
+  font-family: inherit;
+  font-size: 13px;
+  color: ${({ theme }) => theme.colors.white};
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.placeholderText};
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-color: ${({ theme }) => theme.colors.brandGreenLight};
   }
 `;
 
@@ -235,6 +288,22 @@ export const ItemName = styled.p`
   text-overflow: ellipsis;
 `;
 
+// Wraps ItemName + RestaurantLabel for a Stars Server row, so its
+// restaurant affiliation can sit right under the name (unused by
+// restaurant rows, which have no affiliation of their own to show).
+export const NameBlock = styled.div`
+  min-width: 0;
+`;
+
+export const RestaurantLabel = styled.p`
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: ${({ theme }) => theme.colors.mutedText};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
 export const ItemActions = styled.div`
   display: flex;
   align-items: center;
@@ -277,8 +346,18 @@ export const DeleteButton = styled.button`
   }
 `;
 
+export const TransferButton = styled.button`
+  ${iconButtonBase}
+  color: ${({ theme }) => theme.colors.mutedText};
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.brandGreenLight};
+  }
+`;
+
 export const EditIcon = styled(FaPen)``;
 export const DeleteIcon = styled(FaTrash)``;
+export const TransferIcon = styled(FaRightLeft)``;
 
 export const StatusScreen = styled.div`
   display: flex;

@@ -364,6 +364,11 @@ export const AdminDashboardScreen = () => {
                           <S.FeedContext>
                             {review.beerMasterName} · {review.restaurantName}
                           </S.FeedContext>
+                          <S.FeedSubRatings>
+                            {t.adminDashboard.feed.subRatings
+                              .replace('{skills}', String(review.skillsStars))
+                              .replace('{service}', String(review.serviceStars))}
+                          </S.FeedSubRatings>
                           <S.FeedComment>
                             {review.comment ? `"${review.comment}"` : t.adminDashboard.feed.noComment}
                           </S.FeedComment>

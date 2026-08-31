@@ -4,13 +4,12 @@ import { useAuthStore } from '../../auth';
 import { useTranslation } from '../../i18n';
 import { initialsFromName } from '../../utils/initialsFromName';
 
-export type RestaurantSortOption = 'rating' | 'popularity' | 'newest';
+export type RestaurantSortOption = 'score' | 'rating' | 'popularity' | 'newest';
 
 const PAGE_SIZE = 10;
 
 export const useAdminRestaurantsScreen = () => {
-  const { t, language } = useTranslation();
-  const numberFormatter = useMemo(() => new Intl.NumberFormat(language), [language]);
+  const { t } = useTranslation();
 
   const ranking = useAdminStore((state) => state.restaurantsRanking);
   const status = useAdminStore((state) => state.restaurantsRankingStatus);
@@ -22,7 +21,7 @@ export const useAdminRestaurantsScreen = () => {
   const currentUser = useAuthStore((state) => state.user);
   const myRestaurantId = currentUser?.role === 'restaurant' ? currentUser.restaurant_id : null;
 
-  const [sortBy, setSortBy] = useState<RestaurantSortOption>('rating');
+  const [sortBy, setSortBy] = useState<RestaurantSortOption>('score');
   const [searchQuery, setSearchQuery] = useState('');
   const [page, setPage] = useState(1);
   const [hasJumpedToOwnRestaurant, setHasJumpedToOwnRestaurant] = useState(false);
@@ -52,11 +51,13 @@ export const useAdminRestaurantsScreen = () => {
   const rankedItems = useMemo(() => {
     if (!ranking) return [];
 
-    // The API already returns rating desc as the baseline order — for the
-    // other options we just re-sort that same fetched list client-side,
-    // no extra round-trip needed.
+    // The API returns rating desc as the baseline order — for the other
+    // options we re-sort that same fetched list client-side, no round-trip.
     const sorted = [...ranking];
-    if (sortBy === 'popularity') {
+    if (sortBy === 'score') {
+      // Score desc, restaurants with no score (no ratings) last.
+      sorted.sort((a, b) => (b.score ?? -1) - (a.score ?? -1));
+    } else if (sortBy === 'popularity') {
       sorted.sort((a, b) => b.ratings_count - a.ratings_count);
     } else if (sortBy === 'newest') {
       sorted.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
@@ -68,22 +69,11 @@ export const useAdminRestaurantsScreen = () => {
       initials: initialsFromName(restaurant.name),
       name: restaurant.name,
       isOwn: restaurant.id === myRestaurantId,
-      hasRatings: restaurant.ratings_count > 0,
-      averageRating: restaurant.average_rating.toFixed(2),
-      ratingsCountLabel: t.adminRestaurants.ratingsCount.replace(
-        '{count}',
-        numberFormatter.format(restaurant.ratings_count),
-      ),
-      beerMastersToggleLabel: t.adminRestaurants.beerMasters.toggle.replace(
-        '{count}',
-        String(restaurant.beer_masters.length),
-      ),
-      beerMasters: restaurant.beer_masters.map((master) => ({
-        name: master.name,
-        averageRating: master.average_rating.toFixed(2),
-      })),
+      score: restaurant.score,
+      scoreLabel: restaurant.score != null ? restaurant.score.toFixed(1) : t.adminRestaurants.scoreEmpty,
+      scoreBreakdown: restaurant.score_breakdown,
     }));
-  }, [ranking, sortBy, myRestaurantId, numberFormatter, t]);
+  }, [ranking, sortBy, myRestaurantId, t]);
 
   const filteredItems = useMemo(() => {
     const normalizedQuery = searchQuery.trim().toLowerCase();

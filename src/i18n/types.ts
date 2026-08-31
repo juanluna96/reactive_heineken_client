@@ -18,9 +18,11 @@ export interface RegistrationDictionary {
     label: string;
     placeholder: string;
   };
-  email: {
+  phone: {
     label: string;
     placeholder: string;
+    country: string;
+    noResults: string;
   };
   restaurant: {
     label: string;
@@ -32,14 +34,11 @@ export interface RegistrationDictionary {
     linkText: string;
     suffix: string;
   };
-  resultsConsent: {
-    prefix: string;
-  };
   cta: string;
   step: string;
   errors: {
     nameRequired: string;
-    emailInvalid: string;
+    phoneInvalid: string;
     restaurantRequired: string;
     consentRequired: string;
     alreadyRated: string;
@@ -60,21 +59,13 @@ export interface AgeVerificationDictionary {
   };
 }
 
-export interface WatchExperienceDictionary {
-  title: string;
-  subtitle: string;
-  durationLabel: string;
-  timerLabel: string;
-  helper: string;
-  playButtonLabel: string;
-  cta: string;
-  step: string;
-}
-
 export interface RateBeerMasterDictionary {
   beerMasterLabel: string;
   namePlaceholder: string;
+  noResults: string;
   title: string;
+  skillsQuestion: string;
+  serviceQuestion: string;
   subtitle: string;
   tierMessages: string[];
   opinionLabel: string;
@@ -140,6 +131,7 @@ export interface AdminDashboardDictionary {
     title: string;
     empty: string;
     noComment: string;
+    subRatings: string;
   };
   time: {
     justNow: string;
@@ -240,11 +232,13 @@ export interface AdminRestaurantsDictionary {
   pageTitle: string;
   pageSubtitle: string;
   refreshLabel: string;
-  ratingsCount: string;
-  noRatings: string;
   ownRestaurantBadge: string;
+  scoreLabel: string;
+  scoreEmpty: string;
+  scoreBreakdownToggle: string;
   sort: {
     label: string;
+    score: string;
     rating: string;
     popularity: string;
     newest: string;
@@ -257,10 +251,6 @@ export interface AdminRestaurantsDictionary {
     previous: string;
     next: string;
     indicator: string;
-  };
-  beerMasters: {
-    toggle: string;
-    empty: string;
   };
   states: {
     loading: string;
@@ -276,7 +266,6 @@ export interface AdminBeerMastersDictionary {
   refreshLabel: string;
   ratingsCount: string;
   noRatings: string;
-  ownBadge: string;
   sort: {
     label: string;
     rating: string;
@@ -336,6 +325,8 @@ export interface AdminRatingsDictionary {
   };
   restaurantLabel: string;
   beerMasterLabel: string;
+  skillsLabel: string;
+  serviceLabel: string;
   loadMore: string;
   states: {
     loading: string;
@@ -355,6 +346,12 @@ export interface AdminSettingsFormDictionary {
   saving: string;
 }
 
+export interface AdminSettingsBeerMasterFormDictionary extends AdminSettingsFormDictionary {
+  restaurantLabel: string;
+  restaurantPlaceholder: string;
+  restaurantNoResults: string;
+}
+
 export interface AdminSettingsDeleteConfirmDictionary {
   title: string;
   message: string;
@@ -369,15 +366,82 @@ export interface AdminSettingsErrorsDictionary {
   generic: string;
 }
 
+export interface AdminSettingsBeerMasterErrorsDictionary extends AdminSettingsErrorsDictionary {
+  restaurantRequired: string;
+}
+
+export interface AdminSettingsTransferDictionary {
+  title: string;
+  message: string;
+  restaurantLabel: string;
+  restaurantPlaceholder: string;
+  noResults: string;
+  cancel: string;
+  confirm: string;
+  transferring: string;
+  errors: {
+    restaurantRequired: string;
+    duplicate: string;
+    generic: string;
+  };
+}
+
+export interface AdminSettingsScoringDictionary {
+  title: string;
+  subtitle: string;
+  componentsTitle: string;
+  componentsSubtitle: string;
+  weightSum: string;
+  weightSumHint: string;
+  weightLabel: string;
+  kLabel: string;
+  kHint: string;
+  enabledLabel: string;
+  growthPctLabel: string;
+  ceilingLabel: string;
+  manualBadge: string;
+  autoBadge: string;
+  deleteAction: string;
+  addButton: string;
+  inputsTitle: string;
+  inputsSubtitle: string;
+  noManualComponents: string;
+  inputPlaceholder: string;
+  restaurantColumn: string;
+  form: {
+    addTitle: string;
+    labelLabel: string;
+    labelPlaceholder: string;
+    weightLabel: string;
+    growthPctLabel: string;
+    ceilingLabel: string;
+    cancel: string;
+    save: string;
+    saving: string;
+  };
+  deleteConfirm: AdminSettingsDeleteConfirmDictionary;
+  errors: {
+    labelRequired: string;
+    weightInvalid: string;
+    ceilingRequired: string;
+    generic: string;
+  };
+}
+
 export interface AdminSettingsDictionary {
   pageTitle: string;
   pageSubtitle: string;
   tabs: {
     restaurants: string;
     beerMasters: string;
+    scoring: string;
   };
   restaurants: {
     addButton: string;
+    search: {
+      placeholder: string;
+      noResults: string;
+    };
     emptyTitle: string;
     emptySubtitle: string;
     editAction: string;
@@ -390,18 +454,22 @@ export interface AdminSettingsDictionary {
     restaurantPicker: {
       label: string;
       placeholder: string;
+      noResults: string;
     };
     addButton: string;
-    selectRestaurantTitle: string;
-    selectRestaurantSubtitle: string;
     emptyTitle: string;
     emptySubtitle: string;
+    noRestaurantResultsTitle: string;
+    noRestaurantResultsSubtitle: string;
     editAction: string;
     deleteAction: string;
-    form: AdminSettingsFormDictionary;
+    transferAction: string;
+    form: AdminSettingsBeerMasterFormDictionary;
     deleteConfirm: AdminSettingsDeleteConfirmDictionary;
-    errors: AdminSettingsErrorsDictionary;
+    transfer: AdminSettingsTransferDictionary;
+    errors: AdminSettingsBeerMasterErrorsDictionary;
   };
+  scoring: AdminSettingsScoringDictionary;
   states: {
     loading: string;
     error: string;
@@ -420,7 +488,6 @@ export interface TranslationDictionary {
   welcome: WelcomeDictionary;
   ageVerification: AgeVerificationDictionary;
   registration: RegistrationDictionary;
-  watchExperience: WatchExperienceDictionary;
   rateBeerMaster: RateBeerMasterDictionary;
   thankYou: ThankYouDictionary;
   adminDashboard: AdminDashboardDictionary;
