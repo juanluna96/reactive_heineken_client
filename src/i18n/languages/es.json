@@ -56,9 +56,9 @@
     }
   },
   "rateBeerMaster": {
-    "beerMasterLabel": "STARS SERVER",
-    "namePlaceholder": "Nombre del Stars Server",
-    "noResults": "No se encontraron Stars Server con ese nombre",
+    "beerMasterLabel": "EMBAJADOR DEL SERVICIO",
+    "namePlaceholder": "Nombre del embajador del servicio",
+    "noResults": "No se encontró ningún embajador del servicio con ese nombre",
     "title": "¿Cómo fue tu experiencia?",
     "subtitle": "Tu opinión nos ayuda a mejorar",
     "tierMessages": [
@@ -73,7 +73,7 @@
     "cta": "ENVIAR CALIFICACIÓN",
     "step": "PASO 2 DE 2",
     "errors": {
-      "nameRequired": "Ingresa el nombre del Stars Server",
+      "nameRequired": "Ingresa el nombre del embajador del servicio",
       "ratingRequired": "Selecciona una calificación",
       "submitFailed": "No se pudo enviar tu calificación, intenta de nuevo",
       "alreadyRated": "Ya enviaste una calificación para este restaurante"
@@ -94,7 +94,7 @@
     "nav": {
       "dashboard": "Panel de Control",
       "restaurants": "Restaurantes",
-      "beerMasters": "Stars Servers",
+      "beerMasters": "Embajadores del servicio",
       "ratings": "Calificaciones",
       "settings": "Ajustes"
     },
@@ -103,7 +103,7 @@
       "averageRating": "Promedio de Calificación",
       "restaurantsRegistered": "Restaurantes Registrados",
       "newRestaurants": "+{count} nuevos",
-      "beerMastersRegistered": "Stars Servers",
+      "beerMastersRegistered": "Embajadores del servicio",
       "newBeerMasters": "+{count} nuevos"
     },
     "chart": {
@@ -112,9 +112,9 @@
       "empty": "Aún no hay calificaciones en este periodo"
     },
     "rankings": {
-      "title": "Mejores Stars Servers",
+      "title": "Mejores embajadores del servicio",
       "rank": "Rango",
-      "master": "Stars Server",
+      "master": "Embajador del servicio",
       "restaurant": "Restaurante",
       "reviews": "Reseñas",
       "avgRating": "Calif. Promedio",
@@ -166,8 +166,8 @@
       "indicator": "Página {current} de {total}"
     },
     "beerMasters": {
-      "toggle": "Stars Servers ({count})",
-      "empty": "Todavía no hay Stars Servers calificados en este local."
+      "toggle": "Embajadores del servicio ({count})",
+      "empty": "Todavía no hay embajadores del servicio calificados en este local."
     },
     "states": {
       "loading": "Cargando ranking de restaurantes...",
@@ -177,7 +177,7 @@
     }
   },
   "adminBeerMasters": {
-    "pageTitle": "Ranking de Stars Servers",
+    "pageTitle": "Ranking de embajadores del servicio",
     "pageSubtitle": "Desempeño Individual y Calidad del Servicio",
     "refreshLabel": "ACTUALIZAR",
     "ratingsCount": "{count} reseñas",
@@ -192,11 +192,11 @@
     "restaurantFilter": {
       "label": "Sede",
       "all": "Todas las Sedes",
-      "empty": "Todavía no hay Stars Servers calificados en {restaurant}."
+      "empty": "Todavía no hay embajadores del servicio calificados en {restaurant}."
     },
     "search": {
-      "placeholder": "Buscar Stars Server...",
-      "noResults": "No se encontraron Stars Servers que coincidan con \"{query}\""
+      "placeholder": "Buscar embajador del servicio...",
+      "noResults": "No se encontraron embajadores del servicio que coincidan con \"{query}\""
     },
     "pagination": {
       "previous": "Página anterior",
@@ -204,9 +204,9 @@
       "indicator": "Página {current} de {total}"
     },
     "states": {
-      "loading": "Cargando ranking de Stars Servers...",
+      "loading": "Cargando ranking de embajadores del servicio...",
       "error": "No se pudo cargar el ranking. Intenta de nuevo.",
-      "emptyTitle": "Todavía no hay Stars Servers calificados",
+      "emptyTitle": "Todavía no hay embajadores del servicio calificados",
       "emptySubtitle": "Cuando los clientes empiecen a calificarlos, aparecerán aquí."
     }
   },
@@ -240,7 +240,7 @@
       "noResults": "No se encontraron reseñas que coincidan con los filtros actuales"
     },
     "restaurantLabel": "Sede: {restaurant}",
-    "beerMasterLabel": "Stars Server: {name}",
+    "beerMasterLabel": "Embajador del servicio: {name}",
     "loadMore": "Cargar más reseñas",
     "states": {
       "loading": "Cargando reseñas...",
@@ -251,10 +251,10 @@
   },
   "adminSettings": {
     "pageTitle": "Ajustes",
-    "pageSubtitle": "Gestiona los restaurantes y Stars Servers registrados",
+    "pageSubtitle": "Gestiona los restaurantes y embajadores del servicio registrados",
     "tabs": {
       "restaurants": "Restaurantes",
-      "beerMasters": "Stars Servers"
+      "beerMasters": "Embajadores del servicio"
     },
     "restaurants": {
       "addButton": "Agregar restaurante",
@@ -277,7 +277,7 @@
       },
       "deleteConfirm": {
         "title": "Eliminar restaurante",
-        "message": "¿Seguro que quieres eliminar \"{name}\"? También se eliminarán sus Stars Servers y calificaciones asociadas. Esta acción no se puede deshacer.",
+        "message": "¿Seguro que quieres eliminar \"{name}\"? También se eliminarán sus embajadores del servicio y calificaciones asociadas. Esta acción no se puede deshacer.",
         "cancel": "Cancelar",
         "confirm": "Eliminar",
         "deleting": "Eliminando..."
@@ -294,35 +294,35 @@
         "placeholder": "Todos los restaurantes",
         "noResults": "No se encontraron restaurantes"
       },
-      "addButton": "Agregar Stars Server",
-      "emptyTitle": "Todavía no hay Stars Servers registrados",
-      "emptySubtitle": "Usa el botón \"Agregar Stars Server\" para registrar el primero.",
-      "noRestaurantResultsTitle": "Este restaurante no tiene Stars Servers",
+      "addButton": "Agregar embajador del servicio",
+      "emptyTitle": "Todavía no hay embajadores del servicio registrados",
+      "emptySubtitle": "Usa el botón \"Agregar embajador del servicio\" para registrar el primero.",
+      "noRestaurantResultsTitle": "Este restaurante no tiene embajadores del servicio",
       "noRestaurantResultsSubtitle": "Agrega el primero para este restaurante.",
       "editAction": "Editar",
       "deleteAction": "Eliminar",
       "transferAction": "Transferir",
       "form": {
-        "addTitle": "Nuevo Stars Server",
-        "editTitle": "Editar Stars Server",
+        "addTitle": "Nuevo embajador del servicio",
+        "editTitle": "Editar embajador del servicio",
         "restaurantLabel": "Restaurante",
         "restaurantPlaceholder": "Busca un restaurante",
         "restaurantNoResults": "No se encontraron restaurantes",
         "nameLabel": "Nombre",
-        "namePlaceholder": "Nombre del Stars Server",
+        "namePlaceholder": "Nombre del embajador del servicio",
         "cancel": "Cancelar",
         "save": "Guardar",
         "saving": "Guardando..."
       },
       "deleteConfirm": {
-        "title": "Eliminar Stars Server",
+        "title": "Eliminar embajador del servicio",
         "message": "¿Seguro que quieres eliminar a \"{name}\"? Sus calificaciones existentes se conservarán bajo su nombre. Esta acción no se puede deshacer.",
         "cancel": "Cancelar",
         "confirm": "Eliminar",
         "deleting": "Eliminando..."
       },
       "transfer": {
-        "title": "Transferir Stars Server",
+        "title": "Transferir embajador del servicio",
         "message": "Elige el restaurante al que quieres transferir a \"{name}\". Sus calificaciones existentes se transferirán junto con él.",
         "restaurantLabel": "Nuevo restaurante",
         "restaurantPlaceholder": "Busca un restaurante",
@@ -332,14 +332,14 @@
         "transferring": "Transfiriendo...",
         "errors": {
           "restaurantRequired": "Selecciona un restaurante",
-          "duplicate": "No se pudo transferir: ya existe un Stars Server con este nombre en el restaurante destino, o alguno de sus clientes ya calificó ahí",
-          "generic": "No se pudo transferir el Stars Server, intenta de nuevo"
+          "duplicate": "No se pudo transferir: ya existe un embajador del servicio con este nombre en el restaurante destino, o alguno de sus clientes ya calificó ahí",
+          "generic": "No se pudo transferir el embajador del servicio, intenta de nuevo"
         }
       },
       "errors": {
         "nameRequired": "Ingresa un nombre",
         "restaurantRequired": "Selecciona un restaurante",
-        "duplicate": "Ya existe un Stars Server con este nombre en este restaurante",
+        "duplicate": "Ya existe un embajador del servicio con este nombre en este restaurante",
         "generic": "Algo salió mal. Intenta de nuevo."
       }
     },

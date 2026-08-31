@@ -56,9 +56,9 @@
     }
   },
   "rateBeerMaster": {
-    "beerMasterLabel": "STARS SERVER",
-    "namePlaceholder": "Stars Server's name",
-    "noResults": "No Stars Server found with that name",
+    "beerMasterLabel": "BAR STAFF",
+    "namePlaceholder": "Bar staff's name",
+    "noResults": "No bar staff found with that name",
     "title": "How was your experience?",
     "subtitle": "Your opinion helps us improve",
     "tierMessages": [
@@ -73,7 +73,7 @@
     "cta": "SUBMIT RATING",
     "step": "STEP 2 OF 2",
     "errors": {
-      "nameRequired": "Enter the Stars Server's name",
+      "nameRequired": "Enter the bar staff's name",
       "ratingRequired": "Please select a rating",
       "submitFailed": "Failed to submit your rating, please try again",
       "alreadyRated": "You've already submitted a rating for this restaurant"
@@ -94,7 +94,7 @@
     "nav": {
       "dashboard": "Dashboard",
       "restaurants": "Restaurants",
-      "beerMasters": "Stars Servers",
+      "beerMasters": "Bar Staff",
       "ratings": "Ratings",
       "settings": "Settings"
     },
@@ -103,7 +103,7 @@
       "averageRating": "Average Rating",
       "restaurantsRegistered": "Registered Restaurants",
       "newRestaurants": "+{count} new",
-      "beerMastersRegistered": "Stars Servers",
+      "beerMastersRegistered": "Bar Staff",
       "newBeerMasters": "+{count} new"
     },
     "chart": {
@@ -112,9 +112,9 @@
       "empty": "No ratings in this period yet"
     },
     "rankings": {
-      "title": "Top Stars Servers",
+      "title": "Top Bar Staff",
       "rank": "Rank",
-      "master": "Stars Server",
+      "master": "Bar Staff",
       "restaurant": "Restaurant",
       "reviews": "Reviews",
       "avgRating": "Avg. Rating",
@@ -166,8 +166,8 @@
       "indicator": "Page {current} of {total}"
     },
     "beerMasters": {
-      "toggle": "Stars Servers ({count})",
-      "empty": "No rated Stars Servers at this venue yet."
+      "toggle": "Bar Staff ({count})",
+      "empty": "No rated bar staff at this venue yet."
     },
     "states": {
       "loading": "Loading restaurant ranking...",
@@ -177,7 +177,7 @@
     }
   },
   "adminBeerMasters": {
-    "pageTitle": "Stars Servers Ranking",
+    "pageTitle": "Bar Staff Ranking",
     "pageSubtitle": "Individual Performance and Service Quality",
     "refreshLabel": "REFRESH",
     "ratingsCount": "{count} reviews",
@@ -192,11 +192,11 @@
     "restaurantFilter": {
       "label": "Venue",
       "all": "All Venues",
-      "empty": "No rated Stars Servers at {restaurant} yet."
+      "empty": "No rated bar staff at {restaurant} yet."
     },
     "search": {
-      "placeholder": "Search Stars Server...",
-      "noResults": "No Stars Servers found matching \"{query}\""
+      "placeholder": "Search bar staff...",
+      "noResults": "No bar staff found matching \"{query}\""
     },
     "pagination": {
       "previous": "Previous page",
@@ -204,9 +204,9 @@
       "indicator": "Page {current} of {total}"
     },
     "states": {
-      "loading": "Loading Stars Servers ranking...",
+      "loading": "Loading bar staff ranking...",
       "error": "Couldn't load the ranking. Please try again.",
-      "emptyTitle": "No rated Stars Servers yet",
+      "emptyTitle": "No rated bar staff yet",
       "emptySubtitle": "Once customers start rating them, they'll show up here."
     }
   },
@@ -240,7 +240,7 @@
       "noResults": "No reviews found matching the current filters"
     },
     "restaurantLabel": "Venue: {restaurant}",
-    "beerMasterLabel": "Stars Server: {name}",
+    "beerMasterLabel": "Bar Staff: {name}",
     "loadMore": "Load more reviews",
     "states": {
       "loading": "Loading reviews...",
@@ -251,10 +251,10 @@
   },
   "adminSettings": {
     "pageTitle": "Settings",
-    "pageSubtitle": "Manage registered restaurants and Stars Servers",
+    "pageSubtitle": "Manage registered restaurants and bar staff",
     "tabs": {
       "restaurants": "Restaurants",
-      "beerMasters": "Stars Servers"
+      "beerMasters": "Bar Staff"
     },
     "restaurants": {
       "addButton": "Add restaurant",
@@ -277,7 +277,7 @@
       },
       "deleteConfirm": {
         "title": "Delete restaurant",
-        "message": "Are you sure you want to delete \"{name}\"? Its Stars Servers and associated ratings will also be deleted. This action can't be undone.",
+        "message": "Are you sure you want to delete \"{name}\"? Its bar staff and associated ratings will also be deleted. This action can't be undone.",
         "cancel": "Cancel",
         "confirm": "Delete",
         "deleting": "Deleting..."
@@ -294,35 +294,35 @@
         "placeholder": "All restaurants",
         "noResults": "No restaurants found"
       },
-      "addButton": "Add Stars Server",
-      "emptyTitle": "No Stars Servers registered yet",
-      "emptySubtitle": "Use the \"Add Stars Server\" button to register the first one.",
-      "noRestaurantResultsTitle": "This restaurant has no Stars Servers",
+      "addButton": "Add bar staff",
+      "emptyTitle": "No bar staff registered yet",
+      "emptySubtitle": "Use the \"Add bar staff\" button to register the first one.",
+      "noRestaurantResultsTitle": "This restaurant has no bar staff",
       "noRestaurantResultsSubtitle": "Add the first one for this restaurant.",
       "editAction": "Edit",
       "deleteAction": "Delete",
       "transferAction": "Transfer",
       "form": {
-        "addTitle": "New Stars Server",
-        "editTitle": "Edit Stars Server",
+        "addTitle": "New bar staff",
+        "editTitle": "Edit bar staff",
         "restaurantLabel": "Restaurant",
         "restaurantPlaceholder": "Search for a restaurant",
         "restaurantNoResults": "No restaurants found",
         "nameLabel": "Name",
-        "namePlaceholder": "Stars Server name",
+        "namePlaceholder": "Bar staff name",
         "cancel": "Cancel",
         "save": "Save",
         "saving": "Saving..."
       },
       "deleteConfirm": {
-        "title": "Delete Stars Server",
+        "title": "Delete bar staff",
         "message": "Are you sure you want to delete \"{name}\"? Their existing ratings will be kept under their name. This action can't be undone.",
         "cancel": "Cancel",
         "confirm": "Delete",
         "deleting": "Deleting..."
       },
       "transfer": {
-        "title": "Transfer Stars Server",
+        "title": "Transfer bar staff",
         "message": "Choose the restaurant to transfer \"{name}\" to. Their existing ratings will move with them.",
         "restaurantLabel": "New restaurant",
         "restaurantPlaceholder": "Search for a restaurant",
@@ -332,14 +332,14 @@
         "transferring": "Transferring...",
         "errors": {
           "restaurantRequired": "Select a restaurant",
-          "duplicate": "Can't transfer: either a Stars Server with this name already exists at the target restaurant, or one of their customers already has a rating there",
-          "generic": "Couldn't transfer the Stars Server, please try again"
+          "duplicate": "Can't transfer: either a bar staff with this name already exists at the target restaurant, or one of their customers already has a rating there",
+          "generic": "Couldn't transfer the bar staff, please try again"
         }
       },
       "errors": {
         "nameRequired": "Enter a name",
         "restaurantRequired": "Select a restaurant",
-        "duplicate": "A Stars Server with this name already exists at this restaurant",
+        "duplicate": "A bar staff with this name already exists at this restaurant",
         "generic": "Something went wrong. Please try again."
       }
     },
