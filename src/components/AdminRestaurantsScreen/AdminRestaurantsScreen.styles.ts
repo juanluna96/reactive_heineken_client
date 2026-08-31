@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FaArrowsRotate, FaChevronDown, FaChevronLeft, FaChevronRight, FaMagnifyingGlass, FaStar } from 'react-icons/fa6';
+import { FaArrowsRotate, FaChevronLeft, FaChevronRight, FaMagnifyingGlass } from 'react-icons/fa6';
 import styled, { css, keyframes } from 'styled-components';
 import { ADMIN_DESKTOP_BREAKPOINT, ADMIN_MOBILE_BREAKPOINT, ADMIN_SIDEBAR_WIDTH } from '../AdminSidebar';
 
@@ -359,107 +359,25 @@ export const RankMeta = styled.div`
   }
 `;
 
-export const RatingBlock = styled.div`
+export const ScoreBlock = styled.div`
   text-align: center;
-  min-width: 72px;
+  min-width: 64px;
 `;
 
-export const RatingRow = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  color: ${({ theme }) => theme.colors.brandGreenLight};
+export const ScoreValue = styled.span<{ $muted?: boolean }>`
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1;
+  color: ${({ theme, $muted }) => ($muted ? theme.colors.mutedText : theme.colors.brandGreenLight)};
 `;
 
-export const StarIcon = styled(FaStar)`
-  width: 13px;
-  height: 13px;
-`;
-
-export const RatingValue = styled.span`
-  font-size: 16px;
-  font-weight: 700;
-`;
-
-export const ReviewsLabel = styled.p`
-  margin: 2px 0 0;
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
-  color: ${({ theme }) => theme.colors.mutedText};
-`;
-
-export const NoRatingsBadge = styled.span`
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
-  color: ${({ theme }) => theme.colors.mutedText};
-  opacity: 0.7;
-`;
-
-export const BeerMastersDetails = styled.details`
-  ${glassPanel}
-  padding: 8px 14px;
-
-  &[open] summary svg {
-    transform: rotate(180deg);
-  }
-`;
-
-export const BeerMastersSummary = styled.summary`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  list-style: none;
-  cursor: pointer;
-  font-size: 11px;
+export const ScoreLabel = styled.p`
+  margin: 4px 0 0;
+  font-size: 9px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.8px;
-
-  &::-webkit-details-marker {
-    display: none;
-  }
-`;
-
-export const ChevronIcon = styled(FaChevronDown)`
-  width: 10px;
-  height: 10px;
-  transition: transform 0.2s ease;
-`;
-
-export const BeerMastersList = styled.div`
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid ${({ theme }) => theme.colors.surfaceBorder};
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  max-width: 220px;
-`;
-
-export const BeerMasterRow = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  font-size: 12px;
-`;
-
-export const BeerMasterName = styled.span`
-  color: ${({ theme }) => theme.colors.textPrimary};
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-
-export const BeerMasterScore = styled.span`
-  flex-shrink: 0;
-  font-weight: 700;
-  color: ${({ theme }) => theme.colors.brandGreenLight};
+  color: ${({ theme }) => theme.colors.mutedText};
 `;
 
 export const EmptyMessage = styled.p`

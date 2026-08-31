@@ -4,6 +4,13 @@ export { createBeerMaster, deleteBeerMaster, fetchBeerMasters, transferBeerMaste
 export { ApiError } from './client';
 export { checkRatingExists, createRating } from './ratings';
 export { createRestaurant, deleteRestaurant, fetchRestaurants, updateRestaurant } from './restaurants';
+export {
+  createScoreComponent,
+  deleteScoreComponent,
+  fetchScoringConfig,
+  setRestaurantScoreInput,
+  updateScoreComponent,
+} from './scoring';
 export type {
   AdminBeerMasterDto,
   AdminRole,
@@ -24,8 +31,15 @@ export type {
   RegisterPayload,
   ResetPasswordPayload,
   RestaurantDto,
-  RestaurantRankingBeerMasterDto,
   RestaurantRankingDto,
+  RestaurantScoreInputDto,
+  RestaurantScoreInputPayload,
   RestaurantWritePayload,
+  ScoreBreakdownItemDto,
+  ScoreComponentCreatePayload,
+  ScoreComponentDto,
+  ScoreComponentUpdatePayload,
+  ScoringConfigDto,
+  ScoringConfigRestaurantDto,
   TopBeerMasterDto,
 } from './types';

@@ -150,11 +150,13 @@
     "pageTitle": "Venue & Location Ranking",
     "pageSubtitle": "Global Performance and Quality Ranking",
     "refreshLabel": "REFRESH",
-    "ratingsCount": "{count} reviews",
-    "noRatings": "No ratings yet",
     "ownRestaurantBadge": "Your Restaurant",
+    "scoreLabel": "SCORE",
+    "scoreEmpty": "—",
+    "scoreBreakdownToggle": "See score breakdown",
     "sort": {
       "label": "Sort by",
+      "score": "Sort by Score",
       "rating": "Sort by Rating",
       "popularity": "Most Popular",
       "newest": "Newest"
@@ -167,10 +169,6 @@
       "previous": "Previous page",
       "next": "Next page",
       "indicator": "Page {current} of {total}"
-    },
-    "beerMasters": {
-      "toggle": "Bar Staff ({count})",
-      "empty": "No rated bar staff at this venue yet."
     },
     "states": {
       "loading": "Loading restaurant ranking...",
@@ -258,7 +256,8 @@
     "pageSubtitle": "Manage registered restaurants and bar staff",
     "tabs": {
       "restaurants": "Restaurants",
-      "beerMasters": "Bar Staff"
+      "beerMasters": "Bar Staff",
+      "scoring": "Score"
     },
     "restaurants": {
       "addButton": "Add restaurant",
@@ -344,6 +343,53 @@
         "nameRequired": "Enter a name",
         "restaurantRequired": "Select a restaurant",
         "duplicate": "A bar staff with this name already exists at this restaurant",
+        "generic": "Something went wrong. Please try again."
+      }
+    },
+    "scoring": {
+      "title": "Scoring system",
+      "subtitle": "Tune how the STAR SERVE score (0–100) shown in the rankings is calculated.",
+      "componentsTitle": "Components",
+      "componentsSubtitle": "Weights are auto-normalized; the score always stays between 0 and 100.",
+      "weightSum": "Weight sum: {sum}%",
+      "weightSumHint": "100% recommended. If they don't add up to 100 it's normalized anyway.",
+      "weightLabel": "Weight",
+      "kLabel": "k (confidence)",
+      "kHint": "Ratings needed before trusting the individual average.",
+      "enabledLabel": "Active",
+      "growthPctLabel": "Is a growth %",
+      "ceilingLabel": "Ceiling %",
+      "manualBadge": "Manual",
+      "autoBadge": "Automatic",
+      "deleteAction": "Delete",
+      "addButton": "Add component",
+      "inputsTitle": "Per-restaurant values",
+      "inputsSubtitle": "Each restaurant's manual value for the manual components (e.g. beer-sales growth %).",
+      "noManualComponents": "No manual components. Add one above to capture per-restaurant values.",
+      "inputPlaceholder": "—",
+      "restaurantColumn": "Restaurant",
+      "form": {
+        "addTitle": "New component",
+        "labelLabel": "Name",
+        "labelPlaceholder": "e.g. Account volume",
+        "weightLabel": "Weight (0–1)",
+        "growthPctLabel": "The per-restaurant value is a growth %",
+        "ceilingLabel": "Growth ceiling (%)",
+        "cancel": "Cancel",
+        "save": "Create",
+        "saving": "Creating..."
+      },
+      "deleteConfirm": {
+        "title": "Delete component",
+        "message": "Delete \"{name}\"? Its per-restaurant values will also be removed. This can't be undone.",
+        "cancel": "Cancel",
+        "confirm": "Delete",
+        "deleting": "Deleting..."
+      },
+      "errors": {
+        "labelRequired": "Enter a name",
+        "weightInvalid": "Weight must be between 0 and 1",
+        "ceilingRequired": "Enter the growth ceiling",
         "generic": "Something went wrong. Please try again."
       }
     },

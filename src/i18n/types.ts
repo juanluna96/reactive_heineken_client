@@ -232,11 +232,13 @@ export interface AdminRestaurantsDictionary {
   pageTitle: string;
   pageSubtitle: string;
   refreshLabel: string;
-  ratingsCount: string;
-  noRatings: string;
   ownRestaurantBadge: string;
+  scoreLabel: string;
+  scoreEmpty: string;
+  scoreBreakdownToggle: string;
   sort: {
     label: string;
+    score: string;
     rating: string;
     popularity: string;
     newest: string;
@@ -249,10 +251,6 @@ export interface AdminRestaurantsDictionary {
     previous: string;
     next: string;
     indicator: string;
-  };
-  beerMasters: {
-    toggle: string;
-    empty: string;
   };
   states: {
     loading: string;
@@ -388,12 +386,55 @@ export interface AdminSettingsTransferDictionary {
   };
 }
 
+export interface AdminSettingsScoringDictionary {
+  title: string;
+  subtitle: string;
+  componentsTitle: string;
+  componentsSubtitle: string;
+  weightSum: string;
+  weightSumHint: string;
+  weightLabel: string;
+  kLabel: string;
+  kHint: string;
+  enabledLabel: string;
+  growthPctLabel: string;
+  ceilingLabel: string;
+  manualBadge: string;
+  autoBadge: string;
+  deleteAction: string;
+  addButton: string;
+  inputsTitle: string;
+  inputsSubtitle: string;
+  noManualComponents: string;
+  inputPlaceholder: string;
+  restaurantColumn: string;
+  form: {
+    addTitle: string;
+    labelLabel: string;
+    labelPlaceholder: string;
+    weightLabel: string;
+    growthPctLabel: string;
+    ceilingLabel: string;
+    cancel: string;
+    save: string;
+    saving: string;
+  };
+  deleteConfirm: AdminSettingsDeleteConfirmDictionary;
+  errors: {
+    labelRequired: string;
+    weightInvalid: string;
+    ceilingRequired: string;
+    generic: string;
+  };
+}
+
 export interface AdminSettingsDictionary {
   pageTitle: string;
   pageSubtitle: string;
   tabs: {
     restaurants: string;
     beerMasters: string;
+    scoring: string;
   };
   restaurants: {
     addButton: string;
@@ -428,6 +469,7 @@ export interface AdminSettingsDictionary {
     transfer: AdminSettingsTransferDictionary;
     errors: AdminSettingsBeerMasterErrorsDictionary;
   };
+  scoring: AdminSettingsScoringDictionary;
   states: {
     loading: string;
     error: string;

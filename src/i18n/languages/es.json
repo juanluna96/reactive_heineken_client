@@ -150,11 +150,13 @@
     "pageTitle": "Ranking de Sedes y Establecimientos",
     "pageSubtitle": "Clasificación de Rendimiento y Calidad Global",
     "refreshLabel": "ACTUALIZAR",
-    "ratingsCount": "{count} reseñas",
-    "noRatings": "Sin calificaciones aún",
     "ownRestaurantBadge": "Tu Restaurante",
+    "scoreLabel": "PUNTAJE",
+    "scoreEmpty": "—",
+    "scoreBreakdownToggle": "Ver desglose del puntaje",
     "sort": {
       "label": "Ordenar por",
+      "score": "Ordenar por Puntaje",
       "rating": "Ordenar por Calificación",
       "popularity": "Más Populares",
       "newest": "Nuevos"
@@ -167,10 +169,6 @@
       "previous": "Página anterior",
       "next": "Página siguiente",
       "indicator": "Página {current} de {total}"
-    },
-    "beerMasters": {
-      "toggle": "Embajadores del servicio ({count})",
-      "empty": "Todavía no hay embajadores del servicio calificados en este local."
     },
     "states": {
       "loading": "Cargando ranking de restaurantes...",
@@ -258,7 +256,8 @@
     "pageSubtitle": "Gestiona los restaurantes y embajadores del servicio registrados",
     "tabs": {
       "restaurants": "Restaurantes",
-      "beerMasters": "Embajadores del servicio"
+      "beerMasters": "Embajadores del servicio",
+      "scoring": "Puntaje"
     },
     "restaurants": {
       "addButton": "Agregar restaurante",
@@ -344,6 +343,53 @@
         "nameRequired": "Ingresa un nombre",
         "restaurantRequired": "Selecciona un restaurante",
         "duplicate": "Ya existe un embajador del servicio con este nombre en este restaurante",
+        "generic": "Algo salió mal. Intenta de nuevo."
+      }
+    },
+    "scoring": {
+      "title": "Sistema de puntaje",
+      "subtitle": "Ajusta cómo se calcula el puntaje STAR SERVE (0–100) que aparece en los rankings.",
+      "componentsTitle": "Componentes",
+      "componentsSubtitle": "Los pesos se normalizan automáticamente; el puntaje siempre queda entre 0 y 100.",
+      "weightSum": "Suma de pesos: {sum}%",
+      "weightSumHint": "Recomendado 100%. Si no suman 100 se normaliza igualmente.",
+      "weightLabel": "Peso",
+      "kLabel": "k (confianza)",
+      "kHint": "Calificaciones necesarias para confiar en el promedio propio.",
+      "enabledLabel": "Activo",
+      "growthPctLabel": "Es % de crecimiento",
+      "ceilingLabel": "Techo %",
+      "manualBadge": "Manual",
+      "autoBadge": "Automático",
+      "deleteAction": "Eliminar",
+      "addButton": "Agregar componente",
+      "inputsTitle": "Valores por restaurante",
+      "inputsSubtitle": "Valor manual de cada restaurante para los componentes manuales (ej. % de crecimiento de venta).",
+      "noManualComponents": "No hay componentes manuales. Agrega uno arriba para capturar valores por restaurante.",
+      "inputPlaceholder": "—",
+      "restaurantColumn": "Restaurante",
+      "form": {
+        "addTitle": "Nuevo componente",
+        "labelLabel": "Nombre",
+        "labelPlaceholder": "Ej. Volumen de cuenta",
+        "weightLabel": "Peso (0–1)",
+        "growthPctLabel": "El valor por restaurante es un % de crecimiento",
+        "ceilingLabel": "Techo de crecimiento (%)",
+        "cancel": "Cancelar",
+        "save": "Crear",
+        "saving": "Creando..."
+      },
+      "deleteConfirm": {
+        "title": "Eliminar componente",
+        "message": "¿Seguro que quieres eliminar \"{name}\"? Se borrarán también sus valores por restaurante. Esta acción no se puede deshacer.",
+        "cancel": "Cancelar",
+        "confirm": "Eliminar",
+        "deleting": "Eliminando..."
+      },
+      "errors": {
+        "labelRequired": "Ingresa un nombre",
+        "weightInvalid": "El peso debe estar entre 0 y 1",
+        "ceilingRequired": "Ingresa el techo de crecimiento",
         "generic": "Algo salió mal. Intenta de nuevo."
       }
     },

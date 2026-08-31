@@ -95,10 +95,12 @@ export interface DashboardDto {
   recent_ratings: RecentRatingDto[];
 }
 
-export interface RestaurantRankingBeerMasterDto {
-  name: string;
-  ratings_count: number;
-  average_rating: number;
+/** One weighted piece of the STAR SERVE composite score (see scoring). */
+export interface ScoreBreakdownItemDto {
+  label: string;
+  weight_pct: number;
+  cs: number;
+  contribution: number;
 }
 
 export interface RestaurantRankingDto {
@@ -107,7 +109,9 @@ export interface RestaurantRankingDto {
   created_at: string;
   ratings_count: number;
   average_rating: number;
-  beer_masters: RestaurantRankingBeerMasterDto[];
+  /** STAR SERVE composite 0–100; null when the restaurant has no ratings. */
+  score: number | null;
+  score_breakdown: ScoreBreakdownItemDto[];
 }
 
 export interface AdminBeerMasterDto {
@@ -127,6 +131,62 @@ export interface BeerMasterRankingDto {
   created_at: string;
   ratings_count: number;
   average_rating: number;
+  score: number | null;
+  score_breakdown: ScoreBreakdownItemDto[];
+}
+
+/** STAR SERVE scoring configuration (owner-only, /admin/scoring). */
+export interface ScoreComponentDto {
+  id: string;
+  key: string;
+  label: string;
+  kind: 'rating_skills' | 'rating_service' | 'rating_experience' | 'manual';
+  weight: number;
+  enabled: boolean;
+  position: number;
+  confidence_k: number | null;
+  is_growth_pct: boolean;
+  ceiling_pct: number | null;
+}
+
+export interface RestaurantScoreInputDto {
+  restaurant_id: string;
+  component_id: string;
+  value: number;
+}
+
+export interface ScoringConfigRestaurantDto {
+  id: string;
+  name: string;
+}
+
+export interface ScoringConfigDto {
+  components: ScoreComponentDto[];
+  restaurants: ScoringConfigRestaurantDto[];
+  restaurant_inputs: RestaurantScoreInputDto[];
+}
+
+export interface ScoreComponentCreatePayload {
+  label: string;
+  weight: number;
+  is_growth_pct: boolean;
+  ceiling_pct?: number | null;
+}
+
+export interface ScoreComponentUpdatePayload {
+  label?: string;
+  weight?: number;
+  enabled?: boolean;
+  position?: number;
+  confidence_k?: number | null;
+  is_growth_pct?: boolean;
+  ceiling_pct?: number | null;
+}
+
+export interface RestaurantScoreInputPayload {
+  restaurant_id: string;
+  component_id: string;
+  value: number;
 }
 
 export interface RatingReviewDto {

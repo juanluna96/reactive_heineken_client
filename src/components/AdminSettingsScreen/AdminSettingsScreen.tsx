@@ -7,6 +7,7 @@ import { initialsFromName } from '../../utils/initialsFromName';
 import { AdminSidebar } from '../AdminSidebar';
 import { AutocompleteField } from '../AutocompleteField';
 import { Modal } from '../Modal';
+import { ScoringSettingsPanel } from '../ScoringSettingsPanel';
 import { ScreenOverlay } from '../ScreenOverlay';
 import { Skeleton } from '../Skeleton';
 import { TextField } from '../TextField';
@@ -177,6 +178,9 @@ export const AdminSettingsScreen = () => {
             <S.TabButton type="button" $active={activeTab === 'beerMasters'} onClick={() => handleTabChange('beerMasters')}>
               {copy.tabs.beerMasters}
             </S.TabButton>
+            <S.TabButton type="button" $active={activeTab === 'scoring'} onClick={() => handleTabChange('scoring')}>
+              {copy.tabs.scoring}
+            </S.TabButton>
           </S.TabList>
         </S.TopBar>
 
@@ -280,7 +284,7 @@ export const AdminSettingsScreen = () => {
                     </>
                   )}
                 </>
-              ) : (
+              ) : activeTab === 'beerMasters' ? (
                 <>
                   <S.SectionHeader>
                     <S.RestaurantPickerWrapper>
@@ -394,6 +398,8 @@ export const AdminSettingsScreen = () => {
                     </>
                   )}
                 </>
+              ) : (
+                <ScoringSettingsPanel />
               )}
             </S.TabPanel>
           </AnimatePresence>

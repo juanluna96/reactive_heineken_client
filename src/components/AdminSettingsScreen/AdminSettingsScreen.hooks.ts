@@ -15,12 +15,12 @@ import type { AdminBeerMasterDto, RestaurantDto } from '../../api';
 import { useTranslation } from '../../i18n';
 import type { AutocompleteFieldOption } from '../AutocompleteField';
 
-export type AdminSettingsTab = 'restaurants' | 'beerMasters';
+export type AdminSettingsTab = 'restaurants' | 'beerMasters' | 'scoring';
 type FetchStatus = 'idle' | 'loading' | 'loaded' | 'error';
 
 // Order backs the tab-switch animation's direction (see handleTabChange) —
 // sliding toward whichever side the newly active tab sits on.
-const TAB_ORDER: AdminSettingsTab[] = ['restaurants', 'beerMasters'];
+const TAB_ORDER: AdminSettingsTab[] = ['restaurants', 'beerMasters', 'scoring'];
 
 // Both lists here can only grow over time (every restaurant/beer master ever
 // added, no filtering) — paginate so a large roster doesn't render as one
