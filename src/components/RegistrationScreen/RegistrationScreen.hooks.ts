@@ -87,11 +87,11 @@ export const useRegistrationScreen = () => {
         setAlreadyRatedError(t.registration.errors.alreadyRated);
         return;
       }
-      navigate(ROUTES.watchExperience);
+      navigate(ROUTES.rateBeerMaster);
     } catch {
       // Check failed (e.g. network hiccup) — don't strand the customer here,
       // the same uniqueness rule is enforced again server-side at final submit.
-      navigate(ROUTES.watchExperience);
+      navigate(ROUTES.rateBeerMaster);
     } finally {
       setIsChecking(false);
     }

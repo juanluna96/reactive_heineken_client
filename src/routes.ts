@@ -4,7 +4,6 @@ export const ROUTES = {
   welcome: '/',
   ageVerification: '/registration/age-verification',
   registration: '/registration',
-  watchExperience: '/registration/watch',
   rateBeerMaster: '/registration/rate',
   thankYou: '/registration/thanks',
   admin: '/admin',

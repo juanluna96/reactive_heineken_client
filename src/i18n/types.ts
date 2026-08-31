@@ -59,17 +59,6 @@ export interface AgeVerificationDictionary {
   };
 }
 
-export interface WatchExperienceDictionary {
-  title: string;
-  subtitle: string;
-  durationLabel: string;
-  timerLabel: string;
-  helper: string;
-  playButtonLabel: string;
-  cta: string;
-  step: string;
-}
-
 export interface RateBeerMasterDictionary {
   beerMasterLabel: string;
   namePlaceholder: string;
@@ -453,7 +442,6 @@ export interface TranslationDictionary {
   welcome: WelcomeDictionary;
   ageVerification: AgeVerificationDictionary;
   registration: RegistrationDictionary;
-  watchExperience: WatchExperienceDictionary;
   rateBeerMaster: RateBeerMasterDictionary;
   thankYou: ThankYouDictionary;
   adminDashboard: AdminDashboardDictionary;

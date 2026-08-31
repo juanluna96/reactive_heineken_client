@@ -119,7 +119,7 @@ export const RegistrationScreen = () => {
           <PrimaryButton onClick={handleContinue} disabled={!isFormValid || isChecking}>
             {t.registration.cta}
           </PrimaryButton>
-          <StepIndicator current={1} total={3} label={t.registration.step} />
+          <StepIndicator current={1} total={2} label={t.registration.step} />
         </S.Footer>
       </S.Content>
     </S.Screen>

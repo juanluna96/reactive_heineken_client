@@ -46,7 +46,7 @@
       "suffix": " y el tratamiento de mis datos personales."
     },
     "cta": "CONTINUAR",
-    "step": "PASO 1 DE 3",
+    "step": "PASO 1 DE 2",
     "errors": {
       "nameRequired": "Ingresa tu nombre completo",
       "phoneInvalid": "Ingresa un número de teléfono válido",
@@ -54,16 +54,6 @@
       "consentRequired": "Debes aceptar la política de privacidad",
       "alreadyRated": "Ya enviaste una calificación para este restaurante con este número"
     }
-  },
-  "watchExperience": {
-    "title": "Mira la\nExperiencia",
-    "subtitle": "Por favor mira el video completo para desbloquear tu\ncalificación.",
-    "durationLabel": "00:30",
-    "timerLabel": "RESTANTE",
-    "helper": "La calificación estará disponible cuando\ntermine el video.",
-    "playButtonLabel": "Haz clic aquí para reproducir",
-    "cta": "CALIFICA A TU STARS SERVER",
-    "step": "PASO 2 DE 3"
   },
   "rateBeerMaster": {
     "beerMasterLabel": "STARS SERVER",
@@ -81,7 +71,7 @@
     "opinionLabel": "OPINIÓN",
     "opinionPlaceholder": "Comentario opcional...",
     "cta": "ENVIAR CALIFICACIÓN",
-    "step": "PASO 3 DE 3",
+    "step": "PASO 2 DE 2",
     "errors": {
       "nameRequired": "Ingresa el nombre del Stars Server",
       "ratingRequired": "Selecciona una calificación",

@@ -129,7 +129,7 @@ export const RateBeerMasterScreen = () => {
           <PrimaryButton onClick={handleSubmit} disabled={!isFormValid || isSubmitting}>
             {t.rateBeerMaster.cta}
           </PrimaryButton>
-          <StepIndicator current={3} total={3} label={t.rateBeerMaster.step} />
+          <StepIndicator current={2} total={2} label={t.rateBeerMaster.step} />
         </S.Footer>
       </S.Content>
     </S.Screen>

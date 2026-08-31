@@ -84,7 +84,7 @@ export const useRateBeerMasterScreen = () => {
   }));
 
   const handleBack = () => {
-    navigate(ROUTES.watchExperience);
+    navigate(ROUTES.registration);
   };
 
   const handleBeerMasterSelect = (value: string) => {
