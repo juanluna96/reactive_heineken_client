@@ -1,13 +1,14 @@
 import { AnimatePresence } from 'framer-motion';
-import { FaChevronDown, FaUser } from 'react-icons/fa6';
+import { FaUser } from 'react-icons/fa6';
 import { errorMessageVariants, staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background-2.png';
 import backgroundImageLaptop from '../../assets/images/background-laptop-2.png';
 import heinekenLogo from '../../assets/logos/heineken-logo.png';
+import { AutocompleteField } from '../AutocompleteField';
 import { BubbleField } from '../BubbleField';
 import { PrimaryButton } from '../PrimaryButton';
 import { ScreenOverlay } from '../ScreenOverlay';
-import { SelectField } from '../SelectField';
+import { StarRating } from '../StarRating';
 import { StepIndicator } from '../StepIndicator';
 import { TABLET_BREAKPOINT } from '../../styles/breakpoints';
 import * as S from './RateBeerMasterScreen.styles';
@@ -16,23 +17,28 @@ import { useRateBeerMasterScreen } from './RateBeerMasterScreen.hooks';
 export const RateBeerMasterScreen = () => {
   const {
     t,
-    hasBeerMasterList,
     beerMasterOptions,
     selectedBeerMasterId,
     beerMasterName,
     nameError,
-    stars,
-    tierMessage,
-    ratingError,
+    tierMessages,
+    rating,
+    setRating,
+    experienceError,
+    skillsRating,
+    setSkillsRating,
+    skillsError,
+    serviceRating,
+    setServiceRating,
+    serviceError,
     isFormValid,
     isSubmitting,
     submitError,
     comment,
     maxCommentLength,
     handleBack,
-    handleBeerMasterNameChange,
+    setBeerMasterName,
     handleBeerMasterSelect,
-    handleStarHoverEnd,
     handleCommentChange,
     handleSubmit,
   } = useRateBeerMasterScreen();
@@ -58,67 +64,45 @@ export const RateBeerMasterScreen = () => {
 
         <S.Hero>
           <S.ProfileSection variants={staggerItem}>
-            {hasBeerMasterList ? (
-              <SelectField
-                icon={FaUser}
-                chevronIcon={FaChevronDown}
-                label={t.rateBeerMaster.beerMasterLabel}
-                placeholder={t.rateBeerMaster.namePlaceholder}
-                options={beerMasterOptions}
-                value={selectedBeerMasterId}
-                onChange={handleBeerMasterSelect}
-                error={nameError}
-              />
-            ) : (
-              <>
-                <S.NameInput
-                  value={beerMasterName}
-                  onChange={handleBeerMasterNameChange}
-                  placeholder={t.rateBeerMaster.namePlaceholder}
-                  aria-label="Beer master name"
-                  $hasError={Boolean(nameError)}
-                />
-                <S.BeerMasterLabel>{t.rateBeerMaster.beerMasterLabel}</S.BeerMasterLabel>
-                <AnimatePresence>
-                  {nameError && (
-                    <S.NameError initial="hidden" animate="visible" exit="exit" variants={errorMessageVariants}>
-                      {nameError}
-                    </S.NameError>
-                  )}
-                </AnimatePresence>
-              </>
-            )}
+            <AutocompleteField
+              icon={FaUser}
+              label={t.rateBeerMaster.beerMasterLabel}
+              placeholder={t.rateBeerMaster.namePlaceholder}
+              options={beerMasterOptions}
+              value={selectedBeerMasterId}
+              onChange={handleBeerMasterSelect}
+              allowCustomValue
+              freeTextValue={beerMasterName}
+              onCustomValueChange={setBeerMasterName}
+              error={nameError}
+              noResultsText={t.rateBeerMaster.noResults}
+            />
           </S.ProfileSection>
 
           <S.RatingSection variants={staggerItem}>
-            <S.Title>{t.rateBeerMaster.title}</S.Title>
             <S.Subtitle>{t.rateBeerMaster.subtitle}</S.Subtitle>
 
-            <S.Stars>
-              {stars.map((star) => (
-                <S.StarButton
-                  key={star.value}
-                  type="button"
-                  onClick={star.onSelect}
-                  onMouseEnter={star.onHover}
-                  onMouseLeave={handleStarHoverEnd}
-                  aria-label={`${star.value}`}
-                  whileHover={{ scale: 1.15 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  {star.filled ? <S.StarFilled /> : <S.StarEmpty />}
-                </S.StarButton>
-              ))}
-            </S.Stars>
-
-            <S.TierMessage $visible={Boolean(tierMessage)}>{tierMessage}</S.TierMessage>
-            <AnimatePresence>
-              {ratingError && (
-                <S.RatingError initial="hidden" animate="visible" exit="exit" variants={errorMessageVariants}>
-                  {ratingError}
-                </S.RatingError>
-              )}
-            </AnimatePresence>
+            <StarRating
+              label={t.rateBeerMaster.title}
+              value={rating}
+              onChange={setRating}
+              tierMessages={tierMessages}
+              error={experienceError}
+            />
+            <StarRating
+              label={t.rateBeerMaster.skillsQuestion}
+              value={skillsRating}
+              onChange={setSkillsRating}
+              tierMessages={tierMessages}
+              error={skillsError}
+            />
+            <StarRating
+              label={t.rateBeerMaster.serviceQuestion}
+              value={serviceRating}
+              onChange={setServiceRating}
+              tierMessages={tierMessages}
+              error={serviceError}
+            />
           </S.RatingSection>
 
           <S.OpinionSection variants={staggerItem}>
@@ -147,7 +131,7 @@ export const RateBeerMasterScreen = () => {
           <PrimaryButton onClick={handleSubmit} disabled={!isFormValid || isSubmitting}>
             {t.rateBeerMaster.cta}
           </PrimaryButton>
-          <StepIndicator current={3} total={3} label={t.rateBeerMaster.step} />
+          <StepIndicator current={2} total={2} label={t.rateBeerMaster.step} />
         </S.Footer>
       </S.Content>
     </S.Screen>

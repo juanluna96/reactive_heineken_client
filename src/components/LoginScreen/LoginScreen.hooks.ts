@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ApiError, login } from '../../api';
+import { useAdminStore } from '../../admin';
 import { useAuthStore } from '../../auth';
 import { useTranslation } from '../../i18n';
 import { getDefaultAdminRoute, ROUTES } from '../../routes';
@@ -11,6 +12,7 @@ export const useLoginScreen = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const setUser = useAuthStore((state) => state.setUser);
+  const resetAdminData = useAdminStore((state) => state.resetAdminData);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -57,6 +59,7 @@ export const useLoginScreen = () => {
     setSubmitError(undefined);
     try {
       const user = await login({ email, password });
+      resetAdminData();
       setUser(user);
       navigate(getDefaultAdminRoute(user.role));
     } catch (error) {

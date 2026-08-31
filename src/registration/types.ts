@@ -1,19 +1,16 @@
 export interface RegistrationState {
   name: string;
-  email: string;
+  /** National phone number as the customer typed it (no dial-code prefix). */
+  phone: string;
+  /** ISO 3166-1 alpha-2 code of the selected dial-code country (see PhoneField). */
+  phoneCountry: string;
   /** Selected restaurant's id, stringified (matches SelectField's string value contract). */
   restaurantId: string;
   accepted: boolean;
-  /**
-   * Independent, optional opt-in (separate checkbox from `accepted`) authorizing
-   * this activation's results to be emailed to the participant — counsel
-   * guidance, 2026-08-21. Never required for `isFormValid`.
-   */
-  resultsConsent: boolean;
   setName: (name: string) => void;
-  setEmail: (email: string) => void;
+  setPhone: (phone: string) => void;
+  setPhoneCountry: (phoneCountry: string) => void;
   setRestaurantId: (restaurantId: string) => void;
   setAccepted: (accepted: boolean) => void;
-  setResultsConsent: (resultsConsent: boolean) => void;
   reset: () => void;
 }

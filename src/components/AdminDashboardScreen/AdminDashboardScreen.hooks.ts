@@ -101,6 +101,8 @@ export const useAdminDashboardScreen = () => {
       customerName: entry.customer_name,
       relativeTime: formatRelativeTime(entry.created_at, t.adminDashboard.time),
       stars: entry.rating,
+      skillsStars: entry.skills_rating,
+      serviceStars: entry.service_rating,
       comment: entry.comment,
       restaurantName: entry.restaurant_name,
       beerMasterName: entry.beer_master_name,

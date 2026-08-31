@@ -77,6 +77,8 @@ export const useAdminRatingsScreen = () => {
       initials: initialsFromName(review.customer_name),
       customerName: review.customer_name,
       rating: review.rating,
+      skillsRating: review.skills_rating,
+      serviceRating: review.service_rating,
       comment: review.comment,
       restaurantId: review.restaurant_id,
       restaurantName: review.restaurant_name,

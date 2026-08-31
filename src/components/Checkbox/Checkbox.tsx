@@ -5,7 +5,7 @@ import { useCheckbox } from './Checkbox.hooks';
 import type { CheckboxProps } from './Checkbox.types';
 
 export const Checkbox = (props: CheckboxProps) => {
-  const { checked, prefix, linkText, suffix, error } = props;
+  const { checked, prefix, linkText, linkHref, suffix, error } = props;
   const { handleChange } = useCheckbox(props);
 
   return (
@@ -20,7 +20,14 @@ export const Checkbox = (props: CheckboxProps) => {
         />
         <S.Label>
           {prefix}
-          {linkText && <S.LinkText>{linkText}</S.LinkText>}
+          {linkText &&
+            (linkHref ? (
+              <S.LinkText as="a" href={linkHref} target="_blank" rel="noopener noreferrer">
+                {linkText}
+              </S.LinkText>
+            ) : (
+              <S.LinkText>{linkText}</S.LinkText>
+            ))}
           {suffix}
         </S.Label>
       </S.Wrapper>

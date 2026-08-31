@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ApiError, register } from '../../api';
+import { useAdminStore } from '../../admin';
 import { useAuthStore } from '../../auth';
 import { useTranslation } from '../../i18n';
 import { useRestaurantsStore } from '../../restaurants';
@@ -17,6 +18,7 @@ export const useRegisterScreen = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const setUser = useAuthStore((state) => state.setUser);
+  const resetAdminData = useAdminStore((state) => state.resetAdminData);
 
   const restaurants = useRestaurantsStore((state) => state.restaurants);
   const fetchRestaurants = useRestaurantsStore((state) => state.fetchRestaurants);
@@ -99,6 +101,7 @@ export const useRegisterScreen = () => {
     setSubmitError(undefined);
     try {
       const user = await register({ full_name: fullName.trim(), email, password, affiliation });
+      resetAdminData();
       setUser(user);
       navigate(getDefaultAdminRoute(user.role));
     } catch (error) {

@@ -70,6 +70,7 @@ export const LoginScreen = () => {
               type="password"
               value={password}
               onChange={setPassword}
+              onEnter={handleSubmit}
               error={passwordError}
             />
             <S.ForgotPasswordLink type="button" onClick={handleForgotPassword}>

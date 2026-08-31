@@ -5,16 +5,22 @@ import {
   createRestaurant,
   deleteBeerMaster,
   deleteRestaurant,
-  fetchBeerMasters,
+  fetchAllBeerMasters,
   fetchRestaurants,
+  transferBeerMaster,
   updateBeerMaster,
   updateRestaurant,
 } from '../../api';
-import type { BeerMasterDto, RestaurantDto } from '../../api';
+import type { AdminBeerMasterDto, RestaurantDto } from '../../api';
 import { useTranslation } from '../../i18n';
+import type { AutocompleteFieldOption } from '../AutocompleteField';
 
-export type AdminSettingsTab = 'restaurants' | 'beerMasters';
+export type AdminSettingsTab = 'restaurants' | 'beerMasters' | 'scoring';
 type FetchStatus = 'idle' | 'loading' | 'loaded' | 'error';
+
+// Order backs the tab-switch animation's direction (see handleTabChange) —
+// sliding toward whichever side the newly active tab sits on.
+const TAB_ORDER: AdminSettingsTab[] = ['restaurants', 'beerMasters', 'scoring'];
 
 // Both lists here can only grow over time (every restaurant/beer master ever
 // added, no filtering) — paginate so a large roster doesn't render as one
@@ -22,12 +28,21 @@ type FetchStatus = 'idle' | 'loading' | 'loaded' | 'error';
 const PAGE_SIZE = 25;
 
 type RestaurantFormState = { mode: 'add' } | { mode: 'edit'; restaurant: RestaurantDto } | null;
-type BeerMasterFormState = { mode: 'add' } | { mode: 'edit'; beerMaster: BeerMasterDto } | null;
+type BeerMasterFormState = { mode: 'add' } | { mode: 'edit'; beerMaster: AdminBeerMasterDto } | null;
 
 export const useAdminSettingsScreen = () => {
   const { t } = useTranslation();
 
   const [activeTab, setActiveTab] = useState<AdminSettingsTab>('restaurants');
+  // 1 when the newly selected tab sits to the right in TAB_ORDER, -1 when it
+  // sits to the left — drives which way S.TabPanel slides in/out.
+  const [tabDirection, setTabDirection] = useState(0);
+
+  const handleTabChange = (tab: AdminSettingsTab) => {
+    if (tab === activeTab) return;
+    setTabDirection(TAB_ORDER.indexOf(tab) > TAB_ORDER.indexOf(activeTab) ? 1 : -1);
+    setActiveTab(tab);
+  };
 
   // Shared across both tabs: the restaurant list backs tab 1's CRUD list
   // and tab 2's restaurant picker, so it's fetched once here.
@@ -51,9 +66,19 @@ export const useAdminSettingsScreen = () => {
   }, []);
 
   const [restaurantsPage, setRestaurantsPage] = useState(1);
-  const restaurantsPageCount = Math.max(1, Math.ceil((restaurants?.length ?? 0) / PAGE_SIZE));
+  const [restaurantSearchQuery, setRestaurantSearchQueryState] = useState('');
+
+  const setRestaurantSearchQuery = (query: string) => {
+    setRestaurantSearchQueryState(query);
+    setRestaurantsPage(1);
+  };
+
+  const filteredRestaurants = (restaurants ?? []).filter((restaurant) =>
+    restaurant.name.toLowerCase().includes(restaurantSearchQuery.trim().toLowerCase()),
+  );
+  const restaurantsPageCount = Math.max(1, Math.ceil(filteredRestaurants.length / PAGE_SIZE));
   const restaurantsCurrentPage = Math.min(restaurantsPage, restaurantsPageCount);
-  const paginatedRestaurants = (restaurants ?? []).slice(
+  const paginatedRestaurants = filteredRestaurants.slice(
     (restaurantsCurrentPage - 1) * PAGE_SIZE,
     restaurantsCurrentPage * PAGE_SIZE,
   );
@@ -132,13 +157,13 @@ export const useAdminSettingsScreen = () => {
     setRestaurantDeleteError(undefined);
     try {
       await deleteRestaurant(restaurantDeleteTarget.id);
-      // The deleted restaurant may be the one currently picked in the beer
-      // masters tab — drop that selection so it doesn't point at nothing.
+      // Deleting a restaurant cascade-deletes its Stars Servers too (see
+      // routers/restaurants.py) — reload the roster so they drop out, and
+      // clear the filter if it pointed at the now-gone restaurant.
       if (selectedRestaurantId === restaurantDeleteTarget.id) {
         setSelectedRestaurantId('');
-        setBeerMasters(null);
       }
-      await loadRestaurants();
+      await Promise.all([loadRestaurants(), loadAllBeerMasters()]);
       setRestaurantDeleteTarget(null);
     } catch {
       setRestaurantDeleteError(t.adminSettings.restaurants.errors.generic);
@@ -147,17 +172,19 @@ export const useAdminSettingsScreen = () => {
     }
   };
 
-  // --- Beer masters tab: scoped to a picked restaurant ---
-  const [selectedRestaurantId, setSelectedRestaurantId] = useState('');
-  const [beerMasters, setBeerMasters] = useState<BeerMasterDto[] | null>(null);
+  // --- Beer masters tab: every registered Stars Server across every
+  // restaurant, shown right away — the restaurant picker below narrows this
+  // down to one restaurant instead of gating the list behind a selection.
+  const [allBeerMasters, setAllBeerMasters] = useState<AdminBeerMasterDto[] | null>(null);
   const [beerMastersStatus, setBeerMastersStatus] = useState<FetchStatus>('idle');
+  const [selectedRestaurantId, setSelectedRestaurantId] = useState('');
   const [beerMastersPage, setBeerMastersPage] = useState(1);
 
-  const loadBeerMasters = async (restaurantId: string) => {
+  const loadAllBeerMasters = async () => {
     setBeerMastersStatus('loading');
     try {
-      const data = await fetchBeerMasters(restaurantId);
-      setBeerMasters(data);
+      const data = await fetchAllBeerMasters();
+      setAllBeerMasters(data);
       setBeerMastersStatus('loaded');
     } catch {
       setBeerMastersStatus('error');
@@ -165,19 +192,20 @@ export const useAdminSettingsScreen = () => {
   };
 
   useEffect(() => {
-    setBeerMastersPage(1);
-    if (!selectedRestaurantId) {
-      setBeerMasters(null);
-      setBeerMastersStatus('idle');
-      return;
-    }
-    loadBeerMasters(selectedRestaurantId);
+    loadAllBeerMasters();
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    setBeerMastersPage(1);
   }, [selectedRestaurantId]);
 
-  const beerMastersPageCount = Math.max(1, Math.ceil((beerMasters?.length ?? 0) / PAGE_SIZE));
+  const filteredBeerMasters = selectedRestaurantId
+    ? (allBeerMasters ?? []).filter((beerMaster) => beerMaster.restaurant_id === selectedRestaurantId)
+    : (allBeerMasters ?? []);
+  const beerMastersPageCount = Math.max(1, Math.ceil(filteredBeerMasters.length / PAGE_SIZE));
   const beerMastersCurrentPage = Math.min(beerMastersPage, beerMastersPageCount);
-  const paginatedBeerMasters = (beerMasters ?? []).slice(
+  const paginatedBeerMasters = filteredBeerMasters.slice(
     (beerMastersCurrentPage - 1) * PAGE_SIZE,
     beerMastersCurrentPage * PAGE_SIZE,
   );
@@ -187,16 +215,23 @@ export const useAdminSettingsScreen = () => {
   // --- Beer master form (add/edit) ---
   const [beerMasterForm, setBeerMasterForm] = useState<BeerMasterFormState>(null);
   const [beerMasterFormName, setBeerMasterFormName] = useState('');
+  // Only meaningful in 'add' mode — the restaurant to create the Stars Server
+  // under, picked in the modal itself. Pre-filled from the page's restaurant
+  // filter (if any) as a convenience, but always changeable there.
+  const [beerMasterFormRestaurantId, setBeerMasterFormRestaurantId] = useState('');
   const [beerMasterFormError, setBeerMasterFormError] = useState<string | undefined>(undefined);
+  const [beerMasterFormRestaurantError, setBeerMasterFormRestaurantError] = useState<string | undefined>(undefined);
   const [isSavingBeerMaster, setIsSavingBeerMaster] = useState(false);
 
   const openAddBeerMaster = () => {
     setBeerMasterForm({ mode: 'add' });
     setBeerMasterFormName('');
+    setBeerMasterFormRestaurantId(selectedRestaurantId);
     setBeerMasterFormError(undefined);
+    setBeerMasterFormRestaurantError(undefined);
   };
 
-  const openEditBeerMaster = (beerMaster: BeerMasterDto) => {
+  const openEditBeerMaster = (beerMaster: AdminBeerMasterDto) => {
     setBeerMasterForm({ mode: 'edit', beerMaster });
     setBeerMasterFormName(beerMaster.name);
     setBeerMasterFormError(undefined);
@@ -208,7 +243,15 @@ export const useAdminSettingsScreen = () => {
   };
 
   const submitBeerMasterForm = async () => {
-    if (!selectedRestaurantId) return;
+    // Adding targets whichever restaurant is picked in the modal; editing
+    // always targets the row's own restaurant (moving it is a separate
+    // "transfer" action).
+    const restaurantId =
+      beerMasterForm?.mode === 'edit' ? beerMasterForm.beerMaster.restaurant_id : beerMasterFormRestaurantId;
+    if (!restaurantId) {
+      setBeerMasterFormRestaurantError(t.adminSettings.beerMasters.errors.restaurantRequired);
+      return;
+    }
     const name = beerMasterFormName.trim();
     if (!name) {
       setBeerMasterFormError(t.adminSettings.beerMasters.errors.nameRequired);
@@ -217,13 +260,14 @@ export const useAdminSettingsScreen = () => {
 
     setIsSavingBeerMaster(true);
     setBeerMasterFormError(undefined);
+    setBeerMasterFormRestaurantError(undefined);
     try {
       if (beerMasterForm?.mode === 'edit') {
-        await updateBeerMaster(selectedRestaurantId, beerMasterForm.beerMaster.id, { name });
+        await updateBeerMaster(restaurantId, beerMasterForm.beerMaster.id, { name });
       } else {
-        await createBeerMaster(selectedRestaurantId, { name });
+        await createBeerMaster(restaurantId, { name });
       }
-      await loadBeerMasters(selectedRestaurantId);
+      await loadAllBeerMasters();
       setBeerMasterForm(null);
     } catch (error) {
       setBeerMasterFormError(
@@ -237,11 +281,11 @@ export const useAdminSettingsScreen = () => {
   };
 
   // --- Beer master delete confirmation ---
-  const [beerMasterDeleteTarget, setBeerMasterDeleteTarget] = useState<BeerMasterDto | null>(null);
+  const [beerMasterDeleteTarget, setBeerMasterDeleteTarget] = useState<AdminBeerMasterDto | null>(null);
   const [beerMasterDeleteError, setBeerMasterDeleteError] = useState<string | undefined>(undefined);
   const [isDeletingBeerMaster, setIsDeletingBeerMaster] = useState(false);
 
-  const openDeleteBeerMaster = (beerMaster: BeerMasterDto) => {
+  const openDeleteBeerMaster = (beerMaster: AdminBeerMasterDto) => {
     setBeerMasterDeleteTarget(beerMaster);
     setBeerMasterDeleteError(undefined);
   };
@@ -252,12 +296,12 @@ export const useAdminSettingsScreen = () => {
   };
 
   const confirmDeleteBeerMaster = async () => {
-    if (!beerMasterDeleteTarget || !selectedRestaurantId) return;
+    if (!beerMasterDeleteTarget) return;
     setIsDeletingBeerMaster(true);
     setBeerMasterDeleteError(undefined);
     try {
-      await deleteBeerMaster(selectedRestaurantId, beerMasterDeleteTarget.id);
-      await loadBeerMasters(selectedRestaurantId);
+      await deleteBeerMaster(beerMasterDeleteTarget.restaurant_id, beerMasterDeleteTarget.id);
+      await loadAllBeerMasters();
       setBeerMasterDeleteTarget(null);
     } catch {
       setBeerMasterDeleteError(t.adminSettings.beerMasters.errors.generic);
@@ -266,14 +310,65 @@ export const useAdminSettingsScreen = () => {
     }
   };
 
+  // --- Beer master transfer (move to a different restaurant) ---
+  const [beerMasterTransferTarget, setBeerMasterTransferTarget] = useState<AdminBeerMasterDto | null>(null);
+  const [transferTargetRestaurantId, setTransferTargetRestaurantId] = useState('');
+  const [transferError, setTransferError] = useState<string | undefined>(undefined);
+  const [isTransferringBeerMaster, setIsTransferringBeerMaster] = useState(false);
+
+  // Excludes the restaurant the beer master already belongs to — the API
+  // rejects transferring to the current restaurant anyway.
+  const transferRestaurantOptions: AutocompleteFieldOption[] = (restaurants ?? [])
+    .filter((restaurant) => restaurant.id !== beerMasterTransferTarget?.restaurant_id)
+    .map((restaurant) => ({ value: restaurant.id, label: restaurant.name }));
+
+  const openTransferBeerMaster = (beerMaster: AdminBeerMasterDto) => {
+    setBeerMasterTransferTarget(beerMaster);
+    setTransferTargetRestaurantId('');
+    setTransferError(undefined);
+  };
+
+  const closeTransferBeerMaster = () => {
+    if (isTransferringBeerMaster) return;
+    setBeerMasterTransferTarget(null);
+  };
+
+  const confirmTransferBeerMaster = async () => {
+    if (!beerMasterTransferTarget) return;
+    if (!transferTargetRestaurantId) {
+      setTransferError(t.adminSettings.beerMasters.transfer.errors.restaurantRequired);
+      return;
+    }
+
+    setIsTransferringBeerMaster(true);
+    setTransferError(undefined);
+    try {
+      await transferBeerMaster(beerMasterTransferTarget.restaurant_id, beerMasterTransferTarget.id, transferTargetRestaurantId);
+      await loadAllBeerMasters();
+      setBeerMasterTransferTarget(null);
+    } catch (error) {
+      setTransferError(
+        error instanceof ApiError && error.status === 409
+          ? t.adminSettings.beerMasters.transfer.errors.duplicate
+          : t.adminSettings.beerMasters.transfer.errors.generic,
+      );
+    } finally {
+      setIsTransferringBeerMaster(false);
+    }
+  };
+
   return {
     t,
     activeTab,
-    setActiveTab,
+    tabDirection,
+    handleTabChange,
 
     restaurants,
     restaurantsStatus,
     handleRefreshRestaurants: loadRestaurants,
+    restaurantSearchQuery,
+    setRestaurantSearchQuery,
+    filteredRestaurants,
     paginatedRestaurants,
     restaurantsCurrentPage,
     restaurantsPageCount,
@@ -299,7 +394,8 @@ export const useAdminSettingsScreen = () => {
 
     selectedRestaurantId,
     setSelectedRestaurantId,
-    beerMasters,
+    allBeerMasters,
+    filteredBeerMasters,
     beerMastersStatus,
     paginatedBeerMasters,
     beerMastersCurrentPage,
@@ -310,7 +406,10 @@ export const useAdminSettingsScreen = () => {
     beerMasterForm,
     beerMasterFormName,
     setBeerMasterFormName,
+    beerMasterFormRestaurantId,
+    setBeerMasterFormRestaurantId,
     beerMasterFormError,
+    beerMasterFormRestaurantError,
     isSavingBeerMaster,
     openAddBeerMaster,
     openEditBeerMaster,
@@ -323,5 +422,15 @@ export const useAdminSettingsScreen = () => {
     openDeleteBeerMaster,
     closeDeleteBeerMaster,
     confirmDeleteBeerMaster,
+
+    beerMasterTransferTarget,
+    transferTargetRestaurantId,
+    setTransferTargetRestaurantId,
+    transferRestaurantOptions,
+    transferError,
+    isTransferringBeerMaster,
+    openTransferBeerMaster,
+    closeTransferBeerMaster,
+    confirmTransferBeerMaster,
   };
 };
