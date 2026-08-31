@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+import { ADMIN_MOBILE_BREAKPOINT } from '../AdminSidebar';
+
+const MOBILE_BREAKPOINT = ADMIN_MOBILE_BREAKPOINT;
+
 export const Panel = styled.div`
   display: flex;
   flex-direction: column;
@@ -68,6 +72,10 @@ export const ComponentRow = styled.div<{ $disabled?: boolean }>`
   border: 1px solid ${({ theme }) => theme.colors.cardBorder};
   background: ${({ theme }) => theme.colors.cardBackground};
   opacity: ${({ $disabled }) => ($disabled ? 0.55 : 1)};
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    gap: 12px;
+  }
 `;
 
 export const ComponentName = styled.div`
@@ -76,6 +84,10 @@ export const ComponentName = styled.div`
   gap: 4px;
   flex: 1 1 160px;
   min-width: 0;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    flex-basis: 100%;
+  }
 `;
 
 export const KindBadge = styled.span<{ $manual?: boolean }>`
@@ -109,6 +121,7 @@ export const Field = styled.label`
 
 export const NumberInput = styled.input`
   width: 80px;
+  max-width: 100%;
   height: 36px;
   padding: 0 10px;
   border-radius: ${({ theme }) => theme.radii.md};
@@ -195,6 +208,11 @@ export const InputsRow = styled.div`
   border-radius: ${({ theme }) => theme.radii.md};
   border: 1px solid ${({ theme }) => theme.colors.surfaceBorder};
   background: ${({ theme }) => theme.colors.surface};
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    align-items: stretch;
+    gap: 10px;
+  }
 `;
 
 export const InputsHeader = styled(InputsRow)`
@@ -206,6 +224,12 @@ export const InputsHeader = styled(InputsRow)`
   text-transform: uppercase;
   letter-spacing: 0.6px;
   color: ${({ theme }) => theme.colors.mutedText};
+
+  /* Its column labels can't line up with the stacked inputs below on a
+     phone — each field carries its own caption there instead. */
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    display: none;
+  }
 `;
 
 export const RestaurantCell = styled.span`
@@ -213,6 +237,11 @@ export const RestaurantCell = styled.span`
   min-width: 0;
   font-size: 13px;
   color: ${({ theme }) => theme.colors.textPrimary};
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    flex-basis: 100%;
+    font-weight: 700;
+  }
 `;
 
 export const ValueCell = styled.div`
@@ -220,6 +249,14 @@ export const ValueCell = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3px;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    flex: 1 1 100%;
+
+    input {
+      width: 100%;
+    }
+  }
 `;
 
 export const ValueCaption = styled.span`
@@ -255,12 +292,21 @@ export const Form = styled.form`
   flex-direction: column;
   gap: 16px;
   padding: 20px;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    padding: 16px;
+  }
 `;
 
 export const FormActions = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 12px;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
 `;
 
 export const CancelButton = styled.button`

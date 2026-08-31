@@ -78,6 +78,10 @@ export const TabList = styled.div`
   gap: 8px;
 
   @media (max-width: ${MOBILE_BREAKPOINT}) {
+    /* "Embajadores del servicio" is too long to sit abreast the other two
+       on a phone — stack the three as full-width rows so every label stays
+       readable and reachable. */
+    flex-direction: column;
     width: 100%;
   }
 `;
@@ -94,7 +98,8 @@ export const TabButton = styled.button<{ $active?: boolean }>`
   cursor: pointer;
 
   @media (max-width: ${MOBILE_BREAKPOINT}) {
-    flex: 1;
+    width: 100%;
+    text-align: center;
   }
 
   ${({ $active, theme }) =>
