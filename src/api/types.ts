@@ -23,6 +23,8 @@ export interface CreateRatingPayload {
   customer_name: string;
   customer_phone: string;
   rating: number;
+  skills_rating: number;
+  service_rating: number;
   comment?: string | null;
 }
 
@@ -39,6 +41,8 @@ export interface RatingDto {
   customer_name: string;
   customer_phone: string;
   rating: number;
+  skills_rating: number;
+  service_rating: number;
   comment: string | null;
   created_at: string;
 }
@@ -77,6 +81,8 @@ export interface RecentRatingDto {
   restaurant_name: string;
   beer_master_name: string;
   rating: number;
+  skills_rating: number;
+  service_rating: number;
   comment: string | null;
   created_at: string;
 }
@@ -127,6 +133,8 @@ export interface RatingReviewDto {
   id: string;
   customer_name: string;
   rating: number;
+  skills_rating: number;
+  service_rating: number;
   comment: string | null;
   restaurant_id: string;
   restaurant_name: string;

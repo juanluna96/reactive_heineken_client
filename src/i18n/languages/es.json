@@ -60,6 +60,8 @@
     "namePlaceholder": "Nombre del embajador del servicio",
     "noResults": "No se encontró ningún embajador del servicio con ese nombre",
     "title": "¿Cómo fue tu experiencia?",
+    "skillsQuestion": "¿Cómo calificarías sus habilidades el día de hoy?",
+    "serviceQuestion": "¿Cómo calificarías el servicio?",
     "subtitle": "Tu opinión nos ayuda a mejorar",
     "tierMessages": [
       "MUY MALA EXPERIENCIA",
@@ -128,7 +130,8 @@
     "feed": {
       "title": "Últimas Reseñas",
       "empty": "Aún no hay reseñas recientes",
-      "noComment": "El cliente no dejó un comentario"
+      "noComment": "El cliente no dejó un comentario",
+      "subRatings": "Habilidades {skills} · Servicio {service}"
     },
     "time": {
       "justNow": "justo ahora",
@@ -241,6 +244,8 @@
     },
     "restaurantLabel": "Sede: {restaurant}",
     "beerMasterLabel": "Embajador del servicio: {name}",
+    "skillsLabel": "Habilidades",
+    "serviceLabel": "Servicio",
     "loadMore": "Cargar más reseñas",
     "states": {
       "loading": "Cargando reseñas...",

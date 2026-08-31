@@ -227,6 +227,24 @@ export const AdminRatingsScreen = () => {
                           index < review.rating ? <S.StarFilled key={index} /> : <S.StarEmpty key={index} />,
                         )}
                       </S.StarsRow>
+                      <S.SubRatings>
+                        <S.SubRating>
+                          <S.SubRatingLabel>{t.adminRatings.skillsLabel}</S.SubRatingLabel>
+                          <S.SubStarsRow>
+                            {Array.from({ length: 5 }).map((_, index) =>
+                              index < review.skillsRating ? <S.StarFilled key={index} /> : <S.StarEmpty key={index} />,
+                            )}
+                          </S.SubStarsRow>
+                        </S.SubRating>
+                        <S.SubRating>
+                          <S.SubRatingLabel>{t.adminRatings.serviceLabel}</S.SubRatingLabel>
+                          <S.SubStarsRow>
+                            {Array.from({ length: 5 }).map((_, index) =>
+                              index < review.serviceRating ? <S.StarFilled key={index} /> : <S.StarEmpty key={index} />,
+                            )}
+                          </S.SubStarsRow>
+                        </S.SubRating>
+                      </S.SubRatings>
                       <S.CommentText>
                         {review.comment ? `"${review.comment}"` : t.adminDashboard.feed.noComment}
                       </S.CommentText>

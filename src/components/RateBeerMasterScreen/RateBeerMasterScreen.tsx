@@ -8,6 +8,7 @@ import { AutocompleteField } from '../AutocompleteField';
 import { BubbleField } from '../BubbleField';
 import { PrimaryButton } from '../PrimaryButton';
 import { ScreenOverlay } from '../ScreenOverlay';
+import { StarRating } from '../StarRating';
 import { StepIndicator } from '../StepIndicator';
 import { TABLET_BREAKPOINT } from '../../styles/breakpoints';
 import * as S from './RateBeerMasterScreen.styles';
@@ -20,9 +21,16 @@ export const RateBeerMasterScreen = () => {
     selectedBeerMasterId,
     beerMasterName,
     nameError,
-    stars,
-    tierMessage,
-    ratingError,
+    tierMessages,
+    rating,
+    setRating,
+    experienceError,
+    skillsRating,
+    setSkillsRating,
+    skillsError,
+    serviceRating,
+    setServiceRating,
+    serviceError,
     isFormValid,
     isSubmitting,
     submitError,
@@ -31,7 +39,6 @@ export const RateBeerMasterScreen = () => {
     handleBack,
     setBeerMasterName,
     handleBeerMasterSelect,
-    handleStarHoverEnd,
     handleCommentChange,
     handleSubmit,
   } = useRateBeerMasterScreen();
@@ -73,34 +80,29 @@ export const RateBeerMasterScreen = () => {
           </S.ProfileSection>
 
           <S.RatingSection variants={staggerItem}>
-            <S.Title>{t.rateBeerMaster.title}</S.Title>
             <S.Subtitle>{t.rateBeerMaster.subtitle}</S.Subtitle>
 
-            <S.Stars>
-              {stars.map((star) => (
-                <S.StarButton
-                  key={star.value}
-                  type="button"
-                  onClick={star.onSelect}
-                  onMouseEnter={star.onHover}
-                  onMouseLeave={handleStarHoverEnd}
-                  aria-label={`${star.value}`}
-                  whileHover={{ scale: 1.15 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  {star.filled ? <S.StarFilled /> : <S.StarEmpty />}
-                </S.StarButton>
-              ))}
-            </S.Stars>
-
-            <S.TierMessage $visible={Boolean(tierMessage)}>{tierMessage}</S.TierMessage>
-            <AnimatePresence>
-              {ratingError && (
-                <S.RatingError initial="hidden" animate="visible" exit="exit" variants={errorMessageVariants}>
-                  {ratingError}
-                </S.RatingError>
-              )}
-            </AnimatePresence>
+            <StarRating
+              label={t.rateBeerMaster.title}
+              value={rating}
+              onChange={setRating}
+              tierMessages={tierMessages}
+              error={experienceError}
+            />
+            <StarRating
+              label={t.rateBeerMaster.skillsQuestion}
+              value={skillsRating}
+              onChange={setSkillsRating}
+              tierMessages={tierMessages}
+              error={skillsError}
+            />
+            <StarRating
+              label={t.rateBeerMaster.serviceQuestion}
+              value={serviceRating}
+              onChange={setServiceRating}
+              tierMessages={tierMessages}
+              error={serviceError}
+            />
           </S.RatingSection>
 
           <S.OpinionSection variants={staggerItem}>

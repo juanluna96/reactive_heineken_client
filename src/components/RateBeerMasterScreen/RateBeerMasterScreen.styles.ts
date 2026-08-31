@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FaArrowLeft, FaRegStar, FaStar } from 'react-icons/fa6';
+import { FaArrowLeft } from 'react-icons/fa6';
 import styled from 'styled-components';
 
 export const Screen = styled.div`
@@ -100,68 +100,17 @@ export const RatingSection = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   width: 100%;
-`;
-
-export const Title = styled.h1`
-  margin: 0;
-  font-family: ${({ theme }) => theme.fonts.heading};
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 28px;
-  text-align: center;
-  color: ${({ theme }) => theme.colors.textPrimary};
+  gap: clamp(16px, 4dvh, 32px);
 `;
 
 export const Subtitle = styled.p`
-  margin: 4px 0 0;
+  margin: 0;
   font-family: ${({ theme }) => theme.fonts.heading};
   font-size: 14px;
   line-height: 20px;
   text-align: center;
   color: ${({ theme }) => theme.colors.mutedText};
   opacity: 0.6;
-`;
-
-export const Stars = styled.div`
-  display: flex;
-  gap: 8px;
-  padding: 24px 0 16px;
-`;
-
-export const StarButton = styled(motion.button)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background: none;
-  padding: 4px;
-  cursor: pointer;
-`;
-
-export const StarFilled = styled(FaStar)`
-  width: 28px;
-  height: 28px;
-  color: ${({ theme }) => theme.colors.heinekenRed};
-`;
-
-export const StarEmpty = styled(FaRegStar)`
-  width: 28px;
-  height: 28px;
-  color: ${({ theme }) => theme.colors.mutedText};
-`;
-
-export const TierMessage = styled.p<{ $visible: boolean }>`
-  margin: 0;
-  height: 16px;
-  font-family: ${({ theme }) => theme.fonts.heading};
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 16px;
-  letter-spacing: 1.2px;
-  text-align: center;
-  color: ${({ theme }) => theme.colors.accentWarm};
-  opacity: ${({ $visible }) => ($visible ? 1 : 0)};
-  transition: opacity 0.2s ease;
 `;
 
 export const RatingError = styled(motion.p)`

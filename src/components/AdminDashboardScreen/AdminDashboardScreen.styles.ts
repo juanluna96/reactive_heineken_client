@@ -620,6 +620,12 @@ export const FeedContext = styled.p`
   color: ${({ theme }) => theme.colors.mutedText};
 `;
 
+export const FeedSubRatings = styled.p`
+  margin: 0;
+  font-size: 11px;
+  color: ${({ theme }) => theme.colors.mutedText};
+`;
+
 export const FeedComment = styled.p`
   margin: 0;
   font-size: 12px;

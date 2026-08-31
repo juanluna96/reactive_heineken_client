@@ -60,6 +60,8 @@
     "namePlaceholder": "Bar staff's name",
     "noResults": "No bar staff found with that name",
     "title": "How was your experience?",
+    "skillsQuestion": "How would you rate their skills today?",
+    "serviceQuestion": "How would you rate the service?",
     "subtitle": "Your opinion helps us improve",
     "tierMessages": [
       "VERY POOR EXPERIENCE",
@@ -128,7 +130,8 @@
     "feed": {
       "title": "Latest Reviews",
       "empty": "No recent reviews yet",
-      "noComment": "The customer didn't leave a comment"
+      "noComment": "The customer didn't leave a comment",
+      "subRatings": "Skills {skills} · Service {service}"
     },
     "time": {
       "justNow": "just now",
@@ -241,6 +244,8 @@
     },
     "restaurantLabel": "Venue: {restaurant}",
     "beerMasterLabel": "Bar Staff: {name}",
+    "skillsLabel": "Skills",
+    "serviceLabel": "Service",
     "loadMore": "Load more reviews",
     "states": {
       "loading": "Loading reviews...",

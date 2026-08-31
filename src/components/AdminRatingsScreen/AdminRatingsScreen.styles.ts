@@ -400,6 +400,29 @@ export const StarEmpty = styled(FaRegStar)`
   opacity: 0.5;
 `;
 
+export const SubRatings = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin-bottom: 12px;
+`;
+
+export const SubRating = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+`;
+
+export const SubRatingLabel = styled.span`
+  font-size: 11px;
+  color: ${({ theme }) => theme.colors.mutedText};
+`;
+
+export const SubStarsRow = styled.div`
+  display: flex;
+  gap: 2px;
+`;
+
 export const CommentText = styled.p`
   margin: 0 0 12px;
   font-size: 14px;

@@ -64,6 +64,8 @@ export interface RateBeerMasterDictionary {
   namePlaceholder: string;
   noResults: string;
   title: string;
+  skillsQuestion: string;
+  serviceQuestion: string;
   subtitle: string;
   tierMessages: string[];
   opinionLabel: string;
@@ -129,6 +131,7 @@ export interface AdminDashboardDictionary {
     title: string;
     empty: string;
     noComment: string;
+    subRatings: string;
   };
   time: {
     justNow: string;
@@ -325,6 +328,8 @@ export interface AdminRatingsDictionary {
   };
   restaurantLabel: string;
   beerMasterLabel: string;
+  skillsLabel: string;
+  serviceLabel: string;
   loadMore: string;
   states: {
     loading: string;
