@@ -9,7 +9,7 @@ export const ROUTES = {
   admin: '/admin',
   adminHome: '/admin/home',
   adminRestaurants: '/admin/restaurants',
-  adminBeerMasters: '/admin/beer-masters',
+  adminBeerMasters: '/admin/bar-staff',
   adminRatings: '/admin/ratings',
   adminSettings: '/admin/settings',
   authLogin: '/admin/login',
