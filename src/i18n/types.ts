@@ -404,6 +404,7 @@ export interface AdminSettingsScoringDictionary {
   componentsSubtitle: string;
   weightSum: string;
   weightSumHint: string;
+  weightSumUnbalancedHint: string;
   weightLabel: string;
   kLabel: string;
   kHint: string;

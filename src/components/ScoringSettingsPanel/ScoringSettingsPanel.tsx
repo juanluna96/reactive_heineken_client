@@ -12,6 +12,10 @@ export const ScoringSettingsPanel = () => {
     manualComponents,
     restaurants,
     weightSumPct,
+    weightsBalanced,
+    weightValue,
+    handleWeightChange,
+    handleWeightBlur,
     isRating,
     saveComponent,
     openDelete,
@@ -45,7 +49,9 @@ export const ScoringSettingsPanel = () => {
           </S.WeightSum>
         </S.SectionHeader>
         <S.SectionSubtitle>{copy.componentsSubtitle}</S.SectionSubtitle>
-        <S.Hint>{copy.weightSumHint}</S.Hint>
+        <S.Hint $warn={!weightsBalanced}>
+          {weightsBalanced ? copy.weightSumHint : copy.weightSumUnbalancedHint}
+        </S.Hint>
 
         <S.ComponentList>
           {components.map((component) => {
@@ -74,13 +80,9 @@ export const ScoringSettingsPanel = () => {
                     min={0}
                     max={1}
                     step={0.05}
-                    defaultValue={component.weight}
-                    onBlur={(event) => {
-                      const weight = Number(event.target.value);
-                      if (Number.isFinite(weight) && weight >= 0 && weight <= 1 && weight !== component.weight) {
-                        saveComponent(component.id, { weight });
-                      }
-                    }}
+                    value={weightValue(component.id)}
+                    onChange={(event) => handleWeightChange(component.id, event.target.value)}
+                    onBlur={() => handleWeightBlur(component.id)}
                   />
                 </S.Field>
 

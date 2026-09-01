@@ -49,11 +49,12 @@ export const WeightSum = styled.span<{ $ok: boolean }>`
   color: ${({ theme, $ok }) => ($ok ? theme.colors.brandGreenLight : theme.colors.accentWarm)};
 `;
 
-export const Hint = styled.p`
+export const Hint = styled.p<{ $warn?: boolean }>`
   margin: 0;
   font-size: 11px;
-  color: ${({ theme }) => theme.colors.mutedText};
-  opacity: 0.75;
+  color: ${({ theme, $warn }) => ($warn ? theme.colors.accentWarm : theme.colors.mutedText)};
+  opacity: ${({ $warn }) => ($warn ? 1 : 0.75)};
+  font-weight: ${({ $warn }) => ($warn ? 600 : 400)};
 `;
 
 export const ComponentList = styled.div`

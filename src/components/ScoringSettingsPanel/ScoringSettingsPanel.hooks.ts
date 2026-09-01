@@ -51,12 +51,76 @@ export const useScoringSettingsPanel = () => {
   const components = useMemo(() => config?.components ?? [], [config]);
   const manualComponents = useMemo(() => components.filter((c) => c.kind === 'manual'), [components]);
 
-  // Sum of the ENABLED weights, as a percentage — the compute layer normalises
-  // over exactly this set, so this is what the owner is really tuning.
+  // Weight inputs are edited as raw strings so the "Suma de pesos" badge can
+  // update on every keystroke; a change only persists on blur, and only when
+  // the enabled weights add up to exactly 100% (see handleWeightBlur).
+  const [weightDrafts, setWeightDrafts] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    // Seed a draft for each component, keeping any in-progress edit.
+    setWeightDrafts((prev) => {
+      const next: Record<string, string> = {};
+      for (const c of config?.components ?? []) {
+        next[c.id] = c.id in prev ? prev[c.id] : String(c.weight);
+      }
+      return next;
+    });
+  }, [config]);
+
+  const draftWeight = (c: ScoreComponentDto): number => {
+    const raw = weightDrafts[c.id];
+    if (raw === undefined) return c.weight;
+    const parsed = Number(raw);
+    return Number.isFinite(parsed) ? parsed : 0;
+  };
+
+  const weightValue = (id: string): string => {
+    if (weightDrafts[id] !== undefined) return weightDrafts[id];
+    const component = components.find((c) => c.id === id);
+    return component ? String(component.weight) : '';
+  };
+
+  // Live sum of the ENABLED weights, as a percentage — recomputed on every
+  // keystroke from the drafts. The compute layer normalises over exactly this
+  // set, so this is what the owner is really tuning.
   const weightSumPct = useMemo(
-    () => Math.round(components.filter((c) => c.enabled).reduce((sum, c) => sum + c.weight, 0) * 100),
-    [components],
+    () => Math.round(components.filter((c) => c.enabled).reduce((sum, c) => sum + draftWeight(c), 0) * 100),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [components, weightDrafts],
   );
+  const weightsBalanced = weightSumPct === 100;
+
+  const handleWeightChange = (id: string, raw: string) => {
+    setWeightDrafts((prev) => ({ ...prev, [id]: raw }));
+  };
+
+  const handleWeightBlur = async (id: string) => {
+    const component = components.find((c) => c.id === id);
+    if (!component) return;
+    const value = Number(weightDrafts[id]);
+
+    // Invalid entry → snap the field back to the saved value.
+    if (!Number.isFinite(value) || value < 0 || value > 1) {
+      setWeightDrafts((prev) => ({ ...prev, [id]: String(component.weight) }));
+      return;
+    }
+    setWeightDrafts((prev) => ({ ...prev, [id]: String(value) }));
+
+    // Only persist once the enabled weights add up to exactly 100%.
+    const enabledSum = components
+      .filter((c) => c.enabled)
+      .reduce((sum, c) => sum + (c.id === id ? value : draftWeight(c)), 0);
+    if (Math.round(enabledSum * 100) !== 100) return;
+
+    // Balanced: persist every component whose draft weight moved.
+    const changed = components.filter((c) => {
+      const w = c.id === id ? value : draftWeight(c);
+      return Math.abs(w - c.weight) > 1e-9;
+    });
+    for (const c of changed) {
+      await saveComponent(c.id, { weight: c.id === id ? value : draftWeight(c) });
+    }
+  };
 
   const patchComponentLocal = (id: string, patch: Partial<ScoreComponentDto>) => {
     setConfig((prev) =>
@@ -239,6 +303,10 @@ export const useScoringSettingsPanel = () => {
     manualComponents,
     restaurants: config?.restaurants ?? [],
     weightSumPct,
+    weightsBalanced,
+    weightValue,
+    handleWeightChange,
+    handleWeightBlur,
     isRating,
     saveComponent,
     openDelete,
