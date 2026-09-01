@@ -154,6 +154,8 @@
     "scoreLabel": "SCORE",
     "scoreEmpty": "—",
     "scoreBreakdownToggle": "See score breakdown",
+    "scorePartialLabel": "SCORE",
+    "scorePartialNote": "Partial score: you're seeing the calculated score (≈ {pct}% of the total score)",
     "sort": {
       "label": "Sort by",
       "score": "Sort by Score",
@@ -181,11 +183,16 @@
     "pageTitle": "Bar Staff Ranking",
     "pageSubtitle": "Individual Performance and Service Quality",
     "refreshLabel": "REFRESH",
-    "ratingsCount": "{count} reviews",
     "noRatings": "No ratings yet",
+    "score": {
+      "label": "SCORE",
+      "empty": "—",
+      "partialLabel": "SCORE",
+      "partialNote": "Partial score: you're seeing the calculated score (≈ {pct}% of the total score)"
+    },
     "sort": {
       "label": "Sort by",
-      "rating": "Sort by Rating",
+      "score": "Sort by Score",
       "popularity": "Most Popular",
       "newest": "Newest"
     },
@@ -359,6 +366,11 @@
       "enabledLabel": "Active",
       "growthPctLabel": "Is a growth %",
       "ceilingLabel": "Ceiling %",
+      "growthInitialLabel": "Initial value",
+      "growthFinalLabel": "Final value",
+      "growthResult": "Growth {pct}%",
+      "growthPending": "Final value missing",
+      "growthHint": "For growth components, enter each restaurant's starting and ending sales figure. Growth % = (final − initial) ÷ initial × 100. While the final value is missing, the restaurant's and its bar staff's score shows as a \"calculated value\" (the rating part only, ≈ the combined weight of the non-volume components).",
       "manualBadge": "Manual",
       "autoBadge": "Automatic",
       "deleteAction": "Delete",
@@ -397,6 +409,26 @@
       "loading": "Loading...",
       "error": "Couldn't load the information. Please try again."
     }
+  },
+  "scoreBreakdown": {
+    "componentsTitle": "Score breakdown",
+    "componentsIntro": "Each row is one thing being measured. Each gets a 0–100 score and adds to the final score based on how much it weighs. The skills, service and experience scores come from customer ratings; the volume one comes from the venue's sales growth.",
+    "columnComponent": "Parameter",
+    "columnWeight": "Weight",
+    "columnCs": "Sub-score",
+    "columnContribution": "Adds",
+    "pendingTag": "pending",
+    "totalLabel": "Total score",
+    "partialTotalLabel": "Partial score",
+    "staffTitle": "Score breakdown",
+    "staffIntro": "The venue's score is the average of its bar staff's scores. Here's the per-person detail.",
+    "columnStaff": "Bar staff",
+    "columnScore": "Score",
+    "staffCountLabel": "{count} bar staff",
+    "staffAverageLabel": "Score (average)",
+    "partialAverageLabel": "Partial score (average)",
+    "noStaff": "This venue has no rated bar staff yet.",
+    "partialHint": "Partial score: ≈ {pct}% of the total score. The final sales-growth figure is missing."
   },
   "auth": {
     "checkingSession": "Checking session...",

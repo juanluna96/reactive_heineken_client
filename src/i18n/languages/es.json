@@ -154,6 +154,8 @@
     "scoreLabel": "PUNTAJE",
     "scoreEmpty": "—",
     "scoreBreakdownToggle": "Ver desglose del puntaje",
+    "scorePartialLabel": "PUNTAJE",
+    "scorePartialNote": "Puntaje parcial: estás viendo el puntaje calculado (≈ {pct}% del puntaje total)",
     "sort": {
       "label": "Ordenar por",
       "score": "Ordenar por Puntaje",
@@ -181,11 +183,16 @@
     "pageTitle": "Ranking de embajadores del servicio",
     "pageSubtitle": "Desempeño Individual y Calidad del Servicio",
     "refreshLabel": "ACTUALIZAR",
-    "ratingsCount": "{count} reseñas",
     "noRatings": "Sin calificaciones aún",
+    "score": {
+      "label": "PUNTAJE",
+      "empty": "—",
+      "partialLabel": "PUNTAJE",
+      "partialNote": "Puntaje parcial: estás viendo el puntaje calculado (≈ {pct}% del puntaje total)"
+    },
     "sort": {
       "label": "Ordenar por",
-      "rating": "Ordenar por Calificación",
+      "score": "Ordenar por Puntaje",
       "popularity": "Más Populares",
       "newest": "Nuevos"
     },
@@ -359,6 +366,11 @@
       "enabledLabel": "Activo",
       "growthPctLabel": "Es % de crecimiento",
       "ceilingLabel": "Techo %",
+      "growthInitialLabel": "Valor inicial",
+      "growthFinalLabel": "Valor final",
+      "growthResult": "Crecimiento {pct}%",
+      "growthPending": "Falta valor final",
+      "growthHint": "Para los componentes de crecimiento, ingresa el valor inicial y el final de ventas de cada restaurante. El crecimiento % = (final − inicial) ÷ inicial × 100. Mientras falte el valor final, el puntaje del restaurante y de su bar staff se muestra como \"valor calculado\" (solo la parte de calificación, ≈ el peso combinado de los componentes que no son volumen).",
       "manualBadge": "Manual",
       "autoBadge": "Automático",
       "deleteAction": "Eliminar",
@@ -397,6 +409,26 @@
       "loading": "Cargando...",
       "error": "No se pudo cargar la información. Intenta de nuevo."
     }
+  },
+  "scoreBreakdown": {
+    "componentsTitle": "Desglose del puntaje",
+    "componentsIntro": "Cada fila es un aspecto que se mide. A cada uno se le pone una nota de 0 a 100 y suma al puntaje final según cuánto pesa. Las notas de habilidades, servicio y experiencia vienen de las calificaciones de los clientes; la de volumen, del crecimiento de ventas de la sede.",
+    "columnComponent": "Parámetro",
+    "columnWeight": "Peso",
+    "columnCs": "Sub-puntaje",
+    "columnContribution": "Aporta",
+    "pendingTag": "pendiente",
+    "totalLabel": "Puntaje total",
+    "partialTotalLabel": "Puntaje parcial",
+    "staffTitle": "Desglose del puntaje",
+    "staffIntro": "El puntaje de la sede es el promedio de los puntajes de su bar staff. Este es el detalle por persona.",
+    "columnStaff": "Bar staff",
+    "columnScore": "Puntaje",
+    "staffCountLabel": "{count} bar staff",
+    "staffAverageLabel": "Puntaje (promedio)",
+    "partialAverageLabel": "Puntaje parcial (promedio)",
+    "noStaff": "Esta sede aún no tiene bar staff calificados.",
+    "partialHint": "Puntaje parcial: ≈ {pct}% del puntaje total. Falta el valor final de crecimiento de ventas."
   },
   "auth": {
     "checkingSession": "Verificando sesión...",

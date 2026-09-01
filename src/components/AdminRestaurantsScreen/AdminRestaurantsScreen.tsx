@@ -1,9 +1,12 @@
+import { AnimatePresence } from 'framer-motion';
 import { FaFilter } from 'react-icons/fa6';
 import { staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background.png';
 import backgroundImageLaptop from '../../assets/images/background-laptop.png';
 import { AdminSidebar } from '../AdminSidebar';
 import { FilterDropdown } from '../FilterDropdown';
+import { Modal } from '../Modal';
+import { ScoreBreakdown } from '../ScoreBreakdown';
 import { ScreenOverlay } from '../ScreenOverlay';
 import { Skeleton } from '../Skeleton';
 import { TABLET_BREAKPOINT } from '../../styles/breakpoints';
@@ -21,6 +24,11 @@ export const AdminRestaurantsScreen = () => {
     isEmpty,
     hasNoSearchResults,
     items,
+    partialScoreWarning,
+    canExpand,
+    breakdownItem,
+    openBreakdown,
+    closeBreakdown,
     ownCardRef,
     sortBy,
     setSortBy,
@@ -133,42 +141,69 @@ export const AdminRestaurantsScreen = () => {
           </S.StatusScreen>
         ) : (
           <S.Content initial="hidden" animate="visible" variants={staggerContainer}>
-            <S.SearchFieldWrapper variants={staggerItem}>
-              <S.SearchIcon />
-              <S.SearchInput
-                type="text"
-                placeholder={t.adminRestaurants.search.placeholder}
-                value={searchQuery}
-                onChange={(event) => setSearchQuery(event.target.value)}
-              />
-            </S.SearchFieldWrapper>
+            <S.SearchRow variants={staggerItem}>
+              <S.SearchFieldWrapper>
+                <S.SearchIcon />
+                <S.SearchInput
+                  type="text"
+                  placeholder={t.adminRestaurants.search.placeholder}
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                />
+              </S.SearchFieldWrapper>
+              {partialScoreWarning && (
+                <S.WarningCard role="status">
+                  <S.WarningIcon />
+                  <span>{partialScoreWarning}</span>
+                </S.WarningCard>
+              )}
+            </S.SearchRow>
 
             {hasNoSearchResults ? (
               <S.EmptyMessage>{t.adminRestaurants.search.noResults.replace('{query}', searchQuery)}</S.EmptyMessage>
             ) : (
               <>
-                {items.map((restaurant) => (
-                  <S.RankCard
-                    key={restaurant.id}
-                    ref={restaurant.isOwn ? ownCardRef : undefined}
-                    $isOwn={restaurant.isOwn}
-                    variants={staggerItem}
-                  >
-                    <S.RankIdentity>
-                      <S.RankNumber>{String(restaurant.rank).padStart(2, '0')}</S.RankNumber>
-                      <S.RestaurantAvatar>{restaurant.initials}</S.RestaurantAvatar>
-                      <S.RestaurantName>{restaurant.name}</S.RestaurantName>
-                      {restaurant.isOwn && <S.OwnBadge>{t.adminRestaurants.ownRestaurantBadge}</S.OwnBadge>}
-                    </S.RankIdentity>
+                {items.map((restaurant) => {
+                  const expandable = canExpand && restaurant.staffLines.length > 0;
+                  return (
+                    <S.RankCard
+                      key={restaurant.id}
+                      ref={restaurant.isOwn ? ownCardRef : undefined}
+                      $isOwn={restaurant.isOwn}
+                      $clickable={expandable}
+                      variants={staggerItem}
+                      onClick={expandable ? () => openBreakdown(restaurant.id) : undefined}
+                      role={expandable ? 'button' : undefined}
+                      tabIndex={expandable ? 0 : undefined}
+                      onKeyDown={
+                        expandable
+                          ? (event) => {
+                              if (event.key === 'Enter' || event.key === ' ') {
+                                event.preventDefault();
+                                openBreakdown(restaurant.id);
+                              }
+                            }
+                          : undefined
+                      }
+                    >
+                      <S.RankIdentity>
+                        <S.RankNumber>{String(restaurant.rank).padStart(2, '0')}</S.RankNumber>
+                        <S.RestaurantAvatar>{restaurant.initials}</S.RestaurantAvatar>
+                        <S.RestaurantName>{restaurant.name}</S.RestaurantName>
+                        {restaurant.isOwn && <S.OwnBadge>{t.adminRestaurants.ownRestaurantBadge}</S.OwnBadge>}
+                      </S.RankIdentity>
 
-                    <S.RankMeta>
-                      <S.ScoreBlock title={t.adminRestaurants.scoreBreakdownToggle}>
-                        <S.ScoreValue $muted={restaurant.score == null}>{restaurant.scoreLabel}</S.ScoreValue>
-                        <S.ScoreLabel>{t.adminRestaurants.scoreLabel}</S.ScoreLabel>
-                      </S.ScoreBlock>
-                    </S.RankMeta>
-                  </S.RankCard>
-                ))}
+                      <S.RankMeta>
+                        <S.ScoreBlock title={t.adminRestaurants.scoreBreakdownToggle}>
+                          <S.ScoreValue $muted={!restaurant.hasScore || restaurant.isPartialScore}>
+                            {restaurant.scoreLabel}
+                          </S.ScoreValue>
+                          <S.ScoreLabel>{restaurant.scoreCaption}</S.ScoreLabel>
+                        </S.ScoreBlock>
+                      </S.RankMeta>
+                    </S.RankCard>
+                  );
+                })}
 
                 {pageCount > 1 && (
                   <S.Pagination>
@@ -200,6 +235,22 @@ export const AdminRestaurantsScreen = () => {
           </S.Content>
         )}
       </S.Main>
+
+      <AnimatePresence>
+        {breakdownItem && (
+          <Modal title={t.scoreBreakdown.staffTitle} onClose={closeBreakdown}>
+            <ScoreBreakdown
+              variant="staff"
+              subject={breakdownItem.name}
+              lines={breakdownItem.staffLines}
+              total={breakdownItem.scoreTotal}
+              partialTotal={breakdownItem.partialTotal}
+              isPartial={breakdownItem.isPartialScore}
+              ratingWeightPct={breakdownItem.ratingWeightPct}
+            />
+          </Modal>
+        )}
+      </AnimatePresence>
     </S.Screen>
   );
 };

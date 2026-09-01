@@ -1,9 +1,12 @@
+import { AnimatePresence } from 'framer-motion';
 import { FaFilter, FaLocationDot } from 'react-icons/fa6';
 import { staggerContainer, staggerItem } from '../../animations/variants';
 import backgroundImage from '../../assets/images/background.png';
 import backgroundImageLaptop from '../../assets/images/background-laptop.png';
 import { AdminSidebar } from '../AdminSidebar';
 import { FilterDropdown } from '../FilterDropdown';
+import { Modal } from '../Modal';
+import { ScoreBreakdown } from '../ScoreBreakdown';
 import { ScreenOverlay } from '../ScreenOverlay';
 import { Skeleton } from '../Skeleton';
 import { TABLET_BREAKPOINT } from '../../styles/breakpoints';
@@ -34,6 +37,11 @@ export const AdminBeerMastersScreen = () => {
     handlePrevPage,
     handleNextPage,
     handleRefresh,
+    partialScoreWarning,
+    canExpand,
+    breakdownItem,
+    openBreakdown,
+    closeBreakdown,
   } = useAdminBeerMastersScreen();
 
   const sidebar = <AdminSidebar activeItem="beerMasters" />;
@@ -132,7 +140,7 @@ export const AdminBeerMastersScreen = () => {
               value={sortBy}
               onChange={(value) => setSortBy(value as typeof sortBy)}
               options={[
-                { value: 'rating', label: t.adminBeerMasters.sort.rating },
+                { value: 'score', label: t.adminBeerMasters.sort.score },
                 { value: 'popularity', label: t.adminBeerMasters.sort.popularity },
                 { value: 'newest', label: t.adminBeerMasters.sort.newest },
               ]}
@@ -151,49 +159,73 @@ export const AdminBeerMastersScreen = () => {
           </S.StatusScreen>
         ) : (
           <S.Content initial="hidden" animate="visible" variants={staggerContainer}>
-            <S.SearchFieldWrapper variants={staggerItem}>
-              <S.SearchIcon />
-              <S.SearchInput
-                type="text"
-                placeholder={t.adminBeerMasters.search.placeholder}
-                value={searchQuery}
-                onChange={(event) => setSearchQuery(event.target.value)}
-              />
-            </S.SearchFieldWrapper>
+            <S.SearchRow variants={staggerItem}>
+              <S.SearchFieldWrapper>
+                <S.SearchIcon />
+                <S.SearchInput
+                  type="text"
+                  placeholder={t.adminBeerMasters.search.placeholder}
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                />
+              </S.SearchFieldWrapper>
+              {partialScoreWarning && (
+                <S.WarningCard role="status">
+                  <S.WarningIcon />
+                  <span>{partialScoreWarning}</span>
+                </S.WarningCard>
+              )}
+            </S.SearchRow>
 
             {hasNoResults ? (
               <S.EmptyMessage>{emptyResultsMessage}</S.EmptyMessage>
             ) : (
               <>
-                {items.map((beerMaster) => (
-                  <S.RankCard key={beerMaster.key} variants={staggerItem}>
-                    <S.RankIdentity>
-                      <S.RankNumber>{String(beerMaster.rank).padStart(2, '0')}</S.RankNumber>
-                      <S.Avatar>{beerMaster.initials}</S.Avatar>
-                      <S.NameBlock>
-                        <S.BeerMasterName>{beerMaster.name}</S.BeerMasterName>
-                        <S.RestaurantLabel>{beerMaster.restaurantName}</S.RestaurantLabel>
-                      </S.NameBlock>
-                    </S.RankIdentity>
+                {items.map((beerMaster) => {
+                  const expandable = canExpand && beerMaster.hasRatings;
+                  return (
+                    <S.RankCard
+                      key={beerMaster.key}
+                      variants={staggerItem}
+                      $clickable={expandable}
+                      onClick={expandable ? () => openBreakdown(beerMaster.key) : undefined}
+                      role={expandable ? 'button' : undefined}
+                      tabIndex={expandable ? 0 : undefined}
+                      onKeyDown={
+                        expandable
+                          ? (event) => {
+                              if (event.key === 'Enter' || event.key === ' ') {
+                                event.preventDefault();
+                                openBreakdown(beerMaster.key);
+                              }
+                            }
+                          : undefined
+                      }
+                    >
+                      <S.RankIdentity>
+                        <S.RankNumber>{String(beerMaster.rank).padStart(2, '0')}</S.RankNumber>
+                        <S.Avatar>{beerMaster.initials}</S.Avatar>
+                        <S.NameBlock>
+                          <S.BeerMasterName>{beerMaster.name}</S.BeerMasterName>
+                          <S.RestaurantLabel>{beerMaster.restaurantName}</S.RestaurantLabel>
+                        </S.NameBlock>
+                      </S.RankIdentity>
 
-                    <S.RankMeta>
-                      {beerMaster.hasRatings ? (
-                        <S.RatingBlock>
-                          <S.RatingRow>
-                            <S.StarIcon />
-                            <S.RatingValue>{beerMaster.averageRating}</S.RatingValue>
-                          </S.RatingRow>
-                          <S.RatingTrack>
-                            <S.RatingFill $pct={beerMaster.ratingPct} />
-                          </S.RatingTrack>
-                          <S.ReviewsLabel>{beerMaster.ratingsCountLabel}</S.ReviewsLabel>
-                        </S.RatingBlock>
-                      ) : (
-                        <S.NoRatingsBadge>{t.adminBeerMasters.noRatings}</S.NoRatingsBadge>
-                      )}
-                    </S.RankMeta>
-                  </S.RankCard>
-                ))}
+                      <S.RankMeta>
+                        {beerMaster.hasRatings ? (
+                          <S.ScoreBlock>
+                            <S.ScoreValue $muted={!beerMaster.hasScore || beerMaster.isPartialScore}>
+                              {beerMaster.scoreValue}
+                            </S.ScoreValue>
+                            <S.ScoreCaption>{beerMaster.scoreCaption}</S.ScoreCaption>
+                          </S.ScoreBlock>
+                        ) : (
+                          <S.NoRatingsBadge>{t.adminBeerMasters.noRatings}</S.NoRatingsBadge>
+                        )}
+                      </S.RankMeta>
+                    </S.RankCard>
+                  );
+                })}
 
                 {pageCount > 1 && (
                   <S.Pagination>
@@ -225,6 +257,22 @@ export const AdminBeerMastersScreen = () => {
           </S.Content>
         )}
       </S.Main>
+
+      <AnimatePresence>
+        {breakdownItem && (
+          <Modal title={t.scoreBreakdown.componentsTitle} onClose={closeBreakdown}>
+            <ScoreBreakdown
+              variant="components"
+              subject={breakdownItem.name}
+              lines={breakdownItem.breakdown}
+              total={breakdownItem.scoreTotal}
+              partialTotal={breakdownItem.partialTotal}
+              isPartial={breakdownItem.isPartialScore}
+              ratingWeightPct={breakdownItem.ratingWeightPct}
+            />
+          </Modal>
+        )}
+      </AnimatePresence>
     </S.Screen>
   );
 };

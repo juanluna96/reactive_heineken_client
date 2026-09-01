@@ -236,6 +236,10 @@ export interface AdminRestaurantsDictionary {
   scoreLabel: string;
   scoreEmpty: string;
   scoreBreakdownToggle: string;
+  // Shown instead of scoreLabel while the growth "valor final" is missing —
+  // the value is the non-growth slice of the formula only.
+  scorePartialLabel: string;
+  scorePartialNote: string;
   sort: {
     label: string;
     score: string;
@@ -264,11 +268,18 @@ export interface AdminBeerMastersDictionary {
   pageTitle: string;
   pageSubtitle: string;
   refreshLabel: string;
-  ratingsCount: string;
   noRatings: string;
+  score: {
+    label: string;
+    empty: string;
+    // Caption + note shown while the staffer's restaurant is missing the
+    // growth "valor final" — only the rating slice of the formula is known.
+    partialLabel: string;
+    partialNote: string;
+  };
   sort: {
     label: string;
-    rating: string;
+    score: string;
     popularity: string;
     newest: string;
   };
@@ -399,6 +410,13 @@ export interface AdminSettingsScoringDictionary {
   enabledLabel: string;
   growthPctLabel: string;
   ceilingLabel: string;
+  // Per-restaurant growth inputs: initial + final sales figure, the derived
+  // % badge, its "incomplete" state, and the explanatory hint.
+  growthInitialLabel: string;
+  growthFinalLabel: string;
+  growthResult: string;
+  growthPending: string;
+  growthHint: string;
   manualBadge: string;
   autoBadge: string;
   deleteAction: string;
@@ -484,6 +502,30 @@ export interface NotFoundDictionary {
   adminCta: string;
 }
 
+export interface ScoreBreakdownDictionary {
+  // Bar-staff card: per-parameter "invoice".
+  componentsTitle: string;
+  componentsIntro: string;
+  columnComponent: string;
+  columnWeight: string;
+  columnCs: string;
+  columnContribution: string;
+  pendingTag: string;
+  totalLabel: string;
+  partialTotalLabel: string;
+  // Restaurant card: per bar-staff "invoice".
+  staffTitle: string;
+  staffIntro: string;
+  columnStaff: string;
+  columnScore: string;
+  staffCountLabel: string;
+  staffAverageLabel: string;
+  partialAverageLabel: string;
+  noStaff: string;
+  // Shared "you're seeing the partial score" hint under the total.
+  partialHint: string;
+}
+
 export interface TranslationDictionary {
   welcome: WelcomeDictionary;
   ageVerification: AgeVerificationDictionary;
@@ -495,6 +537,7 @@ export interface TranslationDictionary {
   adminBeerMasters: AdminBeerMastersDictionary;
   adminRatings: AdminRatingsDictionary;
   adminSettings: AdminSettingsDictionary;
+  scoreBreakdown: ScoreBreakdownDictionary;
   auth: AuthDictionary;
   notFound: NotFoundDictionary;
 }

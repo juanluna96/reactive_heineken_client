@@ -27,6 +27,9 @@ export const ScoringSettingsPanel = () => {
     confirmDelete,
     inputValue,
     saveInput,
+    growthInput,
+    saveGrowthInput,
+    growthPct,
   } = useScoringSettingsPanel();
 
   if (isLoading) return <S.StatusText>{copy.title}…</S.StatusText>;
@@ -156,6 +159,9 @@ export const ScoringSettingsPanel = () => {
       <S.Section>
         <S.SectionTitle>{copy.inputsTitle}</S.SectionTitle>
         <S.SectionSubtitle>{copy.inputsSubtitle}</S.SectionSubtitle>
+        {manualComponents.some((component) => component.is_growth_pct) && (
+          <S.Hint>{copy.growthHint}</S.Hint>
+        )}
 
         {manualComponents.length === 0 ? (
           <S.EmptyHint>{copy.noManualComponents}</S.EmptyHint>
@@ -170,18 +176,57 @@ export const ScoringSettingsPanel = () => {
             {restaurants.map((restaurant) => (
               <S.InputsRow key={restaurant.id}>
                 <S.RestaurantCell>{restaurant.name}</S.RestaurantCell>
-                {manualComponents.map((component) => (
-                  <S.ValueCell key={component.id}>
-                    <S.ValueCaption>{component.is_growth_pct ? '%' : '0–100'}</S.ValueCaption>
-                    <S.NumberInput
-                      type="number"
-                      step={component.is_growth_pct ? 1 : 5}
-                      placeholder={copy.inputPlaceholder}
-                      defaultValue={inputValue(restaurant.id, component.id) ?? ''}
-                      onBlur={(event) => saveInput(restaurant.id, component.id, event.target.value)}
-                    />
-                  </S.ValueCell>
-                ))}
+                {manualComponents.map((component) => {
+                  if (!component.is_growth_pct) {
+                    return (
+                      <S.ValueCell key={component.id}>
+                        <S.ValueCaption>0–100</S.ValueCaption>
+                        <S.NumberInput
+                          type="number"
+                          step={5}
+                          placeholder={copy.inputPlaceholder}
+                          defaultValue={inputValue(restaurant.id, component.id) ?? ''}
+                          onBlur={(event) => saveInput(restaurant.id, component.id, event.target.value)}
+                        />
+                      </S.ValueCell>
+                    );
+                  }
+                  const pct = growthPct(restaurant.id, component.id);
+                  const pair = growthInput(restaurant.id, component.id);
+                  return (
+                    <S.GrowthCell key={component.id}>
+                      <S.GrowthField>
+                        <S.ValueCaption>{copy.growthInitialLabel}</S.ValueCaption>
+                        <S.NumberInput
+                          type="number"
+                          step={1}
+                          placeholder={copy.inputPlaceholder}
+                          defaultValue={pair.initial ?? ''}
+                          onBlur={(event) =>
+                            saveGrowthInput(restaurant.id, component.id, 'initial', event.target.value)
+                          }
+                        />
+                      </S.GrowthField>
+                      <S.GrowthField>
+                        <S.ValueCaption>{copy.growthFinalLabel}</S.ValueCaption>
+                        <S.NumberInput
+                          type="number"
+                          step={1}
+                          placeholder={copy.inputPlaceholder}
+                          defaultValue={pair.final ?? ''}
+                          onBlur={(event) =>
+                            saveGrowthInput(restaurant.id, component.id, 'final', event.target.value)
+                          }
+                        />
+                      </S.GrowthField>
+                      <S.GrowthResult $pending={pct === null}>
+                        {pct === null
+                          ? copy.growthPending
+                          : copy.growthResult.replace('{pct}', String(pct))}
+                      </S.GrowthResult>
+                    </S.GrowthCell>
+                  );
+                })}
               </S.InputsRow>
             ))}
           </S.InputsGrid>

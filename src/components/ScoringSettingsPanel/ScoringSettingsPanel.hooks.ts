@@ -133,28 +133,89 @@ export const useScoringSettingsPanel = () => {
   };
 
   // --- per-restaurant manual inputs ---
-  const inputValue = (restaurantId: string, componentId: string): number | null => {
-    const row = config?.restaurant_inputs.find(
+  const findInput = (restaurantId: string, componentId: string) =>
+    config?.restaurant_inputs.find(
       (i) => i.restaurant_id === restaurantId && i.component_id === componentId,
-    );
-    return row ? row.value : null;
+    ) ?? null;
+
+  // Non-growth manual components: a single raw 0–100 value.
+  const inputValue = (restaurantId: string, componentId: string): number | null =>
+    findInput(restaurantId, componentId)?.value ?? null;
+
+  // Growth components: the owner enters an initial + final sales figure and the
+  // server derives the growth % (see app/scoring.py).
+  const growthInput = (
+    restaurantId: string,
+    componentId: string,
+  ): { initial: number | null; final: number | null } => {
+    const row = findInput(restaurantId, componentId);
+    return { initial: row?.initial_value ?? null, final: row?.final_value ?? null };
+  };
+
+  const patchInputLocal = (
+    restaurantId: string,
+    componentId: string,
+    patch: Partial<Pick<ScoringConfigDto['restaurant_inputs'][number], 'value' | 'initial_value' | 'final_value'>>,
+  ) => {
+    setConfig((prev) => {
+      if (!prev) return prev;
+      const existing = prev.restaurant_inputs.find(
+        (i) => i.restaurant_id === restaurantId && i.component_id === componentId,
+      );
+      const others = prev.restaurant_inputs.filter((i) => i !== existing);
+      const next = {
+        restaurant_id: restaurantId,
+        component_id: componentId,
+        value: existing?.value ?? 0,
+        initial_value: existing?.initial_value ?? null,
+        final_value: existing?.final_value ?? null,
+        ...patch,
+      };
+      return { ...prev, restaurant_inputs: [...others, next] };
+    });
   };
 
   const saveInput = async (restaurantId: string, componentId: string, raw: string) => {
     const value = Number(raw);
     if (raw.trim() === '' || !Number.isFinite(value)) return;
-    setConfig((prev) => {
-      if (!prev) return prev;
-      const others = prev.restaurant_inputs.filter(
-        (i) => !(i.restaurant_id === restaurantId && i.component_id === componentId),
-      );
-      return { ...prev, restaurant_inputs: [...others, { restaurant_id: restaurantId, component_id: componentId, value }] };
-    });
+    patchInputLocal(restaurantId, componentId, { value });
     try {
       await setRestaurantScoreInput({ restaurant_id: restaurantId, component_id: componentId, value });
     } catch {
       load();
     }
+  };
+
+  const saveGrowthInput = async (
+    restaurantId: string,
+    componentId: string,
+    field: 'initial' | 'final',
+    raw: string,
+  ) => {
+    const current = growthInput(restaurantId, componentId);
+    const parsed = raw.trim() === '' ? null : Number(raw);
+    if (parsed !== null && !Number.isFinite(parsed)) return;
+    const initial = field === 'initial' ? parsed : current.initial;
+    const finalValue = field === 'final' ? parsed : current.final;
+    patchInputLocal(restaurantId, componentId, { initial_value: initial, final_value: finalValue });
+    try {
+      await setRestaurantScoreInput({
+        restaurant_id: restaurantId,
+        component_id: componentId,
+        initial_value: initial,
+        final_value: finalValue,
+      });
+    } catch {
+      load();
+    }
+  };
+
+  // The growth % a completed initial/final pair works out to — shown read-only
+  // next to the inputs so the owner sees what feeds the score.
+  const growthPct = (restaurantId: string, componentId: string): number | null => {
+    const { initial, final } = growthInput(restaurantId, componentId);
+    if (initial == null || initial === 0 || final == null) return null;
+    return Math.round(((final - initial) / initial) * 1000) / 10;
   };
 
   return {
@@ -184,5 +245,8 @@ export const useScoringSettingsPanel = () => {
 
     inputValue,
     saveInput,
+    growthInput,
+    saveGrowthInput,
+    growthPct,
   };
 };

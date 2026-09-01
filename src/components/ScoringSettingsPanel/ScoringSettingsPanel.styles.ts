@@ -259,6 +259,48 @@ export const ValueCell = styled.div`
   }
 `;
 
+/* Growth components take a pair (initial / final) plus a read-only % badge. */
+export const GrowthCell = styled.div`
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    flex: 1 1 100%;
+    flex-wrap: wrap;
+
+    input {
+      width: 100%;
+    }
+  }
+`;
+
+export const GrowthField = styled.label`
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    flex: 1 1 40%;
+  }
+`;
+
+export const GrowthResult = styled.span<{ $pending?: boolean }>`
+  align-self: center;
+  padding: 4px 9px;
+  border-radius: ${({ theme }) => theme.radii.pill};
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+  background: ${({ theme }) => theme.colors.surface};
+  color: ${({ theme, $pending }) => ($pending ? theme.colors.accentWarm : theme.colors.brandGreenLight)};
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    align-self: flex-start;
+  }
+`;
+
 export const ValueCaption = styled.span`
   font-size: 9px;
   font-weight: 700;
