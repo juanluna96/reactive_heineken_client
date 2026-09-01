@@ -7,6 +7,7 @@ import {
   updateScoreComponent,
 } from '../../api';
 import type { ScoreComponentDto, ScoreComponentUpdatePayload, ScoringConfigDto } from '../../api';
+import { useAdminStore } from '../../admin';
 import { useTranslation } from '../../i18n';
 
 type FetchStatus = 'idle' | 'loading' | 'loaded' | 'error';
@@ -25,6 +26,9 @@ const RATING_KINDS = new Set(['rating_skills', 'rating_service', 'rating_experie
 export const useScoringSettingsPanel = () => {
   const { t } = useTranslation();
   const copy = t.adminSettings.scoring;
+  // Any scoring-config edit changes every score and the "≈ X%" figure, so
+  // drop the cached rankings — they refetch next time those screens open.
+  const invalidateScoreData = useAdminStore((s) => s.invalidateScoreData);
 
   const [config, setConfig] = useState<ScoringConfigDto | null>(null);
   const [status, setStatus] = useState<FetchStatus>('idle');
@@ -68,6 +72,8 @@ export const useScoringSettingsPanel = () => {
       patchComponentLocal(id, updated);
     } catch {
       load();
+    } finally {
+      invalidateScoreData();
     }
   };
 
@@ -100,6 +106,7 @@ export const useScoringSettingsPanel = () => {
         ceiling_pct: addForm.isGrowthPct ? ceiling : null,
       });
       await load();
+      invalidateScoreData();
       setAddForm(null);
     } catch {
       setAddForm((f) => (f ? { ...f, saving: false, error: copy.errors.generic } : f));
@@ -124,6 +131,7 @@ export const useScoringSettingsPanel = () => {
     try {
       await deleteScoreComponent(deleteTarget.id);
       await load();
+      invalidateScoreData();
       setDeleteTarget(null);
     } catch {
       setDeleteError(copy.errors.generic);
@@ -183,6 +191,8 @@ export const useScoringSettingsPanel = () => {
       await setRestaurantScoreInput({ restaurant_id: restaurantId, component_id: componentId, value });
     } catch {
       load();
+    } finally {
+      invalidateScoreData();
     }
   };
 
@@ -207,6 +217,8 @@ export const useScoringSettingsPanel = () => {
       });
     } catch {
       load();
+    } finally {
+      invalidateScoreData();
     }
   };
 

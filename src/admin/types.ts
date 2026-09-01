@@ -24,4 +24,8 @@ export interface AdminState {
   /** Clears every cached slice back to idle — call on login/logout so a
    *  role switch can't show the previous session's (differently-scoped) data. */
   resetAdminData: () => void;
+  /** Drops the cached rankings back to idle (keeping the data, so no flash)
+   *  so the next screen visit refetches — call after editing the STAR SERVE
+   *  scoring config, which changes every score/`rating_weight_pct`. */
+  invalidateScoreData: () => void;
 }

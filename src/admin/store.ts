@@ -21,6 +21,8 @@ const emptyData = {
 export const useAdminStore = create<AdminState>((set, get) => ({
   ...emptyData,
   resetAdminData: () => set({ ...emptyData }),
+  invalidateScoreData: () =>
+    set({ restaurantsRankingStatus: 'idle', beerMastersRankingStatus: 'idle' }),
   fetchDashboard: async () => {
     if (get().status === 'loading' || get().status === 'loaded') return;
 
