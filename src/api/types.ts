@@ -101,6 +101,17 @@ export interface ScoreBreakdownItemDto {
   weight_pct: number;
   cs: number;
   contribution: number;
+  /** Growth component still waiting on the restaurant's final sales figure. */
+  pending: boolean;
+}
+
+/** One bar-staff member whose score was averaged into a restaurant's score. */
+export interface RestaurantStaffScoreDto {
+  name: string;
+  ratings_count: number;
+  score: number | null;
+  partial_score: number | null;
+  is_partial: boolean;
 }
 
 export interface RestaurantRankingDto {
@@ -109,9 +120,23 @@ export interface RestaurantRankingDto {
   created_at: string;
   ratings_count: number;
   average_rating: number;
-  /** STAR SERVE composite 0–100; null when the restaurant has no ratings. */
+  /**
+   * STAR SERVE composite 0–100 (mean of the venue's bar-staff scores). null
+   * when the restaurant has no ratings, or while `is_partial` is true.
+   */
   score: number | null;
+  /** Non-growth part of the formula (`rating_weight_pct` % of it). */
+  partial_score: number | null;
+  /** True when `score` is withheld only because a growth final value is unset. */
+  is_partial: boolean;
+  /** Share of the formula (%) the partial score represents. */
+  rating_weight_pct: number;
   score_breakdown: ScoreBreakdownItemDto[];
+  /**
+   * The venue's bar-staff and their individual scores (their average is
+   * `score`). Populated only for owner/heineken — empty otherwise.
+   */
+  staff_scores: RestaurantStaffScoreDto[];
 }
 
 export interface AdminBeerMasterDto {
@@ -131,7 +156,15 @@ export interface BeerMasterRankingDto {
   created_at: string;
   ratings_count: number;
   average_rating: number;
+  /**
+   * STAR SERVE composite 0–100 for this staffer. null with zero ratings, or
+   * while `is_partial` is true.
+   */
   score: number | null;
+  /** Non-growth part of the formula (`rating_weight_pct` % of it). */
+  partial_score: number | null;
+  is_partial: boolean;
+  rating_weight_pct: number;
   score_breakdown: ScoreBreakdownItemDto[];
 }
 
@@ -152,7 +185,11 @@ export interface ScoreComponentDto {
 export interface RestaurantScoreInputDto {
   restaurant_id: string;
   component_id: string;
+  /** Raw 0–100 for a non-growth component; derived growth % for a growth one. */
   value: number;
+  /** Growth components only — the starting/ending sales figures. */
+  initial_value: number | null;
+  final_value: number | null;
 }
 
 export interface ScoringConfigRestaurantDto {
@@ -186,7 +223,11 @@ export interface ScoreComponentUpdatePayload {
 export interface RestaurantScoreInputPayload {
   restaurant_id: string;
   component_id: string;
-  value: number;
+  /** Send for a non-growth component. */
+  value?: number | null;
+  /** Send both for a growth component; the server derives `value`. */
+  initial_value?: number | null;
+  final_value?: number | null;
 }
 
 export interface RatingReviewDto {

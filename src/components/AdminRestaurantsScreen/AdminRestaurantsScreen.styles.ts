@@ -1,5 +1,11 @@
 import { motion } from 'framer-motion';
-import { FaArrowsRotate, FaChevronLeft, FaChevronRight, FaMagnifyingGlass } from 'react-icons/fa6';
+import {
+  FaArrowsRotate,
+  FaChevronLeft,
+  FaChevronRight,
+  FaMagnifyingGlass,
+  FaTriangleExclamation,
+} from 'react-icons/fa6';
 import styled, { css, keyframes } from 'styled-components';
 import { ADMIN_DESKTOP_BREAKPOINT, ADMIN_MOBILE_BREAKPOINT, ADMIN_SIDEBAR_WIDTH } from '../AdminSidebar';
 
@@ -135,6 +141,13 @@ export const Content = styled(motion.div)`
   }
 `;
 
+export const SearchRow = styled(motion.div)`
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  flex-wrap: wrap;
+`;
+
 export const SearchFieldWrapper = styled(motion.div)`
   position: relative;
   width: 100%;
@@ -143,6 +156,28 @@ export const SearchFieldWrapper = styled(motion.div)`
   @media (max-width: ${MOBILE_BREAKPOINT}) {
     max-width: none;
   }
+`;
+
+export const WarningCard = styled.div`
+  flex: 1 1 260px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: ${({ theme }) => theme.radii.md};
+  border: 1px solid ${({ theme }) => theme.colors.accentWarm};
+  background: rgba(255, 179, 71, 0.12);
+  color: ${({ theme }) => theme.colors.accentWarm};
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 600;
+`;
+
+export const WarningIcon = styled(FaTriangleExclamation)`
+  flex-shrink: 0;
+  margin-top: 1px;
+  width: 14px;
+  height: 14px;
 `;
 
 export const SearchIcon = styled(FaMagnifyingGlass)`
@@ -259,13 +294,14 @@ const ownRestaurantPulse = keyframes`
   }
 `;
 
-export const RankCard = styled(motion.div)<{ $isOwn?: boolean }>`
+export const RankCard = styled(motion.div)<{ $isOwn?: boolean; $clickable?: boolean }>`
   ${glassPanel}
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 16px;
   transition: border-color 0.2s ease;
+  cursor: ${({ $clickable }) => ($clickable ? 'pointer' : 'default')};
 
   &:hover {
     border-color: rgba(112, 220, 141, 0.5);

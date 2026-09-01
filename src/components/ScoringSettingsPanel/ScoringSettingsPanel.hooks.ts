@@ -7,6 +7,7 @@ import {
   updateScoreComponent,
 } from '../../api';
 import type { ScoreComponentDto, ScoreComponentUpdatePayload, ScoringConfigDto } from '../../api';
+import { useAdminStore } from '../../admin';
 import { useTranslation } from '../../i18n';
 
 type FetchStatus = 'idle' | 'loading' | 'loaded' | 'error';
@@ -25,6 +26,9 @@ const RATING_KINDS = new Set(['rating_skills', 'rating_service', 'rating_experie
 export const useScoringSettingsPanel = () => {
   const { t } = useTranslation();
   const copy = t.adminSettings.scoring;
+  // Any scoring-config edit changes every score and the "≈ X%" figure, so
+  // drop the cached rankings — they refetch next time those screens open.
+  const invalidateScoreData = useAdminStore((s) => s.invalidateScoreData);
 
   const [config, setConfig] = useState<ScoringConfigDto | null>(null);
   const [status, setStatus] = useState<FetchStatus>('idle');
@@ -47,12 +51,76 @@ export const useScoringSettingsPanel = () => {
   const components = useMemo(() => config?.components ?? [], [config]);
   const manualComponents = useMemo(() => components.filter((c) => c.kind === 'manual'), [components]);
 
-  // Sum of the ENABLED weights, as a percentage — the compute layer normalises
-  // over exactly this set, so this is what the owner is really tuning.
+  // Weight inputs are edited as raw strings so the "Suma de pesos" badge can
+  // update on every keystroke; a change only persists on blur, and only when
+  // the enabled weights add up to exactly 100% (see handleWeightBlur).
+  const [weightDrafts, setWeightDrafts] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    // Seed a draft for each component, keeping any in-progress edit.
+    setWeightDrafts((prev) => {
+      const next: Record<string, string> = {};
+      for (const c of config?.components ?? []) {
+        next[c.id] = c.id in prev ? prev[c.id] : String(c.weight);
+      }
+      return next;
+    });
+  }, [config]);
+
+  const draftWeight = (c: ScoreComponentDto): number => {
+    const raw = weightDrafts[c.id];
+    if (raw === undefined) return c.weight;
+    const parsed = Number(raw);
+    return Number.isFinite(parsed) ? parsed : 0;
+  };
+
+  const weightValue = (id: string): string => {
+    if (weightDrafts[id] !== undefined) return weightDrafts[id];
+    const component = components.find((c) => c.id === id);
+    return component ? String(component.weight) : '';
+  };
+
+  // Live sum of the ENABLED weights, as a percentage — recomputed on every
+  // keystroke from the drafts. The compute layer normalises over exactly this
+  // set, so this is what the owner is really tuning.
   const weightSumPct = useMemo(
-    () => Math.round(components.filter((c) => c.enabled).reduce((sum, c) => sum + c.weight, 0) * 100),
-    [components],
+    () => Math.round(components.filter((c) => c.enabled).reduce((sum, c) => sum + draftWeight(c), 0) * 100),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [components, weightDrafts],
   );
+  const weightsBalanced = weightSumPct === 100;
+
+  const handleWeightChange = (id: string, raw: string) => {
+    setWeightDrafts((prev) => ({ ...prev, [id]: raw }));
+  };
+
+  const handleWeightBlur = async (id: string) => {
+    const component = components.find((c) => c.id === id);
+    if (!component) return;
+    const value = Number(weightDrafts[id]);
+
+    // Invalid entry → snap the field back to the saved value.
+    if (!Number.isFinite(value) || value < 0 || value > 1) {
+      setWeightDrafts((prev) => ({ ...prev, [id]: String(component.weight) }));
+      return;
+    }
+    setWeightDrafts((prev) => ({ ...prev, [id]: String(value) }));
+
+    // Only persist once the enabled weights add up to exactly 100%.
+    const enabledSum = components
+      .filter((c) => c.enabled)
+      .reduce((sum, c) => sum + (c.id === id ? value : draftWeight(c)), 0);
+    if (Math.round(enabledSum * 100) !== 100) return;
+
+    // Balanced: persist every component whose draft weight moved.
+    const changed = components.filter((c) => {
+      const w = c.id === id ? value : draftWeight(c);
+      return Math.abs(w - c.weight) > 1e-9;
+    });
+    for (const c of changed) {
+      await saveComponent(c.id, { weight: c.id === id ? value : draftWeight(c) });
+    }
+  };
 
   const patchComponentLocal = (id: string, patch: Partial<ScoreComponentDto>) => {
     setConfig((prev) =>
@@ -68,6 +136,8 @@ export const useScoringSettingsPanel = () => {
       patchComponentLocal(id, updated);
     } catch {
       load();
+    } finally {
+      invalidateScoreData();
     }
   };
 
@@ -100,6 +170,7 @@ export const useScoringSettingsPanel = () => {
         ceiling_pct: addForm.isGrowthPct ? ceiling : null,
       });
       await load();
+      invalidateScoreData();
       setAddForm(null);
     } catch {
       setAddForm((f) => (f ? { ...f, saving: false, error: copy.errors.generic } : f));
@@ -124,6 +195,7 @@ export const useScoringSettingsPanel = () => {
     try {
       await deleteScoreComponent(deleteTarget.id);
       await load();
+      invalidateScoreData();
       setDeleteTarget(null);
     } catch {
       setDeleteError(copy.errors.generic);
@@ -133,28 +205,93 @@ export const useScoringSettingsPanel = () => {
   };
 
   // --- per-restaurant manual inputs ---
-  const inputValue = (restaurantId: string, componentId: string): number | null => {
-    const row = config?.restaurant_inputs.find(
+  const findInput = (restaurantId: string, componentId: string) =>
+    config?.restaurant_inputs.find(
       (i) => i.restaurant_id === restaurantId && i.component_id === componentId,
-    );
-    return row ? row.value : null;
+    ) ?? null;
+
+  // Non-growth manual components: a single raw 0–100 value.
+  const inputValue = (restaurantId: string, componentId: string): number | null =>
+    findInput(restaurantId, componentId)?.value ?? null;
+
+  // Growth components: the owner enters an initial + final sales figure and the
+  // server derives the growth % (see app/scoring.py).
+  const growthInput = (
+    restaurantId: string,
+    componentId: string,
+  ): { initial: number | null; final: number | null } => {
+    const row = findInput(restaurantId, componentId);
+    return { initial: row?.initial_value ?? null, final: row?.final_value ?? null };
+  };
+
+  const patchInputLocal = (
+    restaurantId: string,
+    componentId: string,
+    patch: Partial<Pick<ScoringConfigDto['restaurant_inputs'][number], 'value' | 'initial_value' | 'final_value'>>,
+  ) => {
+    setConfig((prev) => {
+      if (!prev) return prev;
+      const existing = prev.restaurant_inputs.find(
+        (i) => i.restaurant_id === restaurantId && i.component_id === componentId,
+      );
+      const others = prev.restaurant_inputs.filter((i) => i !== existing);
+      const next = {
+        restaurant_id: restaurantId,
+        component_id: componentId,
+        value: existing?.value ?? 0,
+        initial_value: existing?.initial_value ?? null,
+        final_value: existing?.final_value ?? null,
+        ...patch,
+      };
+      return { ...prev, restaurant_inputs: [...others, next] };
+    });
   };
 
   const saveInput = async (restaurantId: string, componentId: string, raw: string) => {
     const value = Number(raw);
     if (raw.trim() === '' || !Number.isFinite(value)) return;
-    setConfig((prev) => {
-      if (!prev) return prev;
-      const others = prev.restaurant_inputs.filter(
-        (i) => !(i.restaurant_id === restaurantId && i.component_id === componentId),
-      );
-      return { ...prev, restaurant_inputs: [...others, { restaurant_id: restaurantId, component_id: componentId, value }] };
-    });
+    patchInputLocal(restaurantId, componentId, { value });
     try {
       await setRestaurantScoreInput({ restaurant_id: restaurantId, component_id: componentId, value });
     } catch {
       load();
+    } finally {
+      invalidateScoreData();
     }
+  };
+
+  const saveGrowthInput = async (
+    restaurantId: string,
+    componentId: string,
+    field: 'initial' | 'final',
+    raw: string,
+  ) => {
+    const current = growthInput(restaurantId, componentId);
+    const parsed = raw.trim() === '' ? null : Number(raw);
+    if (parsed !== null && !Number.isFinite(parsed)) return;
+    const initial = field === 'initial' ? parsed : current.initial;
+    const finalValue = field === 'final' ? parsed : current.final;
+    patchInputLocal(restaurantId, componentId, { initial_value: initial, final_value: finalValue });
+    try {
+      await setRestaurantScoreInput({
+        restaurant_id: restaurantId,
+        component_id: componentId,
+        initial_value: initial,
+        final_value: finalValue,
+      });
+    } catch {
+      load();
+    } finally {
+      invalidateScoreData();
+    }
+  };
+
+  // The growth % a completed initial/final pair works out to — shown read-only
+  // next to the inputs so the owner sees what feeds the score.
+  const growthPct = (restaurantId: string, componentId: string): number | null => {
+    const { initial, final } = growthInput(restaurantId, componentId);
+    if (initial == null || initial === 0 || final == null) return null;
+    return Math.round(((final - initial) / initial) * 1000) / 10;
   };
 
   return {
@@ -166,6 +303,10 @@ export const useScoringSettingsPanel = () => {
     manualComponents,
     restaurants: config?.restaurants ?? [],
     weightSumPct,
+    weightsBalanced,
+    weightValue,
+    handleWeightChange,
+    handleWeightBlur,
     isRating,
     saveComponent,
     openDelete,
@@ -184,5 +325,8 @@ export const useScoringSettingsPanel = () => {
 
     inputValue,
     saveInput,
+    growthInput,
+    saveGrowthInput,
+    growthPct,
   };
 };
